@@ -1,0 +1,59 @@
+name: Sync PR Labels
+
+on:
+  pull_request:
+    types: [opened, edited]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  sync_labels:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync Labels
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const pr = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+
+            const issueMatches = pr.data.body.matchAll(/#(\d+)/g);
+            const issueNumbers = Array.from(issueMatches, match => match[1]);
+
+            if (issueNumbers.length === 0) return;
+
+            const allLabels = new Set();
+
+            for (const issueNumber of issueNumbers) {
+              try {
+                const issue = await github.rest.issues.get({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber
+                });
+                
+                issue.data.labels.forEach(label => {
+                  allLabels.add(label.name);
+                });
+              } catch (error) {
+                console.log(`Error fetching issue #${issueNumber}:`, error);
+              }
+            }
+
+            if (allLabels.size > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                labels: Array.from(allLabels)
+              });
+            }

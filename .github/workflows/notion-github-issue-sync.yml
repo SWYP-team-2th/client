@@ -20,4 +20,4 @@ jobs:
           echo REPO_OWNER=${{ github.repository_owner }} >> .env
           echo REPO_NAME=${{ github.event.repository.name }} >> .env
       - name: docker compose up
-        run: docker-compose --env-file .env up
+        run: docker compose --env-file .env up

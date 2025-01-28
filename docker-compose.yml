@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   notion-sync:
-    image: ghcr.io/SWYP-team-2th/notion-sync:latest
+    image: ghcr.io/swyp-team-2th/notion-sync:latest
     environment:
       - PERSONAL_GITHUB_ACCESS_KEY=${PERSONAL_GITHUB_ACCESS_KEY}
       - NOTION_KEY=${NOTION_KEY}

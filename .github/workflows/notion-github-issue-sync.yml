@@ -16,13 +16,17 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies
-        run: npm install @notionhq/client --legacy-peer-deps
+      - name: Create temp directory and install dependencies
+        run: |
+          mkdir temp
+          cd temp
+          npm init -y
+          npm install @notionhq/client
 
       - name: Create sync script
         run: |
-          cat > sync.js << 'EOF'
-          const { Client } = require('@notionhq/client');
+          cat > temp/sync.js << 'EOF'
+          import { Client } from '@notionhq/client';
 
           async function sync() {
             const notion = new Client({ auth: process.env.NOTION_KEY });
@@ -67,4 +71,4 @@ jobs:
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
           ISSUE_STATE: ${{ github.event.issue.state }}
-        run: node sync.js
+        run: node temp/sync.js

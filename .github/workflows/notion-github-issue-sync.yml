@@ -16,43 +16,55 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Sync to Notion
-        uses: actions/github-script@v7
-        env:
-          NOTION_KEY: ${{ secrets.NOTION_API_KEY }}
-          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-        with:
-          script: |
-            const { Client } = require('@notionhq/client');
+      - name: Install dependencies
+        run: npm install @notionhq/client
+
+      - name: Create sync script
+        run: |
+          cat > sync.js << 'EOF'
+          const { Client } = require('@notionhq/client');
+
+          async function sync() {
             const notion = new Client({ auth: process.env.NOTION_KEY });
-
-            const issue = context.payload.issue;
-
+            
             try {
               await notion.pages.create({
                 parent: {
                   database_id: process.env.NOTION_DATABASE_ID,
                 },
                 properties: {
-                  이름: {  // 기본 제목 필드
+                  이름: {
                     title: [
                       {
                         text: {
-                          content: issue.title,
+                          content: process.env.ISSUE_TITLE,
                         },
                       },
                     ],
                   },
-                  상태: {  // 칸반보드의 상태
+                  상태: {
                     select: {
-                      name: issue.state === 'open' ? '시작 전' : '완료',
+                      name: process.env.ISSUE_STATE === 'open' ? '시작 전' : '완료',
                     },
                   },
                 },
               });
               
-              console.log(`Issue "${issue.title}" 가 Notion에 성공적으로 동기화되었습니다.`);
+              console.log(`Issue "${process.env.ISSUE_TITLE}" 가 Notion에 성공적으로 동기화되었습니다.`);
               
             } catch (error) {
-              core.setFailed(`Notion 동기화 실패: ${error.message}`);
+              console.error(`Notion 동기화 실패: ${error.message}`);
+              process.exit(1);
             }
+          }
+
+          sync();
+          EOF
+
+      - name: Run sync script
+        env:
+          NOTION_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_STATE: ${{ github.event.issue.state }}
+        run: node sync.js

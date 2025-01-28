@@ -11,6 +11,11 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Check files
+        run: |
+          pwd
+          ls -la
+
       - name: create env file
         run: |
           touch .env
@@ -19,5 +24,6 @@ jobs:
           echo NOTION_DATABASE_ID=${{ secrets.NOTION_DATABASE_ID }} >> .env
           echo REPO_OWNER=${{ github.repository_owner }} >> .env
           echo REPO_NAME=${{ github.event.repository.name }} >> .env
-      - name: docker compose up
+
+      - name: Run docker compose
         run: docker compose --env-file .env up

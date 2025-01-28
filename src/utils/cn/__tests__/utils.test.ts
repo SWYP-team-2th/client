@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import cn from '../cn';
 
 describe('test cn(): className을 오버라이딩하고, 조건부 스타일링을 할 수 있게 도와주는 유틸 함수', () => {

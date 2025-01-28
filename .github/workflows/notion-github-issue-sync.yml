@@ -17,7 +17,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install @notionhq/client
+        run: npm install @notionhq/client --legacy-peer-deps
 
       - name: Create sync script
         run: |

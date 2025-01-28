@@ -20,7 +20,7 @@ jobs:
         run: |
           mkdir temp
           cd temp
-          npm init -y
+          echo '{"type": "module"}' > package.json
           npm install @notionhq/client
 
       - name: Create sync script

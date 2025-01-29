@@ -1,5 +1,7 @@
+import AddFeedLogo from '@/assets/add_feed_24.svg?react';
+
 function App() {
-  return <></>;
+  return <AddFeedLogo />;
 }
 
 export default App;

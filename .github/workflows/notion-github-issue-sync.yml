@@ -67,7 +67,7 @@ jobs:
 
       - name: Run sync script
         env:
-          NOTION_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_KEY: ${{ secrets.NOTION_KEY }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
           ISSUE_STATE: ${{ github.event.issue.state }}

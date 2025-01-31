@@ -25,12 +25,11 @@ jobs:
         id: cache-npm
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package.json', '**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        if: steps.cache-npm.outputs.cache-hit != 'true'
         run: npm install --legacy-peer-deps
 
       - name: Run tests

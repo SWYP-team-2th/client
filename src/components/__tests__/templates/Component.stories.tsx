@@ -1,7 +1,5 @@
-// 스토리북에서 필요한 타입들을 가져옵니다.
-import type { Meta, StoryObj } from '@storybook/react';
-// 스토리를 작성할 컴포넌트를 가져옵니다.
 import ButtonExample from './Component.template';
+import type { Meta, StoryObj } from '@storybook/react';
 
 // storybook meta data 설정
 // title: storybook 사이드바에서 보여질 경로와 이름

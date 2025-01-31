@@ -13,7 +13,7 @@ import { request } from '../config';
 
 const mockRequest = vi.fn();
 vi.mock('../config', () => ({
-  request: (...args: any[]) => mockRequest(...args),
+  request: (...args: unknown[]) => mockRequest(...args),
 }));
 
 const createWrapper = () => {

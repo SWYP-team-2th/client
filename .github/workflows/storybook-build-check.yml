@@ -2,9 +2,6 @@ name: Storybook Build Check
 
 on:
   pull_request:
-    branches:
-      - develop
-      - main
     paths:
       - 'src/**'
 

@@ -15,7 +15,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install dependencies
         run: yarn install
@@ -28,5 +28,3 @@ jobs:
         with:
           name: storybook-build
           path: storybook-static
-          retention-days: 5
-          compression-level: 6

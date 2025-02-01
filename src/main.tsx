@@ -13,10 +13,21 @@ const queryClient = new QueryClient({
   },
 });
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>
-  </StrictMode>,
-);
+async function prepareMSW() {
+  if (process.env.NODE_ENV === 'development') {
+    const { worker } = await import('./mocks/browser.ts');
+
+    await worker.start();
+    console.log('MSW 정상적으로 동작중!');
+  }
+}
+
+prepareMSW().then(() => {
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
+    </StrictMode>,
+  );
+});

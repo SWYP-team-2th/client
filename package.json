@@ -51,6 +51,7 @@
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
     "jsdom": "^26.0.0",
+    "msw": "^2.7.0",
     "prettier": "^3.4.2",
     "storybook": "^8.5.2",
     "typescript": "^5.3.3",
@@ -63,5 +64,10 @@
   "main": "index.js",
   "repository": "https://github.com/SWYP-team-2th/client.git",
   "author": "YOOJS1205 <junsang8921@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
+  }
 }

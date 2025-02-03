@@ -1,0 +1,7 @@
+{
+  "build": {
+    "env": {
+      "STORYBOOK_CONFIG_DIR": ".storybook"
+    }
+  }
+}

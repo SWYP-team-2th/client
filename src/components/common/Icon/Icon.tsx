@@ -39,7 +39,7 @@ import UserFill from '@/assets/icons/user_fill_24px.svg?react';
 import UserOutline from '@/assets/icons/user_outline_24px.svg?react';
 import World from '@/assets/icons/world_24px.svg?react';
 
-const ICONS = {
+export const ICONS = {
   AlertFill,
   AlertOutline,
   ArrowLeft,
@@ -81,7 +81,7 @@ const ICONS = {
   World,
 } as const;
 
-interface IconProps extends SVGProps<SVGSVGElement> {
+export interface IconProps extends SVGProps<SVGSVGElement> {
   name: keyof typeof ICONS;
 }
 

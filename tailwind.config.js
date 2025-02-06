@@ -17,15 +17,15 @@ module.exports = {
           '24px',
           { lineHeight: '1.3', letterSpacing: '-0.015em', fontWeight: 'bold' },
         ],
-        tl: [
+        title_large: [
           '22px',
           { lineHeight: '1.36', letterSpacing: '-0.02em', fontWeight: 'bold' },
         ],
-        tm: [
+        title_medium: [
           '20px',
           { lineHeight: '1.2', letterSpacing: '-0.015em', fontWeight: '600' },
         ],
-        ts: [
+        title_small: [
           '18px',
           { lineHeight: '1.2', letterSpacing: '-0.01em', fontWeight: '600' },
         ],

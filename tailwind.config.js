@@ -1,5 +1,8 @@
 export const content = ['./src/**/*.{html,js,ts,jsx,tsx}'];
 export const theme = {
+  screens: {
+    desktop: '480px',
+  },
   extend: {
     fontSize: {
       h1: [
@@ -52,4 +55,3 @@ export const theme = {
   },
 };
 export const plugins = [];
-

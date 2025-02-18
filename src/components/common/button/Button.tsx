@@ -10,15 +10,14 @@ const buttonVariants = cva('flex items-center justify-center cursor-pointer', {
       outline: 'border bg-gray-100',
     },
     size: {
-      small: 'w-[157px] h-[40px] py-3 px-[50px] rounded-lg text-label-medium',
-      medium: 'w-[212px] h-[48px] py-4 px-[73.5px] rounded-xl text-title-small',
-      large:
-        'w-full h-[63px] py-[23.5px] px-[175px] rounded-2xl text-title-medium',
+      small: 'w-[157px] h-[40px]  rounded-lg text-label-medium',
+      medium: 'w-[212px] h-[48px]  rounded-xl text-title-small',
+      large: 'w-full h-[63px] rounded-2xl text-title-medium',
     },
     solidType: {
       primary: 'bg-primary-400',
       secondary: 'bg-primary-600 ',
-      disabled: 'bg-gray-500 text-gray-300',
+      disabled: 'bg-gray-500 text-gray-100',
     },
     outlineType: {
       primary: 'border-primary-400 text-primary-400',
@@ -37,7 +36,7 @@ interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
-  buttonType?: 'primary' | 'secondary' | 'disabled';
+  buttonType: 'primary' | 'secondary' | 'disabled';
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(

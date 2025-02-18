@@ -7,8 +7,8 @@ const floatingButtonVariants = cva(
   {
     variants: {
       size: {
-        sm: 'w-[56px] h-[56px] p-md',
-        lg: 'w-[72px] h-[72px] p-3',
+        small: 'w-[56px] h-[56px] p-md',
+        large: 'w-[72px] h-[72px] p-3',
       },
       buttonType: {
         primary: 'bg-primary-400',

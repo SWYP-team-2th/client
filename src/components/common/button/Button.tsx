@@ -10,9 +10,10 @@ const buttonVariants = cva('flex items-center justify-center cursor-pointer', {
       outline: 'border bg-gray-100',
     },
     size: {
-      sm: 'w-[157px] h-[40px] py-3 px-[50px] rounded-lg text-label-medium',
-      md: 'w-[212px] h-[48px] py-4 px-[73.5px] rounded-xl text-title-small',
-      lg: 'w-full h-[63px] py-[23.5px] px-[175px] rounded-2xl text-title-medium',
+      small: 'w-[157px] h-[40px] py-3 px-[50px] rounded-lg text-label-medium',
+      medium: 'w-[212px] h-[48px] py-4 px-[73.5px] rounded-xl text-title-small',
+      large:
+        'w-full h-[63px] py-[23.5px] px-[175px] rounded-2xl text-title-medium',
     },
     solidType: {
       primary: 'bg-primary-400',
@@ -25,9 +26,9 @@ const buttonVariants = cva('flex items-center justify-center cursor-pointer', {
       disabled: 'border-gray-400 text-gray-400',
     },
     borderSize: {
-      sm: 'border-[1.5px]',
-      md: 'border-[1.8px]',
-      lg: 'border-[2px]',
+      small: 'border-[1.5px]',
+      medium: 'border-[1.8px]',
+      large: 'border-[2px]',
     },
   },
 });

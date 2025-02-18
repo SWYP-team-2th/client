@@ -1,0 +1,61 @@
+import { Slot } from '@radix-ui/react-slot';
+import { cva, VariantProps } from 'class-variance-authority';
+import React from 'react';
+import { cn } from '@/utils/cn';
+
+const buttonVariants = cva('flex items-center justify-center cursor-pointer', {
+  variants: {
+    variant: {
+      solid: '',
+      outline: 'border bg-gray-100',
+    },
+    size: {
+      sm: 'w-[157px] h-[40px] py-3 px-[50px] rounded-lg text-label-medium',
+      md: 'w-[212px] h-[48px] py-4 px-[73.5px] rounded-xl text-title-small',
+      lg: 'w-full h-[63px] py-[23.5px] px-[175px] rounded-2xl text-title-medium',
+    },
+    solidType: {
+      primary: 'bg-primary-400',
+      secondary: 'bg-primary-600 ',
+      disabled: 'bg-gray-500 text-gray-300',
+    },
+    outlineType: {
+      primary: 'border-primary-400 text-primary-400',
+      secondary: 'border-primary-600 text-primary-600',
+      disabled: 'border-gray-400 text-gray-400',
+    },
+    borderSize: {
+      sm: 'border-[1.5px]',
+      md: 'border-[1.8px]',
+      lg: 'border-[2px]',
+    },
+  },
+});
+
+interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+  buttonType?: 'primary' | 'secondary' | 'disabled';
+}
+
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ variant, size, buttonType, asChild = false, children, ...props }, ref) => {
+    const Comp = asChild ? Slot : 'button';
+
+    const type =
+      variant === 'solid'
+        ? buttonVariants({ solidType: buttonType })
+        : buttonVariants({ outlineType: buttonType, borderSize: size });
+
+    return (
+      <Comp
+        className={cn(buttonVariants({ variant, size }), type)}
+        ref={ref}
+        {...props}
+      >
+        {children}
+      </Comp>
+    );
+  },
+);

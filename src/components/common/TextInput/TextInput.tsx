@@ -57,7 +57,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             {...restProps}
           />
           {rightNode && (
-            <div className="absolute top-3 right-3">{rightNode}</div>
+            <div className="absolute top-3 right-3 w-6 h-6">{rightNode}</div>
           )}
         </div>
         <div className="text-caption flex justify-between">

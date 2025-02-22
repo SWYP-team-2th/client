@@ -21,7 +21,7 @@ export default function Dialog({
   confirmButtonProps,
   showLaterButton,
 }: DialogProps) {
-  const { close } = useDialog();
+  const { closeDialog } = useDialog();
 
   return (
     <div className="px-7 py-8 rounded-2xl flex flex-col gap-4 justify-center items-center text-center w-full max-w-[430px] bg-gray-100">
@@ -35,7 +35,7 @@ export default function Dialog({
             variant="outline"
             size="small"
             buttonType="primary"
-            onClick={close}
+            onClick={closeDialog}
           >
             {cancelButtonProps.text}
           </Button>
@@ -56,7 +56,7 @@ export default function Dialog({
       )}
       {showLaterButton && (
         <button
-          onClick={close}
+          onClick={closeDialog}
           className="underline text-gray-700 cursor-pointer"
         >
           나중에 하기

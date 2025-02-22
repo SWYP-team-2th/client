@@ -9,7 +9,7 @@ export const useDialog = () => {
   }
 
   return {
-    open: (dialog: React.ReactNode) => context.open(dialog),
-    close: () => context.close(),
+    openDialog: (dialog: React.ReactNode) => context.openDialog(dialog),
+    closeDialog: () => context.closeDialog(),
   };
 };

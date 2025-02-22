@@ -46,13 +46,13 @@ export const Example: Story = {
 };
 
 const DialogOpenButton = () => {
-  const { open } = useDialog();
+  const { openDialog } = useDialog();
   return (
     <Button
       buttonType="primary"
       size="large"
       variant="solid"
-      onClick={() => open(<StorybookDialogComponent />)}
+      onClick={() => openDialog(<StorybookDialogComponent />)}
     >
       대화창 열기
     </Button>

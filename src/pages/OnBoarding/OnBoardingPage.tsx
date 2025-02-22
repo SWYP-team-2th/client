@@ -16,7 +16,7 @@ export default function OnBoardingPage() {
         </span>
       </div>
       <div className="mb-16">
-        <Button buttonType="primary" variant={'solid'} size={'large'}>
+        <Button buttonType="primary" variant="solid" size="large">
           카카오로 로그인하기
         </Button>
       </div>

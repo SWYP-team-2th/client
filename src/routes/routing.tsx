@@ -3,7 +3,7 @@ import App from '@/App';
 import DefaultLayout from '@/components/common/Layout/DefaultLayout';
 import SubLayout from '@/components/common/Layout/SubLayout';
 import OnBoardingPage from '@/pages/OnBoarding/OnBoardingPage';
-import PostPage from '@/pages/Post/PostPage';
+import VotePage from '@/pages/\bVote/VotePage';
 
 export const router = createBrowserRouter([
   {
@@ -11,8 +11,8 @@ export const router = createBrowserRouter([
     children: [
       { path: '/', element: <App /> },
       {
-        path: '/posts/:shareUrl',
-        element: <PostPage />,
+        path: '/votes/:shareUrl',
+        element: <VotePage />,
       },
     ],
   },

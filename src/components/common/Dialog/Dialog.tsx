@@ -1,3 +1,4 @@
+import { useDialog } from './hooks';
 import { Button } from '@/components/common/Button/Button';
 
 interface DialogProps {
@@ -5,7 +6,6 @@ interface DialogProps {
   description?: string;
   cancelButtonProps?: {
     text: string;
-    onClick: () => void;
   };
   confirmButtonProps: {
     text: string;
@@ -21,8 +21,10 @@ export default function Dialog({
   confirmButtonProps,
   showLaterButton,
 }: DialogProps) {
+  const { close } = useDialog();
+
   return (
-    <div className="px-7 py-8 rounded-2xl flex flex-col gap-4 justify-center items-center text-center w-full max-w-[430px]">
+    <div className="px-7 py-8 rounded-2xl flex flex-col gap-4 justify-center items-center text-center w-full max-w-[430px] bg-gray-100">
       <div className="flex flex-col gap-2">
         <h2 className="text-h2">{title}</h2>
         <p className="text-body-1-long">{description}</p>
@@ -33,7 +35,7 @@ export default function Dialog({
             variant="outline"
             size="small"
             buttonType="primary"
-            onClick={cancelButtonProps.onClick}
+            onClick={close}
           >
             {cancelButtonProps.text}
           </Button>
@@ -53,7 +55,10 @@ export default function Dialog({
         </Button>
       )}
       {showLaterButton && (
-        <button className="underline text-gray-700 cursor-pointer">
+        <button
+          onClick={close}
+          className="underline text-gray-700 cursor-pointer"
+        >
           나중에 하기
         </button>
       )}

@@ -1,6 +1,7 @@
 import { SVGProps } from 'react';
 import AlertFill from '@/assets/icons/alert_fill_24px.svg?react';
 import AlertOutline from '@/assets/icons/alert_outline_24px.svg?react';
+import AlertV2 from '@/assets/icons/alert_V2.svg?react';
 import ArrowLeft from '@/assets/icons/arrow_left_24px.svg?react';
 import ArrowRight from '@/assets/icons/arrow_right_24px.svg?react';
 import BellFill from '@/assets/icons/bell_fill_24px.svg?react';
@@ -11,6 +12,7 @@ import Check from '@/assets/icons/check_24px.svg?react';
 import Cross from '@/assets/icons/cross_24px.svg?react';
 import Edit from '@/assets/icons/edit_24px.svg?react';
 import HeartFill from '@/assets/icons/heart_fill_24px.svg?react';
+import HeartFillRed from '@/assets/icons/heart_fill_Red.svg?react';
 import HeartOutline from '@/assets/icons/heart_outline_24px.svg?react';
 import HomeFill from '@/assets/icons/home_fill_24px.svg?react';
 import HomeOutline from '@/assets/icons/home_outline_24px.svg?react';
@@ -38,11 +40,13 @@ import User2Fill from '@/assets/icons/user2_fill_24px.svg?react';
 import User2Outline from '@/assets/icons/user2_outline_24px.svg?react';
 import UserFill from '@/assets/icons/user_fill_24px.svg?react';
 import UserOutline from '@/assets/icons/user_outline_24px.svg?react';
+import VoteClose from '@/assets/icons/vote_close.svg?react';
 import World from '@/assets/icons/world_24px.svg?react';
 
 export const ICONS = {
   AlertFill,
   AlertOutline,
+  AlertV2,
   ArrowLeft,
   ArrowRight,
   BellFill,
@@ -53,6 +57,7 @@ export const ICONS = {
   Cross,
   Edit,
   HeartFill,
+  HeartFillRed,
   HeartOutline,
   HomeFill,
   HomeOutline,
@@ -79,15 +84,29 @@ export const ICONS = {
   User2Outline,
   UserFill,
   UserOutline,
+  VoteClose,
   World,
   Logo,
 } as const;
 
+export const ICON_SIZE = {
+  small: 16,
+  medium: 24,
+  large: 32,
+} as const;
+
 export interface IconProps extends SVGProps<SVGSVGElement> {
   name: keyof typeof ICONS;
+  size: keyof typeof ICON_SIZE;
 }
 
-export default function Icon({ name, ...props }: IconProps) {
+export default function Icon({ name, size, ...props }: IconProps) {
   const IconComponent = ICONS[name];
-  return <IconComponent {...props} />;
+  const sizeConfig = ICON_SIZE[size];
+  return (
+    <IconComponent
+      {...props}
+      style={{ width: sizeConfig, height: sizeConfig }}
+    />
+  );
 }

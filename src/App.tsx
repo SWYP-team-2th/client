@@ -1,11 +1,5 @@
-import VotePage from '@/pages/\bVote/VotePage';
-
 function App() {
-  return (
-    <>
-      <VotePage />
-    </>
-  );
+  return <></>;
 }
 
 export default App;

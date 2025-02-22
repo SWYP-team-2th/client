@@ -2,7 +2,7 @@ import React from 'react';
 import { cn } from '@/utils/cn';
 
 interface TextFieldProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'value'> {
   value?: string;
   variant: 'outlined' | 'solid';
   label?: string;

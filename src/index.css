@@ -40,8 +40,10 @@
   --color-gray-900: #000000;
 
   --color-success: #2ecc71;
+  --color-success-100: #2ecc711a;
   --color-warning: #ff9800;
   --color-error: #e53935;
+  --color-error-100: #e539351a;
   --color-info: #2196f3;
 
   /* spacing */

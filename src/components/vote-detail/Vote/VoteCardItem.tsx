@@ -1,9 +1,7 @@
 export default function VoteCardItem() {
   return (
-    <div className="relative w-full aspect- rounded-2xl bg-gray-100 overflow-hidden">
-      {/* grid로 박아놓는다? */}
-
-      <div className="relative w-full aspect-[3/4] rounded-xl overflow-hidden bg-gray-100">
+    <div className="relative w-full rounded-2xl bg-gray-100 overflow-hidden">
+      <div className="relative w-full aspect-[7/9] rounded-xl overflow-hidden bg-gray-100">
         <img
           src="https://png.pngtree.com/thumb_back/fh260/background/20210316/pngtree-vertical-version-of-romantic-spring-cherry-blossom-photography-image_586813.jpg"
           className="w-full h-full object-cover"

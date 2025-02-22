@@ -31,7 +31,7 @@ export const RightNode: Story = {
     showLengthIndicator: true,
     inlineMessage: '도움말 메시지',
     variant: 'outlined',
-    rightNode: <Icon name="Edit" />,
+    rightNode: <Icon name="Edit" size="medium" />,
   },
   render: (args) => <TextField {...args} />,
 };

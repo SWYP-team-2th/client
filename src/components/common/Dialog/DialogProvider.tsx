@@ -1,6 +1,6 @@
 import { createContext, useCallback, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Overlay } from '@/components/common/Overlay/Overlay';
+import Overlay from '@/components/common/Overlay';
 
 interface DialogContextType {
   openDialog: (dialog: React.ReactNode) => void;

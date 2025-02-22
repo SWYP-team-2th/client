@@ -40,7 +40,7 @@ const ToastButton = () => {
   return (
     <Button
       buttonType="primary"
-      borderSize="medium"
+      size="large"
       variant="solid"
       onClick={() =>
         toast.success({

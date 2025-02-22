@@ -13,6 +13,7 @@ const floatingButtonVariants = cva(
       buttonType: {
         primary: 'bg-primary-400',
         secondary: 'bg-accent-500',
+        tertiary: 'bg-primary-300',
       },
     },
   },

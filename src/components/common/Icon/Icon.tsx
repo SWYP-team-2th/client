@@ -33,6 +33,10 @@ import SearchFill from '@/assets/icons/search_fill_24px.svg?react';
 import SettingsOutline from '@/assets/icons/settings_outline_24px.svg?react';
 import ThumbUpFill from '@/assets/icons/thumb-up_fill_24px.svg?react';
 import ThumbUpOutline from '@/assets/icons/thumb-up_outline_24px.svg?react';
+import ToastError from '@/assets/icons/toast_error.svg?react';
+import ToastInfo from '@/assets/icons/toast_info.svg?react';
+import ToastSuccess from '@/assets/icons/toast_success.svg?react';
+import ToastWarning from '@/assets/icons/toast_warning.svg?react';
 import Trash from '@/assets/icons/trash_24px.svg?react';
 import User2Fill from '@/assets/icons/user2_fill_24px.svg?react';
 import User2Outline from '@/assets/icons/user2_outline_24px.svg?react';
@@ -74,6 +78,10 @@ export const ICONS = {
   SettingsOutline,
   ThumbUpFill,
   ThumbUpOutline,
+  ToastError,
+  ToastInfo,
+  ToastSuccess,
+  ToastWarning,
   Trash,
   User2Fill,
   User2Outline,

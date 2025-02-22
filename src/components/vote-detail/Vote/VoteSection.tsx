@@ -1,11 +1,13 @@
-import VoteCard from '@/components/vote-detail/Vote/VoteCard';
-import VoteResult from '@/components/vote-detail/Vote/VoteResult';
+import VoteCardList from '@/components/vote-detail/Vote/VoteCardList';
+import VoteResultList from '@/components/vote-detail/Vote/VoteResultList';
 
 export default function VoteSection() {
   return (
     <>
-      <VoteCard />
-      <VoteResult />
+      <VoteCardList />
+      <VoteResultList />
     </>
   );
 }
+
+// votes 데이터

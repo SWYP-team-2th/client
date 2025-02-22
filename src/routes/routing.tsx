@@ -2,8 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from '@/App';
 import DefaultLayout from '@/components/common/Layout/DefaultLayout';
 import SubLayout from '@/components/common/Layout/SubLayout';
-import OnBoardingPage from '@/pages/OnBoarding/OnBoardingPage';
 import VotePage from '@/pages/\bVote/VotePage';
+import OnBoardingPage from '@/pages/OnBoarding/OnBoardingPage';
 
 export const router = createBrowserRouter([
   {

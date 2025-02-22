@@ -22,6 +22,7 @@ import LockOpen from '@/assets/icons/lock_open_24px.svg?react';
 import LockOutline from '@/assets/icons/lock_outline_24px.svg?react';
 import Logo from '@/assets/icons/logo.svg?react';
 import Maximize from '@/assets/icons/maximize_24px.svg?react';
+import Medal from '@/assets/icons/medal.svg?react';
 import Menu from '@/assets/icons/menu_24px.svg?react';
 import MessageFill from '@/assets/icons/message_fill_24px.svg?react';
 import MessageOutline from '@/assets/icons/message_outline_24px.svg?react';
@@ -32,6 +33,7 @@ import PhotoPlus from '@/assets/icons/photo_plus_24px.svg?react';
 import Plus from '@/assets/icons/plus_24px.svg?react';
 import Post from '@/assets/icons/post_24px.svg?react';
 import SearchFill from '@/assets/icons/search_fill_24px.svg?react';
+import Send from '@/assets/icons/send_24px.svg?react';
 import SettingsOutline from '@/assets/icons/settings_outline_24px.svg?react';
 import ThumbUpFill from '@/assets/icons/thumb-up_fill_24px.svg?react';
 import ThumbUpOutline from '@/assets/icons/thumb-up_outline_24px.svg?react';
@@ -46,7 +48,6 @@ import UserFill from '@/assets/icons/user_fill_24px.svg?react';
 import UserOutline from '@/assets/icons/user_outline_24px.svg?react';
 import VoteClose from '@/assets/icons/vote_close.svg?react';
 import World from '@/assets/icons/world_24px.svg?react';
-
 export const ICONS = {
   AlertFill,
   AlertOutline,
@@ -95,6 +96,8 @@ export const ICONS = {
   VoteClose,
   World,
   Logo,
+  Send,
+  Medal,
 } as const;
 
 export const ICON_SIZE = {

@@ -21,6 +21,7 @@ import LockFill from '@/assets/icons/lock_fill_24px.svg?react';
 import LockOpen from '@/assets/icons/lock_open_24px.svg?react';
 import LockOutline from '@/assets/icons/lock_outline_24px.svg?react';
 import Logo from '@/assets/icons/logo.svg?react';
+import Logout from '@/assets/icons/logout.svg?react';
 import Maximize from '@/assets/icons/maximize_24px.svg?react';
 import Medal from '@/assets/icons/medal.svg?react';
 import Menu from '@/assets/icons/menu_24px.svg?react';
@@ -96,6 +97,7 @@ export const ICONS = {
   VoteClose,
   World,
   Logo,
+  Logout,
   Send,
   Medal,
 } as const;

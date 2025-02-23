@@ -25,7 +25,7 @@ export default function Dialog({
 
   return (
     <div className="px-7 py-8 rounded-2xl flex flex-col gap-4 justify-center items-center text-center w-full max-w-[430px] bg-gray-100">
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 break-keep">
         <h2 className="text-h2">{title}</h2>
         <p className="text-body-1-long">{description}</p>
       </div>

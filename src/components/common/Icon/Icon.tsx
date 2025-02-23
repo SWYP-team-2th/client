@@ -23,6 +23,7 @@ import LockOutline from '@/assets/icons/lock_outline_24px.svg?react';
 import Logo from '@/assets/icons/logo.svg?react';
 import Maximize from '@/assets/icons/maximize_24px.svg?react';
 import Medal from '@/assets/icons/medal.svg?react';
+import MedalWhite from '@/assets/icons/medal_fill_white.svg?react';
 import Menu from '@/assets/icons/menu_24px.svg?react';
 import MessageFill from '@/assets/icons/message_fill_24px.svg?react';
 import MessageOutline from '@/assets/icons/message_outline_24px.svg?react';
@@ -98,6 +99,7 @@ export const ICONS = {
   Logo,
   Send,
   Medal,
+  MedalWhite,
 } as const;
 
 export const ICON_SIZE = {

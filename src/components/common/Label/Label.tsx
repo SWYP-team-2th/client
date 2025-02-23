@@ -1,7 +1,7 @@
-import { cn } from '@/utils/cn';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, VariantProps } from 'class-variance-authority';
 import React from 'react';
+import { cn } from '@/utils/cn';
 
 const labelVariants = cva(
   'flex items-center justify-center px-[7px] py-[5px] whitespace-nowrap overflow-hidden',

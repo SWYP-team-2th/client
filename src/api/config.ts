@@ -25,6 +25,7 @@ interface RequestConfig extends AxiosRequestConfig {
   url: string;
   params?: AxiosRequestConfig['params'];
   data?: AxiosRequestConfig['data'];
+  headers?: AxiosRequestConfig['headers'];
 }
 
 const request = async <T>(config: RequestConfig): Promise<T> => {

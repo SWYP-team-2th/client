@@ -1,5 +1,5 @@
-import { request } from './config';
 import { useSuspenseQuery } from '@tanstack/react-query';
+import { request } from './config';
 
 interface VoteDetailType {
   id: number;
@@ -21,11 +21,11 @@ interface VoteDetailType {
 
 export default function useGetVoteDetail(shareUrl: string) {
   return useSuspenseQuery<VoteDetailType>({
+    queryKey: ['voteDetail', shareUrl],
     queryFn: () =>
       request({
         method: 'GET',
         url: `/posts/${shareUrl}`,
       }),
-    queryKey: [],
   });
 }

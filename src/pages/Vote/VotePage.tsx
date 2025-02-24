@@ -1,10 +1,10 @@
 import Logo from '@/assets/icons/logo.svg?react';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
-import CommentSection from '@/components/vote-detail/Comment/CommentSection';
+import CommentSection from '@/components/vote-detail/Comment/CommentSection/CommentSection';
 import CommentInput from '@/components/vote-detail/Input/CommentInput';
-import VoteTopSection from '@/components/vote-detail/Top/VoteTopSection';
-import VoteSection from '@/components/vote-detail/Vote/VoteSection';
+import VoteTopSection from '@/components/vote-detail/Top/VoteTopSection/VoteTopSection';
+import VoteSection from '@/components/vote-detail/Vote/VoteSection/VoteSection';
 
 export default function VotePage() {
   return (

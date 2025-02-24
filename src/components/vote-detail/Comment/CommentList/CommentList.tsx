@@ -1,4 +1,4 @@
-import CommentItem from '@/components/vote-detail/Comment/CommentItem';
+import CommentItem from '@/components/vote-detail/Comment/CommentItems/CommentItem';
 
 export default function CommentList() {
   return (

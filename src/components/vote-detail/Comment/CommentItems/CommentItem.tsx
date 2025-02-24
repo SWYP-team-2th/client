@@ -10,7 +10,7 @@ export default function CommentItem() {
         <span className="ml-sm text-title-small">닉네임</span>
       </div>
       <div className="px-10 mt-1 break-words text-body-1-normal">
-        asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasda
+        asdasdasdasdasdasdasdasdasdasdassdasdassdasdassdasdas
       </div>
     </div>
   );

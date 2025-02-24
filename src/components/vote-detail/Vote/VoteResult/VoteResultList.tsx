@@ -1,4 +1,4 @@
-import VoteResultItem from '@/components/vote-detail/Vote/VoteResultItem';
+import VoteResultItem from '@/components/vote-detail/Vote/VoteResult/VoteResultItem';
 
 export default function VoteResultList() {
   return (

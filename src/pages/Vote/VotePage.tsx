@@ -10,25 +10,15 @@ export default function VotePage() {
   return (
     <div className="bg-gray-200 w-full h-screen flex itmes-center flex-col pt-[85px] relative">
       <Header
-        leftNode={
-          <div>
-            <Icon name="ArrowLeft" size="large" />
-          </div>
-        }
+        leftNode={<Icon name="ArrowLeft" size="large" />}
         centerNode={
-          <div>
-            <Logo
-              style={{
-                width: '70px',
-              }}
-            />
-          </div>
+          <Logo
+            style={{
+              width: '70px',
+            }}
+          />
         }
-        rightNode={
-          <div>
-            <Icon name="UserFill" size="large" />
-          </div>
-        }
+        rightNode={<Icon name="UserFill" size="large" />}
       />
       <div
         className="mx-[15px] px-[10px] pt-[18px] pb-1 bg-gray-100 rounded-2xl shadow-[0px_2px_20px_0px_rgba(0,0,0,0.03),0px_20px_15px_0px_rgba(0,0,0,0.02),0px_8px_25px_0px_rgba(0,0,0,0.04)] 

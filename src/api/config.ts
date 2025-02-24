@@ -1,7 +1,9 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
 const axiosConfig: AxiosRequestConfig = {
-  baseURL: '',
+  baseURL: import.meta.env.DEV
+    ? import.meta.env.VITE_API_URL_DEV
+    : import.meta.env.VITE_API_URL_PROD,
   validateStatus: (status) => status >= 200 && status < 300,
 };
 

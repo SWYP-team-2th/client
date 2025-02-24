@@ -2,10 +2,8 @@ import VoteAuthorInfo from '@/components/vote-detail/Top/VoteAuthorInfo/VoteAuth
 
 export default function VoteTopSection() {
   return (
-    <>
+    <div>
       <VoteAuthorInfo />
-    </>
+    </div>
   );
 }
-
-// author, description

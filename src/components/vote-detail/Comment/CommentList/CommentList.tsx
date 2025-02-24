@@ -6,8 +6,6 @@ export default function CommentList() {
       <div className="text-title-large mt-lg pl-sm pb-[9px]">한마디 (3)</div>
       <hr className="text-gray-300 mb-[20px]" />
       <CommentItem />
-      <CommentItem />
-      <CommentItem />
     </div>
   );
 }

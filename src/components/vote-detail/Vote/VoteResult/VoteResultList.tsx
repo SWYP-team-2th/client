@@ -4,7 +4,6 @@ export default function VoteResultList() {
   return (
     <div className="px-1 ">
       <VoteResultItem />
-      <VoteResultItem />
     </div>
   );
 }

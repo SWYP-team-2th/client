@@ -3,6 +3,7 @@ import App from '@/App';
 import DefaultLayout from '@/components/common/Layout/DefaultLayout';
 import SubLayout from '@/components/common/Layout/SubLayout';
 import VotePage from '@/pages/\bVote/VotePage';
+import VoteRegistPage from '@/pages/\bVote/VoteRegistPage';
 import MyPage from '@/pages/my/MyPage';
 import OnBoardingPage from '@/pages/OnBoarding/OnBoardingPage';
 import SettingsPage from '@/pages/settings/SettingsPage';
@@ -15,6 +16,10 @@ export const router = createBrowserRouter([
       {
         path: '/votes/:shareUrl',
         element: <VotePage />,
+      },
+      {
+        path: '/votes/regist',
+        element: <VoteRegistPage />,
       },
       {
         path: '/settings',

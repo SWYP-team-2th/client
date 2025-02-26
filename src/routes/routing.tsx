@@ -3,6 +3,7 @@ import App from '@/App';
 import DefaultLayout from '@/components/common/Layout/DefaultLayout';
 import SubLayout from '@/components/common/Layout/SubLayout';
 import MyPage from '@/pages/my/MyPage';
+import OAuthPage from '@/pages/Login/OAuthPage';
 import OnBoardingPage from '@/pages/OnBoarding/OnBoardingPage';
 import SettingsPage from '@/pages/settings/SettingsPage';
 import VoteCommentDetailPage from '@/pages/Vote/VoteCommentDetailPage';
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
       {
         path: '/votes/:postId/comments',
         element: <VoteCommentDetailPage />,
+      },
+      {
+        path: '/oauth',
+        element: <OAuthPage />,
       },
     ],
   },

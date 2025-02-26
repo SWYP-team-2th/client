@@ -1,7 +1,7 @@
 import useGetVoteDetail from '@/api/useGetVoteDetail';
 
-export default function useVoteDetail(shareUrl: string) {
-  const { data: voteDetail } = useGetVoteDetail(shareUrl);
+export default function useVoteDetail(postId: number) {
+  const { data: voteDetail } = useGetVoteDetail(postId);
 
   return {
     voteDetail,

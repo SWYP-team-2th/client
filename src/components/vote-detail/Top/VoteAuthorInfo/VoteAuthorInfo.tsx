@@ -1,27 +1,26 @@
-import User2Outline from '@/assets/icons/user2_outline_24px.svg?react';
-import { useShareUrl } from '@/components/vote-detail/ShareUrlProvider';
+import { useParams } from 'react-router-dom';
 import VoteVerticalEllipsis from '@/components/vote-detail/Top/ViteVerticalEllipsis';
 import useVoteDetail from '@/components/vote-detail/Top/VoteAuthorInfo/hooks';
 
 export default function VoteAuthorInfo() {
-  const shareUrl = useShareUrl();
-  const { voteDetail } = useVoteDetail(shareUrl);
+  const { postId } = useParams<{ postId: string }>();
+  const { voteDetail } = useVoteDetail(Number(postId));
 
   return (
-    <div className="flex justify-between">
-      <div className="pl-[5px]">
-        <section className="flex items-center mb-[12px]">
-          <div className="mr-[5px]">
-            <User2Outline />
-          </div>
+    <div className="w-full flex flex-col">
+      <div className="flex items-center justify-between mb-[12px]">
+        <div className="flex items-center">
+          <img
+            src={voteDetail.author.profileUrl}
+            className="w-10 h-10 rounded-full mr-[5px]"
+          />
           <span className="text-h3">{voteDetail.author.nickname}</span>
-        </section>
+        </div>
 
-        <section>
-          <p>{voteDetail.description}</p>
-        </section>
+        <VoteVerticalEllipsis />
       </div>
-      <VoteVerticalEllipsis />
+
+      <p>{voteDetail.description}</p>
     </div>
   );
 }

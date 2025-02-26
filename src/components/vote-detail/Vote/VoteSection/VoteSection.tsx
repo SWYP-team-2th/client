@@ -1,13 +1,15 @@
+import { Suspense } from 'react';
+import Loading from '@/components/common/Loading';
 import VoteCardList from '@/components/vote-detail/Vote/VoteCard/VoteCardList';
 import VoteResultList from '@/components/vote-detail/Vote/VoteResult/VoteResultList';
 
 export default function VoteSection() {
   return (
     <>
-      <VoteCardList />
-      <VoteResultList />
+      <Suspense fallback={<Loading />}>
+        <VoteCardList />
+        <VoteResultList />
+      </Suspense>
     </>
   );
 }
-
-// votes 데이터

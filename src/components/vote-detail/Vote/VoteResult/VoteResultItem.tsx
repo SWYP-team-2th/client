@@ -1,30 +1,28 @@
-import { useShareUrl } from '@/components/vote-detail/ShareUrlProvider';
-import useVoteDetail from '@/components/vote-detail/Top/VoteAuthorInfo/hooks';
+import { VoteStatusType } from '@/api/useGetVoteStatus';
 
-export default function VoteResultItem() {
-  const shareUrl = useShareUrl();
-  const { voteDetail } = useVoteDetail(shareUrl);
+interface VoteResultItemProps {
+  status: VoteStatusType;
+  isHighest: boolean;
+}
+
+export default function VoteResultItem({
+  status,
+  isHighest,
+}: VoteResultItemProps) {
+  const voteRatio = parseFloat(status.voteRatio);
 
   return (
-    <>
-      {voteDetail.votes.map((vote) => (
-        <div key={vote.id} className="flex items-center mb-sm">
-          <div>
-            <span className="pl-[1px] text-label-medium">
-              {vote.id === 1 ? '뽀또A' : '뽀또B'}
-            </span>
-          </div>
-          <div className="ml-[9px] flex flex-1">
-            <div
-              className={`w-full h-[13px] ${
-                vote.voted ? 'bg-primary-500' : 'bg-primary-300'
-              } rounded-tr-[99px] rounded-br-[99px]`}
-              style={{ width: `${vote.voteRatio}%` }}
-            />
-          </div>
-          <div className="ml-[13px]">{`${vote.voteRatio}%`}</div>
-        </div>
-      ))}
-    </>
+    <div className="flex items-center mb-sm">
+      <div>
+        <span className="pl-[1px] text-label-medium">{status.imageName}</span>
+      </div>
+      <div className="ml-[9px] flex flex-1">
+        <div
+          className={`h-[13px] ${isHighest ? 'bg-primary-500' : 'bg-primary-300'} rounded-tr-[99px] rounded-br-[99px]`}
+          style={{ width: `${voteRatio}%` }}
+        />
+      </div>
+      <div className="ml-[13px]">{`${status.voteCount}표 (${voteRatio}%)`}</div>
+    </div>
   );
 }

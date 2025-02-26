@@ -1,29 +1,38 @@
-import Icon from '@/components/common/Icon';
-import useComment from '@/components/vote-detail/Comment/CommentItems/hooks';
-import { useParams } from 'react-router-dom';
+interface AuthorType {
+  userId: number;
+  nickname: string;
+  profileUrl: string;
+}
 
-export default function CommentItem() {
-  const { postId } = useParams();
-  const { commentsData } = useComment(Number(postId));
+interface CommentType {
+  commentId: number;
+  content: string;
+  author: AuthorType;
+  voteId: number | null;
+  createdAt: string;
+}
 
-  if (!commentsData) return <div>로딩 중...</div>;
+interface CommentItemProps {
+  comment: CommentType;
+}
 
+export default function CommentItem({ comment }: CommentItemProps) {
   return (
-    <div className="flex flex-col mb-md ml-sm">
-      {commentsData.data.map((comment) => (
-        <div key={comment.commentId} className="flex flex-col mb-md">
-          <div className="flex items-center">
-            <Icon name="HeartOutline" size="small" />
-            <span className="ml-sm text-title-small">
-              {comment.author.nickname}
-            </span>
-          </div>
+    <div key={comment.commentId} className="flex flex-col mb-md ml-sm">
+      <div className="flex items-center">
+        <img
+          src={comment.author.profileUrl}
+          className="w-10 h-10 rounded-full"
+          alt="프로필 이미지"
+        />
+        <span className="ml-sm text-title-small">
+          {comment.author.nickname}
+        </span>
+      </div>
 
-          <div className="px-10 mt-1 break-words text-body-1-normal">
-            {comment.content}
-          </div>
-        </div>
-      ))}
+      <div className="px-10 mt-1 break-words text-body-1-normal">
+        {comment.content}
+      </div>
     </div>
   );
 }

@@ -1,10 +1,16 @@
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDeletePost } from '@/api/useDeletePost';
 import More from '@/assets/icons/more_24px.svg?react';
 import Icon from '@/components/common/Icon';
 
 export default function VoteVerticalEllipsis() {
   const [isOpen, setIsOpen] = useState(false);
   const ellipsisRef = useRef<HTMLDivElement>(null);
+  const { mutate: deletePost } = useDeletePost();
+  const { postId } = useParams<{ postId: string }>();
+
+  const navigate = useNavigate();
 
   // 바깥 클릭 시 메뉴 닫히도록
   useEffect(() => {
@@ -21,6 +27,18 @@ export default function VoteVerticalEllipsis() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  // 게시글 삭제
+  const handleDelete = () => {
+    // 추후 로그인 삭제 모달로 대체
+    if (confirm('게시글 삭제?')) {
+      deletePost(Number(postId), {
+        onSuccess: () => {
+          navigate('/');
+        },
+      });
+    }
+  };
 
   return (
     <div className="relative" ref={ellipsisRef}>
@@ -43,7 +61,11 @@ export default function VoteVerticalEllipsis() {
             <span>링크 공유</span>
           </button>
           <hr className="text-gray-300"></hr>
-          <button className="flex items-center w-full px-4 pt-sm gap-sm cursor-pointer">
+
+          <button
+            onClick={handleDelete}
+            className="flex items-center w-full px-4 pt-sm gap-sm cursor-pointer"
+          >
             <Icon name="Trash" size="small" />
             <span>게시글 삭제</span>
           </button>

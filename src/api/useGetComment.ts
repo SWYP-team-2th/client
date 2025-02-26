@@ -21,14 +21,13 @@ interface CommentsResponse {
   data: CommentType[];
 }
 
-export default function useGetComment(postId: number, cursor: number = 0) {
+export default function useGetComment(postId: number) {
   return useSuspenseQuery<CommentsResponse>({
     queryFn: () =>
       request({
         method: 'GET',
         url: `/posts/${postId}/comments`,
-        params: { cursor },
       }),
-    queryKey: ['comments', postId, cursor],
+    queryKey: ['comments', postId],
   });
 }

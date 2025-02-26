@@ -9,23 +9,23 @@ interface VoteDetailType {
     profileUrl: string;
   };
   description: string;
-  votes: {
+  images: {
     id: number;
+    imageName: string;
     imageUrl: string;
-    voteRatio: number;
     voted: boolean;
   }[];
   shareUrl: string;
   createdAt: string;
 }
 
-export default function useGetVoteDetail(shareUrl: string) {
+export default function useGetVoteDetail(postId: number) {
   return useSuspenseQuery<VoteDetailType>({
-    queryKey: ['voteDetail', shareUrl],
+    queryKey: ['voteDetail', postId],
     queryFn: () =>
       request({
         method: 'GET',
-        url: `/posts/${shareUrl}`,
+        url: `/posts/${postId}`,
       }),
   });
 }

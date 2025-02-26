@@ -14,25 +14,27 @@ export const router = createBrowserRouter([
     children: [
       { path: '/', element: <App /> },
       {
-        path: '/votes/:shareUrl',
+        path: '/votes/:postId',
         element: <VotePage />,
-      },
-      {
-        path: '/votes/regist',
-        element: <VoteRegistPage />,
-      },
-      {
-        path: '/settings',
-        element: <SettingsPage />,
-      },
-      {
-        path: '/user/:userId',
-        element: <MyPage />,
       },
     ],
   },
   {
     element: <SubLayout />,
-    children: [{ path: '/onboarding', element: <OnBoardingPage /> }],
+    children: [
+      { path: '/onboarding', element: <OnBoardingPage /> },
+      {
+        path: '/votes/regist',
+        element: <VoteRegistPage />,
+      },
+      {
+        path: '/user/:userId',
+        element: <MyPage />,
+      },
+      {
+        path: '/settings',
+        element: <SettingsPage />,
+      },
+    ],
   },
 ]);

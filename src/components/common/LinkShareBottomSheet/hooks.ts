@@ -3,15 +3,20 @@ import useToast from '../Toast/hooks';
 import { useKakaoShareUrl } from '@/api/useKakaoShareUrl';
 
 interface UseLinkShareBottomSheetOptions {
+  author: string;
   shareUrl: string;
 }
 
 export default function useLinkShareBottomSheet({
+  author,
   shareUrl,
 }: UseLinkShareBottomSheetOptions) {
   const toast = useToast();
   const { closeBottomSheet } = useBottomSheet();
-  const { handleClickKakaoShareButton } = useKakaoShareUrl(shareUrl);
+  const { handleClickKakaoShareButton } = useKakaoShareUrl({
+    author,
+    shareUrl,
+  });
 
   const handleClickUrlShareButton = () => {
     navigator.clipboard

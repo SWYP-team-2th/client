@@ -2,14 +2,16 @@ import BottomSheet from '../BottomSheet';
 import useLinkShareBottomSheet from './hooks';
 
 interface LinkShareBottomSheetProps {
+  author: string;
   shareUrl: string;
 }
 
 export default function LinkShareBottomSheet({
+  author,
   shareUrl,
 }: LinkShareBottomSheetProps) {
   const { handleClickKakaoShareButton, handleClickUrlShareButton } =
-    useLinkShareBottomSheet({ shareUrl });
+    useLinkShareBottomSheet({ author, shareUrl });
 
   return (
     <BottomSheet title="투표 공유하기" hasCloseButton>

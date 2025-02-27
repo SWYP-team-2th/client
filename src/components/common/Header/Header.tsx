@@ -21,9 +21,9 @@ export function Header({
       )}
       {...props}
     >
-      {leftNode}
+      <div className="w-[32px] h-[32px]">{leftNode}</div>
       {centerNode}
-      {rightNode}
+      <div className="w-[32px] h-[32px]">{rightNode}</div>
     </div>
   );
 }

@@ -12,17 +12,18 @@ export default function OAuthPage() {
     if (code) {
       mutate(
         {
-          redirectUri: import.meta.env.VITE_KAKAO_REDIRECT_URI,
+          redirectUri: `${window.location.origin}/oauth`,
           code,
         },
         {
           onSuccess: (data) => {
             console.log('로그인 성공, 토큰:', data.accessToken);
+            // 추후 onboarding -> 마이페이지 userId 포함해서 수정 예정
             navigate('/onboarding');
           },
           onError: (err) => {
             console.error('로그인 실패:', err);
-            navigate('/');
+            navigate('/onboarding');
           },
         },
       );

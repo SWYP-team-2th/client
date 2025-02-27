@@ -3,9 +3,11 @@ import VoteDescription from '../VoteDescription';
 import VoteImages from '../VoteImages';
 import useVoteRegistForm from './hooks';
 import { Button } from '@/components/common/Button/Button';
+import Loading from '@/components/common/Loading';
 
 export default function VoteRegistForm() {
-  const { isFormValid, handleClickVoteRegistButton } = useVoteRegistForm();
+  const { isFormValid, handleClickVoteRegistButton, isPostRegistVotePending } =
+    useVoteRegistForm();
 
   return (
     <div className="relative pt-[65px]">
@@ -16,13 +18,15 @@ export default function VoteRegistForm() {
         <VoteImages />
       </FieldContainer>
       <Button
-        buttonType={isFormValid ? 'primary' : 'disabled'}
+        buttonType={
+          isFormValid && !isPostRegistVotePending ? 'primary' : 'disabled'
+        }
         size="large"
         variant="solid"
         className="fixed bottom-16 left-1/2 -translate-x-1/2"
         onClick={handleClickVoteRegistButton}
       >
-        투표 올리기
+        {isPostRegistVotePending ? <Loading /> : '투표 올리기'}
       </Button>
     </div>
   );

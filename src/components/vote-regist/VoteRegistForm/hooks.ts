@@ -1,12 +1,28 @@
+import { useNavigate } from 'react-router-dom';
 import useVoteRegist from '../Provider/hooks';
+import usePostRegistVote from '@/api/usePostRegistVote';
 
 export default function useVoteRegistForm() {
-  const { isFormValid } = useVoteRegist();
+  const { isFormValid, state } = useVoteRegist();
+  const navigate = useNavigate();
 
-  const handleClickVoteRegistButton = () => {};
+  const { mutate: postRegistVote, isPending: isPostRegistVotePending } =
+    usePostRegistVote({
+      onSuccess: (data) => {
+        navigate(`/votes/${data.postId}`);
+      },
+    });
+
+  const handleClickVoteRegistButton = () => {
+    postRegistVote({
+      description: state.description.value ?? '',
+      images: state.imageFileId.value,
+    });
+  };
 
   return {
     isFormValid,
     handleClickVoteRegistButton,
+    isPostRegistVotePending,
   };
 }

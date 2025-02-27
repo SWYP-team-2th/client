@@ -4,6 +4,7 @@ import DefaultLayout from '@/components/common/Layout/DefaultLayout';
 import SubLayout from '@/components/common/Layout/SubLayout';
 import OAuthPage from '@/pages/Login/OAuthPage';
 import MyPage from '@/pages/my/MyPage';
+import NotFoundPage from '@/pages/NotFound/NotFoundPage';
 import OnBoardingPage from '@/pages/OnBoarding/OnBoardingPage';
 import SettingsPage from '@/pages/settings/SettingsPage';
 import VoteCommentDetailPage from '@/pages/Vote/VoteCommentDetailPage';
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: '/oauth',
         element: <OAuthPage />,
+      },
+      {
+        path: '*',
+        element: <NotFoundPage />,
       },
     ],
   },

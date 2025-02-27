@@ -66,15 +66,14 @@ axiosInstance.interceptors.response.use(
         if (newAccessToken) {
           setAccessToken(newAccessToken);
           error.config.headers.Authorization = `Bearer ${newAccessToken}`;
-          return axiosInstance(error.config); // 재요청
+          return axios(error.config); // 재요청
         }
       } catch (err) {
+        // 토큰 재발급 실패 시 로그아웃 후 온보딩 페이지로 이동
         console.error('401시 토큰 재발급 중 오류:', err);
+        removeAccessToken();
+        window.location.href = '/onboarding';
       }
-
-      // 토큰 재발급 실패 시 로그아웃 후 온보딩 페이지로 이동
-      removeAccessToken();
-      window.location.href = '/onboarding';
     }
 
     return Promise.reject(error);

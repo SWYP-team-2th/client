@@ -27,9 +27,9 @@ export function useGetMyVoteList(
     queryFn: ({ pageParam = null }) =>
       request({
         method: 'GET',
-        url: '/posts/me',
+        url: '/posts/user/me',
         params: {
-          nextCursor: pageParam,
+          cursor: pageParam,
           size: 10,
         },
       }),
@@ -40,8 +40,7 @@ export function useGetMyVoteList(
         return undefined;
       }
 
-      const lastItem = lastPage.data[lastPage.data.length - 1];
-      return lastItem.id;
+      return lastPage.nextCursor;
     },
     ...options,
   });
@@ -61,9 +60,9 @@ export function useGetParticipatedVoteList(
     queryFn: ({ pageParam = null }) =>
       request({
         method: 'GET',
-        url: '/posts/voted',
+        url: '/posts/user/voted',
         params: {
-          nextCursor: pageParam,
+          cursor: pageParam,
           size: 10,
         },
       }),
@@ -74,8 +73,7 @@ export function useGetParticipatedVoteList(
         return undefined;
       }
 
-      const lastItem = lastPage.data[lastPage.data.length - 1];
-      return lastItem.id;
+      return lastPage.nextCursor;
     },
     ...options,
   });

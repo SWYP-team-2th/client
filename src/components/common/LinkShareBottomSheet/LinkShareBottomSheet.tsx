@@ -1,4 +1,5 @@
 import BottomSheet from '../BottomSheet';
+import Icon from '../Icon';
 import useLinkShareBottomSheet from './hooks';
 
 interface LinkShareBottomSheetProps {
@@ -15,9 +16,20 @@ export default function LinkShareBottomSheet({
 
   return (
     <BottomSheet title="투표 공유하기" hasCloseButton>
-      <div className="flex flex-col gap-5">
-        <button onClick={handleClickKakaoShareButton}>카카오로 공유하기</button>
-        <button onClick={handleClickUrlShareButton}>URL로 공유하기</button>
+      <div className="flex flex-col gap-5 text-title-medium">
+        <button
+          onClick={handleClickKakaoShareButton}
+          className="flex gap-4 items-center"
+        >
+          <p>카카오로 공유하기</p>
+        </button>
+        <button
+          onClick={handleClickUrlShareButton}
+          className="flex gap-4 items-center"
+        >
+          <Icon name="Link" size="medium" />
+          <p>URL로 공유하기</p>
+        </button>
       </div>
     </BottomSheet>
   );

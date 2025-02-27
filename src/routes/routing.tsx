@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from '@/App';
 import DefaultLayout from '@/components/common/Layout/DefaultLayout';
 import SubLayout from '@/components/common/Layout/SubLayout';
+import OAuthPage from '@/pages/Login/OAuthPage';
 import MyPage from '@/pages/my/MyPage';
 import OnBoardingPage from '@/pages/OnBoarding/OnBoardingPage';
 import SettingsPage from '@/pages/settings/SettingsPage';
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
       {
         path: '/votes/:postId/comments',
         element: <VoteCommentDetailPage />,
+      },
+      {
+        path: '/oauth',
+        element: <OAuthPage />,
       },
     ],
   },

@@ -1,4 +1,4 @@
-import { Button } from '@/components/common/Button/Button';
+import LoginButton from '@/components/login/button/LoginButton';
 
 export default function OnBoardingPage() {
   return (
@@ -16,9 +16,7 @@ export default function OnBoardingPage() {
         </span>
       </div>
       <div className="mb-16">
-        <Button buttonType="primary" variant="solid" size="large">
-          카카오로 로그인하기
-        </Button>
+        <LoginButton />
       </div>
     </div>
   );

@@ -4,12 +4,6 @@ export function setAccessToken(token: string) {
   console.log('토큰 저장됨');
 }
 
-// 유저 아이디 저장
-export function setAccessTokenUserId(userId: string) {
-  localStorage.setItem('userId', userId);
-  console.log('토큰 저장됨');
-}
-
 // 토큰값 가져오기
 export function getAccessToken(): string | null {
   const token = localStorage.getItem('accessToken');

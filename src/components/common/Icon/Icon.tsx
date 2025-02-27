@@ -14,6 +14,7 @@ import Edit from '@/assets/icons/edit_24px.svg?react';
 import HeartFill from '@/assets/icons/heart_fill_24px.svg?react';
 import HeartFillRed from '@/assets/icons/heart_fill_Red.svg?react';
 import HeartOutline from '@/assets/icons/heart_outline_24px.svg?react';
+import HeartOutlineWhite from '@/assets/icons/heart_outline_white.svg?react';
 import HomeFill from '@/assets/icons/home_fill_24px.svg?react';
 import HomeOutline from '@/assets/icons/home_outline_24px.svg?react';
 import Link from '@/assets/icons/link_24px.svg?react';
@@ -33,6 +34,7 @@ import Minus from '@/assets/icons/minus_24px.svg?react';
 import More from '@/assets/icons/more_24px.svg?react';
 import PhotoPlus from '@/assets/icons/photo_plus_24px.svg?react';
 import Plus from '@/assets/icons/plus_24px.svg?react';
+import PlusWhite from '@/assets/icons/plus_white.svg?react';
 import Post from '@/assets/icons/post_24px.svg?react';
 import SearchFill from '@/assets/icons/search_fill_24px.svg?react';
 import Send from '@/assets/icons/send_24px.svg?react';
@@ -102,6 +104,8 @@ export const ICONS = {
   Send,
   Medal,
   MedalWhite,
+  PlusWhite,
+  HeartOutlineWhite,
 } as const;
 
 export const ICON_SIZE = {

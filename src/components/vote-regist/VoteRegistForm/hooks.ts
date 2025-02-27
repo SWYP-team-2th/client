@@ -1,11 +1,17 @@
+import { useNavigate } from 'react-router-dom';
 import useVoteRegist from '../Provider/hooks';
 import usePostRegistVote from '@/api/usePostRegistVote';
 
 export default function useVoteRegistForm() {
   const { isFormValid, state } = useVoteRegist();
-  // TODO: 요청 성공 시 투표 상세로 보내는 로직 추가
+  const navigate = useNavigate();
+
   const { mutate: postRegistVote, isPending: isPostRegistVotePending } =
-    usePostRegistVote();
+    usePostRegistVote({
+      onSuccess: (data) => {
+        navigate(`/votes/${data.postId}`);
+      },
+    });
 
   const handleClickVoteRegistButton = () => {
     postRegistVote({

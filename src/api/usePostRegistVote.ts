@@ -10,13 +10,17 @@ interface RegistVoteRequest {
   images: Image[];
 }
 
+interface RegistVoteResponse {
+  postId: number;
+}
+
 export default function usePostRegistVote(
   options?: Omit<
-    UseMutationOptions<void, Error, RegistVoteRequest>,
+    UseMutationOptions<RegistVoteResponse, Error, RegistVoteRequest>,
     'mutationFn'
   >,
 ) {
-  return useMutation<void, Error, RegistVoteRequest>({
+  return useMutation<RegistVoteResponse, Error, RegistVoteRequest>({
     mutationFn: (data: RegistVoteRequest) =>
       request({
         method: 'POST',

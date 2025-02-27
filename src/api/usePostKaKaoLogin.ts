@@ -14,6 +14,7 @@ interface LoginRequestType {
 export default function usePostKakaoLogin() {
   return useMutation<LoginResponseType, Error, LoginRequestType>({
     mutationFn: async (data) => {
+      console.log('API 요청 데이터:', data);
       return request<LoginResponseType>({
         method: 'POST',
         url: '/auth/oauth2/code/kakao',
@@ -21,7 +22,11 @@ export default function usePostKakaoLogin() {
       });
     },
     onSuccess: (data) => {
+      console.log('로그인 성공, 토큰:', data.accessToken);
       setAccessToken(data.accessToken);
+    },
+    onError: (err) => {
+      console.error('로그인 실패:', err);
     },
   });
 }

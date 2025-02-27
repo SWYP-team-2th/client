@@ -32,7 +32,7 @@ export default function NotFoundPage() {
       <div className="flex gap-[55px] w-full flex-col items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <img src={NotFoundImage} alt="not-found" width={200} height={200} />
         <div className="flex flex-col gap-2 justify-center items-center">
-          <p className="text-h3">투표 용지가 잘못되었습니다!</p>
+          <p className="text-h3">앗! 잘못된 주소예요!🥲</p>
           <p className="text-title-x-small">
             선택한 페이지가 없거나 삭제되었어요.
           </p>

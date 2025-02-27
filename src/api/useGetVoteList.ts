@@ -27,7 +27,7 @@ export function useGetMyVoteList(
     queryFn: ({ pageParam = null }) =>
       request({
         method: 'GET',
-        url: '/posts/user',
+        url: '/posts/user/me',
         headers: {
           Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjMiLCJpYXQiOjE3NDA2Mzg1MzQsImlzcyI6InN3eXA4dGVhbTIiLCJleHAiOjM4MTQyMzg1MzR9.CcTPwu-kthkfSqcAfA2N1wth77kbbOUe0Ama0P6SdTs`,
         },

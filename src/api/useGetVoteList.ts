@@ -28,9 +28,6 @@ export function useGetMyVoteList(
       request({
         method: 'GET',
         url: '/posts/user/me',
-        headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjMiLCJpYXQiOjE3NDA2Mzg1MzQsImlzcyI6InN3eXA4dGVhbTIiLCJleHAiOjM4MTQyMzg1MzR9.CcTPwu-kthkfSqcAfA2N1wth77kbbOUe0Ama0P6SdTs`,
-        },
         params: {
           cursor: pageParam,
           size: 10,
@@ -67,9 +64,6 @@ export function useGetParticipatedVoteList(
         params: {
           cursor: pageParam,
           size: 10,
-        },
-        headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjMiLCJpYXQiOjE3NDA2Mzg1MzQsImlzcyI6InN3eXA4dGVhbTIiLCJleHAiOjM4MTQyMzg1MzR9.CcTPwu-kthkfSqcAfA2N1wth77kbbOUe0Ama0P6SdTs`,
         },
       }),
     queryKey: ['my-participated-vote-list'],

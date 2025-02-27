@@ -4,8 +4,12 @@ import usePostUploadImage from '@/api/usePostUploadImage';
 
 export default function useImageUploader() {
   const imageUploadButtonRef = useRef<HTMLInputElement | null>(null);
-  const { state, handleImageSelect } = useVoteRegist();
-  const { mutate: postUploadImage } = usePostUploadImage();
+  const { state, handleImageSelect, setImageFileId } = useVoteRegist();
+  const { mutate: postUploadImage } = usePostUploadImage({
+    onSuccess: (data) => {
+      setImageFileId(data.imageFileId);
+    },
+  });
 
   const files = state.images.value;
 

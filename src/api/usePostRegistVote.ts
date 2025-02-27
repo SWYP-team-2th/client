@@ -1,26 +1,30 @@
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { request } from './config';
 
-interface UploadImageResponse {
-  imageFileId: number[];
+interface Image {
+  imageFileId: number;
 }
 
-export default function usePostUploadImage(
+interface RegistVoteRequest {
+  description: string;
+  images: Image[];
+}
+
+export default function usePostRegistVote(
   options?: Omit<
-    UseMutationOptions<UploadImageResponse, Error, FormData>,
+    UseMutationOptions<void, Error, RegistVoteRequest>,
     'mutationFn'
   >,
 ) {
-  return useMutation<UploadImageResponse, Error, FormData>({
-    mutationFn: (formData: FormData) =>
+  return useMutation<void, Error, RegistVoteRequest>({
+    mutationFn: (data: RegistVoteRequest) =>
       request({
         method: 'POST',
-        url: '/image/upload',
+        url: '/posts',
         headers: {
-          'Content-Type': 'multipart/form-data;charset=UTF-8',
           Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJpYXQiOjE3NDAyOTQyMzEsImlzcyI6InN3eXA4dGVhbTIiLCJleHAiOjMzMjc2Mjk0MjMxfQ.gqA245tRiBQB9owKRWIpX1we1T362R-xDTt4YT9AhRY`,
         },
-        data: formData,
+        data,
       }),
     ...options,
   });

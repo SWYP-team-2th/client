@@ -12,9 +12,14 @@ interface ImageFile {
   previewUrl: string;
 }
 
+interface ImageFileId {
+  imageFileId: number;
+}
+
 interface VoteRegistState {
   description: Field<string | null>;
   images: Field<ImageFile[]>;
+  imageFileId: Field<ImageFileId[]>;
 }
 
 interface VoteRegistContextType {
@@ -22,6 +27,7 @@ interface VoteRegistContextType {
   setDescription: (description: string) => void;
   handleImageSelect: (files: File[]) => void;
   removeImage: (name: string) => void;
+  setImageFileId: (imageFileId: number[]) => void;
   isFormValid: boolean;
 }
 
@@ -33,6 +39,10 @@ const initialState: VoteRegistState = {
   images: {
     value: [],
     errorMessage: `이미지를 ${MAX_IMAGE_COUNT}장 업로드해주세요.`,
+  },
+  imageFileId: {
+    value: [],
+    errorMessage: null,
   },
 };
 
@@ -66,8 +76,12 @@ export default function VoteRegistProvider({
     },
     images: {
       ...newState.images,
+      errorMessage: null,
+    },
+    imageFileId: {
+      ...newState.imageFileId,
       errorMessage:
-        newState.images.value.length === MAX_IMAGE_COUNT
+        newState.imageFileId.value.length === MAX_IMAGE_COUNT
           ? null
           : `이미지를 ${MAX_IMAGE_COUNT}장 업로드해주세요.`,
     },
@@ -148,9 +162,25 @@ export default function VoteRegistProvider({
     });
   };
 
+  const setImageFileId = (imageFileId: number[]) => {
+    const imageIds = Array.isArray(imageFileId) ? imageFileId : [imageFileId];
+
+    const formattedImageIds = imageIds.map((id) => ({ imageFileId: id }));
+
+    setState((prev) =>
+      validateState({
+        ...prev,
+        imageFileId: {
+          ...prev.imageFileId,
+          value: [...prev.imageFileId.value, ...formattedImageIds],
+        },
+      }),
+    );
+  };
+
   const isFormValid =
     state.description.errorMessage === null &&
-    state.images.errorMessage === null;
+    state.imageFileId.errorMessage === null;
 
   return (
     <VoteRegistContext.Provider
@@ -159,6 +189,7 @@ export default function VoteRegistProvider({
         setDescription,
         handleImageSelect,
         removeImage,
+        setImageFileId,
         isFormValid,
       }}
     >

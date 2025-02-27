@@ -18,7 +18,7 @@ export default function OAuthPage() {
         {
           onSuccess: (data) => {
             console.log('로그인 성공, 토큰:', data.accessToken);
-            navigate('/onboarding');
+            navigate(`${window.location.origin}/oauth`);
           },
           onError: (err) => {
             console.error('로그인 실패:', err);

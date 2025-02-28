@@ -1,5 +1,5 @@
 import { useDeletePost } from '@/api/useDeletePost';
-import useGetMyInfo from '@/api/useGetIdentificationInfo';
+import useGetMyInfo from '@/api/useGetMyInfo';
 import { useDialog } from '@/components/common/Dialog/hooks';
 
 export default function useDeleteConfirmDialog() {

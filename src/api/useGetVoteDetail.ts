@@ -1,6 +1,14 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { request } from './config';
 
+export interface Image {
+  id: number;
+  imageName: string;
+  imageUrl: string;
+  thumbnailUrl: string;
+  voted: boolean;
+}
+
 interface VoteDetailType {
   id: number;
   author: {
@@ -9,12 +17,7 @@ interface VoteDetailType {
     profileUrl: string;
   };
   description: string;
-  images: {
-    id: number;
-    imageName: string;
-    imageUrl: string;
-    voted: boolean;
-  }[];
+  images: Image[];
   shareUrl: string;
   createdAt: string;
 }

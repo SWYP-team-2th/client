@@ -1,33 +1,46 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Image } from '@/api/useGetVoteDetail';
 import { useDialog } from '@/components/common/Dialog/hooks';
-export default function useImageDetailModal() {
+
+interface UseImageDetailModalOptions {
+  images: Image[];
+  selectedImageId: number;
+}
+
+export default function useImageDetailModal({
+  images,
+  selectedImageId,
+}: UseImageDetailModalOptions) {
   const { closeDialog } = useDialog();
 
-  // TODO: 이미지 원본 api 연결
-  const images = [
-    {
-      id: 1,
-      url: 'https://picsum.photos/200/300',
-    },
-    {
-      id: 2,
-      url: 'https://picsum.photos/200/300',
-    },
-  ];
+  const [currentImageId, setCurrentImageId] = useState(
+    selectedImageId || images[0]?.id,
+  );
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const currentIndex = images.findIndex((img) => img.id === currentImageId);
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const scrollLeft = e.currentTarget.scrollLeft;
-    const width = e.currentTarget.clientWidth;
-    const newIndex = Math.round(scrollLeft / width);
+    const container = e.currentTarget;
+    const itemWidth = container.clientWidth;
 
-    if (newIndex !== currentIndex) {
-      setCurrentIndex(newIndex);
+    const visibleIndex = Math.round(container.scrollLeft / itemWidth);
+
+    if (images[visibleIndex] && images[visibleIndex].id !== currentImageId) {
+      setCurrentImageId(images[visibleIndex].id);
     }
   };
 
+  useEffect(() => {
+    if (scrollContainerRef.current && currentIndex !== -1) {
+      scrollContainerRef.current.scrollLeft =
+        currentIndex * scrollContainerRef.current.clientWidth;
+    }
+  }, [selectedImageId]);
+
   return {
+    scrollContainerRef,
     imageNum: images.length,
     images,
     currentIndex,

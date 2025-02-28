@@ -1,9 +1,21 @@
 import useImageDetailModal from './hooks';
+import { Image } from '@/api/useGetVoteDetail';
 import Icon from '@/components/common/Icon';
 
-export default function ImageDetailModal() {
-  const { images, currentIndex, handleScroll, closeDialog } =
-    useImageDetailModal();
+interface ImageDetailModalProps {
+  images: Image[];
+  selectedImageId: number;
+}
+
+export default function ImageDetailModal({
+  images,
+  selectedImageId,
+}: ImageDetailModalProps) {
+  const { scrollContainerRef, currentIndex, handleScroll, closeDialog } =
+    useImageDetailModal({
+      images,
+      selectedImageId,
+    });
 
   return (
     <div className="bg-gray-700 w-full h-[100dvh] max-w-[480px] flex flex-col">
@@ -20,6 +32,7 @@ export default function ImageDetailModal() {
       </header>
 
       <div
+        ref={scrollContainerRef}
         className="flex-1 flex overflow-x-auto snap-x snap-mandatory"
         style={{ scrollBehavior: 'smooth' }}
         onScroll={handleScroll}
@@ -30,9 +43,9 @@ export default function ImageDetailModal() {
             className="min-w-full h-full flex-shrink-0 snap-center flex items-center justify-center"
           >
             <img
-              src={image.url}
+              src={image.imageUrl}
               alt={`image-${image.id}`}
-              className="w-full h-auto max-h-full object-contain"
+              className="w-full h-auto max-h-full object-cover"
             />
           </div>
         ))}

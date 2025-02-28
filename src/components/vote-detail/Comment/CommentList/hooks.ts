@@ -5,11 +5,19 @@ import useGetVoteDetail from '@/api/useGetVoteDetail';
 export default function useComment() {
   const { shareUrl } = useParams<{ shareUrl: string }>();
   const { data: voteDetail } = useGetVoteDetail(shareUrl ?? '');
-  const { data: commentsData } = useGetComment(voteDetail.id, {
+  const {
+    data: commentsData,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = useGetComment(voteDetail.id, {
     enabled: !!voteDetail.id,
   });
 
   return {
     commentsData,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
   };
 }

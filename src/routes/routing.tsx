@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
         element: <VotePage />,
       },
       {
-        path: '/votes/:postId/comments',
+        path: '/votes/:shareUrl/comments',
         element: <VoteCommentDetailPage />,
       },
       {

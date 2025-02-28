@@ -1,13 +1,16 @@
 import { SetStateAction, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useAddComment from '@/api/useAddComment';
+import useGetVoteDetail from '@/api/useGetVoteDetail';
 import Icon from '@/components/common/Icon';
 import TextInput from '@/components/common/TextInput';
 
 export default function CommentInput() {
   const [content, setContent] = useState('');
   const contentRef = useRef<HTMLInputElement>(null);
-  const { postId } = useParams<{ postId: string }>();
+  const { shareUrl } = useParams<{ shareUrl: string }>();
+
+  const { data: voteDetail } = useGetVoteDetail(shareUrl ?? '');
 
   const { mutate: addComment } = useAddComment();
 
@@ -28,14 +31,16 @@ export default function CommentInput() {
       return;
     }
 
-    addComment(
-      { postId: Number(postId), content },
-      {
-        onSuccess: () => {
-          setContent('');
+    if (voteDetail.id) {
+      addComment(
+        { postId: voteDetail.id, content },
+        {
+          onSuccess: () => {
+            setContent('');
+          },
         },
-      },
-    );
+      );
+    }
   };
 
   return (

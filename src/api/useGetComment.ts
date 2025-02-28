@@ -1,5 +1,10 @@
-import { UseQueryOptions, useSuspenseQuery } from '@tanstack/react-query';
+import {
+  InfiniteData,
+  useInfiniteQuery,
+  UseInfiniteQueryOptions,
+} from '@tanstack/react-query';
 import { request } from './config';
+import { Pageable } from '@/types/pageable';
 
 interface AuthorType {
   userId: number;
@@ -15,23 +20,35 @@ interface CommentType {
   createdAt: string;
 }
 
-interface CommentsResponse {
-  nextCursor: number;
-  hasNext: boolean;
-  data: CommentType[];
-}
-
 export default function useGetComment(
   postId: number,
-  options?: Omit<UseQueryOptions<CommentsResponse>, 'queryKey' | 'queryFn'>,
+  options?: Partial<
+    UseInfiniteQueryOptions<
+      Pageable<CommentType>,
+      Error,
+      InfiniteData<Pageable<CommentType>, unknown>
+    >
+  >,
 ) {
-  return useSuspenseQuery<CommentsResponse>({
-    queryFn: () =>
+  return useInfiniteQuery<Pageable<CommentType>>({
+    queryFn: ({ pageParam = null }) =>
       request({
         method: 'GET',
         url: `/posts/${postId}/comments`,
+        params: {
+          cursor: pageParam,
+          size: 10,
+        },
       }),
     queryKey: ['comments', postId],
+    initialPageParam: null,
+    getNextPageParam: (lastPage) => {
+      if (!lastPage.hasNext || lastPage.data.length === 0) {
+        return undefined;
+      }
+
+      return lastPage.nextCursor;
+    },
     ...options,
   });
 }

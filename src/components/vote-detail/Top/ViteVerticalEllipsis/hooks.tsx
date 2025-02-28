@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import CloseConfirmDialog from './CloseConfirmDIalog';
 import DeleteConfirmDialog from './DeleteConfirmDialog';
 import useGetVoteDetail from '@/api/useGetVoteDetail';
+import useGetVoteStatus from '@/api/useGetVoteStatus';
 import { useBottomSheet } from '@/components/common/BottomSheet/hooks';
 import { useDialog } from '@/components/common/Dialog/hooks';
 import LinkShareBottomSheet from '@/components/common/LinkShareBottomSheet';
@@ -31,9 +32,24 @@ export default function useVoteVerticalEllipsis() {
   }, []);
 
   const { data: voteDetail } = useGetVoteDetail(shareUrl ?? '');
+  const { data: voteStatus } = useGetVoteStatus(voteDetail.id, {
+    enabled: !!voteDetail.id && voteDetail.status === 'PROGRESS',
+  });
 
   const handleCloseVote = () => {
-    openDialog(<CloseConfirmDialog postId={voteDetail.id} />);
+    const notParticipatedVote = voteStatus?.every(
+      (status) => !status.voteCount,
+    );
+    openDialog(
+      <CloseConfirmDialog
+        postId={voteDetail.id}
+        description={
+          notParticipatedVote
+            ? '잠시만요️, 아직 아무도 투표하지 않았어요!😢'
+            : '삭제하면 다시 되돌릴 수 없어요!'
+        }
+      />,
+    );
   };
 
   const handleDelete = () => {

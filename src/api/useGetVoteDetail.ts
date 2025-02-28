@@ -20,6 +20,7 @@ interface VoteDetailType {
   images: Image[];
   shareUrl: string;
   createdAt: string;
+  status: 'PROGRESS' | 'CLOSED';
 }
 
 export default function useGetVoteDetail(shareUrl: string) {

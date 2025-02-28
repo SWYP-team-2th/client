@@ -2,6 +2,7 @@ import { UseQueryOptions, useSuspenseQuery } from '@tanstack/react-query';
 import { request } from '@/api/config';
 
 export interface VoteStatusType {
+  id: number;
   imageName: string;
   voteCount: number;
   voteRatio: string;

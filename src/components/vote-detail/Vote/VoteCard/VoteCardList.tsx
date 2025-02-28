@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import VoteCardItem from './VoteCardItem';
 import ImageDetailModal from '../../ImageDetailModal';
@@ -9,7 +10,17 @@ import useVoteDetail from '@/components/vote-detail/Vote/VoteCard/hooks';
 export default function VoteCardList() {
   const { shareUrl } = useParams<{ shareUrl: string }>();
   const { voteDetail } = useVoteDetail(shareUrl ?? '');
-  const { mutate: voteMutate, isPending } = useVote(voteDetail.id);
+  const queryClient = useQueryClient();
+  const { mutate: voteMutate, isPending } = useVote(voteDetail.id, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['voteDetail', shareUrl],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['voteStatus', voteDetail.id],
+      });
+    },
+  });
   const { openDialog } = useDialog();
 
   const handleClickVoteCardItem = (id: number) => {

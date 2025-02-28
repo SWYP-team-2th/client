@@ -1,4 +1,5 @@
 import { HTMLAttributes } from 'react';
+import { useGetImageStatus } from './hooks';
 import Icon from '@/components/common/Icon';
 import { Label } from '@/components/common/Label/Label';
 import { cn } from '@/utils/cn';
@@ -19,13 +20,18 @@ export default function VoteCardItem({
   onClick,
   handleVote,
 }: VoteCardItemProps) {
+  const { id, status } = useGetImageStatus();
+
   return (
     <button
       className={cn(
-        'relative w-full rounded-2xl overflow-hidden',
-        image.voted
-          ? 'bg-gray-100 shadow-[0_0_0_3px_#FFFFFF,0_0_0_6px_#FFB300]'
-          : 'bg-gray-100',
+        'relative w-full rounded-2xl overflow-hidden bg-gray-100',
+        image.id === id &&
+          status === 'VOTED' &&
+          'bg-gray-100 shadow-[0_0_0_3px_#FFFFFF,0_0_0_6px_#FFB300]',
+        image.id === id &&
+          status === 'WIN' &&
+          'bg-gray-100 shadow-[0_0_0_3px_#FFFFFF,0_0_0_6px_#853AFF]',
       )}
       onClick={onClick}
     >
@@ -47,12 +53,32 @@ export default function VoteCardItem({
           />
         </button>
       </div>
-
-      {image.voted && (
+      {image.id === id && image.voted && (
         <div className="flex absolute top-2 left-2 space-x-2">
           <Label size="small" variant="primary">
             뽀또픽!
           </Label>
+        </div>
+      )}
+      {image.id === id && !image.voted && status === 'WIN' && (
+        <div className="flex absolute top-2 left-2 space-x-2">
+          <Label size="large" variant="secondary">
+            <p>베스트픽!</p>
+          </Label>
+        </div>
+      )}
+      {image.id === id && image.voted && status === 'WIN' && (
+        <div>
+          <div className="flex absolute top-2 left-2 space-x-2">
+            <Label size="large" variant="secondary">
+              <p>베스트픽!</p>
+            </Label>
+          </div>
+          <div className="flex absolute top-2 right-2 space-x-2">
+            <Label size="small" variant="primary">
+              뽀또픽!
+            </Label>
+          </div>
         </div>
       )}
     </button>

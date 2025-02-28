@@ -11,9 +11,12 @@ export default function MyVoteList() {
         <Link
           to={vote.shareUrl}
           key={vote.id}
-          className="relative aspect-[71/106]"
+          className="relative aspect-[71/106] rounded-xl overflow-hidden"
         >
-          <img src={vote.bestPickedImageUrl} />
+          <img
+            src={vote.bestPickedImageUrl}
+            className="w-full h-full object-cover"
+          />
           <Icon
             name="Link"
             size="medium"

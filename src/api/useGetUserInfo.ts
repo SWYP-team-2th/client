@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { request } from './config';
 
-interface UserInfoType {
+export interface UserInfoType {
   id: number;
   nickname: string;
   profileUrl: string;

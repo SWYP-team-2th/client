@@ -1,6 +1,7 @@
 import { createContext, useCallback, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Overlay from '../Overlay';
+import ToastProvider from '../Toast/ToastProvider';
 
 interface BottomSheetContextType {
   openBottomSheet: (bottomSheet: React.ReactNode) => void;
@@ -32,11 +33,13 @@ export const BottomSheetProvider = ({
       {children}
       {createPortal(
         currentBottomSheet && (
-          <Overlay onClose={closeBottomSheet}>
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px]">
-              {currentBottomSheet}
-            </div>
-          </Overlay>
+          <ToastProvider>
+            <Overlay onClose={closeBottomSheet}>
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px]">
+                {currentBottomSheet}
+              </div>
+            </Overlay>
+          </ToastProvider>
         ),
         document.body,
       )}

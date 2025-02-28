@@ -6,10 +6,10 @@ import OAuthPage from '@/pages/Login/OAuthPage';
 import MyPage from '@/pages/my/MyPage';
 import OnBoardingPage from '@/pages/OnBoarding/OnBoardingPage';
 import SettingsPage from '@/pages/settings/SettingsPage';
+import Test from '@/pages/test';
 import VoteCommentDetailPage from '@/pages/Vote/VoteCommentDetailPage';
 import VotePage from '@/pages/Vote/VotePage';
 import VoteRegistPage from '@/pages/Vote/VoteRegistPage';
-import Test from '@/pages/test';
 
 export const router = createBrowserRouter([
   {

@@ -22,6 +22,7 @@ interface CommentType {
 
 export default function useGetComment(
   postId: number,
+  size: number,
   options?: Partial<
     UseInfiniteQueryOptions<
       Pageable<CommentType>,
@@ -37,10 +38,10 @@ export default function useGetComment(
         url: `/posts/${postId}/comments`,
         params: {
           cursor: pageParam,
-          size: 20,
+          size,
         },
       }),
-    queryKey: ['comments', postId],
+    queryKey: ['comments', postId, size],
     initialPageParam: null,
     getNextPageParam: (lastPage) => {
       if (!lastPage.hasNext || lastPage.data.length === 0) {

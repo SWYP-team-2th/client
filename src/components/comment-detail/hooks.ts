@@ -8,7 +8,7 @@ export default function useCommentDetail() {
     isLoading,
     isFetchingNextPage,
     fetchNextPage,
-  } = useComment();
+  } = useComment(20);
 
   const comments = commentsData?.pages.flatMap((page) => page.data);
 

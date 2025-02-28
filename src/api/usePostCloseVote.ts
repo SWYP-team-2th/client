@@ -1,14 +1,14 @@
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
-import { request } from '@/api/config';
+import { request } from './config';
 
-export function useDeletePost(
+export default function usePostCloseVote(
   options?: UseMutationOptions<void, Error, number>,
 ) {
   return useMutation<void, Error, number>({
     mutationFn: (postId: number) =>
       request({
-        method: 'DELETE',
-        url: `/posts/${postId}`,
+        method: 'POST',
+        url: `/posts/${postId}/close`,
       }),
     ...options,
   });

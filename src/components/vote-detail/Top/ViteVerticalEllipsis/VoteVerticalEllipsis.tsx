@@ -3,8 +3,14 @@ import More from '@/assets/icons/more_24px.svg?react';
 import Icon from '@/components/common/Icon';
 
 export default function VoteVerticalEllipsis() {
-  const { isOpen, setIsOpen, ellipsisRef, handleDelete, handleClickVoteShare } =
-    useVoteVerticalEllipsis();
+  const {
+    isOpen,
+    setIsOpen,
+    ellipsisRef,
+    handleCloseVote,
+    handleDelete,
+    handleClickVoteShare,
+  } = useVoteVerticalEllipsis();
 
   return (
     <div className="relative" ref={ellipsisRef}>
@@ -17,8 +23,10 @@ export default function VoteVerticalEllipsis() {
 
       {isOpen && (
         <div className=" absolute right-0 py-[10px] w-[126px] bg-gray-100 rounded-xl z-50 text-caption shadow-[0px_0px_10px_0px_rgba(0,0,0,0.05),0px_2px_15px_0px_rgba(0,0,0,0.10)]">
-          {/* 추후에 공통으로 빼도 좋을듯 */}
-          <button className="flex items-center w-full px-4 gap-sm cursor-pointer">
+          <button
+            onClick={handleCloseVote}
+            className="flex items-center w-full px-4 gap-sm cursor-pointer"
+          >
             <Icon name="VoteClose" size="small" />
             <span>투표 마감</span>
           </button>

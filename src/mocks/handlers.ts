@@ -15,17 +15,12 @@ export const handlers = [
   }),
 
   // POST
-  // http.post(
-  //   'https://devapi.photopic.site/posts/155/votes',
-  //   async ({ request }) => {
-  //     return HttpResponse.json(
-  //       {
-  //         errorCode: 'INVALID_GUEST_HEADER',
-  //       },
-  //       {
-  //         status: 400,
-  //       },
-  //     );
-  //   },
-  // ),
+  http.post('https://example.com/user', async ({ request }) => {
+    const body = await request.json();
+
+    return HttpResponse.json({
+      success: true,
+      data: body,
+    });
+  }),
 ];

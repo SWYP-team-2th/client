@@ -8,6 +8,32 @@ import CommentInput from '@/components/vote-detail/Input';
 export default function VoteCommentDetailPage() {
   const navigate = useNavigate();
 
+  const comments = commentsData?.pages.flatMap((page) => page.data);
+
+  const observerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
+          fetchNextPage();
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    const currentObserver = observerRef.current;
+    if (currentObserver) {
+      observer.observe(currentObserver);
+    }
+
+    return () => {
+      if (currentObserver) {
+        observer.unobserve(currentObserver);
+      }
+    };
+  }, [hasNextPage, fetchNextPage, isFetchingNextPage]);
+
   return (
     <div className="bg-gray-200 w-full h-screen flex items-center flex-col py-[85px] relative">
       <Header

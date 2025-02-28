@@ -1,4 +1,3 @@
-import { useBottomSheet } from '../BottomSheet/hooks';
 import useToast from '../Toast/hooks';
 import { useKakaoShareUrl } from '@/api/useKakaoShareUrl';
 
@@ -12,7 +11,6 @@ export default function useLinkShareBottomSheet({
   shareUrl,
 }: UseLinkShareBottomSheetOptions) {
   const toast = useToast();
-  const { closeBottomSheet } = useBottomSheet();
   const { handleClickKakaoShareButton } = useKakaoShareUrl({
     author,
     shareUrl,
@@ -25,7 +23,6 @@ export default function useLinkShareBottomSheet({
         toast.success({
           title: '투표 주소가 복사됐어요!😉',
         });
-        closeBottomSheet();
       })
       .catch(() => {
         toast.error({

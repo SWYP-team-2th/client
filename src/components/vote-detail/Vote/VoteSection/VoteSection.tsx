@@ -9,9 +9,7 @@ export default function VoteSection() {
       <Suspense fallback={<Loading />}>
         <VoteCardList />
       </Suspense>
-      <Suspense fallback={<Loading />}>
-        <VoteResultList />
-      </Suspense>
+      <VoteResultList />
     </>
   );
 }

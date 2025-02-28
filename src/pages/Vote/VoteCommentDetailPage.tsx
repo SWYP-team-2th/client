@@ -1,19 +1,15 @@
-import { Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '@/assets/icons/logo.svg?react';
+import CommentList from '@/components/comment-detail/CommentList';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
-import Loading from '@/components/common/Loading';
-import CommentItem from '@/components/vote-detail/Comment/CommentItems';
-import useComment from '@/components/vote-detail/Comment/CommentList/hooks';
 import CommentInput from '@/components/vote-detail/Input';
 
 export default function VoteCommentDetailPage() {
-  const { commentsData } = useComment();
   const navigate = useNavigate();
 
   return (
-    <div className="bg-gray-200 w-full h-screen flex items-center flex-col pt-[85px] relative">
+    <div className="bg-gray-200 w-full h-screen flex items-center flex-col py-[85px] relative">
       <Header
         leftNode={
           <Icon
@@ -35,23 +31,10 @@ export default function VoteCommentDetailPage() {
         }
       />
 
-      <div className="w-full">
-        <Suspense fallback={<Loading />}>
-          <div className="mx-[15px] px-[10px] pt-[18px] pb-1 bg-gray-100 rounded-2xl shadow-[0px_2px_20px_0px_rgba(0,0,0,0.03),0px_20px_15px_0px_rgba(0,0,0,0.02),0px_8px_25px_0px_rgba(0,0,0,0.04)]">
-            <div className="h-[791px] overflow-y-auto">
-              <div className="text-title-large mt-lg pl-sm pb-[9px]">
-                한마디 ({commentsData.data.length})
-              </div>
-              <hr className="text-gray-300 mb-[20px]" />
-
-              <div>
-                {commentsData.data.map((comment) => (
-                  <CommentItem key={comment.commentId} comment={comment} />
-                ))}
-              </div>
-            </div>
-          </div>
-        </Suspense>
+      <div className="w-full h-full">
+        <div className="h-full mx-[15px] px-[10px] pt-[18px] pb-1 bg-gray-100 rounded-2xl shadow-[0px_2px_20px_0px_rgba(0,0,0,0.03),0px_20px_15px_0px_rgba(0,0,0,0.02),0px_8px_25px_0px_rgba(0,0,0,0.04)]">
+          <CommentList />
+        </div>
         <CommentInput />
       </div>
     </div>

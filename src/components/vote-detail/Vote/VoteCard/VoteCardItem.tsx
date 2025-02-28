@@ -1,10 +1,9 @@
 import { HTMLAttributes } from 'react';
-import useVote from '@/api/useVote';
 import Icon from '@/components/common/Icon';
 import { Label } from '@/components/common/Label/Label';
 import { cn } from '@/utils/cn';
 
-interface VoteCardItemProps extends HTMLAttributes<HTMLDivElement> {
+interface VoteCardItemProps extends HTMLAttributes<HTMLButtonElement> {
   image: {
     id: number;
     imageName: string;
@@ -12,23 +11,16 @@ interface VoteCardItemProps extends HTMLAttributes<HTMLDivElement> {
     thumbnailUrl: string;
     voted: boolean;
   };
-  postId: number;
+  handleVote: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function VoteCardItem({
   image,
-  postId,
   onClick,
+  handleVote,
 }: VoteCardItemProps) {
-  const { mutate: voteMutate } = useVote(postId);
-
-  const handleVote = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    voteMutate(image.id);
-  };
-
   return (
-    <div
+    <button
       className={cn(
         'relative w-full rounded-2xl overflow-hidden',
         image.voted
@@ -63,6 +55,6 @@ export default function VoteCardItem({
           </Label>
         </div>
       )}
-    </div>
+    </button>
   );
 }

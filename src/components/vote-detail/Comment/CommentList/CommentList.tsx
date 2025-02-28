@@ -5,7 +5,7 @@ import useComment from '@/components/vote-detail/Comment/CommentList/hooks';
 
 export default function CommentList() {
   const { postId } = useParams<{ postId: string }>();
-  const { commentsData } = useComment(Number(postId));
+  const { commentsData } = useComment();
   const navigate = useNavigate();
 
   const visibleComments = commentsData.data.slice(0, 3);

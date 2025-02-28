@@ -5,7 +5,8 @@ import {
   removeAccessToken,
 } from '@/components/login/Auth/token';
 
-const isDevelopment = window.location.host.includes('dev.');
+const isDevelopment =
+  import.meta.env.VITE_API_URL_DEV || window.location.host.includes('dev.');
 
 const axiosConfig: AxiosRequestConfig = {
   baseURL: isDevelopment

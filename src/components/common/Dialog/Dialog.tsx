@@ -1,3 +1,4 @@
+import Loading from '../Loading';
 import { useDialog } from './hooks';
 import { Button } from '@/components/common/Button/Button';
 
@@ -6,10 +7,12 @@ interface DialogProps {
   description?: string;
   cancelButtonProps?: {
     text: string;
+    isLoading?: boolean;
   };
   confirmButtonProps: {
     text: string;
     onClick: () => void;
+    isLoading?: boolean;
   };
   showLaterButton: boolean;
 }
@@ -37,21 +40,29 @@ export default function Dialog({
             buttonType="primary"
             onClick={closeDialog}
           >
-            {cancelButtonProps.text}
+            {cancelButtonProps.isLoading ? <Loading /> : cancelButtonProps.text}
           </Button>
           <Button
             variant="solid"
             size="small"
-            buttonType="primary"
+            buttonType={confirmButtonProps.isLoading ? 'disabled' : 'primary'}
             onClick={confirmButtonProps.onClick}
           >
-            {confirmButtonProps.text}
+            {confirmButtonProps.isLoading ? (
+              <Loading />
+            ) : (
+              confirmButtonProps.text
+            )}
           </Button>
         </div>
       )}
       {!cancelButtonProps && (
-        <Button variant="solid" size="large" buttonType="primary">
-          {confirmButtonProps.text}
+        <Button
+          variant="solid"
+          size="large"
+          buttonType={confirmButtonProps.isLoading ? 'disabled' : 'primary'}
+        >
+          {confirmButtonProps.isLoading ? <Loading /> : confirmButtonProps.text}
         </Button>
       )}
       {showLaterButton && (

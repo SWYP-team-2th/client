@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useDeletePost } from '@/api/useDeletePost';
+import { useParams } from 'react-router-dom';
+import CloseConfirmDialog from './CloseConfirmDIalog';
+import DeleteConfirmDialog from './DeleteConfirmDialog';
 import useGetVoteDetail from '@/api/useGetVoteDetail';
 import { useBottomSheet } from '@/components/common/BottomSheet/hooks';
+import { useDialog } from '@/components/common/Dialog/hooks';
 import LinkShareBottomSheet from '@/components/common/LinkShareBottomSheet';
 
 export default function useVoteVerticalEllipsis() {
   const { postId } = useParams<{ postId: string }>();
-  const navigate = useNavigate();
+  const { openDialog } = useDialog();
   const { openBottomSheet } = useBottomSheet();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -28,18 +30,14 @@ export default function useVoteVerticalEllipsis() {
     };
   }, []);
 
-  const { mutate: deletePost } = useDeletePost();
   const { data: voteDetail } = useGetVoteDetail(Number(postId));
 
+  const handleCloseVote = () => {
+    openDialog(<CloseConfirmDialog postId={Number(postId)} />);
+  };
+
   const handleDelete = () => {
-    // 추후 로그인 삭제 모달로 대체
-    if (confirm('게시글 삭제?')) {
-      deletePost(Number(postId), {
-        onSuccess: () => {
-          navigate('/');
-        },
-      });
-    }
+    openDialog(<DeleteConfirmDialog postId={Number(postId)} />);
   };
 
   const handleClickVoteShare = () => {
@@ -55,6 +53,7 @@ export default function useVoteVerticalEllipsis() {
     isOpen,
     setIsOpen,
     ellipsisRef,
+    handleCloseVote,
     handleDelete,
     handleClickVoteShare,
   };

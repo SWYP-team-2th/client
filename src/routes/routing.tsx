@@ -9,6 +9,7 @@ import SettingsPage from '@/pages/settings/SettingsPage';
 import VoteCommentDetailPage from '@/pages/Vote/VoteCommentDetailPage';
 import VotePage from '@/pages/Vote/VotePage';
 import VoteRegistPage from '@/pages/Vote/VoteRegistPage';
+import Test from '@/pages/test';
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: '/settings',
         element: <SettingsPage />,
+      },
+      {
+        path: '/text',
+        element: <Test />,
       },
     ],
   },

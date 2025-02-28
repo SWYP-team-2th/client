@@ -3,6 +3,8 @@ import {
   getAccessToken,
   setAccessToken,
   removeAccessToken,
+  getGuestToken,
+  setGuestToken,
 } from '@/components/login/Auth/token';
 
 const isDevelopment =
@@ -18,17 +20,45 @@ const axiosConfig: AxiosRequestConfig = {
 
 const axiosInstance = axios.create(axiosConfig);
 
-// 요청시 localStorage에서 헤더에 토큰 넣어줌
+// 요청시 localStorage에서 헤더에 유저, 게스트 토큰 넣어줌
 axiosInstance.interceptors.request.use((config) => {
   const accessToken = getAccessToken();
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
+
+  const guestToken = getGuestToken();
+  if (guestToken) {
+    config.headers['Guest-Token'] = guestToken;
+  }
+
   return config;
 });
 
+// 게스트 토큰 발급 함수
+const fetchGuestToken = async (): Promise<string | null> => {
+  try {
+    const response = await axiosInstance.post<{ guestToken: string }>(
+      '/auth/guest/token',
+    );
+
+    // 반환된 응답 데이터가 있으면
+    if (response.data?.guestToken) {
+      setGuestToken(response.data.guestToken); // 게스트 토큰 저장
+      console.log('게스트 토큰 발급 성공:', response.data.guestToken);
+      return response.data.guestToken;
+    }
+
+    // 반환된 응답 값 없으면 null 반환
+    return null;
+  } catch (error) {
+    console.error('게스트 토큰 발급 실패:', error);
+    return null;
+  }
+};
+
 // 토큰 재발급 함수
-const reissueToken = async (): Promise<string | null> => {
+const fetchReissueToken = async (): Promise<string | null> => {
   try {
     const response = await axiosInstance.post<{ accessToken: string }>(
       '/auth/reissue',
@@ -63,7 +93,7 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     if (error.response?.status === 401 && error.config) {
       try {
-        const newAccessToken = await reissueToken(); // 401 에러시 새로운 토큰 요청
+        const newAccessToken = await fetchReissueToken(); // 401 에러시 새로운 토큰 요청
 
         // 새로운 토큰 들어오면 새로운 토큰으로 다시 저장시키기
         if (newAccessToken) {
@@ -80,6 +110,26 @@ axiosInstance.interceptors.response.use(
     }
 
     return Promise.reject(error);
+  },
+);
+
+// 게스트
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    // 400 처리 (게스트 토큰 없음)
+    if (
+      error.response?.status === 400 &&
+      error.response.data?.error === 'INVALID_GUEST_HEADER'
+    ) {
+      try {
+        const newGuestToken = await fetchGuestToken();
+        error.config.headers['Guest-Token'] = newGuestToken;
+        return axiosInstance(error.config);
+      } catch (err) {
+        console.error('게스트 토큰 재발급 실패:', err);
+      }
+    }
   },
 );
 

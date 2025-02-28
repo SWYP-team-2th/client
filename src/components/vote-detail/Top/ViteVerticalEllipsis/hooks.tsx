@@ -8,7 +8,7 @@ import { useDialog } from '@/components/common/Dialog/hooks';
 import LinkShareBottomSheet from '@/components/common/LinkShareBottomSheet';
 
 export default function useVoteVerticalEllipsis() {
-  const { postId } = useParams<{ postId: string }>();
+  const { shareUrl } = useParams<{ shareUrl: string }>();
   const { openDialog } = useDialog();
   const { openBottomSheet } = useBottomSheet();
 
@@ -30,21 +30,21 @@ export default function useVoteVerticalEllipsis() {
     };
   }, []);
 
-  const { data: voteDetail } = useGetVoteDetail(Number(postId));
+  const { data: voteDetail } = useGetVoteDetail(shareUrl ?? '');
 
   const handleCloseVote = () => {
-    openDialog(<CloseConfirmDialog postId={Number(postId)} />);
+    openDialog(<CloseConfirmDialog postId={voteDetail.id} />);
   };
 
   const handleDelete = () => {
-    openDialog(<DeleteConfirmDialog postId={Number(postId)} />);
+    openDialog(<DeleteConfirmDialog postId={voteDetail.id} />);
   };
 
   const handleClickVoteShare = () => {
     openBottomSheet(
       <LinkShareBottomSheet
         author={voteDetail.author.nickname}
-        shareUrl={voteDetail.shareUrl}
+        shareUrl={`${window.location.origin}/votes/${voteDetail.shareUrl}`}
       />,
     );
   };

@@ -12,6 +12,7 @@ interface RegistVoteRequest {
 
 interface RegistVoteResponse {
   postId: number;
+  shareUrl: string;
 }
 
 export default function usePostRegistVote(
@@ -25,9 +26,6 @@ export default function usePostRegistVote(
       request({
         method: 'POST',
         url: '/posts',
-        headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJpYXQiOjE3NDAyOTQyMzEsImlzcyI6InN3eXA4dGVhbTIiLCJleHAiOjMzMjc2Mjk0MjMxfQ.gqA245tRiBQB9owKRWIpX1we1T362R-xDTt4YT9AhRY`,
-        },
         data,
       }),
     ...options,

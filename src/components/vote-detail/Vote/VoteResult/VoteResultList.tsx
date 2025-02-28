@@ -4,8 +4,11 @@ import useVoteStatus from '@/components/vote-detail/Vote/VoteResult/hooks';
 import VoteResultItem from '@/components/vote-detail/Vote/VoteResult/VoteResultItem';
 
 export default function VoteResultList() {
-  const { postId } = useParams<{ postId: string }>();
-  const { voteStatus, userHasVoted } = useVoteStatus(Number(postId));
+  const { shareUrl } = useParams<{ shareUrl: string }>();
+  const { voteStatus, userHasVoted } = useVoteStatus({
+    postId: Number(shareUrl),
+    shareUrl: shareUrl ?? '',
+  });
 
   // 유저가 해당 게시글에 투표 했는지에 대한 유무
 

@@ -10,7 +10,7 @@ export default function MyVoteList() {
     <div className="overflow-scroll grid grid-cols-3 gap-2">
       {myVoteList.map((vote) => (
         <Link
-          to={vote.shareUrl}
+          to={`/votes/${vote.shareUrl}`}
           key={vote.id}
           className="relative aspect-[71/106] rounded-xl overflow-hidden"
         >
@@ -25,7 +25,7 @@ export default function MyVoteList() {
               e.preventDefault();
               handleClickVoteShare({
                 author: author ?? '',
-                shareUrl: vote.shareUrl,
+                shareUrl: `${window.location.origin}/votes/${vote.shareUrl}`,
               });
             }}
             className="absolute top-2 right-2 rounded-[10px] bg-gray-300 w-[26px] h-[26px] flex items-center justify-center"

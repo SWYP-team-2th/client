@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { UseQueryOptions, useSuspenseQuery } from '@tanstack/react-query';
 import { request } from '@/api/config';
 
 export interface VoteStatusType {
@@ -7,7 +7,10 @@ export interface VoteStatusType {
   voteRatio: string;
 }
 
-export default function useGetVoteStatus(postId: number) {
+export default function useGetVoteStatus(
+  postId: number,
+  options?: Omit<UseQueryOptions<VoteStatusType[]>, 'queryKey' | 'queryFn'>,
+) {
   return useSuspenseQuery<VoteStatusType[]>({
     queryKey: ['voteStatus', postId],
     queryFn: () =>
@@ -18,5 +21,6 @@ export default function useGetVoteStatus(postId: number) {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
       }),
+    ...options,
   });
 }

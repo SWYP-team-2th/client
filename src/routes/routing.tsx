@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
     children: [
       { path: '/', element: <App /> },
       {
-        path: '/votes/:postId',
+        path: '/votes/:shareUrl',
         element: <VotePage />,
       },
       {

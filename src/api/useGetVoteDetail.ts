@@ -22,13 +22,13 @@ interface VoteDetailType {
   createdAt: string;
 }
 
-export default function useGetVoteDetail(postId: number) {
+export default function useGetVoteDetail(shareUrl: string) {
   return useSuspenseQuery<VoteDetailType>({
-    queryKey: ['voteDetail', postId],
+    queryKey: ['voteDetail', shareUrl],
     queryFn: () =>
       request({
         method: 'GET',
-        url: `/posts/${postId}`,
+        url: `/posts/shareUrl/${shareUrl}`,
       }),
   });
 }

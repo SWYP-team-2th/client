@@ -9,6 +9,7 @@ export default function useComment() {
     data: commentsData,
     hasNextPage,
     isFetchingNextPage,
+    isLoading,
     fetchNextPage,
   } = useGetComment(voteDetail.id, {
     enabled: !!voteDetail.id,
@@ -18,6 +19,7 @@ export default function useComment() {
     commentsData,
     hasNextPage,
     isFetchingNextPage,
+    isLoading,
     fetchNextPage,
   };
 }

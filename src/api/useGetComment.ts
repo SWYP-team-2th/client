@@ -37,7 +37,7 @@ export default function useGetComment(
         url: `/posts/${postId}/comments`,
         params: {
           cursor: pageParam,
-          size: 10,
+          size: 20,
         },
       }),
     queryKey: ['comments', postId],

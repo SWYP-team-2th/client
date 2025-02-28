@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useGetIdentificationInfo from '@/api/useGetIdentificationInfo';
 import usePostKakaoLogin from '@/api/usePostKaKaoLogin';
 
 export default function OAuthPage() {
   const navigate = useNavigate();
   const { mutate } = usePostKakaoLogin();
+  const { data: userInfo, refetch } = useGetIdentificationInfo();
 
   useEffect(() => {
     const code = new URL(window.location.href).searchParams.get('code');
@@ -16,10 +18,8 @@ export default function OAuthPage() {
           code,
         },
         {
-          onSuccess: (data) => {
-            console.log('로그인 성공, 토큰:', data.accessToken);
-            // 추후 onboarding -> 마이페이지 userId 포함해서 수정 예정
-            navigate('/onboarding');
+          onSuccess: () => {
+            refetch();
           },
           onError: (err) => {
             console.error('로그인 실패:', err);
@@ -29,6 +29,13 @@ export default function OAuthPage() {
       );
     }
   }, []);
+
+  useEffect(() => {
+    if (userInfo) {
+      console.log('유저 정보 조회 성공:', userInfo);
+      navigate(`/user/${userInfo.id}`);
+    }
+  }, [userInfo]);
 
   return <div>로그인 진행중임다.</div>;
 }

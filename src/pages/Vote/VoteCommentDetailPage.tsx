@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Logo from '@/assets/icons/logo.svg?react';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
@@ -9,8 +9,7 @@ import useComment from '@/components/vote-detail/Comment/CommentList/hooks';
 import CommentInput from '@/components/vote-detail/Input';
 
 export default function VoteCommentDetailPage() {
-  const { postId } = useParams<{ postId: string }>();
-  const { commentsData } = useComment(Number(postId));
+  const { commentsData } = useComment();
   const navigate = useNavigate();
 
   return (

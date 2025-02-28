@@ -11,7 +11,6 @@ export function useKakaoShareUrl({ author, shareUrl }: KakaoShareUrlProps) {
 
   useEffect(() => {
     if (window.Kakao && !window.Kakao.isInitialized()) {
-      console.log(import.meta.env.VITE_KAKAO_JAVASCRIPT_APP_KEY);
       window.Kakao.init(import.meta.env.VITE_KAKAO_JAVASCRIPT_APP_KEY);
     }
   }, []);

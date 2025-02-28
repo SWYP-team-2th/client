@@ -7,9 +7,9 @@ import Loading from '@/components/common/Loading';
 import useVoteDetail from '@/components/vote-detail/Vote/VoteCard/hooks';
 
 export default function VoteCardList() {
-  const { postId } = useParams<{ postId: string }>();
-  const { voteDetail } = useVoteDetail(Number(postId));
-  const { mutate: voteMutate, isPending } = useVote(Number(postId));
+  const { shareUrl } = useParams<{ shareUrl: string }>();
+  const { voteDetail } = useVoteDetail(shareUrl ?? '');
+  const { mutate: voteMutate, isPending } = useVote(voteDetail.id);
   const { openDialog } = useDialog();
 
   const handleClickVoteCardItem = (id: number) => {

@@ -3,8 +3,8 @@ import VoteVerticalEllipsis from '@/components/vote-detail/Top/ViteVerticalEllip
 import useVoteDetail from '@/components/vote-detail/Top/VoteAuthorInfo/hooks';
 
 export default function VoteAuthorInfo() {
-  const { postId } = useParams<{ postId: string }>();
-  const { voteDetail } = useVoteDetail(Number(postId));
+  const { shareUrl } = useParams<{ shareUrl: string }>();
+  const { voteDetail } = useVoteDetail(shareUrl ?? '');
 
   return (
     <div className="w-full flex flex-col">

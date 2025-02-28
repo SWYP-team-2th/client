@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { UseQueryOptions, useSuspenseQuery } from '@tanstack/react-query';
 import { request } from './config';
 
 interface AuthorType {
@@ -21,7 +21,10 @@ interface CommentsResponse {
   data: CommentType[];
 }
 
-export default function useGetComment(postId: number) {
+export default function useGetComment(
+  postId: number,
+  options?: Omit<UseQueryOptions<CommentsResponse>, 'queryKey' | 'queryFn'>,
+) {
   return useSuspenseQuery<CommentsResponse>({
     queryFn: () =>
       request({
@@ -29,5 +32,6 @@ export default function useGetComment(postId: number) {
         url: `/posts/${postId}/comments`,
       }),
     queryKey: ['comments', postId],
+    ...options,
   });
 }

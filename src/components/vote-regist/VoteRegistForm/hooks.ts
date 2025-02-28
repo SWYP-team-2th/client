@@ -9,7 +9,7 @@ export default function useVoteRegistForm() {
   const { mutate: postRegistVote, isPending: isPostRegistVotePending } =
     usePostRegistVote({
       onSuccess: (data) => {
-        navigate(`/votes/${data.postId}`);
+        navigate(`/votes/${data.shareUrl}`);
       },
     });
 

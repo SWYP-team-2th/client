@@ -5,8 +5,10 @@ import {
   removeAccessToken,
 } from '@/components/login/Auth/token';
 
+const isDevelopment = window.location.host.includes('dev.');
+
 const axiosConfig: AxiosRequestConfig = {
-  baseURL: import.meta.env.DEV
+  baseURL: isDevelopment
     ? import.meta.env.VITE_API_URL_DEV
     : import.meta.env.VITE_API_URL_PROD,
   validateStatus: (status) => status >= 200 && status < 300,

@@ -12,14 +12,16 @@ export default function VoteList() {
   };
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 w-full h-full">
       <Tab selectedTab={tab} onClickTabMenu={handleClickTabMenu} />
-      <Suspense fallback={<Loading />}>
-        {tab === 'my' && <MyVoteList />}
-      </Suspense>
-      <Suspense fallback={<Loading />}>
-        {tab === 'participated' && <ParticipatedVoteList />}
-      </Suspense>
+      <div className="overflow-y-auto">
+        <Suspense fallback={<Loading />}>
+          {tab === 'my' && <MyVoteList />}
+        </Suspense>
+        <Suspense fallback={<Loading />}>
+          {tab === 'participated' && <ParticipatedVoteList />}
+        </Suspense>
+      </div>
     </div>
   );
 }

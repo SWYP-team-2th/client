@@ -16,19 +16,20 @@ export default function MyPage() {
   };
 
   return (
-    <div>
+    <div className="w-full h-full overflow-hidden">
       <Header
         leftNode={<Logo style={{ width: 70 }} />}
         rightNode={<Icon name="SettingsOutline" size="medium" />}
       />
       <div className="pt-[105px] px-6 w-full h-full flex flex-col gap-[30px]">
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<Loading className="h-[100px]" />}>
           <Profile />
         </Suspense>
         <Button
           buttonType="primary"
           size="large"
           variant="solid"
+          className="flex-shrink-0"
           onClick={handleClickCreateVoteButton}
         >
           <div className="flex gap-1">

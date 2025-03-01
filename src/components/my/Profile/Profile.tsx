@@ -11,7 +11,7 @@ export default function Profile() {
         height={96}
         className="rounded-[50%]"
       />
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 break-keep">
         <p className="text-h2">
           반가워요,{' '}
           <strong className="text-accent-600">{userInfo.nickname}</strong>님!

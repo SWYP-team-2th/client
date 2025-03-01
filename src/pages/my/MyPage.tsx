@@ -15,11 +15,21 @@ export default function MyPage() {
     navigate('/votes/regist');
   };
 
+  const handleClickSettingsButton = () => {
+    navigate('/settings');
+  };
+
   return (
     <div className="w-full h-full overflow-hidden">
       <Header
         leftNode={<Logo style={{ width: 70 }} />}
-        rightNode={<Icon name="SettingsOutline" size="medium" />}
+        rightNode={
+          <Icon
+            name="SettingsOutline"
+            size="medium"
+            onClick={handleClickSettingsButton}
+          />
+        }
       />
       <div className="pt-[105px] px-6 w-full h-full flex flex-col gap-[30px]">
         <Suspense fallback={<Loading className="h-[100px]" />}>

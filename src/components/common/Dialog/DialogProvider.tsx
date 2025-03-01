@@ -28,7 +28,7 @@ export const DialogProvider = ({ children }: { children: React.ReactNode }) => {
       {createPortal(
         currentDialog && (
           <Overlay onClose={closeDialog}>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[430px] pr-[25px] pl-[25px]">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[430px]">
               {currentDialog}
             </div>
           </Overlay>

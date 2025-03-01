@@ -10,18 +10,16 @@ export default function DefaultLayout() {
   };
 
   return (
-    <div className="w-full h-full mx-auto my-0 min-h-lvh desktop:w-[480px] relative">
+    <div className="relative w-full h-full mx-auto my-0 min-h-lvh max-w-[480px]">
       <Outlet />
-
-      <div className="fixed bottom-[12vh] desktop:right-[calc(50%-216px)] z-50">
-        <FloatingButton
-          onClick={handleClickFloatingButton}
-          buttonType="secondary"
-          size="large"
-        >
-          <Icon name="PlusWhite" size="large" />
-        </FloatingButton>
-      </div>
+      <FloatingButton
+        onClick={handleClickFloatingButton}
+        className="absolute bottom-25 right-6 z-50"
+        buttonType="secondary"
+        size="large"
+      >
+        <Icon name="PlusWhite" size="large" />
+      </FloatingButton>
     </div>
   );
 }

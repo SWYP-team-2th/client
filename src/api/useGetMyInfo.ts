@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { request } from '@/api/config';
 
 interface MyInfoResponse {
@@ -7,7 +7,9 @@ interface MyInfoResponse {
   profileUrl: string;
 }
 
-export default function useGetMyInfo() {
+export default function useGetMyInfo(
+  options?: Omit<UseQueryOptions<MyInfoResponse>, 'queryKey' | 'queryFn'>,
+) {
   return useQuery<MyInfoResponse>({
     queryKey: ['my-info'],
     queryFn: async () => {
@@ -16,5 +18,6 @@ export default function useGetMyInfo() {
         url: '/users/me',
       });
     },
+    ...options,
   });
 }

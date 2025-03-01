@@ -14,7 +14,6 @@ export const router = createBrowserRouter([
   {
     element: <DefaultLayout />,
     children: [
-      { path: '/', element: <App /> },
       {
         path: '/votes/:shareUrl',
         element: <VotePage />,
@@ -32,6 +31,7 @@ export const router = createBrowserRouter([
   {
     element: <SubLayout />,
     children: [
+      { path: '/', element: <App /> },
       { path: '/onboarding', element: <OnBoardingPage /> },
       {
         path: '/votes/regist',

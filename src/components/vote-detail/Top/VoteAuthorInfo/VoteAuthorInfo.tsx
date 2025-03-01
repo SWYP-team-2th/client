@@ -17,7 +17,7 @@ export default function VoteAuthorInfo() {
           <span className="text-h3">{voteDetail.author.nickname}</span>
         </div>
 
-        <VoteVerticalEllipsis />
+        {voteDetail.isAuthor && <VoteVerticalEllipsis />}
       </div>
 
       <p>{voteDetail.description}</p>

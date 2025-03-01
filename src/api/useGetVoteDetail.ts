@@ -21,6 +21,7 @@ interface VoteDetailType {
   shareUrl: string;
   createdAt: string;
   status: 'PROGRESS' | 'CLOSED';
+  isAuthor: boolean;
 }
 
 export default function useGetVoteDetail(shareUrl: string) {

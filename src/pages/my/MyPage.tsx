@@ -31,7 +31,7 @@ export default function MyPage() {
           />
         }
       />
-      <div className="pt-[105px] px-6 w-full h-full flex flex-col gap-[30px]">
+      <div className="pt-[105px] px-6 w-full h-full flex flex-col gap-[30px] flex-1 min-h-0">
         <Suspense fallback={<Loading className="h-[100px]" />}>
           <Profile />
         </Suspense>

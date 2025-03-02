@@ -3,6 +3,7 @@ import {
   useSuspenseInfiniteQuery,
   UseSuspenseInfiniteQueryOptions,
 } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
 import { request } from './config';
 import { Pageable } from '@/types/pageable';
 
@@ -23,11 +24,13 @@ export function useGetMyVoteList(
     unknown
   >,
 ) {
+  const { userId } = useParams<{ userId: string }>();
+
   return useSuspenseInfiniteQuery<Pageable<Vote>>({
     queryFn: ({ pageParam = null }) =>
       request({
         method: 'GET',
-        url: '/posts/user/me',
+        url: `/posts/users/${userId}`,
         params: {
           cursor: pageParam,
           size: 10,
@@ -56,11 +59,13 @@ export function useGetParticipatedVoteList(
     unknown
   >,
 ) {
+  const { userId } = useParams<{ userId: string }>();
+
   return useSuspenseInfiniteQuery<Pageable<Vote>>({
     queryFn: ({ pageParam = null }) =>
       request({
         method: 'GET',
-        url: '/posts/user/voted',
+        url: `/posts/users/${userId}/voted`,
         params: {
           cursor: pageParam,
           size: 10,

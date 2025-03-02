@@ -1,6 +1,9 @@
+import usePostLogout from '@/api/usePostLogout';
 import Dialog from '@/components/common/Dialog';
 
 export default function LogoutDialog() {
+  const { mutate: postLogout } = usePostLogout();
+
   return (
     <Dialog
       title="잠깐! 뽀또들을 두고 떠나시려구요?😢"
@@ -10,8 +13,7 @@ export default function LogoutDialog() {
       }}
       confirmButtonProps={{
         text: '로그아웃',
-        // TODO: 로그아웃 기능 구현
-        onClick: () => {},
+        onClick: postLogout,
       }}
       showLaterButton={false}
     />

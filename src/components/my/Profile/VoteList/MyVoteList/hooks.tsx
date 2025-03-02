@@ -20,13 +20,14 @@ export default function useMyVoteList() {
   const myVoteList = data?.pages.flatMap((page) => page.data) ?? [];
 
   useEffect(() => {
+    const scrollContainer = document.querySelector('.overflow-y-auto');
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
           fetchNextPage();
         }
       },
-      { threshold: 0.1 },
+      { root: scrollContainer, threshold: 0.1 },
     );
 
     const currentObserver = observerRef.current;

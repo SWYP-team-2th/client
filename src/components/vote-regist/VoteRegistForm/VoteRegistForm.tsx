@@ -9,6 +9,9 @@ export default function VoteRegistForm() {
   const { isFormValid, handleClickVoteRegistButton, isPostRegistVotePending } =
     useVoteRegistForm();
 
+  // 오류 있거나 비동기 처리중이면 버튼 비활성화
+  const isDisabled = !isFormValid || isPostRegistVotePending;
+
   return (
     <div className="relative pt-[65px]">
       <FieldContainer fieldTitle="투표 설명">
@@ -25,6 +28,7 @@ export default function VoteRegistForm() {
         variant="solid"
         className="fixed bottom-16 left-1/2 -translate-x-1/2"
         onClick={handleClickVoteRegistButton}
+        disabled={isDisabled}
       >
         {isPostRegistVotePending ? <Loading /> : '투표 올리기'}
       </Button>

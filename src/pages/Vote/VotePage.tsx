@@ -44,7 +44,7 @@ export default function VotePage() {
         }
       />
       <div
-        className="h-[calc(100dvh-165px)] overflow-y-auto mx-[15px] px-[10px] pt-[18px] pb-3 bg-gray-100 rounded-2xl shadow-[0px_2px_20px_0px_rgba(0,0,0,0.03),0px_20px_15px_0px_rgba(0,0,0,0.02),0px_8px_25px_0px_rgba(0,0,0,0.04)] 
+        className="h-[calc(100dvh-180px)] overflow-y-auto mx-[15px] px-[10px] pt-[18px] pb-3 bg-gray-100 rounded-2xl shadow-[0px_2px_20px_0px_rgba(0,0,0,0.03),0px_20px_15px_0px_rgba(0,0,0,0.02),0px_8px_25px_0px_rgba(0,0,0,0.04)] 
         "
       >
         <VoteTopSection />

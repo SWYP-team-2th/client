@@ -23,7 +23,7 @@ export default function MyVoteList() {
     <div className="overflow-scroll grid grid-cols-3 gap-2">
       {participatedVoteList.map((vote) => (
         <Link
-          to={vote.shareUrl}
+          to={`/votes/${vote.shareUrl}`}
           key={vote.id}
           className="relative aspect-[71/106] rounded-xl overflow-hidden"
         >

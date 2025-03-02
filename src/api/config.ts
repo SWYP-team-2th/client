@@ -79,6 +79,28 @@ axiosInstance.interceptors.response.use(
       }
     }
 
+    if (
+      error.response?.status === 400 &&
+      error.response.data.errorCode === 'INVALID_GUEST_HEADER'
+    ) {
+      try {
+        const response = await axiosInstance.post<{ guestToken: string }>(
+          '/auth/guest/token',
+          null,
+        );
+
+        if (response.data.guestToken) {
+          localStorage.setItem('guestToken', response.data.guestToken);
+          error.config.headers['Guest-Token'] = response.data.guestToken;
+          return axios(error.config);
+        }
+      } catch (err) {
+        console.error('400시 게스트 토큰 발급 중 오류:', err);
+        removeAccessToken();
+        window.location.href = '/onboarding';
+      }
+    }
+
     return Promise.reject(error);
   },
 );

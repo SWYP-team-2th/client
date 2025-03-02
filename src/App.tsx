@@ -7,7 +7,11 @@ import { getAccessToken } from '@/components/login/Auth/token';
 function App() {
   const navigate = useNavigate();
   const accessToken = getAccessToken();
-  const { data: myInfo, isLoading: isMyInfoLoading } = useGetMyInfo({
+  const {
+    data: myInfo,
+    isLoading: isMyInfoLoading,
+    isSuccess: isMyInfoSuccess,
+  } = useGetMyInfo({
     enabled: !!accessToken,
   });
 
@@ -18,10 +22,10 @@ function App() {
       return;
     }
 
-    if (myInfo) {
+    if (myInfo && isMyInfoSuccess) {
       navigate(`/user/${myInfo.id}`, { replace: true });
     }
-  }, [navigate, myInfo]);
+  }, [navigate, myInfo, isMyInfoSuccess]);
 
   return (
     <div className="w-full max-w-[480px] mx-auto my-0 h-[100dvh] flex items-center justify-center">

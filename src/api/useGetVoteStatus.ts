@@ -1,5 +1,6 @@
-import { UseQueryOptions, useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { request } from '@/api/config';
+import { getAccessToken } from '@/components/login/Auth/token';
 
 export interface VoteStatusType {
   id: number;
@@ -12,7 +13,8 @@ export default function useGetVoteStatus(
   postId: number,
   options?: Omit<UseQueryOptions<VoteStatusType[]>, 'queryKey' | 'queryFn'>,
 ) {
-  return useSuspenseQuery<VoteStatusType[]>({
+  const accessToken = getAccessToken();
+  return useQuery<VoteStatusType[]>({
     queryKey: ['voteStatus', postId],
     queryFn: () =>
       request({
@@ -23,5 +25,6 @@ export default function useGetVoteStatus(
         },
       }),
     ...options,
+    enabled: accessToken ? options?.enabled !== false : false,
   });
 }

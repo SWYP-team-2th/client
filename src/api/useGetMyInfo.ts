@@ -1,5 +1,6 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { request } from '@/api/config';
+import { getAccessToken } from '@/components/login/Auth/token';
 
 interface MyInfoResponse {
   id: number;
@@ -10,6 +11,8 @@ interface MyInfoResponse {
 export default function useGetMyInfo(
   options?: Omit<UseQueryOptions<MyInfoResponse>, 'queryKey' | 'queryFn'>,
 ) {
+  console.log(options?.enabled);
+  const accessToken = getAccessToken();
   return useQuery<MyInfoResponse>({
     queryKey: ['my-info'],
     queryFn: async () => {
@@ -19,5 +22,6 @@ export default function useGetMyInfo(
       });
     },
     ...options,
+    enabled: accessToken ? options?.enabled !== false : false,
   });
 }

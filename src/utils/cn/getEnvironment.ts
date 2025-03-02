@@ -1,7 +1,6 @@
 export const getIsDevelopment = (): boolean => {
-  if (import.meta.env.PROD) {
-    return false;
-  }
-
-  return true;
+  return (
+    window.location.origin.includes('dev.') ||
+    window.location.origin.includes('localhost')
+  );
 };

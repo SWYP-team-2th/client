@@ -25,7 +25,7 @@ function App() {
     if (myInfo && isMyInfoSuccess) {
       navigate(`/user/${myInfo.id}`, { replace: true });
     }
-  }, [navigate, myInfo, isMyInfoSuccess]);
+  }, [myInfo, isMyInfoSuccess, accessToken]);
 
   return (
     <div className="w-full max-w-[480px] mx-auto my-0 h-[100dvh] flex items-center justify-center">

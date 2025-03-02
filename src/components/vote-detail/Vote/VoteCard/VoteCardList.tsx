@@ -2,13 +2,16 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import VoteCardItem from './VoteCardItem';
 import ImageDetailModal from '../../ImageDetailModal';
+import usePostGuestVote from '@/api/usePostGuestVote';
 import useVote from '@/api/useVote';
 import { useDialog } from '@/components/common/Dialog/hooks';
 import Loading from '@/components/common/Loading';
+import { getAccessToken } from '@/components/login/Auth/token';
 import useVoteDetail from '@/components/vote-detail/Vote/VoteCard/hooks';
 
 export default function VoteCardList() {
   const { shareUrl } = useParams<{ shareUrl: string }>();
+  const { openDialog } = useDialog();
   const { voteDetail } = useVoteDetail(shareUrl ?? '');
   const queryClient = useQueryClient();
   const { mutate: voteMutate, isPending } = useVote(voteDetail.id, {
@@ -21,7 +24,13 @@ export default function VoteCardList() {
       });
     },
   });
-  const { openDialog } = useDialog();
+  const { mutate: postGuestVote } = usePostGuestVote(voteDetail.id, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['voteDetail', shareUrl],
+      });
+    },
+  });
 
   const handleClickVoteCardItem = (id: number) => {
     openDialog(
@@ -32,7 +41,13 @@ export default function VoteCardList() {
   const handleVote =
     (id: number) => (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
-      voteMutate(id);
+      const accessToken = getAccessToken();
+
+      if (accessToken) {
+        voteMutate(id);
+      } else {
+        postGuestVote(id);
+      }
     };
 
   return (

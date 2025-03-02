@@ -4,7 +4,7 @@ export default function Profile() {
   const { userInfo } = useProfile();
 
   return (
-    <div className="flex gap-6">
+    <div className="flex gap-6 items-center">
       <img
         src={userInfo.profileUrl}
         className="w-24 h-24 rounded-full object-cover aspect-square"

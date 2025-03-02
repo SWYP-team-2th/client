@@ -54,6 +54,8 @@ import UserFill from '@/assets/icons/user_fill_24px.svg?react';
 import UserOutline from '@/assets/icons/user_outline_24px.svg?react';
 import VoteClose from '@/assets/icons/vote_close.svg?react';
 import World from '@/assets/icons/world_24px.svg?react';
+import KakaoLogo from '@/assets/icons/kako_logo.svg?react';
+import LinkWhite from '@/assets/icons/link_white.svg?react';
 export const ICONS = {
   ArrowRightPurple,
   PlusGray,
@@ -110,6 +112,8 @@ export const ICONS = {
   MedalWhite,
   PlusWhite,
   HeartOutlineWhite,
+  KakaoLogo,
+  LinkWhite,
 } as const;
 
 export const ICON_SIZE = {

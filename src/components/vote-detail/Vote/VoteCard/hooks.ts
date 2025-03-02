@@ -29,10 +29,10 @@ export const useGetImageStatus = (): {
 
   return {
     id:
-      voteStatus.find(
+      voteStatus?.find(
         (status) =>
           status.voteCount ===
-          Math.max(...voteStatus.map((status) => status.voteCount)),
+          Math.max(...(voteStatus?.map((status) => status.voteCount) ?? [])),
       )?.id ?? 0,
     status: 'WIN',
   };

@@ -7,9 +7,7 @@ export default function Profile() {
     <div className="flex gap-6">
       <img
         src={userInfo.profileUrl}
-        width={96}
-        height={96}
-        className="rounded-[50%]"
+        className="w-24 h-24 rounded-full object-cover aspect-square"
       />
       <div className="flex flex-col gap-1 break-keep">
         <p className="text-h2">

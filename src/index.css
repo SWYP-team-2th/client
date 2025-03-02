@@ -8,6 +8,10 @@
   }
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 @theme {
   --color-primary-900: #b36700;
   --color-primary-800: #c97800;

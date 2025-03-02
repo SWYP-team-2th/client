@@ -10,7 +10,7 @@ export default function MyVoteList() {
   if (myVoteList.length === 0) {
     return (
       <div className="w-full h-full flex flex-col items-center justify-center">
-        <img src={EmptyMyVote} width={160} height={160} />
+        <img src={EmptyMyVote} width={120} height={120} />
         <div className="flex flex-col gap-2 justify-between items-center break-keep text-center">
           <p className="text-h3">아직 올린 투표가 없어요!</p>
           <p className="text-title-small text-gray-700">

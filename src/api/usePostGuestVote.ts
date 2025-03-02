@@ -5,13 +5,15 @@ export default function usePostGuestVote(
   postId: number,
   options?: UseMutationOptions<unknown, Error, number>,
 ) {
+  const guestToken = localStorage.getItem('guestToken');
+
   return useMutation<unknown, Error, number>({
     mutationFn: (imageId: number) => {
       return request({
         method: 'POST',
         url: `/posts/${postId}/votes/guest`,
         headers: {
-          'Guest-Token': localStorage.getItem('guestToken') ?? '',
+          ...(guestToken ? { 'Guest-Token': guestToken } : {}),
         },
         data: {
           imageId,

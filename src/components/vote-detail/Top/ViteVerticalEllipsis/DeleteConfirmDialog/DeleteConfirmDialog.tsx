@@ -12,8 +12,8 @@ export default function DeleteConfirmDialog({
 
   return (
     <Dialog
-      title="이 투표를 삭제하시겠습니까?"
-      description="삭제하면 해당 투표와 댓글이 모두 사라지며 복구할 수 없습니다."
+      title="이 투표를 정말 무효처리 하시겠어요? 😢"
+      description="삭제하면 다시 되돌릴 수 없어요!"
       cancelButtonProps={{
         text: '취소',
         isLoading: isDeletePostPending,

@@ -35,7 +35,7 @@ export default function MyVoteList() {
               className="w-full h-full object-cover"
             />
             <Icon
-              name="Link"
+              name="LinkWhite"
               size="medium"
               onClick={(e) => {
                 e.preventDefault();
@@ -44,7 +44,7 @@ export default function MyVoteList() {
                   shareUrl: `${window.location.origin}/votes/${vote.shareUrl}`,
                 });
               }}
-              className="absolute top-2 right-2 rounded-[10px] bg-gray-300 w-[26px] h-[26px] flex items-center justify-center"
+              className="absolute top-2 right-2 rounded-[10px] bg-gray-900/40 w-[26px] h-[26px] flex items-center justify-center p-1"
             />
           </Link>
         ))}

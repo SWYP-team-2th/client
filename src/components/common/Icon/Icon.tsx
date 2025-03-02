@@ -18,7 +18,9 @@ import HeartOutline from '@/assets/icons/heart_outline_24px.svg?react';
 import HeartOutlineWhite from '@/assets/icons/heart_outline_white.svg?react';
 import HomeFill from '@/assets/icons/home_fill_24px.svg?react';
 import HomeOutline from '@/assets/icons/home_outline_24px.svg?react';
+import KakaoLogo from '@/assets/icons/kako_logo.svg?react';
 import Link from '@/assets/icons/link_24px.svg?react';
+import LinkWhite from '@/assets/icons/link_white.svg?react';
 import LockFill from '@/assets/icons/lock_fill_24px.svg?react';
 import LockOpen from '@/assets/icons/lock_open_24px.svg?react';
 import LockOutline from '@/assets/icons/lock_outline_24px.svg?react';
@@ -54,8 +56,6 @@ import UserFill from '@/assets/icons/user_fill_24px.svg?react';
 import UserOutline from '@/assets/icons/user_outline_24px.svg?react';
 import VoteClose from '@/assets/icons/vote_close.svg?react';
 import World from '@/assets/icons/world_24px.svg?react';
-import KakaoLogo from '@/assets/icons/kako_logo.svg?react';
-import LinkWhite from '@/assets/icons/link_white.svg?react';
 export const ICONS = {
   ArrowRightPurple,
   PlusGray,

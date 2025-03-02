@@ -1,9 +1,9 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import pencilImage from '@/assets/images/vote-detail/pencil.png';
+import Icon from '@/components/common/Icon';
 import Loading from '@/components/common/Loading';
 import CommentItem from '@/components/vote-detail/Comment/CommentItems/CommentItem';
 import useComment from '@/components/vote-detail/Comment/CommentList/hooks';
-import Icon from '@/components/common/Icon';
 
 export default function CommentList() {
   const { shareUrl } = useParams<{ shareUrl: string }>();

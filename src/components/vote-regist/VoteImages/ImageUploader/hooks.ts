@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { MAX_IMAGE_COUNT } from '../../constants';
 import useVoteRegist from '../../Provider/hooks';
 import usePostUploadImage from '@/api/usePostUploadImage';
 
@@ -26,7 +27,7 @@ export default function useImageUploader() {
     if (files.length === 0) return;
 
     const formData = new FormData();
-    files.forEach((file) => {
+    files.slice(0, MAX_IMAGE_COUNT).forEach((file) => {
       formData.append('files', file);
     });
 

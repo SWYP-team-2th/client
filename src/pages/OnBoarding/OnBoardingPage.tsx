@@ -8,29 +8,30 @@ import { onBoardingSlides } from '@/constants/onboarding';
 export default function OnBoardingPage() {
   return (
     <div className="flex flex-col justify-between w-full h-screen px-7 relative">
-      <div className="flex-1 flex items-center">
+      <div className="flex-1 flex items-center min-h-0">
         <Swiper
           modules={[Pagination]}
           slidesPerView={1}
           pagination={{ clickable: true }}
+          className="w-full"
         >
           {onBoardingSlides.map((slide) => (
             <SwiperSlide key={slide.id}>
               <div className="h-full flex flex-col items-center text-center">
-                <span className="text-h1 whitespace-pre-line mt-[160px] mb-[20px]">
+                <span className="text-h1 whitespace-pre-line mt-[80px] mb-[8px]">
                   {slide.title}
                 </span>
 
-                <span className="text-title-medium whitespace-pre-line mb-[50px]">
+                <span className="text-title-small whitespace-pre-line mb-[32px]">
                   {slide.subtitle}
                 </span>
-                <img src={slide.image} className="w-[310px] mb-14" />
+                <img src={slide.image} className="w-[310px] mb-10" />
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
-      <div className="mb-16">
+      <div className="py-6">
         <LoginButton />
       </div>
     </div>

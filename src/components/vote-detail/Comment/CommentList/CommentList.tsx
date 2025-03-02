@@ -3,6 +3,7 @@ import pencilImage from '@/assets/images/vote-detail/pencil.png';
 import Loading from '@/components/common/Loading';
 import CommentItem from '@/components/vote-detail/Comment/CommentItems/CommentItem';
 import useComment from '@/components/vote-detail/Comment/CommentList/hooks';
+import Icon from '@/components/common/Icon';
 
 export default function CommentList() {
   const { shareUrl } = useParams<{ shareUrl: string }>();
@@ -39,13 +40,14 @@ export default function CommentList() {
               </div>
 
               {comments?.length && comments.length === 3 && (
-                <div className="text-center text-accent-800">
+                <div className="flex text-center text-label-medium text-accent-800 items-center justify-center">
                   <button
                     onClick={() => navigate(`/votes/${shareUrl}/comments`)}
                     className="cursor-pointer"
                   >
                     더보기
                   </button>
+                  <Icon name="ArrowRightPurple" size="small" />
                 </div>
               )}
             </>

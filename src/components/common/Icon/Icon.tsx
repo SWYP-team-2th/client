@@ -4,6 +4,7 @@ import AlertOutline from '@/assets/icons/alert_outline_24px.svg?react';
 import AlertV2 from '@/assets/icons/alert_V2.svg?react';
 import ArrowLeft from '@/assets/icons/arrow_left_24px.svg?react';
 import ArrowRight from '@/assets/icons/arrow_right_24px.svg?react';
+import ArrowRightPurple from '@/assets/icons/arrow_right_purple.svg?react';
 import BellFill from '@/assets/icons/bell_fill_24px.svg?react';
 import BellOutline from '@/assets/icons/bell_outline_24px.svg?react';
 import BookmarkFill from '@/assets/icons/bookmark_fill_24px.svg?react';
@@ -33,6 +34,7 @@ import Minimize from '@/assets/icons/minimize_24px.svg?react';
 import Minus from '@/assets/icons/minus_24px.svg?react';
 import More from '@/assets/icons/more_24px.svg?react';
 import PhotoPlus from '@/assets/icons/photo_plus_24px.svg?react';
+import PlusGray from '@/assets/icons/photo_plus_gray.svg?react';
 import Plus from '@/assets/icons/plus_24px.svg?react';
 import PlusWhite from '@/assets/icons/plus_white.svg?react';
 import Post from '@/assets/icons/post_24px.svg?react';
@@ -53,6 +55,8 @@ import UserOutline from '@/assets/icons/user_outline_24px.svg?react';
 import VoteClose from '@/assets/icons/vote_close.svg?react';
 import World from '@/assets/icons/world_24px.svg?react';
 export const ICONS = {
+  ArrowRightPurple,
+  PlusGray,
   AlertFill,
   AlertOutline,
   AlertV2,

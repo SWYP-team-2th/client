@@ -1,19 +1,30 @@
 import { useNavigate } from 'react-router-dom';
+import useGetMyInfo from '@/api/useGetMyInfo';
 import Logo from '@/assets/icons/logo.svg?react';
 import NotFoundImage from '@/assets/images/not-found.png';
 import { Button } from '@/components/common/Button/Button';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
+import { getAccessToken } from '@/components/login/Auth/token';
 
 export default function NotFoundPage() {
   const navigate = useNavigate();
+  const accessToken = getAccessToken();
+
+  const { data: myInfo } = useGetMyInfo({
+    enabled: !!accessToken,
+  });
 
   const handleClickBackButton = () => {
     navigate(-1);
   };
 
   const handleClickGoToHomeButton = () => {
-    navigate('/');
+    if (myInfo?.id) {
+      navigate(`/user/${myInfo.id}`);
+    } else {
+      navigate('/onboarding');
+    }
   };
 
   return (

@@ -27,10 +27,6 @@ export const router = createBrowserRouter([
         path: '/oauth',
         element: <OAuthPage />,
       },
-      {
-        path: '*',
-        element: <NotFoundPage />,
-      },
     ],
   },
   {
@@ -49,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: '/settings',
         element: <SettingsPage />,
+      },
+      {
+        path: '*',
+        element: <NotFoundPage />,
       },
     ],
   },

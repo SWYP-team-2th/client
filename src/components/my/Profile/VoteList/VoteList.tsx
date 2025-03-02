@@ -12,9 +12,9 @@ export default function VoteList() {
   };
 
   return (
-    <div className="flex flex-col gap-6 w-full h-full">
+    <div className="flex flex-col gap-6 w-full h-full flex-1 min-h-0">
       <Tab selectedTab={tab} onClickTabMenu={handleClickTabMenu} />
-      <div className="overflow-y-auto">
+      <div className="overflow-y-auto flex-1 min-h-0">
         <Suspense fallback={<Loading />}>
           {tab === 'my' && <MyVoteList />}
         </Suspense>

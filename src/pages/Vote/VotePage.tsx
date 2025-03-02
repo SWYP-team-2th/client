@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import useGetMyInfo from '@/api/useGetMyInfo';
 import Logo from '@/assets/icons/logo.svg?react';
+import { useDialog } from '@/components/common/Dialog/hooks';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
+import LoginDialog from '@/components/common/LoginDialog/LoginDialog';
 import CommentList from '@/components/vote-detail/Comment/CommentList';
 import CommentInput from '@/components/vote-detail/Input/CommentInput';
 import VoteTopSection from '@/components/vote-detail/Top/VoteTopSection/VoteTopSection';
@@ -10,9 +12,15 @@ import VoteSection from '@/components/vote-detail/Vote/VoteSection';
 
 export default function VotePage() {
   const navigate = useNavigate();
+  const { openDialog } = useDialog();
   const { data: myInfo } = useGetMyInfo();
 
   const handleClickUserButton = () => {
+    if (!myInfo) {
+      openDialog(<LoginDialog />);
+      return;
+    }
+
     navigate(`/user/${myInfo?.id}`);
   };
 

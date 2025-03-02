@@ -1,14 +1,19 @@
 import { SetStateAction, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useAddComment from '@/api/useAddComment';
+import useGetMyInfo from '@/api/useGetMyInfo';
 import useGetVoteDetail from '@/api/useGetVoteDetail';
+import { useDialog } from '@/components/common/Dialog/hooks';
 import Icon from '@/components/common/Icon';
+import LoginDialog from '@/components/common/LoginDialog/LoginDialog';
 import TextInput from '@/components/common/TextInput';
 
 export default function CommentInput() {
   const [content, setContent] = useState('');
   const contentRef = useRef<HTMLInputElement>(null);
   const { shareUrl } = useParams<{ shareUrl: string }>();
+  const { data: myInfo } = useGetMyInfo();
+  const { openDialog } = useDialog();
 
   const { data: voteDetail } = useGetVoteDetail(shareUrl ?? '');
 
@@ -43,6 +48,12 @@ export default function CommentInput() {
     }
   };
 
+  const handleFocusInput = () => {
+    if (!myInfo) {
+      openDialog(<LoginDialog />);
+    }
+  };
+
   return (
     <div className="w-full px-lg py-3 bg-gray-100 bottom-0 fixed left-1/2 -translate-x-1/2 z-4 max-w-[480px]">
       <TextInput
@@ -52,6 +63,7 @@ export default function CommentInput() {
         value={content}
         onChange={onChangeValue}
         onKeyDown={handleKeyDown}
+        onFocus={handleFocusInput}
         rightNode={
           <button className="cursor-pointer" onClick={handleSendComment}>
             <Icon name="Send" size="medium" />

@@ -1,11 +1,21 @@
 import { useNavigate, Outlet } from 'react-router-dom';
+import useGetMyInfo from '@/api/useGetMyInfo';
 import { FloatingButton } from '@/components/common/Button/FloatingButton';
+import { useDialog } from '@/components/common/Dialog/hooks';
 import Icon from '@/components/common/Icon';
+import LoginDialog from '@/components/common/LoginDialog/LoginDialog';
 
 export default function DefaultLayout() {
   const navigate = useNavigate();
+  const { openDialog } = useDialog();
+  const { data: myInfo } = useGetMyInfo();
 
   const handleClickFloatingButton = () => {
+    if (!myInfo) {
+      openDialog(<LoginDialog />);
+      return;
+    }
+
     navigate('/votes/regist');
   };
 

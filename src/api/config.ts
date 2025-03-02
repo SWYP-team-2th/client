@@ -4,9 +4,9 @@ import {
   setAccessToken,
   removeAccessToken,
 } from '@/components/login/Auth/token';
+import { getIsDevelopment } from '@/utils/cn/getEnvironment';
 
-const isDevelopment =
-  import.meta.env.VITE_API_URL_DEV || window.location.host.includes('dev.');
+const isDevelopment = getIsDevelopment();
 
 const axiosConfig: AxiosRequestConfig = {
   baseURL: isDevelopment

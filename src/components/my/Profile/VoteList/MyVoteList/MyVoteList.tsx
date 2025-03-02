@@ -10,7 +10,7 @@ export default function MyVoteList() {
   if (myVoteList.length === 0) {
     return (
       <div className="w-full h-full flex flex-col items-center justify-center">
-        <img src={EmptyMyVote} width={160} height={160} />
+        <img src={EmptyMyVote} width={120} height={120} />
         <div className="flex flex-col gap-2 justify-between items-center break-keep text-center">
           <p className="text-h3">아직 올린 투표가 없어요!</p>
           <p className="text-title-small text-gray-700">
@@ -35,7 +35,7 @@ export default function MyVoteList() {
               className="w-full h-full object-cover"
             />
             <Icon
-              name="Link"
+              name="LinkWhite"
               size="medium"
               onClick={(e) => {
                 e.preventDefault();
@@ -44,7 +44,7 @@ export default function MyVoteList() {
                   shareUrl: `${window.location.origin}/votes/${vote.shareUrl}`,
                 });
               }}
-              className="absolute top-2 right-2 rounded-[10px] bg-gray-300 w-[26px] h-[26px] flex items-center justify-center"
+              className="absolute top-2 right-2 rounded-[10px] bg-gray-900/40 w-[26px] h-[26px] flex items-center justify-center p-1"
             />
           </Link>
         ))}

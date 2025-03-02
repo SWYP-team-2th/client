@@ -16,18 +16,21 @@ export default function LinkShareBottomSheet({
 
   return (
     <BottomSheet title="투표 공유하기" hasCloseButton>
-      <div className="flex flex-col gap-5 text-title-medium">
+      <div className="flex flex-col gap-5 text-title-medium mt-2 mb-6">
         <button
           onClick={handleClickKakaoShareButton}
           className="flex gap-4 items-center"
         >
+          <Icon name="KakaoLogo" size="large" />
           <p>카카오로 공유하기</p>
         </button>
         <button
           onClick={handleClickUrlShareButton}
           className="flex gap-4 items-center"
         >
-          <Icon name="Link" size="medium" />
+          <div className="p-1 bg-gray-600 rounded-full">
+            <Icon name="LinkWhite" size="medium" />
+          </div>
           <p>URL로 공유하기</p>
         </button>
       </div>

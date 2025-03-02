@@ -3,7 +3,7 @@ import { useDialog } from './hooks';
 import { Button } from '@/components/common/Button/Button';
 
 interface DialogProps {
-  title: string;
+  title: React.ReactNode;
   description?: string;
   cancelButtonProps?: {
     text: string;
@@ -61,6 +61,7 @@ export default function Dialog({
           variant="solid"
           size="large"
           buttonType={confirmButtonProps.isLoading ? 'disabled' : 'primary'}
+          onClick={confirmButtonProps.onClick}
         >
           {confirmButtonProps.isLoading ? <Loading /> : confirmButtonProps.text}
         </Button>

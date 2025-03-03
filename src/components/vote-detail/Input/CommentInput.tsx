@@ -64,6 +64,7 @@ export default function CommentInput() {
         onChange={onChangeValue}
         onKeyDown={handleKeyDown}
         onFocus={handleFocusInput}
+        readOnly={!myInfo}
         rightNode={
           <button className="cursor-pointer" onClick={handleSendComment}>
             <Icon name="Send" size="medium" />

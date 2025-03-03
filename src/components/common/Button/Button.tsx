@@ -12,12 +12,12 @@ const buttonVariants = cva(
         outline: 'border bg-gray-100',
       },
       size: {
-        small: 'w-[157px] h-[40px]  rounded-lg text-label-medium',
-        medium: 'w-[212px] h-[48px]  rounded-xl text-title-small',
-        large: 'w-full h-[63px] rounded-2xl text-title-medium',
+        small: 'w-[157px] h-[40px] rounded-lg text-label-medium',
+        medium: 'w-[212px] h-[46px] rounded-xl text-label-large',
+        large: 'w-full h-[58px] rounded-2xl text-title-small-1',
       },
       solidType: {
-        primary: 'bg-primary-400',
+        primary: 'bg-primary-500',
         secondary: 'bg-primary-600 ',
         disabled: 'bg-gray-500 text-gray-100',
       },

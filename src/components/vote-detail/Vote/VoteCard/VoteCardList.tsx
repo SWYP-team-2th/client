@@ -2,16 +2,17 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import VoteCardItem from './VoteCardItem';
 import ImageDetailModal from '../../ImageDetailModal';
+import useGetMyInfo from '@/api/useGetMyInfo';
 import useVote from '@/api/useVote';
 import { useDialog } from '@/components/common/Dialog/hooks';
 import Loading from '@/components/common/Loading';
-import LoginDialog from '@/components/common/LoginDialog/LoginDialog';
-import { getAccessToken } from '@/components/login/Auth/token';
+import LoginDialog from '@/components/common/LoginDialog';
 import useVoteDetail from '@/components/vote-detail/Vote/VoteCard/hooks';
 
 export default function VoteCardList() {
   const { shareUrl } = useParams<{ shareUrl: string }>();
   const { openDialog } = useDialog();
+  const { data: myInfo } = useGetMyInfo();
   const { voteDetail } = useVoteDetail(shareUrl ?? '');
   const queryClient = useQueryClient();
   const { mutate: voteMutate, isPending: isVotePending } = useVote(
@@ -28,16 +29,6 @@ export default function VoteCardList() {
     },
   );
 
-  // TODO: 추후 로직 살리기
-  // const { mutate: postGuestVote, isPending: isGuestVotePending } =
-  //   usePostGuestVote(voteDetail.id, {
-  //     onSuccess: () => {
-  //       queryClient.invalidateQueries({
-  //         queryKey: ['voteDetail', shareUrl],
-  //       });
-  //     },
-  //   });
-
   const handleClickVoteCardItem = (id: number) => {
     openDialog(
       <ImageDetailModal images={voteDetail.images} selectedImageId={id} />,
@@ -47,13 +38,13 @@ export default function VoteCardList() {
   const handleVote =
     (id: number) => (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
-      const accessToken = getAccessToken();
 
-      if (accessToken) {
-        voteMutate(id);
-      } else {
+      if (!myInfo) {
         openDialog(<LoginDialog />);
+        return;
       }
+
+      voteMutate(id);
     };
 
   return (

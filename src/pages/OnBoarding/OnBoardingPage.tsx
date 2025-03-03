@@ -18,14 +18,14 @@ export default function OnBoardingPage() {
           {onBoardingSlides.map((slide) => (
             <SwiperSlide key={slide.id}>
               <div className="h-full flex flex-col items-center text-center">
-                <span className="text-h1 whitespace-pre-line mt-[80px] mb-[8px]">
+                <span className="text-h1 whitespace-pre-line mt-[120px] mb-[12px]">
                   {slide.title}
                 </span>
 
-                <span className="text-title-small whitespace-pre-line mb-[32px]">
+                <span className="text-title-small whitespace-pre-line mb-[18px]">
                   {slide.subtitle}
                 </span>
-                <img src={slide.image} className="w-[310px] mb-10" />
+                <img src={slide.image} />
               </div>
             </SwiperSlide>
           ))}

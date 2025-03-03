@@ -54,6 +54,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             )}
             ref={ref}
             type="text"
+            value={value}
             {...restProps}
           />
           {rightNode && (

@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import useGetMyInfo from '@/api/useGetMyInfo';
 import BlurImage from '@/assets/images/vote-detail/voteBlur.png';
+import { getRole } from '@/components/login/Auth/token';
 import useVoteStatus from '@/components/vote-detail/Vote/VoteResult/hooks';
 import VoteResultItem from '@/components/vote-detail/Vote/VoteResult/VoteResultItem';
 
@@ -12,20 +13,14 @@ export default function VoteResultList() {
   });
   const { data: myInfo } = useGetMyInfo();
 
-  // 유저가 해당 게시글에 투표 했는지에 대한 유무
-
-  // 전체 투표 수 계산
   const totalVoted = voteStatus?.reduce(
     (sum, status) => sum + status.voteCount,
     0,
   );
 
-  // 가장 높은 투표 수 계산
   const highestVoted = Math.max(
     ...(voteStatus?.map((status) => status.voteCount) ?? []),
   );
-
-  //
 
   return (
     <div className="px-1">
@@ -39,7 +34,7 @@ export default function VoteResultList() {
           <p>투표하고, 뽀또들과 함께 결과를 실시간으로 확인해보세요! 🎉</p>
         </div>
       )}
-      {userHasVoted && !myInfo && (
+      {userHasVoted && myInfo && getRole() === 'GUEST' && (
         <div
           className="flex items-center justify-center w-full h-18 text-body-1-normal "
           style={{
@@ -51,6 +46,7 @@ export default function VoteResultList() {
       )}
       {userHasVoted &&
         myInfo &&
+        getRole() === 'USER' &&
         voteStatus?.map((status, index) => {
           const calculatedVoteRatio = totalVoted
             ? ((status.voteCount / totalVoted) * 100).toFixed(1)

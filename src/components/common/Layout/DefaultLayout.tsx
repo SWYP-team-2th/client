@@ -1,9 +1,11 @@
 import { useNavigate, Outlet } from 'react-router-dom';
+import LoginDialog from '../LoginDialog';
 import useGetMyInfo from '@/api/useGetMyInfo';
 import { FloatingButton } from '@/components/common/Button/FloatingButton';
 import { useDialog } from '@/components/common/Dialog/hooks';
+import GuestConfirmDialog from '@/components/common/GuestConfirmDialog/GuestConfirmDialog';
 import Icon from '@/components/common/Icon';
-import LoginDialog from '@/components/common/LoginDialog/LoginDialog';
+import { getRole } from '@/components/login/Auth/token';
 
 export default function DefaultLayout() {
   const navigate = useNavigate();
@@ -13,6 +15,13 @@ export default function DefaultLayout() {
   const handleClickFloatingButton = () => {
     if (!myInfo) {
       openDialog(<LoginDialog />);
+      return;
+    }
+
+    if (myInfo && getRole() === 'GUEST') {
+      openDialog(
+        <GuestConfirmDialog title="게스트 계정은 투표를 올릴 수 없어요 😢" />,
+      );
       return;
     }
 

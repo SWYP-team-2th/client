@@ -85,14 +85,6 @@ export const theme = {
         '11px',
         { lineHeight: '1.2', letterSpacing: '-0.02em', fontWeight: '400' },
       ],
-      'label-x-small-1': [
-        '11px',
-        { lineHeight: '1.2', letterSpacing: '-0.02em', fontWeight: 'bold' },
-      ],
-      'label-x-small-2': [
-        '11px',
-        { lineHeight: '1.2', letterSpacing: '-0.02em', fontWeight: '400' },
-      ],
     },
   },
 };

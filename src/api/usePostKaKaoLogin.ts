@@ -5,6 +5,7 @@ import { request } from '@/api/config';
 interface LoginResponseType {
   accessToken: string;
   userId: number;
+  role: 'USER' | 'GUEST';
 }
 
 interface LoginRequestType {

@@ -1,6 +1,6 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { request } from '@/api/config';
-import { getAccessToken } from '@/components/login/Auth/token';
+import { getAccessToken, getRole } from '@/components/login/Auth/token';
 
 export interface VoteStatusType {
   id: number;
@@ -25,6 +25,7 @@ export default function useGetVoteStatus(
         },
       }),
     ...options,
-    enabled: accessToken ? options?.enabled !== false : false,
+    enabled:
+      accessToken && getRole() === 'USER' ? options?.enabled !== false : false,
   });
 }

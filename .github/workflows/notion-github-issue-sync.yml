@@ -1,0 +1,74 @@
+name: Sync GitHub Issues to Notion
+
+on:
+  issues:
+    types: [opened, closed, reopened]
+
+jobs:
+  sync-to-notion:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Create temp directory and install dependencies
+        run: |
+          mkdir temp
+          cd temp
+          echo '{"type": "module"}' > package.json
+          npm install @notionhq/client
+
+      - name: Create sync script
+        run: |
+          cat > temp/sync.js << 'EOF'
+          import { Client } from '@notionhq/client';
+
+          async function sync() {
+            const notion = new Client({ auth: process.env.NOTION_KEY });
+            
+            try {
+              await notion.pages.create({
+                parent: {
+                  database_id: process.env.NOTION_DATABASE_ID,
+                },
+                properties: {
+                  이름: {
+                    title: [
+                      {
+                        text: {
+                          content: process.env.ISSUE_TITLE,
+                        },
+                      },
+                    ],
+                  },
+                  상태: {
+                    select: {
+                      name: process.env.ISSUE_STATE === 'open' ? '시작 전' : '완료',
+                    },
+                  },
+                },
+              });
+              
+              console.log(`Issue "${process.env.ISSUE_TITLE}" 가 Notion에 성공적으로 동기화되었습니다.`);
+              
+            } catch (error) {
+              console.error(`Notion 동기화 실패: ${error.message}`);
+              process.exit(1);
+            }
+          }
+
+          sync();
+          EOF
+
+      - name: Run sync script
+        env:
+          NOTION_KEY: ${{ secrets.NOTION_KEY }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_STATE: ${{ github.event.issue.state }}
+        run: node temp/sync.js

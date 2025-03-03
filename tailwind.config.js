@@ -23,27 +23,40 @@ export const theme = {
       ],
       'title-medium': [
         '20px',
-        { lineHeight: '1.25', letterSpacing: '-0.015em', fontWeight: '600' },
+        { lineHeight: '1.2', letterSpacing: '-0.015em', fontWeight: '600' },
       ],
-      'title-small': [
+      'title-small-1': [
         '18px',
         { lineHeight: '1.2', letterSpacing: '-0.01em', fontWeight: '600' },
+      ],
+      'title-small-2': [
+        '18px',
+        { lineHeight: '1.2', letterSpacing: '-0.015em', fontWeight: '400' },
       ],
       'title-x-small': [
         '16px',
         { lineHeight: '1.2', letterSpacing: '-0.015em', fontWeight: '600' },
       ],
-      'body-1-long': ['16px', { lineHeight: '1.3', letterSpacing: '-0.01em' }],
+      'body-1-long': [
+        '16px',
+        { lineHeight: '1.3', letterSpacing: '-0.01em', fontWeight: '400' },
+      ],
       'body-1-normal': [
         '16px',
-        { lineHeight: '1.25', letterSpacing: '-0.01em' },
+        { lineHeight: '1.25', letterSpacing: '-0.01em', fontWeight: '500' },
       ],
-      'body-2-long': ['14px', { lineHeight: '1.25', letterSpacing: '-0.01em' }],
+      'body-2-long': [
+        '14px',
+        { lineHeight: '1.25', letterSpacing: '-0.01em', fontWeight: '400' },
+      ],
       'body-2-normal': [
         '14px',
-        { lineHeight: '1.2', letterSpacing: '-0.01em' },
+        { lineHeight: '1.2', letterSpacing: '-0.01em', fontWeight: '500' },
       ],
-      caption: ['12px', { lineHeight: '1.25', letterSpacing: '-0.02em' }],
+      caption: [
+        '12px',
+        { lineHeight: '1.25', letterSpacing: '-0.02em', fontWeight: '400' },
+      ],
       'label-large': [
         '16px',
         { lineHeight: '1.2', letterSpacing: '-0.015em', fontWeight: 'bold' },
@@ -55,6 +68,14 @@ export const theme = {
       'label-small': [
         '12px',
         { lineHeight: '1.3', letterSpacing: '-0.015em', fontWeight: 'bold' },
+      ],
+      'label-x-small-1': [
+        '11px',
+        { lineHeight: '1.2', letterSpacing: '-0.02em', fontWeight: 'bold' },
+      ],
+      'label-x-small-2': [
+        '11px',
+        { lineHeight: '1.2', letterSpacing: '-0.02em', fontWeight: '400' },
       ],
     },
   },

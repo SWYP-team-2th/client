@@ -14,23 +14,27 @@ export default function VoteCardList() {
   const { openDialog } = useDialog();
   const { voteDetail } = useVoteDetail(shareUrl ?? '');
   const queryClient = useQueryClient();
-  const { mutate: voteMutate, isPending } = useVote(voteDetail.id, {
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['voteDetail', shareUrl],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ['voteStatus', voteDetail.id],
-      });
+  const { mutate: voteMutate, isPending: isVotePending } = useVote(
+    voteDetail.id,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['voteDetail', shareUrl],
+        });
+        queryClient.invalidateQueries({
+          queryKey: ['voteStatus', voteDetail.id],
+        });
+      },
     },
-  });
-  const { mutate: postGuestVote } = usePostGuestVote(voteDetail.id, {
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['voteDetail', shareUrl],
-      });
-    },
-  });
+  );
+  const { mutate: postGuestVote, isPending: isGuestVotePending } =
+    usePostGuestVote(voteDetail.id, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['voteDetail', shareUrl],
+        });
+      },
+    });
 
   const handleClickVoteCardItem = (id: number) => {
     openDialog(
@@ -52,7 +56,7 @@ export default function VoteCardList() {
 
   return (
     <div className="flex w-full space-x-6 my-[15px] px-[12px] relative">
-      {isPending && (
+      {(isVotePending || isGuestVotePending) && (
         <div className="absolute w-full inset-0 z-10 bg-gray-100/50">
           <Loading />
         </div>

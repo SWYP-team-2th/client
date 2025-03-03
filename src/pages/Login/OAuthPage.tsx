@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import usePostKakaoLogin from '@/api/usePostKaKaoLogin';
 import { setAccessToken, setRole } from '@/components/login/Auth/token';
+import Loading from '@/components/common/Loading';
 
 export default function OAuthPage() {
+  const [isLoading, setIsLoading] = useState(true);
   const state = new URL(window.location.href).searchParams.get('state');
   const navigate = useNavigate();
   const { mutate } = usePostKakaoLogin({
@@ -18,12 +20,25 @@ export default function OAuthPage() {
     const code = new URL(window.location.href).searchParams.get('code');
 
     if (code) {
-      mutate({
-        redirectUri: `${window.location.origin}/oauth`,
-        code,
-      });
+      mutate(
+        {
+          redirectUri: `${window.location.origin}/oauth`,
+          code,
+        },
+        {
+          onSettled: () => setIsLoading(false),
+        },
+      );
     }
   }, []);
 
-  return <div>로그인 진행중임다.</div>;
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center fixed inset-0">
+        <Loading />
+      </div>
+    );
+  }
+
+  return null;
 }

@@ -27,10 +27,16 @@ interface VoteDetailType {
 export default function useGetVoteDetail(shareUrl: string) {
   return useSuspenseQuery<VoteDetailType>({
     queryKey: ['voteDetail', shareUrl],
-    queryFn: () =>
-      request({
+    queryFn: () => {
+      const guestToken = localStorage.getItem('guestToken');
+
+      return request({
         method: 'GET',
         url: `/posts/shareUrl/${shareUrl}`,
-      }),
+        headers: {
+          ...(guestToken ? { 'Guest-Token': guestToken } : {}),
+        },
+      });
+    },
   });
 }

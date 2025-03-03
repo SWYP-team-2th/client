@@ -35,7 +35,7 @@ export default function OAuthPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center fixed inset-0">
-        <Loading />
+        <Loading className="w-30 h-30" />
       </div>
     );
   }

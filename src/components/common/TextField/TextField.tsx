@@ -39,7 +39,7 @@ const TextField = React.forwardRef<HTMLTextAreaElement, TextFieldProps>(
         <div className="relative">
           <textarea
             className={cn(
-              'w-full resize-none px-4 py-3 h-[149px] rounded-xl border-[1px] border-gray-500 border-solid text-body-1-long text-gray-700 [&:hover]:text-gray-800 focus:outline-none',
+              'w-full resize-none px-4 py-3 h-[100px] rounded-xl border-[1px] border-gray-500 border-solid text-body-1-long text-gray-700 [&:hover]:text-gray-800 focus:outline-none',
               {
                 'border-success':
                   status === 'success' && variant === 'outlined',

@@ -12,12 +12,13 @@ import BookmarkOutline from '@/assets/icons/bookmark_outline_24px.svg?react';
 import Check from '@/assets/icons/check_24px.svg?react';
 import Cross from '@/assets/icons/cross_24px.svg?react';
 import Edit from '@/assets/icons/edit_24px.svg?react';
+import Filter from '@/assets/icons/filter.svg?react';
 import HeartFill from '@/assets/icons/heart_fill_24px.svg?react';
 import HeartFillRed from '@/assets/icons/heart_fill_Red.svg?react';
 import HeartOutline from '@/assets/icons/heart_outline_24px.svg?react';
 import HeartOutlineWhite from '@/assets/icons/heart_outline_white.svg?react';
-import HomeFill from '@/assets/icons/home_fill_24px.svg?react';
-import HomeOutline from '@/assets/icons/home_outline_24px.svg?react';
+import HomeFilled from '@/assets/icons/home-filled.svg?react';
+import HomeOutline from '@/assets/icons/home.svg?react';
 import KakaoLogo from '@/assets/icons/kako_logo.svg?react';
 import Link from '@/assets/icons/link_24px.svg?react';
 import LinkWhite from '@/assets/icons/link_white.svg?react';
@@ -43,6 +44,7 @@ import Post from '@/assets/icons/post_24px.svg?react';
 import SearchFill from '@/assets/icons/search_fill_24px.svg?react';
 import Send from '@/assets/icons/send_24px.svg?react';
 import SettingsOutline from '@/assets/icons/settings_outline_24px.svg?react';
+import Talk from '@/assets/icons/talk.svg?react';
 import ThumbUpFill from '@/assets/icons/thumb-up_fill_24px.svg?react';
 import ThumbUpOutline from '@/assets/icons/thumb-up_outline_24px.svg?react';
 import ToastError from '@/assets/icons/toast_error.svg?react';
@@ -54,9 +56,14 @@ import User2Fill from '@/assets/icons/user2_fill_24px.svg?react';
 import User2Outline from '@/assets/icons/user2_outline_24px.svg?react';
 import UserFill from '@/assets/icons/user_fill_24px.svg?react';
 import UserOutline from '@/assets/icons/user_outline_24px.svg?react';
+import Vote from '@/assets/icons/vote.svg?react';
 import VoteClose from '@/assets/icons/vote_close.svg?react';
 import World from '@/assets/icons/world_24px.svg?react';
 export const ICONS = {
+  Vote,
+  Talk,
+  HomeFilled,
+  Filter,
   ArrowRightPurple,
   PlusGray,
   AlertFill,
@@ -74,7 +81,6 @@ export const ICONS = {
   HeartFill,
   HeartFillRed,
   HeartOutline,
-  HomeFill,
   HomeOutline,
   Link,
   LockFill,
@@ -117,9 +123,11 @@ export const ICONS = {
 } as const;
 
 export const ICON_SIZE = {
+  'extra-small': 12,
   small: 16,
   medium: 24,
   large: 32,
+  'extra-large': 40,
 } as const;
 
 export interface IconProps extends SVGProps<SVGSVGElement> {

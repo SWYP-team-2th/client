@@ -2,9 +2,11 @@ import { useNavigate } from 'react-router-dom';
 import useGetMyInfo from '@/api/useGetMyInfo';
 import Logo from '@/assets/icons/logo.svg?react';
 import { useDialog } from '@/components/common/Dialog/hooks';
+import GuestConfirmDialog from '@/components/common/GuestConfirmDialog/GuestConfirmDialog';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
-import LoginDialog from '@/components/common/LoginDialog/LoginDialog';
+import LoginDialog from '@/components/common/LoginDialog';
+import { getRole } from '@/components/login/Auth/token';
 import CommentList from '@/components/vote-detail/Comment/CommentList';
 import CommentInput from '@/components/vote-detail/Input/CommentInput';
 import VoteTopSection from '@/components/vote-detail/Top/VoteTopSection/VoteTopSection';
@@ -18,6 +20,13 @@ export default function VotePage() {
   const handleClickUserButton = () => {
     if (!myInfo) {
       openDialog(<LoginDialog />);
+      return;
+    }
+
+    if (myInfo && getRole() === 'GUEST') {
+      openDialog(
+        <GuestConfirmDialog title="게스트 계정은 뽀또본부로 이동할 수 없어요 😢" />,
+      );
       return;
     }
 

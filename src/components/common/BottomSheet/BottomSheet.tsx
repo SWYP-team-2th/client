@@ -15,8 +15,8 @@ export default function BottomSheet({
   const { closeBottomSheet } = useBottomSheet();
 
   return (
-    <div className="py-8 rounded-t-2xl relative w-full max-w-[480px] bg-gray-100">
-      <h3 className="px-8 text-h3 pb-4 border-b-[1px] border-gray-400">
+    <div className="py-[28px] rounded-t-2xl relative w-full max-w-[480px] bg-gray-100">
+      <h3 className="px-10 text-h3 pb-4 border-b-[1px] border-gray-400">
         {title}
       </h3>
       {hasCloseButton && (
@@ -27,7 +27,7 @@ export default function BottomSheet({
           <Icon name="Cross" size="large" />
         </button>
       )}
-      <div className="pt-4 px-8">{children}</div>
+      <div className="pt-4 px-10">{children}</div>
     </div>
   );
 }

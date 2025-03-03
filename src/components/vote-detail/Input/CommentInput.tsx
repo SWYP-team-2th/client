@@ -4,9 +4,11 @@ import useAddComment from '@/api/useAddComment';
 import useGetMyInfo from '@/api/useGetMyInfo';
 import useGetVoteDetail from '@/api/useGetVoteDetail';
 import { useDialog } from '@/components/common/Dialog/hooks';
+import GuestConfirmDialog from '@/components/common/GuestConfirmDialog/GuestConfirmDialog';
 import Icon from '@/components/common/Icon';
-import LoginDialog from '@/components/common/LoginDialog/LoginDialog';
+import LoginDialog from '@/components/common/LoginDialog';
 import TextInput from '@/components/common/TextInput';
+import { getRole } from '@/components/login/Auth/token';
 
 export default function CommentInput() {
   const [content, setContent] = useState('');
@@ -51,6 +53,13 @@ export default function CommentInput() {
   const handleFocusInput = () => {
     if (!myInfo) {
       openDialog(<LoginDialog />);
+      return;
+    }
+
+    if (myInfo && getRole() === 'GUEST') {
+      openDialog(
+        <GuestConfirmDialog title="게스트 계정은 한마디 남기기가 불가능해요 😢" />,
+      );
     }
   };
 

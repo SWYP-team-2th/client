@@ -30,13 +30,13 @@ prepareMSW().then(() => {
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
       <QueryClientProvider client={queryClient}>
-        <BottomSheetProvider>
-          <ToastProvider>
+        <ToastProvider>
+          <BottomSheetProvider>
             <DialogProvider>
               <RouterProvider router={router} />
             </DialogProvider>
-          </ToastProvider>
-        </BottomSheetProvider>
+          </BottomSheetProvider>
+        </ToastProvider>
       </QueryClientProvider>
     </StrictMode>,
   );

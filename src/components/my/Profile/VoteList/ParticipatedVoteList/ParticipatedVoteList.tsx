@@ -21,12 +21,12 @@ export default function MyVoteList() {
 
   return (
     <div className="pb-6">
-      <div className="overflow-scroll grid grid-cols-3 gap-2">
+      <div className="overflow-scroll grid grid-cols-3 gap-[6px]">
         {participatedVoteList.map((vote) => (
           <Link
             to={`/votes/${vote.shareUrl}`}
             key={vote.id}
-            className="relative aspect-[71/106] rounded-xl overflow-hidden"
+            className="relative aspect-[140/177] rounded-xl overflow-hidden"
           >
             <img
               src={vote.bestPickedImageUrl}

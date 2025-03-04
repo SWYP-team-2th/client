@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import usePostKakaoLogin from '@/api/usePostKaKaoLogin';
-import { setAccessToken, setRole } from '@/components/login/Auth/token';
 import Loading from '@/components/common/Loading';
+import { setAccessToken, setRole } from '@/components/login/Auth/token';
 
 export default function OAuthPage() {
-  const [isLoading, setIsLoading] = useState(true);
   const state = new URL(window.location.href).searchParams.get('state');
   const navigate = useNavigate();
-  const { mutate } = usePostKakaoLogin({
+
+  const { mutate, isPending } = usePostKakaoLogin({
     onSuccess: (data) => {
       setRole(data.role);
       setAccessToken(data.accessToken);
@@ -20,19 +20,14 @@ export default function OAuthPage() {
     const code = new URL(window.location.href).searchParams.get('code');
 
     if (code) {
-      mutate(
-        {
-          redirectUri: `${window.location.origin}/oauth`,
-          code,
-        },
-        {
-          onSettled: () => setIsLoading(false),
-        },
-      );
+      mutate({
+        redirectUri: `${window.location.origin}/oauth`,
+        code,
+      });
     }
   }, []);
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <div className="flex items-center justify-center fixed inset-0">
         <Loading className="w-30 h-30" />

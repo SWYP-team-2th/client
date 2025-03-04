@@ -20,7 +20,7 @@ export default function MyPage() {
   };
 
   return (
-    <div className="w-full h-full overflow-hidden">
+    <div className="w-full h-full overflow-hidden bg-gray-200">
       <Header
         leftNode={<Logo style={{ width: 70 }} />}
         rightNode={
@@ -31,22 +31,24 @@ export default function MyPage() {
           />
         }
       />
-      <div className="pt-[105px] px-6 w-full h-full flex flex-col gap-[30px] flex-1 min-h-0">
-        <Suspense fallback={<Loading />}>
-          <Profile />
-        </Suspense>
-        <Button
-          buttonType="primary"
-          size="large"
-          variant="solid"
-          className="flex-shrink-0"
-          onClick={handleClickCreateVoteButton}
-        >
-          <div className="flex gap-1">
-            <Icon name="Post" size="medium" />
-            <p>새 투표 만들기</p>
-          </div>
-        </Button>
+      <div className="pt-[100px]  w-full h-full flex flex-col flex-1 min-h-0">
+        <div className="px-6">
+          <Suspense fallback={<Loading />}>
+            <Profile />
+          </Suspense>
+          <Button
+            buttonType="primary"
+            size="large"
+            variant="solid"
+            className="flex-shrink-0 mt-6 mb-7"
+            onClick={handleClickCreateVoteButton}
+          >
+            <div className="flex gap-1">
+              <Icon name="Post" size="medium" />
+              <p>새 투표 만들기</p>
+            </div>
+          </Button>
+        </div>
         <VoteList />
       </div>
     </div>

@@ -10,7 +10,7 @@ export default function VoteRegistForm() {
     useVoteRegistForm();
 
   return (
-    <div className="relative pt-[65px]">
+    <div className="relative pt-[75px]">
       <FieldContainer fieldTitle="투표 설명">
         <VoteDescription />
       </FieldContainer>

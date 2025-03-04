@@ -17,7 +17,7 @@ const MenuItem = ({ title, onClick, rightIcon }: MenuItemProps) => {
   return (
     <button
       onClick={onClick}
-      className="w-full flex items-center justify-between text-title-medium text-gray-900 cursor-pointer"
+      className="w-full flex items-center justify-between text-title-small text-gray-900 cursor-pointer"
     >
       <span>{title}</span>
       {rightIcon}

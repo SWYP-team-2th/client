@@ -50,7 +50,7 @@ export default function VotePage() {
             className="cursor-pointer"
             onClick={handleClickUserButton}
             name="UserFill"
-            size="large"
+            size="medium"
           />
         }
       />

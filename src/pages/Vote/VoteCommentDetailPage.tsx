@@ -19,13 +19,7 @@ export default function VoteCommentDetailPage() {
             size="large"
           />
         }
-        centerNode={
-          <Logo
-            style={{
-              width: '70px',
-            }}
-          />
-        }
+        centerNode={<Logo style={{ width: '50px' }} />}
         rightNode={
           <Icon className="cursor-pointer" name="UserFill" size="large" />
         }

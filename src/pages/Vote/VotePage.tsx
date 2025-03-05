@@ -44,13 +44,7 @@ export default function VotePage() {
             size="medium"
           />
         }
-        centerNode={
-          <Logo
-            style={{
-              width: '70px',
-            }}
-          />
-        }
+        centerNode={<Logo style={{ width: '50px' }} />}
         rightNode={
           <Icon
             className="cursor-pointer"

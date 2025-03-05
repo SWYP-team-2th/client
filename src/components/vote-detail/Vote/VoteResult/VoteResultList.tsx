@@ -23,10 +23,10 @@ export default function VoteResultList() {
   );
 
   return (
-    <div className="px-1">
+    <div className="pt-5 pb-[14px]">
       {!userHasVoted && (
         <div
-          className="flex items-center justify-center w-full h-18 text-body-1-normal "
+          className="flex items-center justify-center w-full h-18 text-body-2-normal "
           style={{
             backgroundImage: `url(${BlurImage})`,
           }}
@@ -36,7 +36,7 @@ export default function VoteResultList() {
       )}
       {userHasVoted && myInfo && getRole() === 'GUEST' && (
         <div
-          className="flex items-center justify-center w-full h-18 text-body-1-normal "
+          className="flex items-center justify-center w-full h-18 text-body-2-normal "
           style={{
             backgroundImage: `url(${BlurImage})`,
           }}

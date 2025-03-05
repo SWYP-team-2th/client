@@ -35,26 +35,28 @@ export default function VoteCardItem({
       )}
       onClick={onClick}
     >
-      <div className="relative w-full aspect-[7/9] rounded-xl overflow-hidden bg-gray-100">
+      <div className="relative w-full aspect-[206/272] rounded-xl overflow-hidden bg-gray-100">
         <img src={image.thumbnailUrl} className="w-full h-full object-cover" />
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full bg-gray-900/40 px-3 py-2 flex justify-between items-center">
-        <span className="text-white font-semibold">{image.imageName}</span>
+      <div className="absolute bottom-0 left-0 w-full bg-gray-900/40 px-[14px] py-2 flex justify-between items-center">
+        <span className="text-gray-100 text-body-2-normal">
+          {image.imageName}
+        </span>
 
         <button onClick={handleVote} className="focus:outline-none">
           <Icon
             name={image.voted ? 'HeartFillRed' : 'HeartOutlineWhite'}
-            size="medium"
+            size="small"
             className={cn(
               'cursor-pointer',
-              image.voted ? 'text-primary-500' : 'text-white',
+              image.voted ? 'text-primary-500' : 'text-gray-100',
             )}
           />
         </button>
       </div>
       {image.id === id && image.voted && (
-        <div className="flex absolute top-2 left-2 space-x-2">
+        <div className="flex absolute top-[6px] left-[6px] space-x-2">
           <Label size="small" variant="primary">
             뽀또픽!
           </Label>

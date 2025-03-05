@@ -23,7 +23,7 @@ export default function BottomSheet({
       transition={{ duration: 0.4, ease: 'easeInOut' }}
       className="py-[28px] rounded-t-2xl relative w-full max-w-[480px] bg-gray-100"
     >
-      <h3 className="px-10 text-h3 pb-4 border-b-[1px] border-gray-400">
+      <h3 className="px-10 text-title-large pb-4 border-b-[1px] border-gray-400">
         {title}
       </h3>
       {hasCloseButton && (

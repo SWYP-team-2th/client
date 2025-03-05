@@ -18,17 +18,16 @@ export default function CommentList() {
         <Loading />
       ) : (
         <>
-          <div className="text-title-large mt-lg pl-sm pb-[9px]">
+          <div className="text-title-small-1 mt-5 pb-4">
             한마디 ({comments?.length})
           </div>
-          <hr className="text-gray-300 mb-[20px]" />
 
           {comments?.length === 0 ? (
-            <div className="flex items-center justify-center text-center flex-col mb-[50px]">
-              <img src={pencilImage} className="w-16 h-16 opacity-50" />
-              <p className="text-title-small">
-                아직 댓글이 없어요 <br />
-                가장 먼저 한마디를 남겨보세요.
+            <div className="flex items-center justify-center text-center flex-col mb-[50px] mt-[10px]">
+              <img src={pencilImage} className="w-[100px] h-[100px]" />
+              <p className="text-title-small">아직 댓글이 없어요</p>
+              <p className="text-body-2-normal text-gray-700">
+                가장 먼저 한 마디를 남겨보세요.
               </p>
             </div>
           ) : (

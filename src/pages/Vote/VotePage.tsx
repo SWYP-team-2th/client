@@ -34,14 +34,14 @@ export default function VotePage() {
   };
 
   return (
-    <div className="bg-gray-200 w-full h-screen flex itmes-center flex-col pt-[85px] relative">
+    <div className="w-full bg-gray-100 h-screen flex itmes-center flex-col pt-[85px] relative">
       <Header
         leftNode={
           <Icon
             className="cursor-pointer"
             onClick={() => navigate(-1)}
             name="ArrowLeft"
-            size="large"
+            size="medium"
           />
         }
         centerNode={
@@ -60,12 +60,11 @@ export default function VotePage() {
           />
         }
       />
-      <div
-        className="h-[calc(100dvh-180px)] overflow-y-auto mx-[15px] px-[10px] pt-[18px] pb-3 bg-gray-100 rounded-2xl shadow-[0px_2px_20px_0px_rgba(0,0,0,0.03),0px_20px_15px_0px_rgba(0,0,0,0.02),0px_8px_25px_0px_rgba(0,0,0,0.04)] 
-        "
-      >
+      <div className="h-[calc(100dvh-180px)] overflow-y-auto px-6 py-[10px] rounded-2xl">
         <VoteTopSection />
         <VoteSection />
+        <hr className="border-t-[5px] border-gray-300" />
+
         <CommentList />
       </div>
       <CommentInput />

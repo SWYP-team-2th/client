@@ -48,7 +48,7 @@ export default function VoteCardList() {
     };
 
   return (
-    <div className="flex w-full space-x-6 my-[15px] px-[12px] relative">
+    <div className="flex w-full space-x-3 mt-5 px-2 relative">
       {isVotePending && (
         <div className="absolute w-full inset-0 z-10 bg-gray-100/50">
           <Loading />

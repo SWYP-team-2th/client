@@ -8,19 +8,21 @@ export default function VoteAuthorInfo() {
 
   return (
     <div className="w-full flex flex-col">
-      <div className="flex items-center justify-between mb-[12px]">
-        <div className="flex items-center">
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center mb-1">
           <img
             src={voteDetail.author.profileUrl}
-            className="w-10 h-10 rounded-full mr-[5px]"
+            className="w-8 h-8 rounded-full mr-[6px]"
           />
-          <span className="text-h3">{voteDetail.author.nickname}</span>
+          <span className="text-title-small-1">
+            {voteDetail.author.nickname}
+          </span>
         </div>
 
         {voteDetail.isAuthor && <VoteVerticalEllipsis />}
       </div>
 
-      <p>{voteDetail.description}</p>
+      <p className="pl-[6px] text-body-2-long">{voteDetail.description}</p>
     </div>
   );
 }

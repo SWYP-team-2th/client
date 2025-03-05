@@ -18,7 +18,7 @@ interface CommentItemProps {
 
 export default function CommentItem({ comment }: CommentItemProps) {
   return (
-    <div key={comment.commentId} className="flex mb-3 ml-sm">
+    <div key={comment.commentId} className="flex mb-3 ">
       <div className="flex ">
         <img
           src={comment.author.profileUrl}

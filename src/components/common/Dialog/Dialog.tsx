@@ -37,7 +37,7 @@ export default function Dialog({
     <div className="relative px-7 py-8 rounded-2xl flex flex-col gap-4 justify-center items-center text-center w-full max-w-[430px] bg-gray-100">
       <div className="flex flex-col gap-2 break-keep">
         <h2 className="text-title-large">{title}</h2>
-        <p className="text-body-1-long text-gray-700">{description}</p>
+        <p className="text-body-2-normal text-gray-700">{description}</p>
       </div>
       {hasCloseButton && (
         <button
@@ -91,7 +91,7 @@ export default function Dialog({
       )}
       {customButtonProps && customButtonProps}
       {inlineMessage && (
-        <p className="text-label-xsmall-2 text-gray-600">{inlineMessage}</p>
+        <p className="text-label-x-small-2 text-gray-600">{inlineMessage}</p>
       )}
     </div>
   );

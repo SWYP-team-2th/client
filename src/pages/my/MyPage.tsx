@@ -37,14 +37,14 @@ export default function MyPage() {
             <Profile />
           </Suspense>
           <Button
-            buttonType="primary"
-            size="large"
+            buttonType="tertiary"
+            size="jumbo"
             variant="solid"
             className="flex-shrink-0 mt-6 mb-7"
             onClick={handleClickCreateVoteButton}
           >
-            <div className="flex gap-1">
-              <Icon name="Post" size="medium" />
+            <div className="flex gap-1 items-center text-body-1-normal">
+              <Icon name="Post" size="small" />
               <p>새 투표 만들기</p>
             </div>
           </Button>

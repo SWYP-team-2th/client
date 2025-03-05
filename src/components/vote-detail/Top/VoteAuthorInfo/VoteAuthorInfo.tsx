@@ -12,7 +12,7 @@ export default function VoteAuthorInfo() {
         <div className="flex items-center mb-1">
           <img
             src={voteDetail.author.profileUrl}
-            className="w-8 h-8 rounded-full mr-[6px]"
+            className="w-8 h-8 rounded-full mr-[8px]"
           />
           <span className="text-title-small-1">
             {voteDetail.author.nickname}

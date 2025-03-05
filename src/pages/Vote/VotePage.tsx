@@ -34,7 +34,7 @@ export default function VotePage() {
   };
 
   return (
-    <div className="w-full bg-gray-100 h-screen flex itmes-center flex-col pt-[85px] relative">
+    <div className="w-full bg-gray-100 h-screen flex itmes-center flex-col pt-[75px] relative">
       <Header
         leftNode={
           <Icon

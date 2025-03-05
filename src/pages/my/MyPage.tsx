@@ -31,7 +31,7 @@ export default function MyPage() {
           />
         }
       />
-      <div className="pt-[100px]  w-full h-full flex flex-col flex-1 min-h-0">
+      <div className="pt-[75px]  w-full h-full flex flex-col flex-1 min-h-0">
         <div className="px-6">
           <Suspense fallback={<Loading />}>
             <Profile />

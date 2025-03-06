@@ -2,10 +2,10 @@ name: Sync and Deploy to Vercel
 
 on:
   push:
-    branches: [main]
+    branches: [main, develop]
   pull_request:
     types: [closed]
-    branches: [main]
+    branches: [main, develop]
 
 jobs:
   sync-and-deploy:

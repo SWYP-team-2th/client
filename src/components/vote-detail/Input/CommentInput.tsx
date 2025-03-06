@@ -64,7 +64,7 @@ export default function CommentInput() {
   };
 
   return (
-    <div className="w-full px-lg py-3 bg-gray-100 bottom-0 fixed left-1/2 -translate-x-1/2 z-4 max-w-[480px]">
+    <div className="w-full px-lg pb-[30px] py-3 bg-gray-100 bottom-0 fixed left-1/2 -translate-x-1/2 z-4 max-w-[480px]">
       <TextInput
         ref={contentRef}
         placeholder="댓글을 입력해주세요"

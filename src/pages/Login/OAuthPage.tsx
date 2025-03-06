@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import usePostKakaoLogin from '@/api/usePostKaKaoLogin';
+import Loading from '@/components/common/Loading';
 import { setAccessToken, setRole } from '@/components/login/Auth/token';
 
 export default function OAuthPage() {
   const state = new URL(window.location.href).searchParams.get('state');
   const navigate = useNavigate();
-  const { mutate } = usePostKakaoLogin({
+
+  const { mutate, isPending } = usePostKakaoLogin({
     onSuccess: (data) => {
       setRole(data.role);
       setAccessToken(data.accessToken);
@@ -25,5 +27,13 @@ export default function OAuthPage() {
     }
   }, []);
 
-  return <div>로그인 진행중임다.</div>;
+  if (isPending) {
+    return (
+      <div className="flex items-center justify-center fixed inset-0">
+        <Loading className="w-30 h-30" />
+      </div>
+    );
+  }
+
+  return null;
 }

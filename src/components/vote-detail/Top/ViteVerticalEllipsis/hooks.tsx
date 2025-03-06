@@ -45,7 +45,7 @@ export default function useVoteVerticalEllipsis() {
         postId={voteDetail.id}
         description={
           notParticipatedVote
-            ? '❗잠시만요️, 아직 아무도 투표하지 않았어요!😢'
+            ? '잠시만요️! 아직 아무도 투표하지 않았어요 😢'
             : '삭제하면 다시 되돌릴 수 없어요!'
         }
       />,

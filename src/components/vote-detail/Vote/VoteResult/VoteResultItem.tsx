@@ -12,9 +12,9 @@ export default function VoteResultItem({
   const voteRatio = parseFloat(status.voteRatio);
 
   return (
-    <div className="flex items-center mb-sm">
-      <div>
-        <span className="pl-[1px] text-label-medium">{status.imageName}</span>
+    <div className="flex items-center mb-[6px]">
+      <div className="flex">
+        <span className="text-label-small">{status.imageName}</span>
       </div>
       <div className="ml-[9px] flex flex-1">
         <div
@@ -22,7 +22,10 @@ export default function VoteResultItem({
           style={{ width: `${voteRatio}%` }}
         />
       </div>
-      <div className="ml-[13px]">{`${status.voteCount}표 (${voteRatio}%)`}</div>
+      <div className="ml-[13px] flex">
+        <span className="text-gray-800 text-label-small">{`${status.voteCount}표`}</span>
+        <span className="pl-[2px] text-gray-800 text-label-x-small-2">{`(${voteRatio}%)`}</span>
+      </div>
     </div>
   );
 }

@@ -8,10 +8,10 @@ export default function MyVoteList() {
   if (participatedVoteList.length === 0) {
     return (
       <div className="w-full h-full flex flex-col items-center justify-center">
-        <img src={EmptyParticipatedVote} width={160} height={160} />
-        <div className="flex flex-col gap-2 justify-between items-center break-keep text-center">
-          <p className="text-h3">아직 참여한 투표가 없어요!</p>
-          <p className="text-title-small text-gray-700">
+        <img src={EmptyParticipatedVote} width={100} height={100} />
+        <div className="flex flex-col gap-2 justify-between items-center break-keep text-center pt-3">
+          <p className="text-title-medium">아직 참여한 투표가 없어요!</p>
+          <p className="text-body-2-long text-gray-700">
             다른 사람들이 만든 투표에 참여하면 여기에 표시돼요!
           </p>
         </div>
@@ -21,12 +21,12 @@ export default function MyVoteList() {
 
   return (
     <div className="pb-6">
-      <div className="overflow-scroll grid grid-cols-3 gap-2">
+      <div className="overflow-scroll grid grid-cols-3 gap-[6px]">
         {participatedVoteList.map((vote) => (
           <Link
             to={`/votes/${vote.shareUrl}`}
             key={vote.id}
-            className="relative aspect-[71/106] rounded-xl overflow-hidden"
+            className="relative aspect-[140/177] rounded-xl overflow-hidden"
           >
             <img
               src={vote.bestPickedImageUrl}

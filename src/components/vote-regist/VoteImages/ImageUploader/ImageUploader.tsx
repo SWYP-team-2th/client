@@ -12,8 +12,8 @@ export default function ImageUploader() {
 
   return (
     <div onClick={handleClickImageUploadButton}>
-      <div className="rounded-xl bg-gray-300 w-[104px] h-[104px] flex flex-col items-center justify-center text-gray-600 text-label-medium">
-        <Icon name="PhotoPlus" size="medium" />
+      <div className="rounded-xl bg-gray-300 w-[104px] h-[104px] flex flex-col items-center justify-center text-gray-600 text-label-medium gap-1">
+        <Icon name="PhotoPlusWhite" size="medium" />
         <p>
           {!files.length
             ? '(최대 2장)'

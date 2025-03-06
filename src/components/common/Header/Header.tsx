@@ -16,7 +16,7 @@ export function Header({
   return (
     <div
       className={cn(
-        'flex items-center justify-between w-full max-w-[480px] pt-5 pb-[18px] px-5 border-b border-gray-400 fixed top-0 left-1/2 -translate-x-1/2 z-40 bg-gray-100 ',
+        'flex items-center justify-between w-full max-w-[480px] py-[14px] px-5 border-b border-gray-200 fixed top-0 left-1/2 -translate-x-1/2 z-40 bg-gray-100 ',
         className,
       )}
       {...props}

@@ -69,14 +69,6 @@ export const theme = {
         '11px',
         { lineHeight: '1.3', letterSpacing: '-0.02em', fontWeight: 'bold' },
       ],
-      'label-xsmall-1': [
-        '11px',
-        { lineHeight: '1.2', letterSpacing: '-0.02em', fontWeight: 'bold' },
-      ],
-      'label-xsmall-2': [
-        '11px',
-        { lineHeight: '1.2', letterSpacing: '-0.02em', fontWeight: 'regular' },
-      ],
       'label-x-small-1': [
         '11px',
         { lineHeight: '1.2', letterSpacing: '-0.02em', fontWeight: 'bold' },

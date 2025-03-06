@@ -37,7 +37,7 @@ import Minimize from '@/assets/icons/minimize_24px.svg?react';
 import Minus from '@/assets/icons/minus_24px.svg?react';
 import More from '@/assets/icons/more_24px.svg?react';
 import PhotoPlus from '@/assets/icons/photo_plus_24px.svg?react';
-import PlusGray from '@/assets/icons/photo_plus_gray.svg?react';
+import PhotoPlusWhite from '@/assets/icons/photo_plus_gray.svg?react';
 import Plus from '@/assets/icons/plus_24px.svg?react';
 import PlusWhite from '@/assets/icons/plus_white.svg?react';
 import Post from '@/assets/icons/post_24px.svg?react';
@@ -65,7 +65,7 @@ export const ICONS = {
   HomeFilled,
   Filter,
   ArrowRightPurple,
-  PlusGray,
+  PhotoPlusWhite,
   AlertFill,
   AlertOutline,
   AlertV2,

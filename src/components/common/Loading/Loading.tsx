@@ -13,7 +13,7 @@ export default function Loading({
       )}
       {...props}
     >
-      <img src={Spinner} alt="loading" className="w-10 h-10" />
+      <img src={Spinner} alt="loading" className={cn('w-10 h-10', className)} />
     </div>
   );
 }

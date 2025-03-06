@@ -17,11 +17,15 @@ export default function SettingsPage() {
     <div>
       <Header
         leftNode={
-          <Icon name="ArrowLeft" size="large" onClick={handleClickBackButton} />
+          <Icon
+            name="ArrowLeft"
+            size="medium"
+            onClick={handleClickBackButton}
+          />
         }
-        centerNode={<h1 className="text-h3">설정</h1>}
+        centerNode={<h1 className="text-title-medium">설정</h1>}
       />
-      <div className="pt-[65px]">
+      <div className="pt-[55px]">
         {menus.map((menu) => (
           <Menu key={menu.id} title={menu.title}>
             {menu.subMenus.map((subMenu) => (

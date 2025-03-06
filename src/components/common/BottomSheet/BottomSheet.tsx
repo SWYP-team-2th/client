@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import Icon from '../Icon';
 import { useBottomSheet } from './hooks';
 
@@ -15,8 +16,14 @@ export default function BottomSheet({
   const { closeBottomSheet } = useBottomSheet();
 
   return (
-    <div className="py-[28px] rounded-t-2xl relative w-full max-w-[480px] bg-gray-100">
-      <h3 className="px-10 text-h3 pb-4 border-b-[1px] border-gray-400">
+    <motion.div
+      initial={{ y: '100%', opacity: 1 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: '100%', opacity: 0 }}
+      transition={{ duration: 0.4, ease: 'easeInOut' }}
+      className="py-[28px] rounded-t-2xl relative w-full max-w-[480px] bg-gray-100"
+    >
+      <h3 className="px-10 text-title-large pb-4 border-b-[1px] border-gray-400">
         {title}
       </h3>
       {hasCloseButton && (
@@ -28,6 +35,6 @@ export default function BottomSheet({
         </button>
       )}
       <div className="pt-4 px-10">{children}</div>
-    </div>
+    </motion.div>
   );
 }

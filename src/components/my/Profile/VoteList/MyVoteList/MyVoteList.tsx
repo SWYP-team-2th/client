@@ -10,10 +10,10 @@ export default function MyVoteList() {
   if (myVoteList.length === 0) {
     return (
       <div className="w-full h-full flex flex-col items-center justify-center">
-        <img src={EmptyMyVote} width={120} height={120} />
-        <div className="flex flex-col gap-2 justify-between items-center break-keep text-center">
-          <p className="text-h3">아직 올린 투표가 없어요!</p>
-          <p className="text-title-small text-gray-700">
+        <img src={EmptyMyVote} width={100} height={100} />
+        <div className="flex flex-col gap-2 justify-between items-center break-keep text-center pt-3">
+          <p className="text-title-medium">아직 올린 투표가 없어요!</p>
+          <p className="text-body-2-long text-gray-700">
             첫 번째 투표를 만들고 친구들과 공유해보세요.
           </p>
         </div>
@@ -23,12 +23,12 @@ export default function MyVoteList() {
 
   return (
     <div className="pb-6">
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-3 gap-[6px]">
         {myVoteList.map((vote) => (
           <Link
             to={`/votes/${vote.shareUrl}`}
             key={vote.id}
-            className="relative aspect-[71/106] rounded-xl overflow-hidden"
+            className="relative aspect-[140/177] rounded-xl overflow-hidden"
           >
             <img
               src={vote.bestPickedImageUrl}
@@ -44,7 +44,7 @@ export default function MyVoteList() {
                   shareUrl: `${window.location.origin}/votes/${vote.shareUrl}`,
                 });
               }}
-              className="absolute top-2 right-2 rounded-[10px] bg-gray-900/40 w-[26px] h-[26px] flex items-center justify-center p-1"
+              className="absolute top-2 right-2 rounded-[10px] bg-gray-900/40 w-6 h-6 flex items-center justify-center p-1"
             />
           </Link>
         ))}

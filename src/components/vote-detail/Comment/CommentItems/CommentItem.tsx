@@ -18,20 +18,17 @@ interface CommentItemProps {
 
 export default function CommentItem({ comment }: CommentItemProps) {
   return (
-    <div key={comment.commentId} className="flex flex-col mb-md ml-sm">
-      <div className="flex items-center">
+    <div key={comment.commentId} className="flex mb-3 ">
+      <div className="flex ">
         <img
           src={comment.author.profileUrl}
-          className="w-10 h-10 rounded-full"
+          className="w-[20px] h-[20px] rounded-full"
           alt="프로필 이미지"
         />
-        <span className="ml-sm text-title-small">
-          {comment.author.nickname}
-        </span>
       </div>
-
-      <div className="px-10 mt-1 break-words text-body-1-normal">
-        {comment.content}
+      <div className="flex flex-col ml-[6px]">
+        <span className="text-label-medium">{comment.author.nickname}</span>
+        <span className="break-words text-body-2-long">{comment.content}</span>
       </div>
     </div>
   );

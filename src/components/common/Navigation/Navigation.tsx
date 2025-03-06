@@ -1,15 +1,13 @@
 import { NavLink } from 'react-router-dom';
-import useGetMyInfo from '@/api/useGetMyInfo';
 import Icon from '@/components/common/Icon';
-import { navigationMenus } from '@/components/common/Navigation/navigationMenus';
+import useBottomNavigation from '@/components/common/Navigation/hooks';
 
 const Navigation = () => {
-  const { data: userInfo } = useGetMyInfo();
-  const menus = navigationMenus(userInfo?.id?.toString());
+  const { navigationMenus } = useBottomNavigation();
 
   return (
     <nav className="w-full h-[80px] fixed bottom-0 desktop:w-[480px] bg-gray-100 flex justify-between items-center px-10">
-      {menus.map((menu) => (
+      {navigationMenus.map((menu) => (
         <NavLink
           key={menu.id}
           to={menu.link}

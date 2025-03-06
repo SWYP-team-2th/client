@@ -1,30 +1,32 @@
-name: git push into another repo to deploy to vercel
+name: Sync and Deploy to Vercel
 
 on:
   push:
     branches: [main, develop]
+  pull_request:
+    types: [closed]
+    branches: [main, develop]
 
 jobs:
-  build:
+  sync-and-deploy:
+    if: github.event.pull_request.merged == true || github.event_name == 'push'
     runs-on: ubuntu-latest
-    container: pandoc/latex
     steps:
-      - uses: actions/checkout@v2
-      - name: Install mustache (to update the date)
-        run: apk add ruby && gem install mustache
-      - name: creates output
-        run: sh ./build.sh
-      - name: Pushes to another repository
-        id: push_directory
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.PERSONAL_GITHUB_ACCESS_KEY }}
+      - uses: actions/checkout@v3
         with:
-          source-directory: 'output'
-          destination-github-username: YOOJS1205
-          destination-repository-name: photopic
-          user-email: ${{ secrets.PERSONAL_EMAIL }}
-          commit-message: ${{ github.event.commits[0].message }}
-          target-branch: ${{ github.ref_name }}
-      - name: Test get variable exported by push-to-another-repository
-        run: echo $DESTINATION_CLONED_DIRECTORY
+          fetch-depth: 0
+          token: ${{ secrets.API_TOKEN_GITHUB }}
+
+      - name: Configure Git
+        run: |
+          git config --global user.email "${{ secrets.PERSONAL_EMAIL }}"
+          git config --global user.name "GitHub Action"
+
+      - name: Push to forked repository
+        run: |
+          echo "Setting up remote repository..."
+          git remote add fork "https://oauth2:${{ secrets.API_TOKEN_GITHUB }}@github.com/YOOJS1205/photopic.git"
+          echo "Fetching from fork..."
+          git fetch fork
+          echo "Pushing to fork..."
+          git push -f fork ${GITHUB_REF#refs/heads/}:${GITHUB_REF#refs/heads/}

@@ -3,11 +3,11 @@ import Icon from '@/components/common/Icon';
 import useBottomNavigation from '@/components/common/Navigation/hooks';
 
 const Navigation = () => {
-  const { navigationMenus } = useBottomNavigation();
+  const { menus } = useBottomNavigation();
 
   return (
     <nav className="w-full h-[80px] fixed bottom-0 desktop:w-[480px] bg-gray-100 flex justify-between items-center px-10">
-      {navigationMenus.map((menu) => (
+      {menus.map((menu) => (
         <NavLink
           key={menu.id}
           to={menu.link}

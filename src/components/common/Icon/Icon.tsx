@@ -41,6 +41,7 @@ import PhotoPlusWhite from '@/assets/icons/photo_plus_gray.svg?react';
 import Plus from '@/assets/icons/plus_24px.svg?react';
 import PlusWhite from '@/assets/icons/plus_white.svg?react';
 import Post from '@/assets/icons/post_24px.svg?react';
+import PostWhite from '@/assets/icons/post_white.svg?react';
 import SearchFill from '@/assets/icons/search_fill_24px.svg?react';
 import Send from '@/assets/icons/send_24px.svg?react';
 import SettingsOutline from '@/assets/icons/settings_outline_24px.svg?react';
@@ -60,6 +61,7 @@ import Vote from '@/assets/icons/vote.svg?react';
 import VoteClose from '@/assets/icons/vote_close.svg?react';
 import World from '@/assets/icons/world_24px.svg?react';
 export const ICONS = {
+  PostWhite,
   Vote,
   Talk,
   HomeFilled,

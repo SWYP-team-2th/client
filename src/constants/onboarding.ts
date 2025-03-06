@@ -12,8 +12,8 @@ export const onBoardingSlides = [
   {
     id: 2,
     image: onboarding2,
-    title: `고민되는 사진을 올리고,\n투표를 받아보세요!`,
-    subtitle: `사진을 올리면, 친구의 투표 시작!\n더 많은 표를 받을 사진은?`,
+    title: `어떤 사진이 더 인기 있을까?\n사진을 올리면 친구들의 투표 시작!`,
+    subtitle: `투표 받고, 친구들의 반응을\n미리 확인하세요!`,
   },
   {
     id: 3,

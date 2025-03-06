@@ -3,6 +3,7 @@ import { useGetImageStatus } from './hooks';
 import Icon from '@/components/common/Icon';
 import { Label } from '@/components/common/Label/Label';
 import { cn } from '@/utils/cn';
+import AnimatedLabel from '@/components/common/Label/AnimatedLabel';
 
 interface VoteCardItemProps extends HTMLAttributes<HTMLButtonElement> {
   image: {
@@ -57,27 +58,29 @@ export default function VoteCardItem({
       </div>
       {image.id === id && image.voted && (
         <div className="flex absolute top-[6px] left-[6px] space-x-2">
-          <Label size="small" variant="primary">
+          <Label color="isPicked" variant="solid">
             뽀또픽!
           </Label>
         </div>
       )}
       {image.id === id && !image.voted && status === 'WIN' && (
         <div className="flex absolute top-2 left-2 space-x-2">
-          <Label size="large" variant="secondary">
-            <p>베스트픽!</p>
-          </Label>
+          <AnimatedLabel type="bestPick">
+            <Icon name="MedalWhite" size="small" />
+            <p className="pl-[3px]">베스트픽!</p>
+          </AnimatedLabel>
         </div>
       )}
       {image.id === id && image.voted && status === 'WIN' && (
         <div>
           <div className="flex absolute top-2 left-2 space-x-2">
-            <Label size="large" variant="secondary">
-              <p>베스트픽!</p>
-            </Label>
+            <AnimatedLabel type="bestPick">
+              <Icon name="MedalWhite" size="small" />
+              <p className="pl-[3px]">베스트픽!</p>
+            </AnimatedLabel>
           </div>
           <div className="flex absolute top-2 right-2 space-x-2">
-            <Label size="small" variant="primary">
+            <Label color="isPicked" variant="solid">
               뽀또픽!
             </Label>
           </div>

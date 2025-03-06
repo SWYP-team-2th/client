@@ -1,9 +1,9 @@
 import { HTMLAttributes } from 'react';
 import { useGetImageStatus } from './hooks';
 import Icon from '@/components/common/Icon';
+import AnimatedLabel from '@/components/common/Label/AnimatedLabel';
 import { Label } from '@/components/common/Label/Label';
 import { cn } from '@/utils/cn';
-import AnimatedLabel from '@/components/common/Label/AnimatedLabel';
 
 interface VoteCardItemProps extends HTMLAttributes<HTMLButtonElement> {
   image: {

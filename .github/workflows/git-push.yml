@@ -2,7 +2,7 @@ name: Sync and Deploy to Vercel
 
 on:
   push:
-    branches: [main]
+    branches: [main, develop]
   pull_request:
     types: [closed]
     branches: [main]
@@ -26,4 +26,4 @@ jobs:
           destination-repository-name: photopic
           user-email: ${{ secrets.PERSONAL_EMAIL }}
           commit-message: ${{ github.event.commits[0].message || 'Sync from original repository' }}
-          target-branch: main
+          target-branch: ${{ github.ref_name }}

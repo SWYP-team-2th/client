@@ -4,16 +4,17 @@ import React from 'react';
 import { cn } from '@/utils/cn';
 
 const labelVariants = cva(
-  'flex items-center justify-center px-[7px] py-[5px] whitespace-nowrap overflow-hidden',
+  'flex items-center justify-center px-[7px] py-[3px] whitespace-nowrap overflow-hidden rounded-full text-label-small',
   {
     variants: {
       variant: {
-        primary: 'bg-primary-300 !text-gray-900',
-        secondary: 'bg-accent-600 !text-gray-100',
+        solid: '',
+        outline: 'bg-gray-100 border',
       },
-      size: {
-        small: 'w-[50px] h-[24px] rounded-[99px] text-label-small',
-        large: 'w-[65px] h-[24px] rounded-[99px] text-label-small',
+      color: {
+        isPicked: 'bg-primary-400 !text-gray-800 ',
+        isProgress: 'border-primary-500 !text-primary-600',
+        voteEnded: 'border-accent-400 !text-accent-500',
       },
     },
   },
@@ -23,19 +24,19 @@ interface LabelProps
   extends React.HTMLAttributes<HTMLSpanElement>,
     VariantProps<typeof labelVariants> {
   asChild?: boolean;
-  size: 'small' | 'large';
-  variant: 'primary' | 'secondary';
+  variant: 'solid' | 'outline';
+  color: 'isPicked' | 'isProgress' | 'voteEnded';
 }
 
 export const Label = React.forwardRef<HTMLSpanElement, LabelProps>(
-  ({ variant, size, asChild = false, children, ...props }, ref) => {
+  ({ variant, color, asChild = false, children, ...props }, ref) => {
     const Comp = asChild ? Slot : 'span';
     return (
       <Comp
         className={cn(
           labelVariants({
             variant,
-            size,
+            color,
           }),
         )}
         ref={ref}

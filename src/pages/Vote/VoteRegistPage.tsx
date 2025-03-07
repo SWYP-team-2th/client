@@ -17,7 +17,6 @@ export default function VoteRegistPage() {
         leftNode={
           <Icon name="ArrowLeft" size="large" onClick={handleClickBackButton} />
         }
-        centerNode={<h1 className="text-h3">투표 만들기</h1>}
       />
       <VoteRegistProvider>
         <VoteRegistForm />

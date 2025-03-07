@@ -14,11 +14,11 @@ export default function FieldContainer({
   return (
     <div
       className={cn(
-        'flex flex-col gap-4 px-6 py-7',
-        !isLastField && 'border-b-[5px] border-gray-300',
+        'flex flex-col gap-3 px-6 py-[18px]',
+        !isLastField && 'border-b-[3px] border-gray-300',
       )}
     >
-      <h3 className="text-title-medium">{fieldTitle}</h3>
+      <h3 className="text-title-small-1">{fieldTitle}</h3>
       {children}
     </div>
   );

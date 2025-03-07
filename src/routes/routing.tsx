@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
-import App from '@/App';
 import DefaultLayout from '@/components/common/Layout/DefaultLayout';
 import SubLayout from '@/components/common/Layout/SubLayout';
+import Home from '@/pages/Home/Home';
 import OAuthPage from '@/pages/Login/OAuthPage';
 import MyPage from '@/pages/my/MyPage';
 import NotFoundPage from '@/pages/NotFound/NotFoundPage';
@@ -20,6 +20,20 @@ export const router = createBrowserRouter([
         element: <VotePage />,
       },
       {
+        path: '/home',
+        element: <Home />,
+      },
+      {
+        path: '/user/:userId',
+        element: <MyPage />,
+      },
+    ],
+  },
+  {
+    element: <SubLayout />,
+    children: [
+      { path: '/onboarding', element: <OnBoardingPage /> },
+      {
         path: '/votes/:shareUrl/comments',
         element: <VoteCommentDetailPage />,
       },
@@ -27,21 +41,11 @@ export const router = createBrowserRouter([
         path: '/oauth',
         element: <OAuthPage />,
       },
-    ],
-  },
-  {
-    element: <SubLayout />,
-    children: [
-      { path: '/', element: <App /> },
-      { path: '/onboarding', element: <OnBoardingPage /> },
       {
         path: '/votes/regist',
         element: <VoteRegistPage />,
       },
-      {
-        path: '/user/:userId',
-        element: <MyPage />,
-      },
+
       {
         path: '/settings',
         element: <SettingsPage />,

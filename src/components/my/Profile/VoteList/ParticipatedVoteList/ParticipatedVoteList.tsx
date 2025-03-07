@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import useParticipatedVoteList from './hooks';
 import EmptyParticipatedVote from '@/assets/images/my/no-participated-vote-list.png';
-import Icon from '@/components/common/Icon';
 export default function MyVoteList() {
   const { participatedVoteList, observerRef } = useParticipatedVoteList();
 
@@ -31,11 +30,6 @@ export default function MyVoteList() {
             <img
               src={vote.bestPickedImageUrl}
               className="w-full h-full object-cover"
-            />
-            <Icon
-              name="Link"
-              size="medium"
-              className="absolute top-2 right-2 rounded-[10px] bg-gray-300 w-[26px] h-[26px] flex items-center justify-center"
             />
           </Link>
         ))}

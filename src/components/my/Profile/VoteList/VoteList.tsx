@@ -12,7 +12,7 @@ export default function VoteList() {
   };
 
   return (
-    <div className="flex flex-col gap-7 w-full h-full flex-1 min-h-0 bg-gray-100 px-6 rounded-t-[20px] shadow-[0px_2px_10px_0px_rgba(0,0,0,0.08)]">
+    <div className="flex flex-col gap-3 w-full h-full flex-1 min-h-0 bg-gray-100 px-6 rounded-t-[20px] shadow-[0px_2px_10px_0px_rgba(0,0,0,0.08)]">
       <Tab selectedTab={tab} onClickTabMenu={handleClickTabMenu} />
       <div className="overflow-y-auto flex-1 min-h-0">
         <Suspense fallback={<Loading />}>

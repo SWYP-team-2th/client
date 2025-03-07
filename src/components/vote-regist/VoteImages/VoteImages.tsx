@@ -7,14 +7,15 @@ export default function VoteImages() {
   const files = state.images.value;
 
   return (
-    <div className="flex gap-1">
+    <div className="flex gap-1 overflow-x-auto">
       <ImageUploader />
       {files.map((imageFile) => (
-        <PreviewImage
-          key={imageFile.file.name}
-          previewUrl={imageFile.previewUrl}
-          name={imageFile.file.name}
-        />
+        <div key={imageFile.file.name} className="flex-shrink-0">
+          <PreviewImage
+            previewUrl={imageFile.previewUrl}
+            name={imageFile.file.name}
+          />
+        </div>
       ))}
     </div>
   );

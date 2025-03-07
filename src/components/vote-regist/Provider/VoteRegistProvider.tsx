@@ -1,5 +1,9 @@
 import { createContext, useEffect, useState } from 'react';
-import { MAX_IMAGE_COUNT, MAX_IMAGE_SIZE } from '../constants';
+import {
+  MAX_IMAGE_COUNT,
+  MAX_IMAGE_SIZE,
+  MINIMUM_IMAGE_COUNT,
+} from '../constants';
 import useToast from '@/components/common/Toast/hooks';
 
 interface Field<T> {
@@ -12,14 +16,11 @@ interface ImageFile {
   previewUrl: string;
 }
 
-interface ImageFileId {
-  imageFileId: number;
-}
-
 interface VoteRegistState {
   description: Field<string | null>;
   images: Field<ImageFile[]>;
-  imageFileId: Field<ImageFileId[]>;
+  voteType: Field<'SINGLE' | 'MULTIPLE' | null>;
+  scope: Field<'PUBLIC' | 'PRIVATE'>;
 }
 
 interface VoteRegistContextType {
@@ -27,7 +28,8 @@ interface VoteRegistContextType {
   setDescription: (description: string) => void;
   handleImageSelect: (files: File[]) => void;
   removeImage: (name: string) => void;
-  setImageFileId: (imageFileId: number[]) => void;
+  setVoteType: (voteType: 'SINGLE' | 'MULTIPLE' | null) => void;
+  setScope: (scope: 'PUBLIC' | 'PRIVATE') => void;
   isFormValid: boolean;
 }
 
@@ -38,10 +40,14 @@ const initialState: VoteRegistState = {
   },
   images: {
     value: [],
-    errorMessage: `이미지를 ${MAX_IMAGE_COUNT}장 업로드해주세요.`,
+    errorMessage: `이미지를 ${MINIMUM_IMAGE_COUNT}장 이상 업로드해주세요.`,
   },
-  imageFileId: {
-    value: [],
+  voteType: {
+    value: null,
+    errorMessage: '투표 설정 방식을 선택해주세요.',
+  },
+  scope: {
+    value: 'PRIVATE',
     errorMessage: null,
   },
 };
@@ -76,14 +82,23 @@ export default function VoteRegistProvider({
     },
     images: {
       ...newState.images,
-      errorMessage: null,
-    },
-    imageFileId: {
-      ...newState.imageFileId,
       errorMessage:
-        newState.imageFileId.value.length === MAX_IMAGE_COUNT
-          ? null
-          : `이미지를 ${MAX_IMAGE_COUNT}장 업로드해주세요.`,
+        newState.images.value.length < MINIMUM_IMAGE_COUNT
+          ? `이미지를 ${MINIMUM_IMAGE_COUNT}장 이상 업로드해주세요.`
+          : newState.images.value.length > MAX_IMAGE_COUNT
+            ? `이미지를 ${MAX_IMAGE_COUNT}장 이하로 업로드해주세요.`
+            : null,
+    },
+    voteType: {
+      ...newState.voteType,
+      errorMessage:
+        newState.voteType.value === null
+          ? '투표 설정 방식을 선택해주세요.'
+          : null,
+    },
+    scope: {
+      ...newState.scope,
+      errorMessage: null,
     },
   });
 
@@ -162,25 +177,25 @@ export default function VoteRegistProvider({
     });
   };
 
-  const setImageFileId = (imageFileId: number[]) => {
-    const imageIds = Array.isArray(imageFileId) ? imageFileId : [imageFileId];
-
-    const formattedImageIds = imageIds.map((id) => ({ imageFileId: id }));
-
+  const setVoteType = (voteType: 'SINGLE' | 'MULTIPLE' | null) => {
     setState((prev) =>
       validateState({
         ...prev,
-        imageFileId: {
-          ...prev.imageFileId,
-          value: [...prev.imageFileId.value, ...formattedImageIds],
-        },
+        voteType: { ...prev.voteType, value: voteType },
       }),
+    );
+  };
+
+  const setScope = (scope: 'PUBLIC' | 'PRIVATE') => {
+    setState((prev) =>
+      validateState({ ...prev, scope: { ...prev.scope, value: scope } }),
     );
   };
 
   const isFormValid =
     state.description.errorMessage === null &&
-    state.imageFileId.errorMessage === null;
+    state.images.errorMessage === null &&
+    state.voteType.errorMessage === null;
 
   return (
     <VoteRegistContext.Provider
@@ -189,7 +204,8 @@ export default function VoteRegistProvider({
         setDescription,
         handleImageSelect,
         removeImage,
-        setImageFileId,
+        setVoteType,
+        setScope,
         isFormValid,
       }}
     >

@@ -55,6 +55,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       asChild = false,
       children,
       className,
+      onClick,
       ...props
     },
     ref,
@@ -66,10 +67,26 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ? buttonVariants({ solidType: buttonType })
         : buttonVariants({ outlineType: buttonType, borderSize: size });
 
+    const disabled = buttonType === 'disabled';
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (disabled) {
+        e.preventDefault();
+        return;
+      }
+      onClick?.(e);
+    };
+
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size }), type, className)}
+        className={cn(
+          buttonVariants({ variant, size }),
+          type,
+          buttonType === 'disabled' && 'cursor-not-allowed',
+          className,
+        )}
         ref={ref}
+        onClick={handleClick}
         {...props}
       >
         {children}

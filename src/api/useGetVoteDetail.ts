@@ -9,7 +9,7 @@ export interface Image {
   voted: boolean;
 }
 
-interface VoteDetailType {
+export interface VoteDetailType {
   id: number;
   author: {
     id: number;

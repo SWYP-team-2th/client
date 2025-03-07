@@ -34,7 +34,7 @@ export default function Dialog({
   const { closeDialog } = useDialog();
 
   return (
-    <div className="relative px-7 py-8 rounded-2xl flex flex-col gap-4 justify-center items-center text-center w-full max-w-[430px] bg-gray-100">
+    <div className="relative mx-auto px-7 py-8 rounded-2xl flex flex-col gap-4 justify-center items-center text-center w-[calc(100%-50px)] max-w-[430px] bg-gray-100">
       <div className="flex flex-col gap-2 break-keep">
         <h2 className="text-title-large">{title}</h2>
         <p className="text-body-2-normal text-gray-700">{description}</p>

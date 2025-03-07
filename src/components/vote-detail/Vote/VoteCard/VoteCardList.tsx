@@ -30,9 +30,7 @@ export default function VoteCardList() {
   );
 
   const handleClickVoteCardItem = (id: number) => {
-    openDialog(
-      <ImageDetailModal images={voteDetail.images} selectedImageId={id} />,
-    );
+    openDialog(<ImageDetailModal selectedImageId={id} />);
   };
 
   const handleVote =

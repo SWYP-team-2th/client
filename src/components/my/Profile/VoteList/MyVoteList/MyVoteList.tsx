@@ -23,7 +23,7 @@ export default function MyVoteList() {
 
   return (
     <div className="pb-6">
-      <div className="grid grid-cols-3 gap-[6px]">
+      <div className="overflow-scroll grid grid-cols-3 gap-[6px]">
         {myVoteList.map((vote) => (
           <Link
             to={`/votes/${vote.shareUrl}`}

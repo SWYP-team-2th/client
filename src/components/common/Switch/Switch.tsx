@@ -3,8 +3,8 @@ import { cn } from '@/utils/cn';
 interface SwitchProps {
   size?: 'medium' | 'small';
   disabled?: boolean;
-  checked?: boolean;
-  onChange?: (checked: boolean) => void;
+  checked: boolean;
+  onChange: (checked: boolean) => void;
   className?: string;
   name?: string;
   value?: string;
@@ -21,7 +21,7 @@ export default function Switch({
 }: SwitchProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (disabled) return;
-    onChange?.(e.target.checked);
+    onChange(e.target.checked);
   };
 
   const containerClasses = {

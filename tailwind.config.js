@@ -66,8 +66,8 @@ export const theme = {
         { lineHeight: '1.25', letterSpacing: '-0.015em', fontWeight: 'bold' },
       ],
       'label-small': [
-        '11px',
-        { lineHeight: '1.3', letterSpacing: '-0.02em', fontWeight: 'bold' },
+        '12px',
+        { lineHeight: '1.3', letterSpacing: '-0.015em', fontWeight: 'bold' },
       ],
       'label-x-small-1': [
         '11px',

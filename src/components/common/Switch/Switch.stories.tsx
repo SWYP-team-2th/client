@@ -24,7 +24,6 @@ const MediumSwitch = () => {
 
   return <Switch size="medium" checked={checked} onChange={setChecked} />;
 };
-
 const SmallSwitch = () => {
   const [checked, setChecked] = useState(false);
 

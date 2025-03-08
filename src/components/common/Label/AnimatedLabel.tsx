@@ -4,24 +4,24 @@ import { cn } from '@/utils/cn';
 
 interface AnimatedLabelProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  type: 'primary' | 'accent';
+  color: 'primary' | 'accent';
 }
 
-const typeVariants: Record<string, string> = {
+const colorVariants: Record<string, string> = {
   primary: 'bg-primary-500 text-gray-800 w-[46px]',
   accent: 'bg-accent-600 text-gray-100 w-[60px]',
 };
 
 const AnimatedLabel: React.FC<AnimatedLabelProps> = ({
   children,
-  type = 'primary',
+  color = 'primary',
   ...props
 }) => {
   return (
     <div
       className={cn(
         'relative flex items-center justify-center !text-label-small h-[20px] overflow-hidden rounded-full',
-        typeVariants[type],
+        colorVariants[color],
       )}
       {...props}
     >

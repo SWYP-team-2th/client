@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useBottomSheet } from '@/components/common/BottomSheet/hooks';
-import { getIsDevelopment } from '@/utils/cn/getEnvironment';
 interface KakaoShareUrlProps {
   author: string;
   shareUrl: string;
@@ -8,17 +7,12 @@ interface KakaoShareUrlProps {
 
 export function useKakaoShareUrl({ author, shareUrl }: KakaoShareUrlProps) {
   const { closeBottomSheet } = useBottomSheet();
-  const isDevelopment = getIsDevelopment();
 
   useEffect(() => {
     if (window.Kakao && !window.Kakao.isInitialized()) {
-      window.Kakao.init(
-        isDevelopment
-          ? import.meta.env.VITE_KAKAO_JAVASCRIPT_APP_KEY
-          : import.meta.env.VITE_KAKAO_PROD_JAVASCRIPT_APP_KEY,
-      );
+      window.Kakao.init(import.meta.env.VITE_KAKAO_JAVASCRIPT_APP_KEY);
     }
-  }, [isDevelopment]);
+  }, []);
 
   const handleClickKakaoShareButton = () => {
     if (!window.Kakao.isInitialized()) {

@@ -4,17 +4,17 @@ import { cn } from '@/utils/cn';
 
 interface AnimatedLabelProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  type: 'bestPick' | 'isPicked';
+  type: 'primary' | 'accent';
 }
 
 const typeVariants: Record<string, string> = {
-  bestPick: 'bg-accent-600 text-gray-100 w-[60px]',
-  isPicked: 'bg-primary-500 text-gray-800 w-[46px]',
+  primary: 'bg-primary-500 text-gray-800 w-[46px]',
+  accent: 'bg-accent-600 text-gray-100 w-[60px]',
 };
 
 const AnimatedLabel: React.FC<AnimatedLabelProps> = ({
   children,
-  type = 'bestPick',
+  type = 'primary',
   ...props
 }) => {
   return (

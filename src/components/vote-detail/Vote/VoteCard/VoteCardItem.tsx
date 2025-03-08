@@ -65,7 +65,7 @@ export default function VoteCardItem({
       )}
       {image.id === id && !image.voted && status === 'WIN' && (
         <div className="flex absolute top-2 left-2 space-x-2">
-          <AnimatedLabel type="accent">
+          <AnimatedLabel color="accent">
             <Icon name="MedalWhite" size="small" />
             <p className="pl-[3px]">베스트픽!</p>
           </AnimatedLabel>
@@ -74,7 +74,7 @@ export default function VoteCardItem({
       {image.id === id && image.voted && status === 'WIN' && (
         <div>
           <div className="flex absolute top-2 left-2 space-x-2">
-            <AnimatedLabel type="accent">
+            <AnimatedLabel color="accent">
               <Icon name="MedalWhite" size="small" />
               <p className="pl-[3px]">베스트픽!</p>
             </AnimatedLabel>

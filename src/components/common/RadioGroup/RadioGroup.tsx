@@ -9,7 +9,7 @@ export interface RadioOption {
 
 interface RadioGroupProps {
   options: RadioOption[];
-  value: string;
+  value: string | null;
   onChange: (value: string) => void;
   size?: 'medium' | 'small';
   name?: string;

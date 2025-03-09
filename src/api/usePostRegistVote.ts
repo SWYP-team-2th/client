@@ -8,6 +8,8 @@ interface Image {
 interface RegistVoteRequest {
   description: string;
   images: Image[];
+  voteType: 'SINGLE' | 'MULTIPLE' | null;
+  scope: 'PUBLIC' | 'PRIVATE';
 }
 
 interface RegistVoteResponse {

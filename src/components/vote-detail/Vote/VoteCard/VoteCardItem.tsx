@@ -79,7 +79,7 @@ export default function VoteCardItem({
               <p className="pl-[3px]">베스트픽!</p>
             </AnimatedLabel>
           </div>
-          <div className="flex absolute top-2 right-2 space-x-2">
+          <div className="flex absolute top-8 left-2 space-x-2">
             <Label color="isPicked" variant="solid">
               뽀또픽!
             </Label>

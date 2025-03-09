@@ -31,7 +31,7 @@ export default function VoteResultList() {
             backgroundImage: `url(${BlurImage})`,
           }}
         >
-          <p>투표하고, 뽀또들과 함께 결과를 실시간으로 확인해보세요! 🎉</p>
+          <p>투표하고, 뽀또들과 함께 결과를 확인해보세요! 🎉</p>
         </div>
       )}
       {userHasVoted && myInfo && getRole() === 'GUEST' && (

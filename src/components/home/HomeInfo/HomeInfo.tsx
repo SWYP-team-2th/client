@@ -1,5 +1,5 @@
-import { Label } from '@/components/common/Label/Label';
 import { useState } from 'react';
+import { Label } from '@/components/common/Label/Label';
 
 export default function HomeInfo() {
   const [isFullTextShown, setIsFullTextShown] = useState(false);

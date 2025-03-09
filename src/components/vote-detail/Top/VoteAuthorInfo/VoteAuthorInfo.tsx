@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
-import VoteVerticalEllipsis from '@/components/vote-detail/ViteVerticalEllipsis';
 import useVoteDetail from '@/components/vote-detail/Top/VoteAuthorInfo/hooks';
+import VoteVerticalEllipsis from '@/components/vote-detail/ViteVerticalEllipsis';
 
 export default function VoteAuthorInfo() {
   const { shareUrl } = useParams<{ shareUrl: string }>();

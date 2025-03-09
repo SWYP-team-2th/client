@@ -2,6 +2,7 @@ import useImageDetailModal from './hooks';
 import { FloatingButton } from '@/components/common/Button/FloatingButton';
 import Icon from '@/components/common/Icon';
 import Loading from '@/components/common/Loading';
+import { cn } from '@/utils/cn';
 
 interface ImageDetailModalProps {
   selectedImageId: number;
@@ -42,7 +43,11 @@ export default function ImageDetailModal({
             onClick={() => handleClickImage(image.id)}
           >
             <img
-              className="rounded-lg overflow-hidden object-cover w-full h-full"
+              className={cn(
+                'rounded-lg overflow-hidden object-cover w-full h-full',
+                image.id === currentImageId &&
+                  'border-[3px] border-primary-500',
+              )}
               src={image.imageUrl}
               alt={`image-${image.id}`}
             />

@@ -37,6 +37,7 @@ import MessageOutline from '@/assets/icons/message_outline_24px.svg?react';
 import Minimize from '@/assets/icons/minimize_24px.svg?react';
 import Minus from '@/assets/icons/minus_24px.svg?react';
 import More from '@/assets/icons/more_24px.svg?react';
+import PencilGray from '@/assets/icons/pencil-gray.svg?react';
 import PhotoPlus from '@/assets/icons/photo_plus_24px.svg?react';
 import PhotoPlusWhite from '@/assets/icons/photo_plus_gray.svg?react';
 import Plus from '@/assets/icons/plus_24px.svg?react';
@@ -53,6 +54,7 @@ import ToastError from '@/assets/icons/toast_error.svg?react';
 import ToastInfo from '@/assets/icons/toast_info.svg?react';
 import ToastSuccess from '@/assets/icons/toast_success.svg?react';
 import ToastWarning from '@/assets/icons/toast_warning.svg?react';
+import TrashCanGray from '@/assets/icons/trash-can-gray.svg?react';
 import Trash from '@/assets/icons/trash_24px.svg?react';
 import User2Fill from '@/assets/icons/user2_fill_24px.svg?react';
 import User2Outline from '@/assets/icons/user2_outline_24px.svg?react';
@@ -126,6 +128,8 @@ export const ICONS = {
   PlusWhite,
   HeartOutlineWhite,
   KakaoLogo,
+  PencilGray,
+  TrashCanGray,
   LinkWhite,
 } as const;
 

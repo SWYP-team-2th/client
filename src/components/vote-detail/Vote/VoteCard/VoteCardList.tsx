@@ -2,13 +2,13 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import VoteCardItem from './VoteCardItem';
 import ImageDetailModal from '../../ImageDetailModal';
+import { useCancelVote } from '@/api/useCancelVoted';
 import useGetMyInfo from '@/api/useGetMyInfo';
 import useVote from '@/api/useVote';
 import { useDialog } from '@/components/common/Dialog/hooks';
 import Loading from '@/components/common/Loading';
 import LoginDialog from '@/components/common/LoginDialog';
 import useVoteDetail from '@/components/vote-detail/Vote/VoteCard/hooks';
-import { useCancelVote } from '@/api/useCancelVoted';
 
 export default function VoteCardList() {
   const { shareUrl } = useParams<{ shareUrl: string }>();

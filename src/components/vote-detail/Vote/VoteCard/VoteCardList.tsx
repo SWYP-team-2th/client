@@ -43,6 +43,7 @@ export default function VoteCardList() {
       }
 
       voteMutate(id);
+      console.log(id);
     };
 
   return (

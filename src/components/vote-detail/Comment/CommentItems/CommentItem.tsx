@@ -16,7 +16,6 @@ interface CommentType {
   author: AuthorType;
   voteId: number | null;
   createdAt: string;
-  postId?: number;
   isAuthor: boolean;
 }
 

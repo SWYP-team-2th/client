@@ -7,7 +7,7 @@ import useComment from '@/components/vote-detail/Comment/CommentList/hooks';
 
 export default function CommentList() {
   const { shareUrl } = useParams<{ shareUrl: string }>();
-  const { commentsData, isLoading } = useComment(3);
+  const { commentsData, isLoading } = useComment(5);
   const navigate = useNavigate();
 
   const comments = commentsData?.pages.flatMap((page) => page.data);
@@ -38,7 +38,7 @@ export default function CommentList() {
                 ))}
               </div>
 
-              {comments?.length && comments.length === 3 && (
+              {comments?.length && comments.length === 5 && (
                 <div className="flex text-center text-label-medium text-accent-800 items-center justify-center">
                   <button
                     onClick={() => navigate(`/votes/${shareUrl}/comments`)}

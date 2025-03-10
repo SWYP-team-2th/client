@@ -62,7 +62,6 @@ export default function VoteCardList() {
       }
     };
 
-  console.log(voteDetail);
 
   return (
     <div className="flex w-full space-x-3 mt-5 px-2 relative">

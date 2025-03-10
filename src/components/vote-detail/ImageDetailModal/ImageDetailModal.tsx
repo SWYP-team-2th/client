@@ -86,7 +86,7 @@ export default function ImageDetailModal({
         ) : (
           <Icon
             name={
-              images.find((image) => image.id === currentImageId)?.voted
+              images.find((image) => image.id === currentImageId)?.voteId
                 ? 'HeartFillRed'
                 : 'HeartOutline'
             }

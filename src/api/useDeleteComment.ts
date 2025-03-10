@@ -5,17 +5,17 @@ import {
 } from '@tanstack/react-query';
 import { request } from '@/api/config';
 
-interface DeleteCommentParams {
+interface DeleteCommentType {
   postId: number;
   commentId: number;
 }
 
 export function useDeleteComment(
-  options?: UseMutationOptions<void, Error, DeleteCommentParams>,
+  options?: UseMutationOptions<void, Error, DeleteCommentType>,
 ) {
   const queryClient = useQueryClient();
 
-  return useMutation<void, Error, DeleteCommentParams>({
+  return useMutation<void, Error, DeleteCommentType>({
     mutationFn: ({ postId, commentId }) =>
       request({
         method: 'DELETE',

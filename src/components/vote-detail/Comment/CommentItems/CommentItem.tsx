@@ -21,9 +21,13 @@ interface CommentType {
 
 interface CommentItemProps {
   comment: CommentType;
+  onEditComment?: (commentId: number, content: string) => void;
 }
 
-export default function CommentItem({ comment }: CommentItemProps) {
+export default function CommentItem({
+  comment,
+  onEditComment,
+}: CommentItemProps) {
   const { openDialog } = useDialog();
   const { shareUrl } = useParams<{ shareUrl: string }>();
   const { data: voteDetail } = useGetVoteDetail(shareUrl ?? '');
@@ -37,21 +41,36 @@ export default function CommentItem({ comment }: CommentItemProps) {
     );
   };
 
-  return (
-    <div key={comment.commentId} className="flex mb-3">
-      <img
-        src={comment.author.profileUrl}
-        className="w-7 h-7 rounded-full mt-[2px]"
-        alt="프로필 이미지"
-      />
+  const handleEditClick = () => {
+    if (onEditComment) {
+      onEditComment(comment.commentId, comment.content);
+    }
+  };
 
-      <div className="flex flex-col ml-[6px] flex-grow">
-        <span className="text-label-medium">{comment.author.nickname}</span>
-        <span className="break-words text-body-2-long">{comment.content}</span>
+  return (
+    <div
+      key={comment.commentId}
+      className="flex mb-3 items-start justify-between"
+    >
+      <div className="flex">
+        <img
+          src={comment.author.profileUrl}
+          className="w-7 h-7 rounded-full mt-[2px]"
+          alt="프로필 이미지"
+        />
+
+        <div className="flex flex-col ml-[6px] flex-grow">
+          <span className="text-label-medium pb-1">
+            {comment.author.nickname}
+          </span>
+          <span className="break-words text-body-2-long">
+            {comment.content}
+          </span>
+        </div>
       </div>
 
-      <div className="space-x-2">
-        <button className="cursor-pointer">
+      <div className="flex items-center space-x-2">
+        <button className="cursor-pointer" onClick={handleEditClick}>
           <Icon name="PencilGray" size="extra-small" />
         </button>
         <button className="cursor-pointer" onClick={handleDeleteClick}>

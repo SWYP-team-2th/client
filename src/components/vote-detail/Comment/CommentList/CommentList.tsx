@@ -5,7 +5,11 @@ import Loading from '@/components/common/Loading';
 import CommentItem from '@/components/vote-detail/Comment/CommentItems/CommentItem';
 import useComment from '@/components/vote-detail/Comment/CommentList/hooks';
 
-export default function CommentList() {
+interface CommentListType {
+  onEditComment?: (commentId: number, content: string) => void;
+}
+
+export default function CommentList({ onEditComment }: CommentListType) {
   const { shareUrl } = useParams<{ shareUrl: string }>();
   const { commentsData, isLoading } = useComment(5);
   const navigate = useNavigate();
@@ -34,7 +38,11 @@ export default function CommentList() {
             <>
               <div className="overflow-y-auto">
                 {comments?.map((comment) => (
-                  <CommentItem key={comment.commentId} comment={comment} />
+                  <CommentItem
+                    key={comment.commentId}
+                    comment={comment}
+                    onEditComment={onEditComment}
+                  />
                 ))}
               </div>
 

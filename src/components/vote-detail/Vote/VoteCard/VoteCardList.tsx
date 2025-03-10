@@ -8,6 +8,7 @@ import { useDialog } from '@/components/common/Dialog/hooks';
 import Loading from '@/components/common/Loading';
 import LoginDialog from '@/components/common/LoginDialog';
 import useVoteDetail from '@/components/vote-detail/Vote/VoteCard/hooks';
+import { useCancelVote } from '@/api/useCancelVoted';
 
 export default function VoteCardList() {
   const { shareUrl } = useParams<{ shareUrl: string }>();
@@ -29,12 +30,24 @@ export default function VoteCardList() {
     },
   );
 
+  const { mutate: voteCancel } = useCancelVote({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['voteDetail', shareUrl],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['voteStatus', voteDetail.id],
+      });
+    },
+  });
+
   const handleClickVoteCardItem = (id: number) => {
     openDialog(<ImageDetailModal selectedImageId={id} />);
   };
 
   const handleVote =
-    (id: number) => (e: React.MouseEvent<HTMLButtonElement>) => {
+    (id: number, voteId: number | null) =>
+    (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
 
       if (!myInfo) {
@@ -42,9 +55,14 @@ export default function VoteCardList() {
         return;
       }
 
-      voteMutate(id);
-      console.log(id);
+      if (voteId) {
+        voteCancel(voteId);
+      } else {
+        voteMutate(id);
+      }
     };
+
+  console.log(voteDetail);
 
   return (
     <div className="flex w-full space-x-3 mt-5 px-2 relative">
@@ -58,7 +76,7 @@ export default function VoteCardList() {
           key={image.id}
           image={image}
           onClick={() => handleClickVoteCardItem(image.id)}
-          handleVote={handleVote(image.id)}
+          handleVote={handleVote(image.id, image.voteId)}
         />
       ))}
     </div>

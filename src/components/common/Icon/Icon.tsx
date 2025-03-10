@@ -31,6 +31,7 @@ import Maximize from '@/assets/icons/maximize_24px.svg?react';
 import Medal from '@/assets/icons/medal.svg?react';
 import MedalWhite from '@/assets/icons/medal_fill_white.svg?react';
 import Menu from '@/assets/icons/menu_24px.svg?react';
+import MessageOutlineGray from '@/assets/icons/message-outline-gray.svg?react';
 import MessageFill from '@/assets/icons/message_fill_24px.svg?react';
 import MessageOutline from '@/assets/icons/message_outline_24px.svg?react';
 import Minimize from '@/assets/icons/minimize_24px.svg?react';
@@ -57,10 +58,14 @@ import User2Fill from '@/assets/icons/user2_fill_24px.svg?react';
 import User2Outline from '@/assets/icons/user2_outline_24px.svg?react';
 import UserFill from '@/assets/icons/user_fill_24px.svg?react';
 import UserOutline from '@/assets/icons/user_outline_24px.svg?react';
+import VoteGray from '@/assets/icons/vote-gray.svg?react';
 import Vote from '@/assets/icons/vote.svg?react';
 import VoteClose from '@/assets/icons/vote_close.svg?react';
 import World from '@/assets/icons/world_24px.svg?react';
+
 export const ICONS = {
+  VoteGray,
+  MessageOutlineGray,
   PostWhite,
   Vote,
   Talk,

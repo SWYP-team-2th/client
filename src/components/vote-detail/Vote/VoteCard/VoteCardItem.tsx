@@ -11,7 +11,7 @@ interface VoteCardItemProps extends HTMLAttributes<HTMLButtonElement> {
     imageName: string;
     imageUrl: string;
     thumbnailUrl: string;
-    voted: boolean;
+    voteId: number | null;
   };
   handleVote: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
@@ -47,23 +47,23 @@ export default function VoteCardItem({
 
         <button onClick={handleVote} className="focus:outline-none">
           <Icon
-            name={image.voted ? 'HeartFillRed' : 'HeartOutlineWhite'}
+            name={image.voteId ? 'HeartFillRed' : 'HeartOutlineWhite'}
             size="small"
             className={cn(
               'cursor-pointer',
-              image.voted ? 'text-primary-500' : 'text-gray-100',
+              image.voteId ? 'text-primary-500' : 'text-gray-100',
             )}
           />
         </button>
       </div>
-      {image.id === id && image.voted && (
+      {image.id === id && image.voteId && (
         <div className="flex absolute top-[6px] left-[6px] space-x-2">
           <Label color="isPicked" variant="solid">
             뽀또픽!
           </Label>
         </div>
       )}
-      {image.id === id && !image.voted && status === 'WIN' && (
+      {image.id === id && !image.voteId && status === 'WIN' && (
         <div className="flex absolute top-2 left-2 space-x-2">
           <AnimatedLabel color="accent">
             <Icon name="MedalWhite" size="small" />
@@ -71,7 +71,7 @@ export default function VoteCardItem({
           </AnimatedLabel>
         </div>
       )}
-      {image.id === id && image.voted && status === 'WIN' && (
+      {image.id === id && image.voteId && status === 'WIN' && (
         <div>
           <div className="flex absolute top-2 left-2 space-x-2">
             <AnimatedLabel color="accent">

@@ -19,7 +19,7 @@ export default function useGetVoteStatus(
     queryFn: () =>
       request({
         method: 'GET',
-        url: `/posts/${postId}/status`,
+        url: `/posts/${postId}/votes/status`,
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },

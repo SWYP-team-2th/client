@@ -22,7 +22,7 @@ export const useGetImageStatus = (): {
 
   if (voteDetail?.status === 'PROGRESS') {
     return {
-      id: voteDetail.images.find((image) => image.voted)?.id ?? 0,
+      id: voteDetail.images.find((image) => image.voteId)?.id ?? 0,
       status: 'VOTED',
     };
   }

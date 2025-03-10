@@ -11,7 +11,6 @@ interface MyInfoResponse {
 export default function useGetMyInfo(
   options?: Omit<UseQueryOptions<MyInfoResponse>, 'queryKey' | 'queryFn'>,
 ) {
-  console.log(options?.enabled);
   const accessToken = getAccessToken();
   return useQuery<MyInfoResponse>({
     queryKey: ['my-info'],

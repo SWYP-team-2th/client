@@ -6,7 +6,7 @@ export interface Image {
   imageName: string;
   imageUrl: string;
   thumbnailUrl: string;
-  voted: boolean;
+  voteId: number | null;
 }
 
 export interface VoteDetailType {

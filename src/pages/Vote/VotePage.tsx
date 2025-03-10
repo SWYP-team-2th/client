@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useGetMyInfo from '@/api/useGetMyInfo';
 import Logo from '@/assets/icons/logo.svg?react';
@@ -12,10 +13,33 @@ import CommentInput from '@/components/vote-detail/Input/CommentInput';
 import VoteTopSection from '@/components/vote-detail/Top/VoteTopSection/VoteTopSection';
 import VoteSection from '@/components/vote-detail/Vote/VoteSection';
 
+interface EditingComment {
+  commentId: number;
+  content: string;
+}
+
 export default function VotePage() {
   const navigate = useNavigate();
   const { openDialog } = useDialog();
   const { data: myInfo } = useGetMyInfo();
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const [editingComment, setEditingComment] = useState<EditingComment | null>(
+    null,
+  );
+
+  const handleEditComment = (commentId: number, content: string) => {
+    setEditingComment({ commentId, content });
+
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 0);
+  };
+
+  const handleEditComplete = () => {
+    setEditingComment(null);
+  };
 
   const handleClickUserButton = () => {
     if (!myInfo) {
@@ -58,10 +82,14 @@ export default function VotePage() {
         <VoteTopSection />
         <VoteSection />
         <hr className="border-t-[5px] border-gray-300" />
-
-        <CommentList />
+        <CommentList onEditComment={handleEditComment} />
       </div>
-      <CommentInput />
+
+      <CommentInput
+        inputRef={inputRef}
+        editingComment={editingComment}
+        onEditComplete={handleEditComplete}
+      />
     </div>
   );
 }

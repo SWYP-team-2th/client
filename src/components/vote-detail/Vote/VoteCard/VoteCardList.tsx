@@ -60,8 +60,13 @@ export default function VoteCardList() {
       } else {
         voteMutate(id);
       }
+
+      voteMutate(id);
     };
 
+  const imageCount = voteDetail.images.length;
+  const photoGrid =
+    imageCount === 2 || imageCount === 4 ? 'grid-cols-2' : 'grid-cols-3';
 
   return (
     <div className="flex w-full space-x-3 mt-5 px-2 relative">
@@ -70,14 +75,16 @@ export default function VoteCardList() {
           <Loading />
         </div>
       )}
-      {voteDetail.images.map((image) => (
-        <VoteCardItem
-          key={image.id}
-          image={image}
-          onClick={() => handleClickVoteCardItem(image.id)}
-          handleVote={handleVote(image.id, image.voteId)}
-        />
-      ))}
+      <div className={`w-full justify-center grid ${photoGrid} gap-3`}>
+        {voteDetail.images.map((image) => (
+          <VoteCardItem
+            key={image.id}
+            image={image}
+            onClick={() => handleClickVoteCardItem(image.id)}
+            handleVote={handleVote(image.id, image.voteId)}
+          />
+        ))}
+      </div>
     </div>
   );
 }

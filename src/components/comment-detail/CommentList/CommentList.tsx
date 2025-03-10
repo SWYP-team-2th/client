@@ -2,7 +2,11 @@ import useCommentDetail from '../hooks';
 import Loading from '@/components/common/Loading';
 import CommentItem from '@/components/vote-detail/Comment/CommentItems';
 
-export default function CommentList() {
+interface CommentListProps {
+  onEditComment?: (commentId: number, content: string) => void;
+}
+
+export default function CommentList({ onEditComment }: CommentListProps) {
   const { comments, observerRef, isLoading } = useCommentDetail();
 
   return (
@@ -18,7 +22,11 @@ export default function CommentList() {
 
           <div>
             {comments?.map((comment) => (
-              <CommentItem key={comment.commentId} comment={comment} />
+              <CommentItem
+                key={comment.commentId}
+                comment={comment}
+                onEditComment={onEditComment}
+              />
             ))}
             <div ref={observerRef} style={{ height: '10px' }} />
           </div>

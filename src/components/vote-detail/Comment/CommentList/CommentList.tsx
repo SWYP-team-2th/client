@@ -5,9 +5,13 @@ import Loading from '@/components/common/Loading';
 import CommentItem from '@/components/vote-detail/Comment/CommentItems/CommentItem';
 import useComment from '@/components/vote-detail/Comment/CommentList/hooks';
 
-export default function CommentList() {
+interface CommentListType {
+  onEditComment?: (commentId: number, content: string) => void;
+}
+
+export default function CommentList({ onEditComment }: CommentListType) {
   const { shareUrl } = useParams<{ shareUrl: string }>();
-  const { commentsData, isLoading } = useComment(3);
+  const { commentsData, isLoading } = useComment(5);
   const navigate = useNavigate();
 
   const comments = commentsData?.pages.flatMap((page) => page.data);
@@ -34,11 +38,15 @@ export default function CommentList() {
             <>
               <div className="overflow-y-auto">
                 {comments?.map((comment) => (
-                  <CommentItem key={comment.commentId} comment={comment} />
+                  <CommentItem
+                    key={comment.commentId}
+                    comment={comment}
+                    onEditComment={onEditComment}
+                  />
                 ))}
               </div>
 
-              {comments?.length && comments.length === 3 && (
+              {comments?.length && comments.length === 5 && (
                 <div className="flex text-center text-label-medium text-accent-800 items-center justify-center">
                   <button
                     onClick={() => navigate(`/votes/${shareUrl}/comments`)}

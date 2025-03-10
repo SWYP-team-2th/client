@@ -18,6 +18,7 @@ interface CommentType {
   author: AuthorType;
   voteId: number | null;
   createdAt: string;
+  isAuthor: boolean;
 }
 
 export default function useGetComment(

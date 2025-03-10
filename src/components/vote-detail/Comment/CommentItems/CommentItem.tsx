@@ -17,6 +17,7 @@ interface CommentType {
   voteId: number | null;
   createdAt: string;
   postId?: number;
+  isAuthor: boolean;
 }
 
 interface CommentItemProps {
@@ -69,14 +70,16 @@ export default function CommentItem({
         </div>
       </div>
 
-      <div className="flex items-center space-x-2">
-        <button className="cursor-pointer" onClick={handleEditClick}>
-          <Icon name="PencilGray" size="extra-small" />
-        </button>
-        <button className="cursor-pointer" onClick={handleDeleteClick}>
-          <Icon name="TrashCanGray" size="extra-small" />
-        </button>
-      </div>
+      {comment.isAuthor && (
+        <div className="flex items-center space-x-2">
+          <button className="cursor-pointer" onClick={handleEditClick}>
+            <Icon name="PencilGray" size="extra-small" />
+          </button>
+          <button className="cursor-pointer" onClick={handleDeleteClick}>
+            <Icon name="TrashCanGray" size="extra-small" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

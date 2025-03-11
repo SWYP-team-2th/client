@@ -10,30 +10,24 @@ export default function useVoteDetail(shareUrl: string) {
   };
 }
 
-export const useGetImageStatus = (): {
-  id: number;
-  status: 'VOTED' | 'WIN';
-} => {
+export const useGetBestPickImageIds = (): number[] => {
   const { shareUrl } = useParams<{ shareUrl: string }>();
   const { data: voteDetail } = useGetVoteDetail(shareUrl ?? '');
   const { data: voteStatus } = useGetVoteStatus(voteDetail.id, {
     enabled: !!voteDetail.id,
   });
 
-  if (voteDetail?.status === 'PROGRESS') {
-    return {
-      id: voteDetail.images.find((image) => image.voteId)?.id ?? 0,
-      status: 'VOTED',
-    };
+  if (voteDetail.status === 'PROGRESS') {
+    return [];
   }
 
-  return {
-    id:
-      voteStatus?.find(
-        (status) =>
-          status.voteCount ===
-          Math.max(...(voteStatus?.map((status) => status.voteCount) ?? [])),
-      )?.id ?? 0,
-    status: 'WIN',
-  };
+  const maxVoteCount = Math.max(
+    ...(voteStatus?.map((status) => status.voteCount) ?? []),
+  );
+
+  return (
+    voteStatus
+      ?.filter((status) => status.voteCount === maxVoteCount)
+      .map((status) => status.id) ?? []
+  );
 };

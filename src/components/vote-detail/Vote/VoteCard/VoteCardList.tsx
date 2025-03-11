@@ -8,11 +8,13 @@ import useVote from '@/api/useVote';
 import { useDialog } from '@/components/common/Dialog/hooks';
 import Loading from '@/components/common/Loading';
 import LoginDialog from '@/components/common/LoginDialog';
+import useToast from '@/components/common/Toast/hooks';
 import useVoteDetail from '@/components/vote-detail/Vote/VoteCard/hooks';
 
 export default function VoteCardList() {
   const { shareUrl } = useParams<{ shareUrl: string }>();
   const { openDialog } = useDialog();
+  const toast = useToast();
   const { data: myInfo } = useGetMyInfo();
   const { voteDetail } = useVoteDetail(shareUrl ?? '');
   const queryClient = useQueryClient();
@@ -30,7 +32,7 @@ export default function VoteCardList() {
     },
   );
 
-  const { mutate: voteCancel } = useCancelVote({
+  const { mutate: voteCancel, isPending: isVoteCancelPending } = useCancelVote({
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['voteDetail', shareUrl],
@@ -50,6 +52,13 @@ export default function VoteCardList() {
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
 
+      if (voteDetail.status === 'CLOSED') {
+        toast.warning({
+          title: '이미 마감된 투표예요!',
+        });
+        return;
+      }
+
       if (!myInfo) {
         openDialog(<LoginDialog />);
         return;
@@ -68,7 +77,7 @@ export default function VoteCardList() {
 
   return (
     <div className="flex w-full space-x-3 mt-5 px-2 relative">
-      {isVotePending && (
+      {(isVotePending || isVoteCancelPending) && (
         <div className="absolute w-full inset-0 z-10 bg-gray-100/50">
           <Loading />
         </div>

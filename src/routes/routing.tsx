@@ -6,7 +6,9 @@ import OAuthPage from '@/pages/Login/OAuthPage';
 import MyPage from '@/pages/my/MyPage';
 import NotFoundPage from '@/pages/NotFound/NotFoundPage';
 import OnBoardingPage from '@/pages/OnBoarding/OnBoardingPage';
+import PrivacyPolicyPage from '@/pages/PrivacyPolicy/PrivacyPolicyPage';
 import SettingsPage from '@/pages/settings/SettingsPage';
+import TermsPage from '@/pages/Terms/TermsPage';
 import VoteCommentDetailPage from '@/pages/Vote/VoteCommentDetailPage';
 import VotePage from '@/pages/Vote/VotePage';
 import VoteRegistPage from '@/pages/Vote/VoteRegistPage';
@@ -49,6 +51,14 @@ export const router = createBrowserRouter([
       {
         path: '/settings',
         element: <SettingsPage />,
+      },
+      {
+        path: '/terms',
+        element: <TermsPage />,
+      },
+      {
+        path: '/privacy-policy',
+        element: <PrivacyPolicyPage />,
       },
       {
         path: '*',

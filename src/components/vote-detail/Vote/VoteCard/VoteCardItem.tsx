@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react';
-import { useGetImageStatus } from './hooks';
+import { useGetBestPickImageIds } from './hooks';
 import Icon from '@/components/common/Icon';
 import AnimatedLabel from '@/components/common/Label/AnimatedLabel';
 import { Label } from '@/components/common/Label/Label';
@@ -21,17 +21,17 @@ export default function VoteCardItem({
   onClick,
   handleVote,
 }: VoteCardItemProps) {
-  const { id, status } = useGetImageStatus();
+  const bestPickImageIds = useGetBestPickImageIds();
+  const isBestPickImage = bestPickImageIds.includes(image.id);
 
   return (
     <button
       className={cn(
         'relative w-full rounded-2xl overflow-hidden bg-gray-100',
-        image.id === id &&
-          status === 'VOTED' &&
+        image.voteId &&
+          !isBestPickImage &&
           'bg-gray-100 shadow-[0_0_0_3px_#FFFFFF,0_0_0_6px_#FFB300]',
-        image.id === id &&
-          status === 'WIN' &&
+        isBestPickImage &&
           'bg-gray-100 shadow-[0_0_0_3px_#FFFFFF,0_0_0_6px_#853AFF]',
       )}
       onClick={onClick}
@@ -56,14 +56,14 @@ export default function VoteCardItem({
           />
         </button>
       </div>
-      {image.id === id && image.voteId && (
+      {image.voteId && !isBestPickImage && (
         <div className="flex absolute top-[6px] left-[6px] space-x-2">
           <Label color="isPicked" variant="solid">
             뽀또픽!
           </Label>
         </div>
       )}
-      {image.id === id && !image.voteId && status === 'WIN' && (
+      {isBestPickImage && (
         <div className="flex absolute top-2 left-2 space-x-2">
           <AnimatedLabel color="accent">
             <Icon name="MedalWhite" size="small" />
@@ -71,7 +71,7 @@ export default function VoteCardItem({
           </AnimatedLabel>
         </div>
       )}
-      {image.id === id && image.voteId && status === 'WIN' && (
+      {isBestPickImage && image.voteId && (
         <div>
           <div className="flex absolute top-2 left-2 space-x-2">
             <AnimatedLabel color="accent">

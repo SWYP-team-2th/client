@@ -3,6 +3,7 @@ import useGetVoteDetail from '@/api/useGetVoteDetail';
 import { useDialog } from '@/components/common/Dialog/hooks';
 import Icon from '@/components/common/Icon';
 import DeleteCommentDialog from '@/components/vote-detail/Comment/DeleteCommentDialog';
+import useNavigateToProfile from '@/hooks/useNicknameNavigation';
 
 interface AuthorType {
   userId: number;
@@ -32,6 +33,8 @@ export default function CommentItem({
   const { shareUrl } = useParams<{ shareUrl: string }>();
   const { data: voteDetail } = useGetVoteDetail(shareUrl ?? '');
 
+  const navigate = useNavigateToProfile();
+
   const handleDeleteClick = () => {
     openDialog(
       <DeleteCommentDialog
@@ -60,7 +63,10 @@ export default function CommentItem({
         />
 
         <div className="flex flex-col ml-[6px] flex-grow">
-          <span className="text-label-medium pb-1">
+          <span
+            className="text-label-medium pb-1"
+            onClick={() => navigate(comment.author.userId)}
+          >
             {comment.author.nickname}
           </span>
           <span className="break-words text-body-2-long">

@@ -32,6 +32,7 @@ export default function HomeSection({ feed }: { feed: FeedType }) {
   return (
     <div className="pl-[10px] pt-[16px] pb-[13px] bg-gray-100 rounded-2xl shadow-[0px_2px_10px_0px_rgba(0,0,0,0.02),0px_2px_12px_0px_rgba(0,0,0,0.04),0px_4px_30px_0px_rgba(0,0,0,0.05)]">
       <HomeInfo
+        userId={feed.author.id}
         nickname={feed.author.nickname}
         profileUrl={feed.author.profileUrl}
         status={feed.status}

@@ -3,11 +3,13 @@ import { useParams } from 'react-router-dom';
 import { Label } from '@/components/common/Label/Label';
 import useVoteDetail from '@/components/vote-detail/Top/VoteAuthorInfo/hooks';
 import VoteVerticalEllipsis from '@/components/vote-detail/ViteVerticalEllipsis';
+import useNavigateToProfile from '@/hooks/useNicknameNavigation';
 
 export default function VoteAuthorInfo() {
   const { shareUrl } = useParams<{ shareUrl: string }>();
   const { voteDetail } = useVoteDetail(shareUrl ?? '');
   const [isFullTextShown, setIsFullTextShown] = useState(false);
+  const navigate = useNavigateToProfile(); // ✅ 훅 실행하여 함수 가져오기
 
   const maxLength = 40;
   const overComment = voteDetail.description.length > maxLength;
@@ -25,7 +27,10 @@ export default function VoteAuthorInfo() {
             src={voteDetail.author.profileUrl}
             className="w-8 h-8 rounded-full mr-[8px]"
           />
-          <span className="text-title-small-1">
+          <span
+            className="text-title-small-1"
+            onClick={() => navigate(voteDetail.author.id)}
+          >
             {voteDetail.author.nickname}
           </span>
 

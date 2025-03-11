@@ -5,6 +5,7 @@ import { cn } from '@/utils/cn';
 interface AnimatedLabelProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   color: 'primary' | 'accent';
+  icon?: React.ReactNode;
 }
 
 const colorVariants: Record<string, string> = {
@@ -15,19 +16,21 @@ const colorVariants: Record<string, string> = {
 const AnimatedLabel: React.FC<AnimatedLabelProps> = ({
   children,
   color = 'primary',
+  icon,
   ...props
 }) => {
   return (
     <div
       className={cn(
-        'relative flex items-center justify-center !text-label-small h-[20px] overflow-hidden rounded-full',
+        'relative flex items-center justify-center !text-label-small h-[20px] overflow-hidden rounded-full px-2',
         colorVariants[color],
       )}
       {...props}
     >
+      {icon && <span className="flex items-center pl-[18px]">{icon}</span>}
       <motion.div
-        className="flex absolute left-0 whitespace-nowrap"
-        initial={{ x: '-100%' }}
+        className="flex whitespace-nowrap"
+        initial={{ x: '0%' }}
         animate={{ x: '100%' }}
         transition={{ repeat: Infinity, duration: 3, ease: 'linear' }}
       >

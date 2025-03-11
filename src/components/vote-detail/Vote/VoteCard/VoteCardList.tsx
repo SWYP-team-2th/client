@@ -60,8 +60,6 @@ export default function VoteCardList() {
       } else {
         voteMutate(id);
       }
-
-      voteMutate(id);
     };
 
   const imageCount = voteDetail.images.length;

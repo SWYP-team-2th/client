@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import ImageItem from '@/components/home/HomeImages/ImageItem';
 import useGetVoteDetail from '@/api/useGetVoteDetail';
+import ImageItem from '@/components/home/HomeImages/ImageItem';
 
 interface ImageListProps {
   images: { id: number; imageUrl: string }[];

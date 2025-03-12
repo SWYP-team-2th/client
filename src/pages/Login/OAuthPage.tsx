@@ -12,7 +12,7 @@ export default function OAuthPage() {
     onSuccess: (data) => {
       setRole(data.role);
       setAccessToken(data.accessToken);
-      navigate(state ?? `/user/${data.userId}`);
+      navigate(state ?? `/home`);
     },
   });
 

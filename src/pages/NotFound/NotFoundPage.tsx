@@ -37,7 +37,12 @@ export default function NotFoundPage() {
             onClick={handleClickBackButton}
           />
         }
-        centerNode={<Logo style={{ width: '50px' }} />}
+        centerNode={
+          <Logo
+            style={{ width: 50, cursor: 'pointer' }}
+            onClick={() => navigate('/home')}
+          />
+        }
         rightNode={<Icon name="UserOutline" size="medium" />}
       />
       <div className="flex gap-[55px] w-full flex-col items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">

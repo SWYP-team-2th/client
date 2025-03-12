@@ -42,7 +42,12 @@ export default function VoteCommentDetailPage() {
             size="large"
           />
         }
-        centerNode={<Logo style={{ width: '50px' }} />}
+        centerNode={
+          <Logo
+            style={{ width: 50, cursor: 'pointer' }}
+            onClick={() => navigate('/home')}
+          />
+        }
         rightNode={
           <Icon className="cursor-pointer" name="UserFill" size="large" />
         }

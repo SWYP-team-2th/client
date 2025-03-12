@@ -45,7 +45,12 @@ export default function Home() {
             size="medium"
           />
         }
-        centerNode={<Logo style={{ width: '50px' }} />}
+        centerNode={
+          <Logo
+            style={{ width: 50, cursor: 'pointer' }}
+            onClick={() => navigate('/home')}
+          />
+        }
         rightNode={
           <Icon className="cursor-pointer" name="BellOutline" size="medium" />
         }

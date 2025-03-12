@@ -9,7 +9,7 @@ export default function VoteAuthorInfo() {
   const { shareUrl } = useParams<{ shareUrl: string }>();
   const { voteDetail } = useVoteDetail(shareUrl ?? '');
   const [isFullTextShown, setIsFullTextShown] = useState(false);
-  const navigate = useNavigateToProfile(); // ✅ 훅 실행하여 함수 가져오기
+  const navigate = useNavigateToProfile();
 
   const maxLength = 40;
   const overComment = voteDetail.description.length > maxLength;

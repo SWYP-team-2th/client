@@ -1,11 +1,28 @@
-import { Pagination } from 'swiper/modules';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import LoginButton from '@/components/login/button/LoginButton';
 import { onBoardingSlides } from '@/constants/onboarding';
+import useGetMyInfo from '@/api/useGetMyInfo';
+import { getAccessToken } from '@/components/login/Auth/token';
 
 export default function OnBoardingPage() {
+  const navigate = useNavigate();
+  const accessToken = getAccessToken();
+
+  const { data: myInfo, isLoading: isUserLoading } = useGetMyInfo({
+    enabled: !!accessToken,
+  });
+
+  useEffect(() => {
+    if (!isUserLoading && myInfo?.id) {
+      navigate('/', { replace: true });
+    }
+  }, [myInfo, isUserLoading, navigate]);
+
   return (
     <div className="flex flex-col w-full h-screen px-7">
       <div className="flex-1 flex items-center min-h-0">

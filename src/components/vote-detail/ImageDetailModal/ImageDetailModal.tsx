@@ -35,24 +35,26 @@ export default function ImageDetailModal({
         <div className="w-[24px] h-full"></div>
       </header>
 
-      <div className="flex gap-2 pl-6 pt-1 overflow-x-auto">
-        {images.map((image) => (
-          <button
-            key={image.id}
-            className="w-[64px] h-[94px]"
-            onClick={() => handleClickImage(image.id)}
-          >
-            <img
-              className={cn(
-                'rounded-lg overflow-hidden object-cover w-full h-full',
-                image.id === currentImageId &&
-                  'border-[3px] border-primary-500',
-              )}
-              src={image.imageUrl}
-              alt={`image-${image.id}`}
-            />
-          </button>
-        ))}
+      <div className="overflow-x-auto">
+        <div className="flex gap-2 px-6 pt-1 min-w-max ">
+          {images.map((image) => (
+            <button
+              key={image.id}
+              className="w-[64px] h-[94px]"
+              onClick={() => handleClickImage(image.id)}
+            >
+              <img
+                className={cn(
+                  'rounded-lg overflow-hidden object-cover w-full h-full',
+                  image.id === currentImageId &&
+                    'border-[3px] border-primary-500',
+                )}
+                src={image.imageUrl}
+                alt={`image-${image.id}`}
+              />
+            </button>
+          ))}
+        </div>
       </div>
 
       <div

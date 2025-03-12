@@ -39,7 +39,7 @@ export default function Home() {
   const { data: myInfo } = useGetMyInfo();
 
   useEffect(() => {
-    if (myInfo === null || myInfo?.id === undefined) {
+    if (!myInfo?.id) {
       navigate('/onboarding', { replace: true });
     }
   }, [myInfo, navigate]);

@@ -25,7 +25,12 @@ export default function MyPage() {
   return (
     <div className="w-full h-full overflow-hidden bg-gray-200">
       <Header
-        leftNode={<Logo style={{ width: 50 }} />}
+        leftNode={
+          <Logo
+            style={{ width: 50, cursor: 'pointer' }}
+            onClick={() => navigate('/home')}
+          />
+        }
         rightNode={
           <Icon
             name="SettingsOutline"

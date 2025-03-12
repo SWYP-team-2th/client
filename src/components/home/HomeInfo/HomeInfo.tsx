@@ -24,21 +24,27 @@ export default function HomeInfo({
   const overComment = description.length > maxLength;
   const navigate = useNavigateToProfile();
 
+  const handleClickProfile = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    navigate(userId);
+  };
+
   return (
     <div className="flex flex-col">
       <div className="flex items-center mb-2">
-        <img
-          src={profileUrl}
-          alt="유저 이미지"
-          className="w-8 h-8 rounded-full mr-2 cursor-pointer"
-          onClick={() => navigate(userId)}
-        />
-        <span
-          className="text-title-small-1 mr-1 cursor-pointer"
-          onClick={() => navigate(userId)}
+        <div
+          className="flex items-center cursor-pointer"
+          onClick={handleClickProfile}
         >
-          {nickname}
-        </span>
+          <img
+            src={profileUrl}
+            alt="유저 이미지"
+            className="w-8 h-8 rounded-full mr-2 cursor-pointer"
+          />
+          <span className="text-title-small-1 mr-1 cursor-pointer">
+            {nickname}
+          </span>
+        </div>
         <Label
           variant="outline"
           color={status === 'PROGRESS' ? 'isProgress' : 'voteEnded'}

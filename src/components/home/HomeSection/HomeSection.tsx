@@ -1,32 +1,9 @@
+import { Suspense } from 'react';
+import Loading from '@/components/common/Loading';
 import ImageList from '@/components/home/HomeImages/ImageList';
 import HomeInfo from '@/components/home/HomeInfo';
 import HomeTaskCheck from '@/components/home/HomeTaskCheck';
-
-interface ImageType {
-  id: number;
-  imageName: string;
-  imageUrl: string;
-  thumbnailUrl?: string;
-  voteId?: number | null;
-}
-
-interface AuthorType {
-  id: number;
-  nickname: string;
-  profileUrl: string;
-}
-
-interface FeedType {
-  id: number;
-  author: AuthorType;
-  images: ImageType[];
-  status: 'PROGRESS' | 'CLOSED';
-  description: string;
-  shareUrl: string;
-  isAuthor: boolean;
-  participantCount: number;
-  commentCount: number;
-}
+import { FeedType } from '@/types/feed';
 
 export default function HomeSection({ feed }: { feed: FeedType }) {
   return (
@@ -40,7 +17,9 @@ export default function HomeSection({ feed }: { feed: FeedType }) {
         isAuthor={feed.isAuthor}
         shareUrl={feed.shareUrl}
       />
-      <ImageList images={feed.images} shareUrl={feed.shareUrl} />
+      <Suspense fallback={<Loading />}>
+        <ImageList images={feed.images} shareUrl={feed.shareUrl} />
+      </Suspense>
       <HomeTaskCheck
         participantCount={feed.participantCount}
         commentCount={feed.commentCount}

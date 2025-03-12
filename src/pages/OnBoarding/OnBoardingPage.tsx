@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import LoginButton from '@/components/login/button/LoginButton';
-import { onBoardingSlides } from '@/constants/onboarding';
 import useGetMyInfo from '@/api/useGetMyInfo';
 import { getAccessToken } from '@/components/login/Auth/token';
+import LoginButton from '@/components/login/button/LoginButton';
+import { onBoardingSlides } from '@/constants/onboarding';
 
 export default function OnBoardingPage() {
   const navigate = useNavigate();

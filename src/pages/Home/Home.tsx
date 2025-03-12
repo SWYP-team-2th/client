@@ -1,15 +1,15 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useGetFeed from '@/api/useGetFeed';
+import useGetMyInfo from '@/api/useGetMyInfo';
 import Logo from '@/assets/icons/logo.svg?react';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
 import Loading from '@/components/common/Loading';
 import HomeSection from '@/components/home/HomeSection';
 import { useHomePagenation } from '@/components/home/hooks';
-import { FeedType } from '@/types/feed';
 import { getAccessToken } from '@/components/login/Auth/token';
-import useGetMyInfo from '@/api/useGetMyInfo';
-import { useEffect } from 'react';
+import { FeedType } from '@/types/feed';
 
 export default function Home() {
   const navigate = useNavigate();

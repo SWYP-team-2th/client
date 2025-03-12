@@ -7,6 +7,9 @@ import Loading from '@/components/common/Loading';
 import HomeSection from '@/components/home/HomeSection';
 import { useHomePagenation } from '@/components/home/hooks';
 import { FeedType } from '@/types/feed';
+import { getAccessToken } from '@/components/login/Auth/token';
+import useGetMyInfo from '@/api/useGetMyInfo';
+import { useEffect } from 'react';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -25,6 +28,20 @@ export default function Home() {
   });
 
   const feeds = feed?.pages.flatMap((page) => page.data);
+
+  const accessToken = getAccessToken();
+
+  const { data: myInfo, isLoading: isUserLoading } = useGetMyInfo({
+    enabled: !!accessToken,
+  });
+
+  useEffect(() => {
+    if (!isUserLoading) {
+      if (!myInfo?.id) {
+        navigate('/onboarding', { replace: true });
+      }
+    }
+  }, [myInfo, navigate]);
 
   if (isLoading) {
     return (
@@ -48,7 +65,7 @@ export default function Home() {
         centerNode={
           <Logo
             style={{ width: 50, cursor: 'pointer' }}
-            onClick={() => navigate('/home')}
+            onClick={() => navigate('/')}
           />
         }
         rightNode={

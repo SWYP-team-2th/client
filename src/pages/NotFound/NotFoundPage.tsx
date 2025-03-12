@@ -21,7 +21,7 @@ export default function NotFoundPage() {
 
   const handleClickGoToHomeButton = () => {
     if (myInfo?.id) {
-      navigate(`/user/${myInfo.id}`);
+      navigate(`/`);
     } else {
       navigate('/onboarding');
     }
@@ -40,7 +40,7 @@ export default function NotFoundPage() {
         centerNode={
           <Logo
             style={{ width: 50, cursor: 'pointer' }}
-            onClick={() => navigate('/home')}
+            onClick={() => navigate('/')}
           />
         }
         rightNode={<Icon name="UserOutline" size="medium" />}

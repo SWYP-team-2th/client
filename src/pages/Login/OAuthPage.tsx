@@ -5,14 +5,13 @@ import Loading from '@/components/common/Loading';
 import { setAccessToken, setRole } from '@/components/login/Auth/token';
 
 export default function OAuthPage() {
-  const state = new URL(window.location.href).searchParams.get('state');
   const navigate = useNavigate();
 
   const { mutate, isPending } = usePostKakaoLogin({
     onSuccess: (data) => {
       setRole(data.role);
       setAccessToken(data.accessToken);
-      navigate(state ?? `/home`);
+      navigate(`/`);
     },
   });
 

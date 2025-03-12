@@ -16,8 +16,20 @@ export default function VoteResultList() {
   const { data: myInfo } = useGetMyInfo();
   const [isFullResultShown, setIsFullResultShown] = useState(false);
 
-  // voteStatus 값이 없으면 null로 반환 (undefined 시 대응)
-  if (!voteStatus) return null;
+  if (!voteStatus) {
+    return (
+      <div className="pt-5 pb-4">
+        {!userHasVoted && (
+          <div
+            className="flex items-center justify-center w-full h-18 text-body-2-normal"
+            style={{ backgroundImage: `url(${BlurImage})` }}
+          >
+            <p>투표하고, 뽀또들과 함께 결과를 확인해보세요! 🎉</p>
+          </div>
+        )}
+      </div>
+    );
+  }
 
   const totalVoted = voteStatus.reduce(
     (sum, status) => sum + status.voteCount,

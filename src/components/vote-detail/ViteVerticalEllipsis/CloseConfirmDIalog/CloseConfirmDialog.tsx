@@ -17,7 +17,7 @@ export default function CloseConfirmDialog({
   return (
     <Dialog
       title="투표를 마감 하시겠습니까?"
-      description={description ?? '삭제하면 다시 되돌릴 수 없어요!'}
+      description={description}
       cancelButtonProps={{
         text: '취소',
         isLoading: isCloseVotePending,

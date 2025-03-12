@@ -29,6 +29,9 @@ export function useHomePagenation({
     );
 
     observer.observe(observerRef.current);
+    return () => {
+      observer.disconnect();
+    };
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   return observerRef;

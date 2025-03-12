@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import useGetVoteDetail from '@/api/useGetVoteDetail';
 import ImageItem from '@/components/home/HomeImages/ImageItem';
 
 interface ImageListProps {
@@ -9,11 +8,10 @@ interface ImageListProps {
 
 export default function ImageList({ images, shareUrl }: ImageListProps) {
   const navigate = useNavigate();
-  const { data: voteDetail } = useGetVoteDetail(shareUrl);
 
   const handleClick = () => {
-    if (voteDetail) {
-      navigate(`/votes/${voteDetail.shareUrl}`);
+    if (shareUrl) {
+      navigate(`/votes/${shareUrl}`);
     }
   };
 

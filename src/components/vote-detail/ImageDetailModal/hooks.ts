@@ -1,8 +1,10 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useRef, useState } from 'react';
+import { useCancelVote } from '@/api/useCancelVoted';
 import useGetVoteDetail from '@/api/useGetVoteDetail';
 import useVote from '@/api/useVote';
 import { useDialog } from '@/components/common/Dialog/hooks';
+import useToast from '@/components/common/Toast/hooks';
 
 interface UseImageDetailModalOptions {
   selectedImageId: number;
@@ -12,6 +14,7 @@ export default function useImageDetailModal({
   selectedImageId,
 }: UseImageDetailModalOptions) {
   const queryClient = useQueryClient();
+  const toast = useToast();
   const { closeDialog } = useDialog();
   const shareUrl = window.location.pathname.split('/')[2];
   const { data: voteDetail } = useGetVoteDetail(shareUrl);
@@ -25,6 +28,13 @@ export default function useImageDetailModal({
       },
     },
   );
+  const { mutate: deleteVote, isPending: isDeleteVotePending } = useCancelVote({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['voteDetail', shareUrl],
+      });
+    },
+  });
 
   const [currentImageId, setCurrentImageId] = useState(
     (selectedImageId || voteDetail?.images[0]?.id) ?? 0,
@@ -63,7 +73,20 @@ export default function useImageDetailModal({
   };
 
   const handleClickVoteButton = () => {
-    postVote(currentImageId);
+    if (voteDetail?.status === 'CLOSED') {
+      toast.warning({
+        title: '이미 마감된 투표예요!',
+      });
+      return;
+    }
+
+    const image = voteDetail?.images.find((img) => img.id === currentImageId);
+
+    if (image?.voteId) {
+      deleteVote(image?.voteId);
+    } else {
+      postVote(currentImageId);
+    }
   };
 
   useEffect(() => {
@@ -76,7 +99,7 @@ export default function useImageDetailModal({
   return {
     scrollContainerRef,
     images: voteDetail?.images ?? [],
-    isPostVotePending,
+    isVotePending: isPostVotePending || isDeleteVotePending,
     currentIndex,
     currentImageId,
     handleScrollCapture,

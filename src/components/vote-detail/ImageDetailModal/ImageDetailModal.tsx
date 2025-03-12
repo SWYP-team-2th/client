@@ -16,7 +16,7 @@ export default function ImageDetailModal({
     currentIndex,
     currentImageId,
     images,
-    isPostVotePending,
+    isVotePending,
     handleScrollCapture,
     handleClickImage,
     handleClickVoteButton,
@@ -79,9 +79,9 @@ export default function ImageDetailModal({
         size="small"
         className="bg-gray-100 fixed bottom-16 right-6"
         onClick={handleClickVoteButton}
-        disabled={isPostVotePending}
+        disabled={isVotePending}
       >
-        {isPostVotePending ? (
+        {isVotePending ? (
           <Loading />
         ) : (
           <Icon

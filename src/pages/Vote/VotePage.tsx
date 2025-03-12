@@ -10,7 +10,7 @@ import LoginDialog from '@/components/common/LoginDialog';
 import { getRole } from '@/components/login/Auth/token';
 import CommentList from '@/components/vote-detail/Comment/CommentList';
 import CommentInput from '@/components/vote-detail/Input/CommentInput';
-import VoteTopSection from '@/components/vote-detail/Top/VoteTopSection/VoteTopSection';
+import VoteAuthorInfo from '@/components/vote-detail/Top/VoteAuthorInfo';
 import VoteSection from '@/components/vote-detail/Vote/VoteSection';
 
 interface EditingComment {
@@ -84,7 +84,7 @@ export default function VotePage() {
         }
       />
       <div className="h-[calc(100dvh-180px)] overflow-y-auto px-6 py-[10px] rounded-2xl">
-        <VoteTopSection />
+        <VoteAuthorInfo />
         <VoteSection />
         <hr className="border-t-[5px] border-gray-300" />
         <CommentList onEditComment={handleEditComment} />

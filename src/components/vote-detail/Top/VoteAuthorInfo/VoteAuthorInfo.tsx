@@ -22,15 +22,15 @@ export default function VoteAuthorInfo() {
   return (
     <div className="w-full flex flex-col">
       <div className="flex items-center justify-between mb-2">
-        <div className="flex items-center mb-1">
+        <div
+          className="flex items-center mb-1"
+          onClick={() => navigate(voteDetail.author.id)}
+        >
           <img
             src={voteDetail.author.profileUrl}
             className="w-8 h-8 rounded-full mr-[8px]"
           />
-          <span
-            className="text-title-small-1"
-            onClick={() => navigate(voteDetail.author.id)}
-          >
+          <span className="text-title-small-1">
             {voteDetail.author.nickname}
           </span>
 

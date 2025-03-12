@@ -4,12 +4,20 @@ import Logo from '@/assets/icons/logo.svg?react';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
 import Loading from '@/components/common/Loading';
+import useToast from '@/components/common/Toast/hooks';
 import HomeSection from '@/components/home/HomeSection';
 import { useHomePagenation } from '@/components/home/hooks';
 import { FeedType } from '@/types/feed';
 
 export default function Home() {
   const navigate = useNavigate();
+  const toast = useToast();
+
+  const handleClickAlarmButton = () => {
+    toast.warning({
+      title: '추가 예정인 기능이에요!',
+    });
+  };
 
   const {
     data: feed,
@@ -52,7 +60,12 @@ export default function Home() {
           />
         }
         rightNode={
-          <Icon className="cursor-pointer" name="BellOutline" size="medium" />
+          <Icon
+            className="cursor-pointer"
+            name="BellOutline"
+            size="medium"
+            onClick={handleClickAlarmButton}
+          />
         }
       />
 

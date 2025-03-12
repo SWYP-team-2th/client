@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import ImageItem from '@/components/home/HomeImages/ImageItem';
 
 interface ImageListProps {
@@ -6,24 +5,12 @@ interface ImageListProps {
   shareUrl: string;
 }
 
-export default function ImageList({ images, shareUrl }: ImageListProps) {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    if (shareUrl) {
-      navigate(`/votes/${shareUrl}`);
-    }
-  };
-
+export default function ImageList({ images }: ImageListProps) {
   return (
     <div className="w-full overflow-x-auto mb-[6px] pl-[2px]">
       <div className="flex space-x-[6px] w-max">
         {images.map((image) => (
-          <ImageItem
-            key={image.id}
-            imageUrl={image.imageUrl}
-            onClick={handleClick}
-          />
+          <ImageItem key={image.id} imageUrl={image.imageUrl} />
         ))}
       </div>
     </div>

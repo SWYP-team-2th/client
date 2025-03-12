@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import useGetMyInfo from '@/api/useGetMyInfo';
 import Logo from '@/assets/icons/logo.svg?react';
 import { Button } from '@/components/common/Button/Button';
 import { Header } from '@/components/common/Header/Header';
@@ -10,6 +11,8 @@ import VoteList from '@/components/my/Profile/VoteList';
 
 export default function MyPage() {
   const navigate = useNavigate();
+  const { userId } = useParams<{ userId: string }>();
+  const { data: myInfo } = useGetMyInfo();
 
   const handleClickCreateVoteButton = () => {
     navigate('/votes/regist');
@@ -36,18 +39,20 @@ export default function MyPage() {
           <Suspense fallback={<Loading />}>
             <Profile />
           </Suspense>
-          <Button
-            buttonType="tertiary"
-            size="jumbo"
-            variant="solid"
-            className="flex-shrink-0 mt-6 mb-7"
-            onClick={handleClickCreateVoteButton}
-          >
-            <div className="flex gap-1 items-center text-body-1-normal">
-              <Icon name="Post" size="small" />
-              <p>새 투표 만들기</p>
-            </div>
-          </Button>
+          {Number(userId) === myInfo?.id && (
+            <Button
+              buttonType="tertiary"
+              size="jumbo"
+              variant="solid"
+              className="flex-shrink-0 mt-6 mb-7"
+              onClick={handleClickCreateVoteButton}
+            >
+              <div className="flex gap-1 items-center text-body-1-normal">
+                <Icon name="Post" size="small" />
+                <p>새 투표 만들기</p>
+              </div>
+            </Button>
+          )}
         </div>
         <VoteList />
       </div>

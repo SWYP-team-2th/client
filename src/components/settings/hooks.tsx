@@ -1,7 +1,9 @@
 import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import LogoutDialog from './LogoutDialog';
 import { useDialog } from '../common/Dialog/hooks';
 import Icon from '../common/Icon';
+import Switch from '../common/Switch';
 import useToast from '../common/Toast/hooks';
 
 interface MenuType {
@@ -20,6 +22,7 @@ interface SubMenuType {
 export default function useSettingMenus() {
   const toast = useToast();
   const { openDialog } = useDialog();
+  const navigate = useNavigate();
 
   const handleClickNotOpenedMenu = () => {
     toast.info({
@@ -29,6 +32,14 @@ export default function useSettingMenus() {
 
   const handleClickLogoutButton = () => {
     openDialog(<LogoutDialog />);
+  };
+
+  const handleClickServiceOfTermsButton = () => {
+    navigate('/terms');
+  };
+
+  const handleClickPrivacyPolicyButton = () => {
+    navigate('/privacy-policy');
   };
 
   const menus: MenuType[] = useMemo(
@@ -58,8 +69,13 @@ export default function useSettingMenus() {
           {
             id: 'app-notification',
             title: '앱 알림 설정',
-            rightIcon: <Icon name="ArrowRight" size="medium" />,
-            onClick: handleClickNotOpenedMenu,
+            rightIcon: (
+              <Switch
+                size="small"
+                checked={false}
+                onChange={handleClickNotOpenedMenu}
+              />
+            ),
           },
         ],
       },
@@ -71,13 +87,13 @@ export default function useSettingMenus() {
             id: 'terms-of-service',
             title: '이용 약관',
             rightIcon: <Icon name="ArrowRight" size="medium" />,
-            onClick: handleClickNotOpenedMenu,
+            onClick: handleClickServiceOfTermsButton,
           },
           {
             id: 'privacy-policy',
             title: '개인정보 처리 방침',
             rightIcon: <Icon name="ArrowRight" size="medium" />,
-            onClick: handleClickNotOpenedMenu,
+            onClick: handleClickPrivacyPolicyButton,
           },
         ],
       },

@@ -36,13 +36,11 @@ export default function Home() {
 
   const feeds = feed?.pages.flatMap((page) => page.data);
 
-  const { data: myInfo, isLoading: isUserLoading } = useGetMyInfo();
+  const { data: myInfo } = useGetMyInfo();
 
   useEffect(() => {
-    if (!isUserLoading) {
-      if (!myInfo?.id) {
-        navigate('/onboarding', { replace: true });
-      }
+    if (myInfo === null || myInfo?.id === undefined) {
+      navigate('/onboarding', { replace: true });
     }
   }, [myInfo, navigate]);
 

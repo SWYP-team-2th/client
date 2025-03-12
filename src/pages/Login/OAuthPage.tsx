@@ -6,12 +6,12 @@ import { setAccessToken, setRole } from '@/components/login/Auth/token';
 
 export default function OAuthPage() {
   const navigate = useNavigate();
-
+  const state = new URL(window.location.href).searchParams.get('state');
   const { mutate, isPending } = usePostKakaoLogin({
     onSuccess: (data) => {
       setRole(data.role);
       setAccessToken(data.accessToken);
-      navigate(`/`);
+      navigate(state ?? '/');
     },
   });
 

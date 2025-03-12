@@ -5,23 +5,19 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import useGetMyInfo from '@/api/useGetMyInfo';
-import { getAccessToken } from '@/components/login/Auth/token';
 import LoginButton from '@/components/login/button/LoginButton';
 import { onBoardingSlides } from '@/constants/onboarding';
 
 export default function OnBoardingPage() {
   const navigate = useNavigate();
-  const accessToken = getAccessToken();
 
-  const { data: myInfo, isLoading: isUserLoading } = useGetMyInfo({
-    enabled: !!accessToken,
-  });
+  const { data: myInfo } = useGetMyInfo();
 
   useEffect(() => {
-    if (!isUserLoading && myInfo?.id) {
+    if (myInfo?.id) {
       navigate('/', { replace: true });
     }
-  }, [myInfo, isUserLoading, navigate]);
+  }, [myInfo, navigate]);
 
   return (
     <div className="flex flex-col w-full h-screen px-7">

@@ -8,7 +8,6 @@ import Icon from '@/components/common/Icon';
 import Loading from '@/components/common/Loading';
 import HomeSection from '@/components/home/HomeSection';
 import { useHomePagenation } from '@/components/home/hooks';
-import { getAccessToken } from '@/components/login/Auth/token';
 import { FeedType } from '@/types/feed';
 
 export default function Home() {
@@ -29,11 +28,7 @@ export default function Home() {
 
   const feeds = feed?.pages.flatMap((page) => page.data);
 
-  const accessToken = getAccessToken();
-
-  const { data: myInfo, isLoading: isUserLoading } = useGetMyInfo({
-    enabled: !!accessToken,
-  });
+  const { data: myInfo, isLoading: isUserLoading } = useGetMyInfo();
 
   useEffect(() => {
     if (!isUserLoading) {

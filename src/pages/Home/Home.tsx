@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useGetFeed from '@/api/useGetFeed';
+import useGetMyInfo from '@/api/useGetMyInfo';
 import Logo from '@/assets/icons/logo.svg?react';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
@@ -26,6 +28,16 @@ export default function Home() {
 
   const feeds = feed?.pages.flatMap((page) => page.data);
 
+  const { data: myInfo, isLoading: isUserLoading } = useGetMyInfo();
+
+  useEffect(() => {
+    if (!isUserLoading) {
+      if (!myInfo?.id) {
+        navigate('/onboarding', { replace: true });
+      }
+    }
+  }, [myInfo, navigate]);
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen w-full bg-gray-100">
@@ -48,7 +60,7 @@ export default function Home() {
         centerNode={
           <Logo
             style={{ width: 50, cursor: 'pointer' }}
-            onClick={() => navigate('/home')}
+            onClick={() => navigate('/')}
           />
         }
         rightNode={

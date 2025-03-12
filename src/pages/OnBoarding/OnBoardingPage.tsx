@@ -1,11 +1,24 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import useGetMyInfo from '@/api/useGetMyInfo';
 import LoginButton from '@/components/login/button/LoginButton';
 import { onBoardingSlides } from '@/constants/onboarding';
 
 export default function OnBoardingPage() {
+  const navigate = useNavigate();
+
+  const { data: myInfo } = useGetMyInfo();
+
+  useEffect(() => {
+    if (myInfo?.id) {
+      navigate('/', { replace: true });
+    }
+  }, [myInfo, navigate]);
+
   return (
     <div className="flex flex-col w-full h-screen px-7">
       <div className="flex-1 flex items-center min-h-0">

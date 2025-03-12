@@ -12,7 +12,7 @@ export default function useBottomNavigation() {
         name: '홈',
         icon: <Icon name="HomeOutline" size="large" />,
         activeIcon: <Icon name="HomeFilled" size="large" />,
-        link: '/home',
+        link: '/',
       },
       {
         id: 2,

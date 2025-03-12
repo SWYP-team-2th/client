@@ -55,14 +55,6 @@ export default function Home() {
   return (
     <div className="bg-gray-300 flex flex-col w-full h-screen px-4 pt-[65px] overflow-y-auto">
       <Header
-        leftNode={
-          <Icon
-            className="cursor-pointer"
-            onClick={() => navigate(-1)}
-            name="ArrowLeft"
-            size="medium"
-          />
-        }
         centerNode={
           <Logo
             style={{ width: 50, cursor: 'pointer' }}

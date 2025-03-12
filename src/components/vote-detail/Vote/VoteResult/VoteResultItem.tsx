@@ -13,7 +13,7 @@ export default function VoteResultItem({
 
   return (
     <div className="flex items-center mb-[6px]">
-      <div className="flex">
+      <div className="flex w-[30px]">
         <span className="text-label-small">{status.imageName}</span>
       </div>
       <div className="ml-[9px] flex flex-1">

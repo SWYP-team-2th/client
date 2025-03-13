@@ -27,6 +27,7 @@ import LockOpen from '@/assets/icons/lock_open_24px.svg?react';
 import LockOutline from '@/assets/icons/lock_outline_24px.svg?react';
 import Logo from '@/assets/icons/logo.svg?react';
 import Logout from '@/assets/icons/logout.svg?react';
+import LogoutGray from '@/assets/icons/logout_gray.svg?react';
 import Maximize from '@/assets/icons/maximize_24px.svg?react';
 import Medal from '@/assets/icons/medal.svg?react';
 import MedalWhite from '@/assets/icons/medal_fill_white.svg?react';
@@ -44,6 +45,7 @@ import Plus from '@/assets/icons/plus_24px.svg?react';
 import PlusWhite from '@/assets/icons/plus_white.svg?react';
 import Post from '@/assets/icons/post_24px.svg?react';
 import PostWhite from '@/assets/icons/post_white.svg?react';
+import ArrowRightGray from '@/assets/icons/right_arrow_gray.svg?react';
 import SearchFill from '@/assets/icons/search_fill_24px.svg?react';
 import Send from '@/assets/icons/send_24px.svg?react';
 import SettingsOutline from '@/assets/icons/settings_outline_24px.svg?react';
@@ -66,6 +68,8 @@ import VoteClose from '@/assets/icons/vote_close.svg?react';
 import World from '@/assets/icons/world_24px.svg?react';
 
 export const ICONS = {
+  LogoutGray,
+  ArrowRightGray,
   VoteGray,
   MessageOutlineGray,
   PostWhite,

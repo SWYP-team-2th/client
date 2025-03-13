@@ -57,13 +57,13 @@ export default function useSettingMenus() {
           {
             id: 'my-information',
             title: '내 정보',
-            rightIcon: <Icon name="ArrowRight" size="medium" />,
+            rightIcon: <Icon name="ArrowRightGray" size="medium" />,
             onClick: handleClickNotOpenedMenu,
           },
           {
             id: 'logout',
             title: '로그아웃',
-            rightIcon: <Icon name="Logout" size="medium" />,
+            rightIcon: <Icon name="LogoutGray" size="medium" />,
             onClick: handleClickLogoutButton,
           },
         ],
@@ -92,19 +92,19 @@ export default function useSettingMenus() {
           {
             id: 'terms-of-service',
             title: '이용 약관',
-            rightIcon: <Icon name="ArrowRight" size="medium" />,
+            rightIcon: <Icon name="ArrowRightGray" size="medium" />,
             onClick: handleClickServiceOfTermsButton,
           },
           {
             id: 'privacy-policy',
             title: '개인정보 처리 방침',
-            rightIcon: <Icon name="ArrowRight" size="medium" />,
+            rightIcon: <Icon name="ArrowRightGray" size="medium" />,
             onClick: handleClickPrivacyPolicyButton,
           },
           {
             id: 'feedback',
             title: '피드백 주기 🎁',
-            rightIcon: <Icon name="ArrowRight" size="medium" />,
+            rightIcon: <Icon name="ArrowRightGray" size="medium" />,
             onClick: handleClickFeedbackButton,
           },
         ],

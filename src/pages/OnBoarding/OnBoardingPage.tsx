@@ -23,7 +23,7 @@ export default function OnBoardingPage() {
   useEffect(() => {
     setTimeout(() => {
       setShowSplash(false);
-    }, 3000);
+    }, 2500);
   }, []);
 
   if (showSplash) {

@@ -3,13 +3,9 @@ name: Sync and Deploy to Vercel
 on:
   push:
     branches: [main, develop]
-  pull_request:
-    types: [closed]
-    branches: [main, develop]
 
 jobs:
   sync-and-deploy:
-    if: github.event.pull_request.merged == true || github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -28,5 +24,6 @@ jobs:
           git remote add fork "https://oauth2:${{ secrets.API_TOKEN_GITHUB }}@github.com/YOOJS1205/photopic.git"
           echo "Fetching from fork..."
           git fetch fork
+          echo "Current branch: ${GITHUB_REF#refs/heads/}"
           echo "Pushing to fork..."
           git push -f fork ${GITHUB_REF#refs/heads/}:${GITHUB_REF#refs/heads/}

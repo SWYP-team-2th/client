@@ -29,7 +29,14 @@ jobs:
           echo "Fetching from fork..."
           git fetch fork
           echo "Pushing to fork..."
-          git push -f fork ${GITHUB_REF#refs/heads/}:${GITHUB_REF#refs/heads/}
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            TARGET_BRANCH="${GITHUB_BASE_REF}"
+            echo "PR merged to $TARGET_BRANCH, pushing only target branch"
+            git push -f fork "refs/remotes/origin/$TARGET_BRANCH:refs/heads/$TARGET_BRANCH"
+          else
+            # 직접 푸시인 경우는 현재 브랜치 푸시
+            git push -f fork ${GITHUB_REF#refs/heads/}:${GITHUB_REF#refs/heads/}
+          fi
 
       - name: Deploy to Vercel Production
         if: github.ref == 'refs/heads/main'

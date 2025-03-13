@@ -25,6 +25,9 @@ export default function useImageDetailModal({
         queryClient.invalidateQueries({
           queryKey: ['voteDetail', shareUrl],
         });
+        queryClient.invalidateQueries({
+          queryKey: ['voteStatus', voteDetail?.id],
+        });
       },
     },
   );
@@ -32,6 +35,9 @@ export default function useImageDetailModal({
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['voteDetail', shareUrl],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['voteStatus', voteDetail?.id],
       });
     },
   });

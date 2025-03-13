@@ -19,8 +19,7 @@ interface SubMenuType {
   onClick?: () => void;
 }
 
-const FEEDBACK_NOTION_LINK =
-  'https://portfolio-ohyunseong.notion.site/1b3c0eb655cb80f98493cfd53e9e14aa?pvs=74';
+const FEEDBACK_NOTION_LINK = 'https://photopic.notion.site';
 
 export default function useSettingMenus() {
   const toast = useToast();

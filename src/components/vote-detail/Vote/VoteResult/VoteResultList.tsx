@@ -9,7 +9,7 @@ import VoteResultItem from '@/components/vote-detail/Vote/VoteResult/VoteResultI
 
 export default function VoteResultList() {
   const { shareUrl } = useParams<{ shareUrl: string }>();
-  const { voteStatus, userHasVoted, voteDetail } = useVoteStatus({
+  const { voteStatus, userHasVoted, isAuthor } = useVoteStatus({
     postId: Number(shareUrl),
     shareUrl: shareUrl ?? '',
   });
@@ -19,7 +19,7 @@ export default function VoteResultList() {
   if (!voteStatus) {
     return (
       <div className="pt-5 pb-4">
-        {!userHasVoted && !voteDetail?.isAuthor && (
+        {!userHasVoted && !isAuthor && (
           <div
             className="flex items-center justify-center w-full h-18 text-body-2-normal"
             style={{ backgroundImage: `url(${BlurImage})` }}
@@ -42,7 +42,7 @@ export default function VoteResultList() {
   const visibleResult = isFullResultShown ? voteStatus : voteStatus.slice(0, 3);
   return (
     <div className="pt-5 pb-4">
-      {!userHasVoted && !voteDetail?.isAuthor && (
+      {!userHasVoted && !isAuthor && (
         <div
           className="flex items-center justify-center w-full h-18 text-body-2-normal "
           style={{
@@ -52,20 +52,17 @@ export default function VoteResultList() {
           <p>투표하고, 뽀또들과 함께 결과를 확인해보세요! 🎉</p>
         </div>
       )}
-      {userHasVoted &&
-        !voteDetail?.isAuthor &&
-        myInfo &&
-        getRole() === 'GUEST' && (
-          <div
-            className="flex items-center justify-center w-full h-18 text-body-2-normal "
-            style={{
-              backgroundImage: `url(${BlurImage})`,
-            }}
-          >
-            <p>👀 투표 결과는 로그인 후 확인할 수 있어요!</p>
-          </div>
-        )}
-      {(userHasVoted || voteDetail?.isAuthor) &&
+      {userHasVoted && !isAuthor && myInfo && getRole() === 'GUEST' && (
+        <div
+          className="flex items-center justify-center w-full h-18 text-body-2-normal "
+          style={{
+            backgroundImage: `url(${BlurImage})`,
+          }}
+        >
+          <p>👀 투표 결과는 로그인 후 확인할 수 있어요!</p>
+        </div>
+      )}
+      {(userHasVoted || isAuthor) &&
         myInfo &&
         getRole() === 'USER' &&
         voteStatus && (

@@ -18,6 +18,6 @@ export default function useVoteStatus({ shareUrl }: UseVoteStatusOptions) {
   return {
     voteStatus,
     userHasVoted,
-    voteDetail,
+    isAuthor: voteDetail.isAuthor,
   };
 }

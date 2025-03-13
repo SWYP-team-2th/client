@@ -19,6 +19,8 @@ interface SubMenuType {
   onClick?: () => void;
 }
 
+const FEEDBACK_NOTION_LINK = 'https://photopic.notion.site';
+
 export default function useSettingMenus() {
   const toast = useToast();
   const { openDialog } = useDialog();
@@ -40,6 +42,10 @@ export default function useSettingMenus() {
 
   const handleClickPrivacyPolicyButton = () => {
     navigate('/privacy-policy');
+  };
+
+  const handleClickFeedbackButton = () => {
+    window.open(FEEDBACK_NOTION_LINK, '_blank');
   };
 
   const menus: MenuType[] = useMemo(
@@ -94,6 +100,12 @@ export default function useSettingMenus() {
             title: '개인정보 처리 방침',
             rightIcon: <Icon name="ArrowRight" size="medium" />,
             onClick: handleClickPrivacyPolicyButton,
+          },
+          {
+            id: 'feedback',
+            title: '피드백 주기 🎁',
+            rightIcon: <Icon name="ArrowRight" size="medium" />,
+            onClick: handleClickFeedbackButton,
           },
         ],
       },

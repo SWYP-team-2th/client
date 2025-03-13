@@ -3,13 +3,9 @@ name: Sync and Deploy to Vercel
 on:
   push:
     branches: [main, develop]
-  pull_request:
-    types: [closed]
-    branches: [main, develop]
 
 jobs:
   sync-and-deploy:
-    if: github.event.pull_request.merged == true || github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -28,15 +24,9 @@ jobs:
           git remote add fork "https://oauth2:${{ secrets.API_TOKEN_GITHUB }}@github.com/YOOJS1205/photopic.git"
           echo "Fetching from fork..."
           git fetch fork
+          echo "Current branch: ${GITHUB_REF#refs/heads/}"
           echo "Pushing to fork..."
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            TARGET_BRANCH="${GITHUB_BASE_REF}"
-            echo "PR merged to $TARGET_BRANCH, pushing only target branch"
-            git push -f fork "refs/remotes/origin/$TARGET_BRANCH:refs/heads/$TARGET_BRANCH"
-          else
-            # 직접 푸시인 경우는 현재 브랜치 푸시
-            git push -f fork ${GITHUB_REF#refs/heads/}:${GITHUB_REF#refs/heads/}
-          fi
+          git push -f fork ${GITHUB_REF#refs/heads/}:${GITHUB_REF#refs/heads/}
 
       - name: Deploy to Vercel Production
         if: github.ref == 'refs/heads/main'

@@ -71,7 +71,7 @@ export default function VotePage() {
         centerNode={
           <Logo
             style={{ width: 50, cursor: 'pointer' }}
-            onClick={() => navigate('/home')}
+            onClick={() => navigate('/')}
           />
         }
         rightNode={

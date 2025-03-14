@@ -68,7 +68,6 @@ export default function useVoteVerticalEllipsis() {
   const handleClickVoteShare = () => {
     openBottomSheet(
       <LinkShareBottomSheet
-        author={voteDetail.author.nickname}
         shareUrl={`${window.location.origin}/votes/${voteDetail.shareUrl}`}
       />,
     );

@@ -3,10 +3,13 @@ interface Window {
     Share: {
       sendDefault: (options: {
         objectType: string;
-        text: string;
-        link: {
-          mobileWebUrl: string;
-          webUrl: string;
+        content: {
+          description: string;
+          imageUrl: string;
+          link: {
+            mobileWebUrl: string;
+            webUrl: string;
+          };
         };
       }) => void;
     };

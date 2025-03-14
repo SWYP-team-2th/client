@@ -10,9 +10,11 @@ export default function Toast({ type, title, description }: ToastProps) {
       {type === 'info' && <Icon name="ToastInfo" size="large" />}
       <div className="flex flex-col gap-1">
         <h3 className="text-title-small-1 text-gray-100">{title}</h3>
-        <p className="text-body-2-long whitespace-pre-wrap text-gray-300">
-          {description}
-        </p>
+        {description && (
+          <p className="text-body-2-long whitespace-pre-wrap text-gray-300">
+            {description}
+          </p>
+        )}
       </div>
     </div>
   );

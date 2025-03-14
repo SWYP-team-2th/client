@@ -4,8 +4,7 @@ import EmptyMyVote from '@/assets/images/my/no-my-vote-list.png';
 import Icon from '@/components/common/Icon';
 
 export default function MyVoteList() {
-  const { author, myVoteList, observerRef, handleClickVoteShare } =
-    useMyVoteList();
+  const { myVoteList, observerRef, handleClickVoteShare } = useMyVoteList();
 
   if (myVoteList.length === 0) {
     return (
@@ -40,7 +39,6 @@ export default function MyVoteList() {
               onClick={(e) => {
                 e.preventDefault();
                 handleClickVoteShare({
-                  author: author ?? '',
                   shareUrl: `${window.location.origin}/votes/${vote.shareUrl}`,
                 });
               }}

@@ -28,7 +28,7 @@ const MenuItem = ({ title, onClick, rightIcon }: MenuItemProps) => {
 const Menu: MenuComponent = ({ children, title }) => {
   return (
     <div className="pt-8 pb-6 px-6 flex flex-col gap-4 border-b-[5px] border-gray-300">
-      {title && <h2 className="text-title-small text-gray-600">{title}</h2>}
+      {title && <h2 className="text-title-x-small text-gray-600">{title}</h2>}
       <div className="flex flex-col gap-4">{children}</div>
     </div>
   );

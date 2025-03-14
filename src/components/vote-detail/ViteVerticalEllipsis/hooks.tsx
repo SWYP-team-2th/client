@@ -7,10 +7,12 @@ import useGetVoteStatus from '@/api/useGetVoteStatus';
 import { useBottomSheet } from '@/components/common/BottomSheet/hooks';
 import { useDialog } from '@/components/common/Dialog/hooks';
 import LinkShareBottomSheet from '@/components/common/LinkShareBottomSheet';
+import useToast from '@/components/common/Toast/hooks';
 
 export default function useVoteVerticalEllipsis() {
   const { shareUrl } = useParams<{ shareUrl: string }>();
   const { openDialog } = useDialog();
+  const toast = useToast();
   const { openBottomSheet } = useBottomSheet();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -37,6 +39,13 @@ export default function useVoteVerticalEllipsis() {
   });
 
   const handleCloseVote = () => {
+    if (voteDetail.status === 'CLOSED') {
+      toast.warning({
+        title: '이미 마감된 투표예요! 😉',
+      });
+      return;
+    }
+
     const notParticipatedVote = voteStatus?.every(
       (status) => !status.voteCount,
     );

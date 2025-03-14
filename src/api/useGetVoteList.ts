@@ -36,7 +36,7 @@ export function useGetMyVoteList(
           size: 10,
         },
       }),
-    queryKey: ['my-vote-list'],
+    queryKey: ['my-vote-list', userId],
     initialPageParam: null,
     getNextPageParam: (lastPage) => {
       if (!lastPage.hasNext || lastPage.data.length === 0) {
@@ -71,7 +71,7 @@ export function useGetParticipatedVoteList(
           size: 10,
         },
       }),
-    queryKey: ['my-participated-vote-list'],
+    queryKey: ['my-participated-vote-list', userId],
     initialPageParam: null,
     getNextPageParam: (lastPage) => {
       if (!lastPage.hasNext || lastPage.data.length === 0) {

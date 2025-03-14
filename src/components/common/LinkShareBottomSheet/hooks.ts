@@ -1,20 +1,20 @@
 import useToast from '../Toast/hooks';
+import useGetMyInfo from '@/api/useGetMyInfo';
 import { useKakaoShareUrl } from '@/api/useKakaoShareUrl';
 import { useBottomSheet } from '@/components/common/BottomSheet/hooks';
 
 interface UseLinkShareBottomSheetOptions {
-  author: string;
   shareUrl: string;
 }
 
 export default function useLinkShareBottomSheet({
-  author,
   shareUrl,
 }: UseLinkShareBottomSheetOptions) {
   const toast = useToast();
   const { closeBottomSheet } = useBottomSheet();
+  const { data: myInfo } = useGetMyInfo();
   const { handleClickKakaoShareButton } = useKakaoShareUrl({
-    author,
+    author: myInfo?.nickname ?? '',
     shareUrl,
   });
 

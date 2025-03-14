@@ -22,13 +22,15 @@ export function useKakaoShareUrl({ author, shareUrl }: KakaoShareUrlProps) {
 
     try {
       window.Kakao.Share.sendDefault({
-        objectType: 'text',
-        text: `${author}님이 투표를 공유했어요! 💛`,
-        link: {
-          mobileWebUrl: shareUrl,
-          webUrl: shareUrl,
+        objectType: 'feed',
+        content: {
+          description: `${author}님이 투표를 공유했어요! 💛`,
+          imageUrl: 'https://image.photopic.site/photopic_thumnail.png',
+          link: {
+            mobileWebUrl: shareUrl,
+            webUrl: shareUrl,
+          },
         },
-        imageUrl: 'https://image.photopic.site/photopic_thumnail.png',
       });
 
       closeBottomSheet();

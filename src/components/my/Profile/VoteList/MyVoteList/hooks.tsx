@@ -42,16 +42,8 @@ export default function useMyVoteList() {
     };
   }, [hasNextPage, fetchNextPage, isFetchingNextPage]);
 
-  const handleClickVoteShare = ({
-    author,
-    shareUrl,
-  }: {
-    author: string;
-    shareUrl: string;
-  }) => {
-    openBottomSheet(
-      <LinkShareBottomSheet author={author} shareUrl={shareUrl} />,
-    );
+  const handleClickVoteShare = ({ shareUrl }: { shareUrl: string }) => {
+    openBottomSheet(<LinkShareBottomSheet shareUrl={shareUrl} />);
   };
   return {
     author: userInfo?.nickname,

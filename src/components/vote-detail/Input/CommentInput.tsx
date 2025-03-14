@@ -7,6 +7,7 @@ import useEditComment from '@/api/useUpdateComment';
 import { useDialog } from '@/components/common/Dialog/hooks';
 import GuestConfirmDialog from '@/components/common/GuestConfirmDialog/GuestConfirmDialog';
 import Icon from '@/components/common/Icon';
+import Loading from '@/components/common/Loading';
 import LoginDialog from '@/components/common/LoginDialog';
 import TextInput from '@/components/common/TextInput';
 import { getRole } from '@/components/login/Auth/token';
@@ -32,8 +33,10 @@ export default function CommentInput({
   const { data: myInfo } = useGetMyInfo();
   const { openDialog } = useDialog();
   const { data: voteDetail } = useGetVoteDetail(shareUrl ?? '');
-  const { mutate: addComment } = useAddComment();
-  const { mutate: editComment } = useEditComment();
+  const { mutate: addComment, isPending: isAddCommentPending } =
+    useAddComment();
+  const { mutate: editComment, isPending: isEditCommentPending } =
+    useEditComment();
 
   useEffect(() => {
     if (editingComment) {
@@ -106,10 +109,15 @@ export default function CommentInput({
         onKeyDown={handleKeyDown}
         onFocus={handleFocusInput}
         readOnly={!myInfo}
+        disabled={isAddCommentPending || isEditCommentPending}
         rightNode={
-          <button className="cursor-pointer" onClick={handleSendComment}>
-            <Icon name="Send" size="medium" />
-          </button>
+          isAddCommentPending || isEditCommentPending ? (
+            <Loading className="w-6 h-6" />
+          ) : (
+            <button className="cursor-pointer" onClick={handleSendComment}>
+              <Icon name="Send" size="medium" />
+            </button>
+          )
         }
       />
     </div>

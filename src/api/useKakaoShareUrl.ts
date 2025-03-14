@@ -28,6 +28,7 @@ export function useKakaoShareUrl({ author, shareUrl }: KakaoShareUrlProps) {
           mobileWebUrl: shareUrl,
           webUrl: shareUrl,
         },
+        imageUrl: 'https://image.photopic.site/photopic_thumnail.png',
       });
 
       closeBottomSheet();

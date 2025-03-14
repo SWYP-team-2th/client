@@ -8,6 +8,7 @@ interface Window {
           mobileWebUrl: string;
           webUrl: string;
         };
+        imageUrl: string;
       }) => void;
     };
     init: (key: string) => void;

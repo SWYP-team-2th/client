@@ -24,6 +24,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       showLengthIndicator,
       maxLength,
       className,
+      disabled,
       ...restProps
     },
     ref,
@@ -55,6 +56,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             ref={ref}
             type="text"
             value={value}
+            disabled={disabled}
             {...restProps}
           />
           {rightNode && (

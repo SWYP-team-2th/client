@@ -65,23 +65,27 @@ export default function VoteCardItem({
       )}
       {isBestPickImage && (
         <div className="flex absolute top-2 left-2 space-x-2">
-          <AnimatedLabel color="accent">
-            <Icon name="MedalWhite" size="small" />
-            <p className="pl-[3px]">베스트픽!</p>
+          <AnimatedLabel
+            color="accent"
+            icon={<Icon name="MedalWhite" size="extra-small" />}
+          >
+            베스트 Pick!
           </AnimatedLabel>
         </div>
       )}
       {isBestPickImage && image.voteId && (
         <div>
           <div className="flex absolute top-2 left-2 space-x-2">
-            <AnimatedLabel color="accent">
-              <Icon name="MedalWhite" size="small" />
-              <p className="pl-[3px]">베스트픽!</p>
+            <AnimatedLabel
+              color="accent"
+              icon={<Icon name="MedalWhite" size="extra-small" />}
+            >
+              베스트 Pick!
             </AnimatedLabel>
           </div>
           <div className="flex absolute top-8 left-2 space-x-2">
             <Label color="isPicked" variant="solid">
-              뽀또픽!
+              뽀또 Pick!
             </Label>
           </div>
         </div>

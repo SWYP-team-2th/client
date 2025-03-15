@@ -18,10 +18,6 @@ export const router = createBrowserRouter([
     element: <DefaultLayout />,
     children: [
       {
-        path: '/votes/:shareUrl',
-        element: <VotePage />,
-      },
-      {
         path: '/',
         element: <Home />,
       },
@@ -35,6 +31,10 @@ export const router = createBrowserRouter([
     element: <SubLayout />,
     children: [
       { path: '/onboarding', element: <OnBoardingPage /> },
+      {
+        path: '/votes/:shareUrl',
+        element: <VotePage />,
+      },
       {
         path: '/votes/:shareUrl/comments',
         element: <VoteCommentDetailPage />,

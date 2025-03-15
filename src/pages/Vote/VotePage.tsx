@@ -83,7 +83,7 @@ export default function VotePage() {
           />
         }
       />
-      <div className="h-[calc(100dvh-180px)] overflow-y-auto px-6 py-[10px] rounded-2xl">
+      <div className="h-[calc(100dvh-100px)] overflow-y-auto px-6 py-[10px] rounded-2xl">
         <VoteAuthorInfo />
         <VoteSection />
         <hr className="border-t-[5px] border-gray-300" />

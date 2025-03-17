@@ -19,7 +19,8 @@ interface SubMenuType {
   onClick?: () => void;
 }
 
-const FEEDBACK_NOTION_LINK = 'https://photopic.notion.site';
+const FEEDBACK_NOTION_LINK =
+  'https://docs.google.com/forms/d/e/1FAIpQLSe7YxB99oPFZ4H2bzNMmS9szvyE0mVBlFxczLr3gThAIECqlA/viewform?usp=header';
 
 export default function useSettingMenus() {
   const toast = useToast();

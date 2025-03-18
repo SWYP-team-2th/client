@@ -15,7 +15,7 @@ export default function CommentList({ onEditComment }: CommentListProps) {
         <Loading />
       ) : (
         <>
-          <div className="text-title-large mt-lg pl-sm pb-[9px]">
+          <div className="text-title-medium mt-md pl-sm pb-[9px]">
             한마디 ({comments?.length})
           </div>
           <hr className="text-gray-300 mb-[20px]" />

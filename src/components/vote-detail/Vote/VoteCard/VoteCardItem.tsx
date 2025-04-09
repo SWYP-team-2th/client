@@ -59,7 +59,7 @@ export default function VoteCardItem({
       {image.voteId && !isBestPickImage && (
         <div className="flex absolute top-[6px] left-[6px] space-x-2">
           <Label color="isPicked" variant="solid">
-            뽀또픽!
+            뽀또픽!!
           </Label>
         </div>
       )}

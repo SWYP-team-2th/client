@@ -16,8 +16,5 @@ jobs:
           node-version: 20
           cache: 'yarn'
 
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Run Lint
-        run: yarn lint
+      - name: Run Lint with Cache
+        run: yarn lint --cache --cache-location .eslintcache

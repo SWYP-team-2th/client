@@ -17,7 +17,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
-      - name: Run Lint
-        run: yarn lint
+      - name: Run Lint with Cache
+        run: yarn lint --cache --cache-location .eslintcache

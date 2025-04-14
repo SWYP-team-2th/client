@@ -47,7 +47,7 @@ export default function CommentList({ onEditComment }: CommentListType) {
               </div>
 
               {comments?.length && comments.length === 5 && (
-                <div className="flex text-center text-label-medium text-accent-800 items-center justify-center">
+                <div className="flex text-center text-label-x-small-1 text-accent-800 items-center justify-center pt-2">
                   <button
                     onClick={() => navigate(`/votes/${shareUrl}/comments`)}
                     className="cursor-pointer"

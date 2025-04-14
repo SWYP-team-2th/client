@@ -54,11 +54,11 @@ export const theme = {
         { lineHeight: '20px', letterSpacing: '-0.6px', fontWeight: '400' },
       ],
 
-      'caption-large': [
+      'caption-1': [
         '12px',
         { lineHeight: '16px', letterSpacing: '-0.6px', fontWeight: '400' },
       ],
-      'caption-small': [
+      'caption-2': [
         '11px',
         { lineHeight: '15px', letterSpacing: '-0.6px', fontWeight: '400' },
       ],

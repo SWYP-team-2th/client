@@ -1,81 +1,83 @@
 export const content = ['./src/**/*.{html,js,ts,jsx,tsx}'];
+
 export const theme = {
   screens: {
     desktop: '480px',
   },
   extend: {
     fontSize: {
-      h1: [
+      'title-1': [
         '32px',
-        { lineHeight: '1.25', letterSpacing: '-0.02em', fontWeight: 'bold' },
+        { lineHeight: '42px', letterSpacing: '-0.6px', fontWeight: 'bold' },
       ],
-      h2: [
+      'title-2': [
         '28px',
-        { lineHeight: '1.3', letterSpacing: '-0.02em', fontWeight: 'bold' },
+        { lineHeight: '38px', letterSpacing: '-0.6px', fontWeight: 'bold' },
       ],
-      h3: [
+      'title-3': [
         '24px',
-        { lineHeight: '1.3', letterSpacing: '-0.015em', fontWeight: 'bold' },
+        { lineHeight: '34px', letterSpacing: '-0.6px', fontWeight: 'bold' },
       ],
-      'title-large': [
+
+      'heading-1': [
         '22px',
-        { lineHeight: '1.36', letterSpacing: '-0.02em', fontWeight: 'bold' },
+        { lineHeight: '30px', letterSpacing: '-0.6px', fontWeight: 'bold' },
       ],
-      'title-medium': [
+      'heading-2': [
         '20px',
-        { lineHeight: '1.2', letterSpacing: '-0.015em', fontWeight: '600' },
+        { lineHeight: '28px', letterSpacing: '-0.6px', fontWeight: 'bold' },
       ],
-      'title-small-1': [
+
+      'headline-1': [
         '18px',
-        { lineHeight: '1.2', letterSpacing: '-0.01em', fontWeight: '600' },
+        { lineHeight: '28px', letterSpacing: '-0.6px', fontWeight: 'bold' },
       ],
-      'title-small-2': [
-        '18px',
-        { lineHeight: '1.2', letterSpacing: '-0.015em', fontWeight: '400' },
+      'headline-2': [
+        '17px',
+        { lineHeight: '24px', letterSpacing: '-0.6px', fontWeight: 'bold' },
       ],
-      'title-x-small': [
+
+      'body-1': [
         '16px',
-        { lineHeight: '1.2', letterSpacing: '-0.015em', fontWeight: '600' },
+        { lineHeight: '24px', letterSpacing: '-0.6px', fontWeight: '600' },
       ],
       'body-1-long': [
         '16px',
-        { lineHeight: '1.3', letterSpacing: '-0.01em', fontWeight: '400' },
+        { lineHeight: '22px', letterSpacing: '-0.6px', fontWeight: '400' },
       ],
-      'body-1-normal': [
-        '16px',
-        { lineHeight: '1.25', letterSpacing: '-0.01em', fontWeight: '500' },
+      'body-2': [
+        '14px',
+        { lineHeight: '22px', letterSpacing: '-0.6px', fontWeight: '600' },
       ],
       'body-2-long': [
         '14px',
-        { lineHeight: '1.25', letterSpacing: '-0.01em', fontWeight: '400' },
+        { lineHeight: '20px', letterSpacing: '-0.6px', fontWeight: '400' },
       ],
-      'body-2-normal': [
-        '14px',
-        { lineHeight: '1.2', letterSpacing: '-0.01em', fontWeight: '500' },
-      ],
-      caption: [
+
+      'caption-large': [
         '12px',
-        { lineHeight: '1.25', letterSpacing: '-0.02em', fontWeight: '400' },
+        { lineHeight: '16px', letterSpacing: '-0.6px', fontWeight: '400' },
       ],
-      'label-large': [
+      'caption-small': [
+        '11px',
+        { lineHeight: '15px', letterSpacing: '-0.6px', fontWeight: '400' },
+      ],
+
+      'label-1': [
         '16px',
-        { lineHeight: '1.2', letterSpacing: '-0.015em', fontWeight: 'bold' },
+        { lineHeight: '20px', letterSpacing: '-0.6px', fontWeight: 'bold' },
       ],
-      'label-medium': [
+      'label-2': [
         '14px',
-        { lineHeight: '1.25', letterSpacing: '-0.015em', fontWeight: 'bold' },
+        { lineHeight: '18px', letterSpacing: '-0.6px', fontWeight: 'bold' },
       ],
-      'label-small': [
+      'label-3': [
+        '13px',
+        { lineHeight: '16px', letterSpacing: '-0.6px', fontWeight: 'bold' },
+      ],
+      'label-4': [
         '12px',
-        { lineHeight: '1.3', letterSpacing: '-0.015em', fontWeight: 'bold' },
-      ],
-      'label-x-small-1': [
-        '11px',
-        { lineHeight: '1.2', letterSpacing: '-0.02em', fontWeight: 'bold' },
-      ],
-      'label-x-small-2': [
-        '11px',
-        { lineHeight: '1.2', letterSpacing: '-0.02em', fontWeight: '400' },
+        { lineHeight: '14px', letterSpacing: '-0.6px', fontWeight: 'bold' },
       ],
     },
   },

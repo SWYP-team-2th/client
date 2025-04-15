@@ -30,11 +30,15 @@ export const theme = {
 
       'headline-1': [
         '18px',
-        { lineHeight: '28px', letterSpacing: '-0.6px', fontWeight: 'bold' },
+        { lineHeight: '26px', letterSpacing: '-0.6px', fontWeight: 'bold' },
       ],
       'headline-2': [
+        '18px',
+        { lineHeight: '24px', letterSpacing: '-0.6px', fontWeight: '400' },
+      ],
+      'headline-3': [
         '17px',
-        { lineHeight: '24px', letterSpacing: '-0.6px', fontWeight: 'bold' },
+        { lineHeight: '23px', letterSpacing: '-0.6px', fontWeight: '600' },
       ],
 
       'body-1': [

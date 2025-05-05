@@ -1,5 +1,5 @@
 export interface ToastProps {
-  type: 'success' | 'error' | 'warning' | 'info';
+  type: 'default' | 'success' | 'error' | 'warning' | 'info';
   title: string;
   description?: string;
 }

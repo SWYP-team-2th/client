@@ -50,6 +50,8 @@
   --color-error-100: #ff5a5a1a;
   --color-info: #6faff9;
 
+  --color-notification-badge: #ff2c20;
+
   /* spacing */
 
   --spacing-sm: 8px;

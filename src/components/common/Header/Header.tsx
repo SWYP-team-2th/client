@@ -16,14 +16,16 @@ export function Header({
   return (
     <div
       className={cn(
-        'flex items-center justify-between w-full max-w-[480px] py-[14px] px-5 border-b border-gray-200 fixed top-0 left-1/2 -translate-x-1/2 z-40 bg-gray-100 ',
+        'flex items-center justify-between w-full max-w-[480px] py-[18px] px-5 fixed top-0 left-1/2 -translate-x-1/2 z-40',
         className,
       )}
       {...props}
     >
-      <div className="w-[32px]">{leftNode}</div>
-      {centerNode}
-      <div className="w-[32px]">{rightNode}</div>
+      <div className="flex justify-start">{leftNode}</div>
+      <div className="absolute left-1/2 -translate-x-1/2 text-heading-1">
+        {centerNode}
+      </div>
+      <div className="flex justify-end">{rightNode}</div>
     </div>
   );
 }

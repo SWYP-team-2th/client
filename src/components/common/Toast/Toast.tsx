@@ -8,7 +8,7 @@ export default function Toast({ type, title, description }: ToastProps) {
       {type === 'error' && <Icon name="ToastError" size="large" />}
       {type === 'warning' && <Icon name="ToastWarning" size="large" />}
       {type === 'info' && <Icon name="ToastInfo" size="large" />}
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col">
         <h3 className="text-title-small-1 text-gray-100">{title}</h3>
         {description && (
           <p className="text-body-2-long whitespace-pre-wrap text-gray-300">

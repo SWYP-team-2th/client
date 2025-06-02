@@ -138,11 +138,11 @@ export const ICONS = {
 } as const;
 
 export const ICON_SIZE = {
-  'extra-small': 12,
+  xSmall: 12,
   small: 16,
   medium: 24,
-  large: 32,
-  'extra-large': 40,
+  large: 28,
+  xLarge: 32,
 } as const;
 
 export interface IconProps extends SVGProps<SVGSVGElement> {

@@ -78,10 +78,10 @@ export default function CommentItem({
       {comment.isAuthor && (
         <div className="flex items-center space-x-2">
           <button className="cursor-pointer" onClick={handleEditClick}>
-            <Icon name="PencilGray" size="extra-small" />
+            <Icon name="PencilGray" size="xSmall" />
           </button>
           <button className="cursor-pointer" onClick={handleDeleteClick}>
-            <Icon name="TrashCanGray" size="extra-small" />
+            <Icon name="TrashCanGray" size="xSmall" />
           </button>
         </div>
       )}

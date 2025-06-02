@@ -89,12 +89,12 @@ export default function VoteResultList() {
                 {isFullResultShown ? (
                   <>
                     접기
-                    <Icon name="ArrowRightPurple" size="extra-small" />
+                    <Icon name="ArrowRightPurple" size="xSmall" />
                   </>
                 ) : (
                   <>
                     결과 모두 보기
-                    <Icon name="ArrowRightPurple" size="extra-small" />
+                    <Icon name="ArrowRightPurple" size="xSmall" />
                   </>
                 )}
               </button>

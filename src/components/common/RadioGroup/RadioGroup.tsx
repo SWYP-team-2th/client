@@ -5,6 +5,7 @@ export interface RadioOption {
   value: string;
   label?: string;
   disabled?: boolean;
+  Content?: React.ReactNode;
 }
 
 interface RadioGroupProps {
@@ -36,16 +37,28 @@ export default function RadioGroup({
       role="radiogroup"
     >
       {options.map((option) => (
-        <RadioButton
-          key={option.value}
-          value={option.value}
-          label={option.label}
-          checked={value === option.value}
-          onChange={onChange}
-          disabled={option.disabled}
-          size={size}
-          name={name}
-        />
+        <div key={option.value}>
+          <RadioButton
+            value={option.value}
+            label={option.label}
+            checked={value === option.value}
+            onChange={onChange}
+            disabled={option.disabled}
+            size={size}
+            name={name}
+          />
+          {option.value === value && (
+            <div
+              className={cn(
+                'mt-2',
+                size === 'medium' && 'ml-[26px]',
+                size === 'small' && 'ml-[22px]',
+              )}
+            >
+              {option.Content}
+            </div>
+          )}
+        </div>
       ))}
     </div>
   );

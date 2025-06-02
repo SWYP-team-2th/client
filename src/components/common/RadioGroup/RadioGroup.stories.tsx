@@ -15,6 +15,10 @@ export const Default: Story = {
   render: () => <StorybookRadioGroup />,
 };
 
+export const WithContent: Story = {
+  render: () => <StorybookRadioGroupWithContent />,
+};
+
 const StorybookRadioGroup = () => {
   const [selectedOption, setSelectedOption] = useState('option1');
 
@@ -26,6 +30,25 @@ const StorybookRadioGroup = () => {
         { value: 'option3', label: '옵션 3' },
       ]}
       direction="horizontal"
+      value={selectedOption}
+      onChange={setSelectedOption}
+      name="myOptions"
+    />
+  );
+};
+
+const StorybookRadioGroupWithContent = () => {
+  const [selectedOption, setSelectedOption] = useState('option1');
+
+  return (
+    <RadioGroup
+      size="small"
+      options={[
+        { value: 'option1', label: '옵션 1', Content: <div>Content 1</div> },
+        { value: 'option2', label: '옵션 2', Content: <div>Content 2</div> },
+        { value: 'option3', label: '옵션 3', Content: <div>Content 3</div> },
+      ]}
+      direction="vertical"
       value={selectedOption}
       onChange={setSelectedOption}
       name="myOptions"

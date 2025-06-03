@@ -1,11 +1,11 @@
 import { useContext } from 'react';
-import { VoteRegistContext } from './VoteRegistProvider';
+import { PollContext } from './PollRegistProvider';
 
-export default function useVoteRegist() {
-  const context = useContext(VoteRegistContext);
+export default function usePollRegist() {
+  const context = useContext(PollContext);
   if (!context) {
     throw new Error(
-      'useVoteRegist는 VoteRegistProvider 내부에서만 사용 가능합니다.',
+      'usePollRegist는 PollRegistProvider 내부에서만 사용 가능합니다.',
     );
   }
 

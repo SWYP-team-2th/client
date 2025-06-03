@@ -203,18 +203,7 @@ export const PollContext = createContext<
 >({
   data: initialPollRegistState.data,
   errors: initialPollRegistState.errors,
-  setTitle: () => {},
-  setDescription: () => {},
-  addPollChoice: () => {},
-  deletePollChoice: () => {},
-  setPollChoiceImage: () => {},
-  setPollChoiceOrder: () => {},
-  setPollChoiceTitle: () => {},
-  setPollType: () => {},
-  setCommentActive: () => {},
-  setCloseType: () => {},
-  setClosedAt: () => {},
-  setMaxVoterCount: () => {},
+  ...pollActions(() => {}),
 });
 
 export const PollProvider = ({ children }: { children: React.ReactNode }) => {

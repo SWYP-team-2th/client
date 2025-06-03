@@ -15,5 +15,8 @@ export const INITIAL_POLL_REGIST_DATA: PollRegistData = {
   },
 };
 
+export const MAX_POLL_TITLE_LENGTH = 50;
+export const MAX_POLL_DESCRIPTION_LENGTH = 100;
 export const MIN_POLL_CHOICE_COUNT = 2;
 export const MAX_POLL_CHOICE_COUNT = 10;
+export const MAX_VOTER_COUNT = 999;

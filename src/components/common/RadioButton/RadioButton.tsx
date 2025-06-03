@@ -38,7 +38,7 @@ export default function RadioButton({
         disabled
           ? 'border-gray-400'
           : checked
-            ? 'bg-secondary-700'
+            ? 'bg-primary-700'
             : 'border-gray-600',
         size === 'medium' ? 'w-[18px] h-[18px]' : 'w-[14px] h-[14px]',
       ),
@@ -48,7 +48,10 @@ export default function RadioButton({
         size === 'medium' ? 'w-[10px] h-[10px]' : 'w-[8px] h-[8px]',
       ),
     },
-    label: cn('ml-1 text-sm', disabled ? 'text-gray-500' : 'text-gray-700'),
+    label: cn(
+      'ml-1 text-headline-2',
+      disabled ? 'text-gray-500' : 'text-gray-900',
+    ),
   };
 
   return (

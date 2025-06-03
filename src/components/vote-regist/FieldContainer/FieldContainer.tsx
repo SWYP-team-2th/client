@@ -1,25 +1,28 @@
 import { cn } from '@/utils/cn';
 
 interface FieldContainerProps {
-  fieldTitle: string;
+  title?: string;
   isLastField?: boolean;
   children: React.ReactNode;
+  className?: string;
 }
 
 export default function FieldContainer({
-  fieldTitle,
+  title,
   isLastField,
   children,
+  className,
 }: FieldContainerProps) {
   return (
-    <div
+    <section
       className={cn(
-        'flex flex-col gap-3 px-6 py-[18px]',
-        !isLastField && 'border-b-[3px] border-gray-300',
+        'px-5 py-6 flex flex-col gap-3',
+        !isLastField && 'border-b-[1px] border-gray-200',
+        className,
       )}
     >
-      <h3 className="text-title-small-1">{fieldTitle}</h3>
+      {title && <h3 className="text-body-1 text-primary-600">{title}</h3>}
       {children}
-    </div>
+    </section>
   );
 }

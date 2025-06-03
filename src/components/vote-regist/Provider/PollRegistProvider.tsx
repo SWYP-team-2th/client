@@ -2,6 +2,7 @@ import { useReducer, createContext } from 'react';
 import { INITIAL_POLL_REGIST_DATA } from './constants';
 import { PollRegistData, PollRegistState } from './types';
 
+// TODO: 서버에서 공개 투표 추가하면 반영
 const initialPollRegistState: PollRegistState = {
   data: INITIAL_POLL_REGIST_DATA,
   errors: {

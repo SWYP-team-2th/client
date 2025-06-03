@@ -31,7 +31,7 @@ export default function Switch({
       small: 'h-[25px] w-[41px]',
     },
     active: {
-      on: 'bg-secondary-500',
+      on: 'bg-primary-500',
       off: 'bg-gray-400',
     },
     disabled: 'opacity-40 cursor-not-allowed',

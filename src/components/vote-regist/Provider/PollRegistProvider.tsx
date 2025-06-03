@@ -1,6 +1,7 @@
 import { useReducer, createContext } from 'react';
 import { INITIAL_POLL_REGIST_DATA } from './constants';
 import { PollRegistData, PollRegistState } from './types';
+import { validateDescription, validateTitle } from './validate';
 
 // TODO: 서버에서 공개 투표 추가하면 반영
 const initialPollRegistState: PollRegistState = {
@@ -51,10 +52,24 @@ function pollReducer(
   action: PollAction,
 ): PollRegistState {
   switch (action.type) {
-    case 'SET_TITLE':
-      return { ...state, data: { ...state.data, title: action.payload } };
-    case 'SET_DESCRIPTION':
-      return { ...state, data: { ...state.data, description: action.payload } };
+    case 'SET_TITLE': {
+      const title = action.payload;
+      const error = validateTitle(title);
+      return {
+        ...state,
+        data: { ...state.data, title },
+        errors: { ...state.errors, title: error },
+      };
+    }
+    case 'SET_DESCRIPTION': {
+      const description = action.payload;
+      const error = validateDescription(description);
+      return {
+        ...state,
+        data: { ...state.data, description },
+        errors: { ...state.errors, description: error },
+      };
+    }
     case 'ADD_POLL_CHOICE':
       return {
         ...state,

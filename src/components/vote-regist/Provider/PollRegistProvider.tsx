@@ -1,7 +1,7 @@
 import { useReducer, createContext } from 'react';
 import { INITIAL_POLL_REGIST_DATA } from './constants';
 import { PollRegistData, PollRegistState } from './types';
-import { validateDescription, validateTitle } from './validate';
+import { PollValidator } from './validate';
 
 // TODO: 서버에서 공개 투표 추가하면 반영
 const initialPollRegistState: PollRegistState = {
@@ -54,7 +54,7 @@ function pollReducer(
   switch (action.type) {
     case 'SET_TITLE': {
       const title = action.payload;
-      const error = validateTitle(title);
+      const error = PollValidator.validateTitle(title);
       return {
         ...state,
         data: { ...state.data, title },
@@ -63,7 +63,7 @@ function pollReducer(
     }
     case 'SET_DESCRIPTION': {
       const description = action.payload;
-      const error = validateDescription(description);
+      const error = PollValidator.validateDescription(description);
       return {
         ...state,
         data: { ...state.data, description },
@@ -146,39 +146,63 @@ function pollReducer(
           },
         },
       };
-    case 'SET_CLOSE_TYPE':
+    case 'SET_CLOSE_TYPE': {
+      const closeType = action.payload;
+      const closeOptions = {
+        ...state.data.closeOptions,
+        closeType,
+        ...(closeType === 'TIME' && { maxVoterCount: 0 }),
+        ...(closeType === 'VOTER_COUNT' && { closedAt: '' }),
+        ...(closeType === 'SELF' && { closedAt: '', maxVoterCount: 0 }),
+      };
+      const error = PollValidator.validateCloseOptions({
+        closeType,
+      });
+
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          closeOptions,
+        },
+        errors: { ...state.errors, closeOptions: error },
+      };
+    }
+    case 'SET_CLOSED_AT': {
+      const closedAt = action.payload;
+      const error = PollValidator.validateCloseOptions({
+        closeType: state.data.closeOptions?.closeType,
+        closedAt,
+      });
+
       return {
         ...state,
         data: {
           ...state.data,
           closeOptions: {
             ...state.data.closeOptions,
-            closeType: action.payload,
+            closedAt,
           },
         },
+        errors: { ...state.errors, closeOptions: error },
       };
-    case 'SET_CLOSED_AT':
+    }
+    case 'SET_MAX_VOTER_COUNT': {
+      const maxVoterCount = action.payload;
+      const error = PollValidator.validateCloseOptions({
+        closeType: state.data.closeOptions?.closeType,
+        maxVoterCount,
+      });
+
       return {
         ...state,
         data: {
           ...state.data,
-          closeOptions: {
-            ...state.data.closeOptions,
-            closedAt: action.payload,
-          },
+          closeOptions: { ...state.data.closeOptions, maxVoterCount },
         },
+        errors: { ...state.errors, closeOptions: error },
       };
-    case 'SET_MAX_VOTER_COUNT':
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          closeOptions: {
-            ...state.data.closeOptions,
-            maxVoterCount: action.payload,
-          },
-        },
-      };
+    }
     default:
       return state;
   }

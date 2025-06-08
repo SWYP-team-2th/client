@@ -1,5 +1,5 @@
 import { useReducer, createContext } from 'react';
-import { INITIAL_POLL_REGIST_DATA } from './constants';
+import { IMAGE_TITLE_PLACEHOLDER, INITIAL_POLL_REGIST_DATA } from './constants';
 import { PollRegistData, PollRegistState } from './types';
 import { PollValidator } from './validate';
 
@@ -77,7 +77,15 @@ function pollReducer(
           ...state.data,
           pollChoices: [
             ...state.data.pollChoices,
-            { title: '', imageUrl: '', order: state.data.pollChoices.length },
+            {
+              title:
+                IMAGE_TITLE_PLACEHOLDER[
+                  state.data.pollChoices
+                    .length as keyof typeof IMAGE_TITLE_PLACEHOLDER
+                ],
+              imageUrl: '',
+              order: state.data.pollChoices.length,
+            },
           ],
         },
       };

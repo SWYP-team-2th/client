@@ -7,7 +7,7 @@ export default function usePollChoiceInformation() {
   const isPollChoiceFull = data.pollChoices.length >= MAX_POLL_CHOICE_COUNT;
 
   return {
-    data,
+    pollChoices: data.pollChoices,
     addPollChoice,
     isPollChoiceFull,
   };

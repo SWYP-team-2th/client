@@ -4,19 +4,18 @@ import PollChoice from './PollChoice';
 import Icon from '@/components/common/Icon';
 
 export default function PollChoiceInformation() {
-  const { pollChoices, addPollChoice, isPollChoiceFull } =
+  const { pollChoices, addPollChoice, setPollChoicesOrder, isPollChoiceFull } =
     usePollChoiceInformation();
+
   return (
     <div className="flex flex-col gap-6 justify-center items-center">
       <Reorder.Group
         className="flex flex-col gap-3 w-full"
         values={pollChoices.map((choice) => choice.order)}
-        onReorder={(newOrder) => {
-          console.log(newOrder);
-        }}
+        onReorder={setPollChoicesOrder}
       >
         {pollChoices.map((choice) => (
-          <PollChoice key={choice.order} choice={choice} />
+          <PollChoice key={choice.id} choice={choice} />
         ))}
       </Reorder.Group>
       {!isPollChoiceFull && (

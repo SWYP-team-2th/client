@@ -1,4 +1,5 @@
 import { useReducer, createContext } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { IMAGE_TITLE_PLACEHOLDER, INITIAL_POLL_REGIST_DATA } from './constants';
 import { PollRegistData, PollRegistState } from './types';
 import { PollValidator } from './validate';
@@ -24,12 +25,15 @@ type PollChoiceAction =
   | { type: 'DELETE_POLL_CHOICE'; payload: { index: number } }
   | {
       type: 'SET_POLL_CHOICE_IMAGE';
-      payload: { index: number; imageUrl: string };
+      payload: { id: string; imageUrl: string };
     }
-  | { type: 'SET_POLL_CHOICE_ORDER'; payload: { index: number; order: number } }
+  | {
+      type: 'SET_POLL_CHOICES_ORDER';
+      payload: { newOrder: number[] };
+    }
   | {
       type: 'SET_POLL_CHOICE_TITLE';
-      payload: { index: number; title: string };
+      payload: { id: string; title: string };
     };
 
 type PollOptionAction =
@@ -78,6 +82,7 @@ function pollReducer(
           pollChoices: [
             ...state.data.pollChoices,
             {
+              id: uuidv4(),
               title:
                 IMAGE_TITLE_PLACEHOLDER[
                   state.data.pollChoices
@@ -104,32 +109,33 @@ function pollReducer(
         ...state,
         data: {
           ...state.data,
-          pollChoices: state.data.pollChoices.map((choice, index) =>
-            index === action.payload.index
+          pollChoices: state.data.pollChoices.map((choice) =>
+            choice.id === action.payload.id
               ? { ...choice, imageUrl: action.payload.imageUrl }
               : choice,
           ),
         },
       };
-    case 'SET_POLL_CHOICE_ORDER':
+    case 'SET_POLL_CHOICES_ORDER': {
       return {
         ...state,
         data: {
           ...state.data,
-          pollChoices: state.data.pollChoices.map((choice, index) =>
-            index === action.payload.index
-              ? { ...choice, order: action.payload.order }
-              : choice,
+          pollChoices: state.data.pollChoices.sort(
+            (a, b) =>
+              action.payload.newOrder.indexOf(a.order) -
+              action.payload.newOrder.indexOf(b.order),
           ),
         },
       };
+    }
     case 'SET_POLL_CHOICE_TITLE':
       return {
         ...state,
         data: {
           ...state.data,
-          pollChoices: state.data.pollChoices.map((choice, index) =>
-            index === action.payload.index
+          pollChoices: state.data.pollChoices.map((choice) =>
+            choice.id === action.payload.id
               ? { ...choice, title: action.payload.title }
               : choice,
           ),
@@ -223,12 +229,16 @@ const pollActions = (dispatch: React.Dispatch<PollAction>) => ({
   addPollChoice: () => dispatch({ type: 'ADD_POLL_CHOICE' }),
   deletePollChoice: (index: number) =>
     dispatch({ type: 'DELETE_POLL_CHOICE', payload: { index } }),
-  setPollChoiceImage: (index: number, imageUrl: string) =>
-    dispatch({ type: 'SET_POLL_CHOICE_IMAGE', payload: { index, imageUrl } }),
-  setPollChoiceOrder: (index: number, order: number) =>
-    dispatch({ type: 'SET_POLL_CHOICE_ORDER', payload: { index, order } }),
-  setPollChoiceTitle: (index: number, title: string) =>
-    dispatch({ type: 'SET_POLL_CHOICE_TITLE', payload: { index, title } }),
+  setPollChoiceImage: (id: string, imageUrl: string) =>
+    dispatch({ type: 'SET_POLL_CHOICE_IMAGE', payload: { id, imageUrl } }),
+  setPollChoicesOrder: (newOrder: number[]) => {
+    dispatch({
+      type: 'SET_POLL_CHOICES_ORDER',
+      payload: { newOrder },
+    });
+  },
+  setPollChoiceTitle: (id: string, title: string) =>
+    dispatch({ type: 'SET_POLL_CHOICE_TITLE', payload: { id, title } }),
   setPollType: (pollType: 'SINGLE' | 'MULTIPLE') =>
     dispatch({ type: 'SET_POLL_TYPE', payload: pollType }),
   setCommentActive: (commentActive: 'OPEN' | 'CLOSED') =>

@@ -10,7 +10,13 @@ interface PollChoiceProps {
 }
 
 export default function PollChoice({ choice }: PollChoiceProps) {
-  const { dragControls, setPollChoiceTitle } = usePollChoice();
+  const {
+    dragControls,
+    setPollChoiceImage,
+    setPollChoiceTitle,
+    fileInputRef,
+    handleClickImageButton,
+  } = usePollChoice();
 
   return (
     <Reorder.Item
@@ -20,13 +26,33 @@ export default function PollChoice({ choice }: PollChoiceProps) {
       dragControls={dragControls}
     >
       <div className="flex items-center gap-3">
-        <img
-          src={choice.imageUrl ?? ''}
-          alt={choice.title}
-          width={80}
-          height={80}
-          className="rounded-lg object-cover"
-        />
+        <div onClick={handleClickImageButton} className="cursor-pointer">
+          {choice.imageUrl ? (
+            <img
+              src={choice.imageUrl}
+              alt={choice.title}
+              className="rounded-lg object-cover w-20 h-20 overflow-hidden"
+            />
+          ) : (
+            <div className="w-20 h-20 bg-gray-400 rounded-lg flex items-center justify-center">
+              <Icon name="PhotoPlusWhite" size="large" />
+            </div>
+          )}
+          <input
+            type="file"
+            accept="image/*"
+            ref={fileInputRef}
+            style={{ display: 'none' }}
+            onChange={(e) => {
+              if (e.target.files?.[0]) {
+                setPollChoiceImage(
+                  choice.order,
+                  URL.createObjectURL(e.target.files[0]),
+                );
+              }
+            }}
+          />
+        </div>
         <input
           type="text"
           className={cn(

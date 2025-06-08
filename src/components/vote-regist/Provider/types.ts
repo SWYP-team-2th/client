@@ -7,6 +7,7 @@ export interface PollRegistData {
 }
 
 export interface PollChoice {
+  id: string;
   title: string;
   imageUrl: string;
   order: number;

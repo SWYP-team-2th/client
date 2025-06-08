@@ -46,7 +46,7 @@ export default function PollChoice({ choice }: PollChoiceProps) {
             onChange={(e) => {
               if (e.target.files?.[0]) {
                 setPollChoiceImage(
-                  choice.order,
+                  choice.id,
                   URL.createObjectURL(e.target.files[0]),
                 );
               }
@@ -64,7 +64,7 @@ export default function PollChoice({ choice }: PollChoiceProps) {
           )}
           value={choice.title}
           onChange={(e) => {
-            setPollChoiceTitle(choice.order, e.target.value);
+            setPollChoiceTitle(choice.id, e.target.value);
           }}
         />
       </div>

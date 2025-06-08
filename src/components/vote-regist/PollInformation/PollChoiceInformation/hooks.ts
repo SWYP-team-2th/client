@@ -2,13 +2,14 @@ import { MAX_POLL_CHOICE_COUNT } from '@/components/vote-regist/Provider/constan
 import usePollRegist from '@/components/vote-regist/Provider/hooks';
 
 export default function usePollChoiceInformation() {
-  const { data, addPollChoice } = usePollRegist();
+  const { data, addPollChoice, setPollChoicesOrder } = usePollRegist();
 
   const isPollChoiceFull = data.pollChoices.length >= MAX_POLL_CHOICE_COUNT;
 
   return {
     pollChoices: data.pollChoices,
     addPollChoice,
+    setPollChoicesOrder,
     isPollChoiceFull,
   };
 }

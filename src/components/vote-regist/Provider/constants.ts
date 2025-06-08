@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { PollRegistData } from './types';
 
 export const IMAGE_TITLE_PLACEHOLDER = {
@@ -18,11 +19,13 @@ export const INITIAL_POLL_REGIST_DATA: PollRegistData = {
   description: '',
   pollChoices: [
     {
+      id: uuidv4(),
       title: IMAGE_TITLE_PLACEHOLDER[0],
       imageUrl: '',
       order: 0,
     },
     {
+      id: uuidv4(),
       title: IMAGE_TITLE_PLACEHOLDER[1],
       imageUrl: '',
       order: 1,

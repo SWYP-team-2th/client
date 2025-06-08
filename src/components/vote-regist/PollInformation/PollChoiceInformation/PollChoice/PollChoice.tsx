@@ -1,4 +1,4 @@
-import { Reorder } from 'motion/react';
+import { Reorder, motion } from 'motion/react';
 import usePollChoice from './hooks';
 import type { PollChoice } from '@/components/vote-regist/Provider/types';
 import Icon from '@/components/common/Icon';
@@ -16,63 +16,89 @@ export default function PollChoice({ choice }: PollChoiceProps) {
     setPollChoiceTitle,
     fileInputRef,
     handleClickImageButton,
-  } = usePollChoice();
+    handleDelete,
+    isDeleteOpen,
+    x,
+    controls,
+  } = usePollChoice(choice.id);
 
   return (
     <Reorder.Item
-      className="bg-white flex pl-2 pr-4 py-2 justify-between items-center w-full h-[96px] border border-gray-300 rounded-xl"
+      className="w-full"
       value={choice.order}
       dragListener={false}
       dragControls={dragControls}
     >
-      <div className="flex items-center gap-3">
-        <div onClick={handleClickImageButton} className="cursor-pointer">
-          {choice.imageUrl ? (
-            <img
-              src={choice.imageUrl}
-              alt={choice.title}
-              className="rounded-lg object-cover w-20 h-20 overflow-hidden"
-            />
-          ) : (
-            <div className="w-20 h-20 bg-gray-400 rounded-lg flex items-center justify-center">
-              <Icon name="PhotoPlusWhite" size="large" />
+      <div className="relative w-full">
+        <motion.div
+          drag="x"
+          dragConstraints={{ left: -80, right: 0 }}
+          style={{ x }}
+          animate={controls}
+          className="bg-white flex pl-2 pr-4 py-2 justify-between items-center w-full h-[96px] border border-gray-300 rounded-xl z-10"
+        >
+          <div className="flex items-center gap-3">
+            <div onClick={handleClickImageButton} className="cursor-pointer">
+              {choice.imageUrl ? (
+                <img
+                  src={choice.imageUrl}
+                  alt={choice.title}
+                  className="rounded-lg object-cover w-20 h-20 overflow-hidden"
+                />
+              ) : (
+                <div className="w-20 h-20 bg-gray-400 rounded-lg flex items-center justify-center">
+                  <Icon name="PhotoPlusWhite" size="large" />
+                </div>
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                ref={fileInputRef}
+                style={{ display: 'none' }}
+                onChange={(e) => {
+                  if (e.target.files?.[0]) {
+                    setPollChoiceImage(
+                      choice.id,
+                      URL.createObjectURL(e.target.files[0]),
+                    );
+                  }
+                }}
+              />
             </div>
-          )}
-          <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            style={{ display: 'none' }}
-            onChange={(e) => {
-              if (e.target.files?.[0]) {
-                setPollChoiceImage(
-                  choice.id,
-                  URL.createObjectURL(e.target.files[0]),
-                );
-              }
+            <input
+              type="text"
+              className={cn(
+                'focus:outline-none text-headline-3',
+                choice.title ===
+                  IMAGE_TITLE_PLACEHOLDER[
+                    choice.order as keyof typeof IMAGE_TITLE_PLACEHOLDER
+                  ] && 'text-gray-400',
+              )}
+              value={choice.title}
+              onChange={(e) => {
+                setPollChoiceTitle(choice.id, e.target.value);
+              }}
+            />
+          </div>
+          <Icon
+            size="medium"
+            name="Menu"
+            onPointerDown={(e) => {
+              e.preventDefault();
+              dragControls.start(e);
             }}
+            tabIndex={-1}
           />
-        </div>
-        <input
-          type="text"
-          className={cn(
-            'focus:outline-none text-headline-3',
-            choice.title ===
-              IMAGE_TITLE_PLACEHOLDER[
-                choice.order as keyof typeof IMAGE_TITLE_PLACEHOLDER
-              ] && 'text-gray-400',
-          )}
-          value={choice.title}
-          onChange={(e) => {
-            setPollChoiceTitle(choice.id, e.target.value);
-          }}
-        />
+        </motion.div>
+        {isDeleteOpen && (
+          <button
+            className="w-[40px] flex items-center justify-center h-[40px] absolute right-4 rounded-full top-1/2 -translate-y-1/2 z-50 bg-red-500 text-white"
+            onClick={handleDelete}
+          >
+            <Icon name="Trash" size="medium" />
+          </button>
+        )}
       </div>
-      <Icon
-        size="medium"
-        name="Menu"
-        onPointerDown={(e) => dragControls.start(e)}
-      />
     </Reorder.Item>
   );
 }

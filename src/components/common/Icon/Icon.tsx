@@ -11,6 +11,7 @@ import BookmarkFill from '@/assets/icons/bookmark_fill_24px.svg?react';
 import BookmarkOutline from '@/assets/icons/bookmark_outline_24px.svg?react';
 import Check from '@/assets/icons/check_24px.svg?react';
 import Cross from '@/assets/icons/cross_24px.svg?react';
+import DeadLine from '@/assets/icons/dead_line.svg?react';
 import Edit from '@/assets/icons/edit_24px.svg?react';
 import Filter from '@/assets/icons/filter.svg?react';
 import HeartFill from '@/assets/icons/heart_fill_24px.svg?react';
@@ -86,6 +87,7 @@ export const ICONS = {
   ArrowRight,
   BellFill,
   BellOutline,
+  DeadLine,
   BookmarkFill,
   BookmarkOutline,
   Check,

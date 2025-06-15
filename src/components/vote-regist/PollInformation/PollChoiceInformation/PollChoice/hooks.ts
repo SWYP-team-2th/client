@@ -1,14 +1,37 @@
+import { useMotionValue, useAnimation } from 'framer-motion';
 import { useDragControls } from 'motion/react';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import usePollRegist from '@/components/vote-regist/Provider/hooks';
 
-export default function usePollChoice() {
+export default function usePollChoice(id: string) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dragControls = useDragControls();
-  const { setPollChoiceTitle, setPollChoiceImage } = usePollRegist();
+  const { setPollChoiceTitle, setPollChoiceImage, deletePollChoice } =
+    usePollRegist();
+
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   const handleClickImageButton = () => {
     fileInputRef.current?.click();
+  };
+
+  const x = useMotionValue(0);
+  const controls = useAnimation();
+
+  useEffect(() => {
+    const unsubscribe = x.on('change', (latest) => {
+      if (latest <= -80) {
+        setIsDeleteOpen(true);
+      } else {
+        setIsDeleteOpen(false);
+      }
+    });
+    return () => unsubscribe();
+  }, [x]);
+
+  const handleDelete = () => {
+    setIsDeleteOpen(false);
+    deletePollChoice(id);
   };
 
   return {
@@ -17,5 +40,10 @@ export default function usePollChoice() {
     setPollChoiceImage,
     fileInputRef,
     handleClickImageButton,
+    handleDelete,
+    x,
+    controls,
+    isDeleteOpen,
+    setIsDeleteOpen,
   };
 }

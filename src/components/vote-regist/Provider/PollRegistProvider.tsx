@@ -22,7 +22,7 @@ type BasicAction =
 
 type PollChoiceAction =
   | { type: 'ADD_POLL_CHOICE' }
-  | { type: 'DELETE_POLL_CHOICE'; payload: { index: number } }
+  | { type: 'DELETE_POLL_CHOICE'; payload: { id: string } }
   | {
       type: 'SET_POLL_CHOICE_IMAGE';
       payload: { id: string; imageUrl: string };
@@ -100,7 +100,7 @@ function pollReducer(
         data: {
           ...state.data,
           pollChoices: state.data.pollChoices.filter(
-            (_, index) => index !== action.payload.index,
+            (choice) => choice.id !== action.payload.id,
           ),
         },
       };
@@ -227,8 +227,8 @@ const pollActions = (dispatch: React.Dispatch<PollAction>) => ({
   setDescription: (description: string) =>
     dispatch({ type: 'SET_DESCRIPTION', payload: description }),
   addPollChoice: () => dispatch({ type: 'ADD_POLL_CHOICE' }),
-  deletePollChoice: (index: number) =>
-    dispatch({ type: 'DELETE_POLL_CHOICE', payload: { index } }),
+  deletePollChoice: (id: string) =>
+    dispatch({ type: 'DELETE_POLL_CHOICE', payload: { id } }),
   setPollChoiceImage: (id: string, imageUrl: string) =>
     dispatch({ type: 'SET_POLL_CHOICE_IMAGE', payload: { id, imageUrl } }),
   setPollChoicesOrder: (newOrder: number[]) => {

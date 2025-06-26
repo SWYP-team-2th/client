@@ -1,10 +1,10 @@
 import { useContextMenuContext } from './context';
 
-interface ContextMenuButtonProps {
+interface ContextMenuTriggerProps {
   children: React.ReactNode;
 }
 
-export function ContextMenuButton({ children }: ContextMenuButtonProps) {
+export function ContextMenuTrigger({ children }: ContextMenuTriggerProps) {
   const { isOpen, setIsOpen } = useContextMenuContext();
 
   return <button onClick={() => setIsOpen(!isOpen)}>{children}</button>;

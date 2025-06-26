@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, ReactNode } from 'react';
 import { ContextMenuContext } from '@/components/common/ContextMenu/context';
-import { ContextMenuButton } from '@/components/common/ContextMenu/ContextMenuButton';
+import { ContextMenuTrigger } from '@/components/common/ContextMenu/ContextMenuButton';
 import { ContextMenuItem } from '@/components/common/ContextMenu/ContextMenuItem';
 import { ContextMenuList } from '@/components/common/ContextMenu/ContextMenuList';
 
@@ -35,7 +35,7 @@ function ContextMenuRoot({ children }: ContextMenuProps) {
 }
 
 const ContextMenu = Object.assign(ContextMenuRoot, {
-  Button: ContextMenuButton,
+  Trigger: ContextMenuTrigger,
   List: ContextMenuList,
   Item: ContextMenuItem,
 });

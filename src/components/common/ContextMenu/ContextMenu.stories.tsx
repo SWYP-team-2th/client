@@ -14,9 +14,9 @@ export const CustomMenu: Story = {
   render: () => (
     <div className="flex justify-center items-center h-screen">
       <ContextMenu>
-        <ContextMenu.Button>
+        <ContextMenu.Trigger>
           <Icon name="More" size="medium" />
-        </ContextMenu.Button>
+        </ContextMenu.Trigger>
         <ContextMenu.List>
           <ContextMenu.Item
             icon={<Icon name="Post" size="medium" />}

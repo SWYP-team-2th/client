@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
 import CheckBox from './CheckBox';
+import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof CheckBox> = {
   title: 'Common/CheckBox',

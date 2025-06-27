@@ -2,12 +2,12 @@ import Icon from '../Icon/Icon';
 import { cn } from '@/utils/cn';
 
 interface CheckBoxProps {
-  id?: number;
+  id: number | string;
   size: 'large' | 'small';
   checked: boolean;
   disabled?: boolean;
   readOnly?: boolean;
-  label?: string;
+  label: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -31,8 +31,8 @@ export default function CheckBoxWithLabel({
     <div
       className={cn(
         'flex items-center cursor-pointer',
-        readOnly ? 'cursor-default' : 'cursor-pointer',
-        disabled ? 'cursor-not-allowed' : '',
+        readOnly && 'cursor-default',
+        disabled && 'cursor-not-allowed',
       )}
     >
       {!readOnly && (
@@ -43,7 +43,6 @@ export default function CheckBoxWithLabel({
             checked
               ? 'bg-primary-900 border-primary-900'
               : 'bg-gray-100 border-gray-400',
-            disabled ? 'cursor-not-allowed' : 'cursor-pointer',
           )}
         >
           <input
@@ -62,18 +61,17 @@ export default function CheckBoxWithLabel({
           )}
         </span>
       )}
-      {label && (
-        <label
-          htmlFor={stringId}
-          className={cn(
-            'text-body-1 cursor-pointer',
-            readOnly ? 'cursor-default' : 'cursor-pointer',
-            disabled ? 'text-gray-400 cursor-not-allowed' : 'text-gray-900',
-          )}
-        >
-          {label}
-        </label>
-      )}
+
+      <label
+        htmlFor={stringId}
+        className={cn(
+          'text-body-1 cursor-pointer',
+          readOnly && 'cursor-default',
+          disabled && 'text-gray-400 cursor-not-allowed',
+        )}
+      >
+        {label}
+      </label>
     </div>
   );
 }

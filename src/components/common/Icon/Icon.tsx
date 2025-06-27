@@ -10,6 +10,8 @@ import BellOutline from '@/assets/icons/bell_outline_24px.svg?react';
 import BookmarkFill from '@/assets/icons/bookmark_fill_24px.svg?react';
 import BookmarkOutline from '@/assets/icons/bookmark_outline_24px.svg?react';
 import Check from '@/assets/icons/check_24px.svg?react';
+import CheckLarge from '@/assets/icons/check_large.svg?react';
+import CheckSmall from '@/assets/icons/check_small.svg?react';
 import Cross from '@/assets/icons/cross_24px.svg?react';
 import DeadLine from '@/assets/icons/dead_line.svg?react';
 import Edit from '@/assets/icons/edit_24px.svg?react';
@@ -69,6 +71,8 @@ import VoteClose from '@/assets/icons/vote_close.svg?react';
 import World from '@/assets/icons/world_24px.svg?react';
 
 export const ICONS = {
+  CheckLarge,
+  CheckSmall,
   LogoutGray,
   ArrowRightGray,
   VoteGray,

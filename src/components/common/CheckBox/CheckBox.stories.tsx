@@ -21,7 +21,7 @@ type Story = StoryObj<typeof CheckBox>;
 
 export const WithLabel: Story = {
   args: {
-    id: 1,
+    id: '1',
     checked: false,
     size: 'large',
     disabled: false,
@@ -42,7 +42,7 @@ export const WithLabel: Story = {
 
 export const ReadOnly: Story = {
   args: {
-    id: 2,
+    id: '2',
     checked: true,
     size: 'large',
     disabled: false,
@@ -56,7 +56,7 @@ export const ReadOnly: Story = {
 
 export const Disabled: Story = {
   args: {
-    id: 3,
+    id: '3',
     checked: false,
     size: 'large',
     disabled: true,

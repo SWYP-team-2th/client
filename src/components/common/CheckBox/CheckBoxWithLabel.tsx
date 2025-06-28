@@ -2,7 +2,7 @@ import Icon from '../Icon/Icon';
 import { cn } from '@/utils/cn';
 
 interface CheckBoxProps {
-  id: number | string;
+  id: string;
   size: 'large' | 'small';
   checked: boolean;
   disabled?: boolean;
@@ -25,8 +25,6 @@ export default function CheckBoxWithLabel({
   readOnly = false,
   label,
 }: CheckBoxProps) {
-  const stringId = id?.toString();
-
   return (
     <div
       className={cn(
@@ -46,12 +44,12 @@ export default function CheckBoxWithLabel({
           )}
         >
           <input
-            id={stringId}
+            id={id}
             type="checkbox"
             checked={checked}
             onChange={onChange}
             disabled={disabled}
-            className="absolute w-full h-full opacity-0 cursor-pointer"
+            className="absolute w-full h-full opacity-0"
           />
           {checked && (
             <Icon
@@ -63,12 +61,8 @@ export default function CheckBoxWithLabel({
       )}
 
       <label
-        htmlFor={stringId}
-        className={cn(
-          'text-body-1 cursor-pointer',
-          readOnly && 'cursor-default',
-          disabled && 'text-gray-400 cursor-not-allowed',
-        )}
+        htmlFor={id}
+        className={cn('text-body-1', disabled && 'text-gray-400')}
       >
         {label}
       </label>

@@ -11,7 +11,7 @@ export default function VoteRegistPage() {
     <div>
       <Header
         className="bg-white"
-        leftNode={<Icon name="ArrowLeft" size="large" />}
+        leftNode={<Icon name="ThickClose" size="large" />}
         centerNode={<h1 className="text-heading-1">투표</h1>}
         rightNode={<Icon name="BellOutline" size="large" />}
       />

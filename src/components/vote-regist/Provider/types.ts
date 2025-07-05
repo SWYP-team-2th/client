@@ -27,4 +27,5 @@ export interface CloseOption {
 export interface PollRegistState {
   data: PollRegistData;
   errors: Record<keyof PollRegistData, string | null>;
+  isValid: boolean;
 }

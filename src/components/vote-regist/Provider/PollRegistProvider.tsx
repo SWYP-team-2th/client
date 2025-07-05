@@ -14,6 +14,7 @@ const initialPollRegistState: PollRegistState = {
     pollOptions: null,
     closeOptions: null,
   },
+  isValid: false,
 };
 
 type BasicAction =
@@ -57,24 +58,12 @@ function pollReducer(
 ): PollRegistState {
   switch (action.type) {
     case 'SET_TITLE': {
-      const title = action.payload;
-      const error = PollValidator.validateTitle(title);
-      return {
-        ...state,
-        data: { ...state.data, title },
-        errors: { ...state.errors, title: error },
-      };
+      return { ...state, data: { ...state.data, title: action.payload } };
     }
     case 'SET_DESCRIPTION': {
-      const description = action.payload;
-      const error = PollValidator.validateDescription(description);
-      return {
-        ...state,
-        data: { ...state.data, description },
-        errors: { ...state.errors, description: error },
-      };
+      return { ...state, data: { ...state.data, description: action.payload } };
     }
-    case 'ADD_POLL_CHOICE':
+    case 'ADD_POLL_CHOICE': {
       return {
         ...state,
         data: {
@@ -94,7 +83,8 @@ function pollReducer(
           ],
         },
       };
-    case 'DELETE_POLL_CHOICE':
+    }
+    case 'DELETE_POLL_CHOICE': {
       return {
         ...state,
         data: {
@@ -104,7 +94,8 @@ function pollReducer(
           ),
         },
       };
-    case 'SET_POLL_CHOICE_IMAGE':
+    }
+    case 'SET_POLL_CHOICE_IMAGE': {
       return {
         ...state,
         data: {
@@ -116,6 +107,7 @@ function pollReducer(
           ),
         },
       };
+    }
     case 'SET_POLL_CHOICES_ORDER': {
       return {
         ...state,
@@ -129,7 +121,7 @@ function pollReducer(
         },
       };
     }
-    case 'SET_POLL_CHOICE_TITLE':
+    case 'SET_POLL_CHOICE_TITLE': {
       return {
         ...state,
         data: {
@@ -141,7 +133,8 @@ function pollReducer(
           ),
         },
       };
-    case 'SET_POLL_TYPE':
+    }
+    case 'SET_POLL_TYPE': {
       return {
         ...state,
         data: {
@@ -149,7 +142,8 @@ function pollReducer(
           pollOptions: { ...state.data.pollOptions, pollType: action.payload },
         },
       };
-    case 'SET_COMMENT_ACTIVE':
+    }
+    case 'SET_COMMENT_ACTIVE': {
       return {
         ...state,
         data: {
@@ -160,61 +154,45 @@ function pollReducer(
           },
         },
       };
+    }
     case 'SET_CLOSE_TYPE': {
       const closeType = action.payload;
-      const closeOptions = {
-        ...state.data.closeOptions,
-        closeType,
-        ...(closeType === 'TIME' && { maxVoterCount: 0 }),
-        ...(closeType === 'VOTER_COUNT' && { closedAt: '' }),
-        ...(closeType === 'SELF' && { closedAt: '', maxVoterCount: 0 }),
-      };
-      const error = PollValidator.validateCloseOptions({
-        closeType,
-      });
-
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          closeOptions,
-        },
-        errors: { ...state.errors, closeOptions: error },
-      };
-    }
-    case 'SET_CLOSED_AT': {
-      const closedAt = action.payload;
-      const error = PollValidator.validateCloseOptions({
-        closeType: state.data.closeOptions?.closeType,
-        closedAt,
-      });
-
       return {
         ...state,
         data: {
           ...state.data,
           closeOptions: {
             ...state.data.closeOptions,
-            closedAt,
+            closeType,
+            ...(closeType === 'TIME' && { maxVoterCount: 0 }),
+            ...(closeType === 'VOTER_COUNT' && { closedAt: '' }),
+            ...(closeType === 'SELF' && { closedAt: '', maxVoterCount: 0 }),
           },
         },
-        errors: { ...state.errors, closeOptions: error },
       };
     }
-    case 'SET_MAX_VOTER_COUNT': {
-      const maxVoterCount = action.payload;
-      const error = PollValidator.validateCloseOptions({
-        closeType: state.data.closeOptions?.closeType,
-        maxVoterCount,
-      });
-
+    case 'SET_CLOSED_AT': {
       return {
         ...state,
         data: {
           ...state.data,
-          closeOptions: { ...state.data.closeOptions, maxVoterCount },
+          closeOptions: {
+            ...state.data.closeOptions,
+            closedAt: action.payload,
+          },
         },
-        errors: { ...state.errors, closeOptions: error },
+      };
+    }
+    case 'SET_MAX_VOTER_COUNT': {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          closeOptions: {
+            ...state.data.closeOptions,
+            maxVoterCount: action.payload,
+          },
+        },
       };
     }
     default:
@@ -257,27 +235,36 @@ export const PollContext = createContext<
   {
     data: PollRegistData;
     errors: Record<keyof PollRegistData, string | null>;
+    isValid: boolean;
   } & PollActions
 >({
   data: initialPollRegistState.data,
   errors: initialPollRegistState.errors,
+  isValid: initialPollRegistState.isValid,
   ...pollActions(() => {}),
 });
 
 export const PollProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(pollReducer, initialPollRegistState);
 
+  const validator = new PollValidator(state.data);
   const actions = pollActions(dispatch);
 
   return (
     <PollContext.Provider
       value={{
         data: state.data,
-        errors: state.errors,
+        errors: validator.errors,
+        isValid: validator.isValid,
         ...actions,
       }}
     >
-      {children}
+      <form
+        className="pt-[55px] pb-[100px] px-6 relative h-full"
+        onSubmit={(e) => e.preventDefault()}
+      >
+        {children}
+      </form>
     </PollContext.Provider>
   );
 };

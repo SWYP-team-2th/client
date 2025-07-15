@@ -13,7 +13,7 @@ import Check from '@/assets/icons/check_24px.svg?react';
 import CheckLarge from '@/assets/icons/check_large.svg?react';
 import CheckSmall from '@/assets/icons/check_small.svg?react';
 import Cross from '@/assets/icons/cross_24px.svg?react';
-import DeadLineDarkGray from '@/assets/icons/dead-line-dark-gray.svg?react';
+import DeadLineDarkGray from '@/assets/icons/dead-Line-dark-gray.svg?react';
 import DeadLine from '@/assets/icons/dead_line.svg?react';
 import Edit from '@/assets/icons/edit_24px.svg?react';
 import Filter from '@/assets/icons/filter.svg?react';

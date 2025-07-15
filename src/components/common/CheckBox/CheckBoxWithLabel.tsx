@@ -39,7 +39,7 @@ export default function CheckBoxWithLabel({
             'relative inline-flex items-center justify-center border-2 rounded transition-colors mr-[10px]',
             sizeMap[size],
             checked
-              ? 'bg-primary-900 border-primary-900'
+              ? 'bg-primary-500 border-primary-500'
               : 'bg-gray-100 border-gray-400',
           )}
         >

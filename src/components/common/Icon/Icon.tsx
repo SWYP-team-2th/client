@@ -16,6 +16,7 @@ import Cross from '@/assets/icons/cross_24px.svg?react';
 import DeadLine from '@/assets/icons/dead_line.svg?react';
 import Edit from '@/assets/icons/edit_24px.svg?react';
 import Filter from '@/assets/icons/filter.svg?react';
+import FullPhoto from '@/assets/icons/full.svg?react';
 import HeartFill from '@/assets/icons/heart_fill_24px.svg?react';
 import HeartFillRed from '@/assets/icons/heart_fill_Red.svg?react';
 import HeartOutline from '@/assets/icons/heart_outline_24px.svg?react';
@@ -69,7 +70,6 @@ import VoteGray from '@/assets/icons/vote-gray.svg?react';
 import Vote from '@/assets/icons/vote.svg?react';
 import VoteClose from '@/assets/icons/vote_close.svg?react';
 import World from '@/assets/icons/world_24px.svg?react';
-
 export const ICONS = {
   CheckLarge,
   CheckSmall,
@@ -141,6 +141,7 @@ export const ICONS = {
   PencilGray,
   TrashCanGray,
   LinkWhite,
+  FullPhoto,
 } as const;
 
 export const ICON_SIZE = {

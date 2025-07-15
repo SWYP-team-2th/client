@@ -1,10 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { usePost } from '@/hooks/usePost';
 import { Header } from '@/components/common/Header/Header';
-
 import Icon from '@/components/common/Icon';
-import PollInfo from '@/components/poll-detail/Info/PollInfo';
 import CardList from '@/components/poll-detail/Card/CardList';
+import PollInfo from '@/components/poll-detail/Info/PollInfo';
+import { usePost } from '@/hooks/usePost';
+import NotFoundPage from '@/pages/NotFound/NotFoundPage';
 export default function PollDetailPage() {
   const navigate = useNavigate();
   const { postId } = useParams<{ postId: string }>();
@@ -13,14 +13,10 @@ export default function PollDetailPage() {
     return <div>게시글 ID가 없습니다.</div>;
   }
 
-  const { data: post, isLoading, error } = usePost(postId);
+  const { data: post } = usePost(postId);
 
   if (!post) {
-    return (
-      <div className="w-full bg-gray-100 h-screen flex items-center justify-center pt-[60px]">
-        <div className="text-lg">게시글을 찾을 수 없습니다.</div>
-      </div>
-    );
+    return <NotFoundPage />;
   }
 
   return (

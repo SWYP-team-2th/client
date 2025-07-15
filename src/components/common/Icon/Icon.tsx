@@ -13,6 +13,7 @@ import Check from '@/assets/icons/check_24px.svg?react';
 import CheckLarge from '@/assets/icons/check_large.svg?react';
 import CheckSmall from '@/assets/icons/check_small.svg?react';
 import Cross from '@/assets/icons/cross_24px.svg?react';
+import DeadLineDarkGray from '@/assets/icons/dead-line-dark-gray.svg?react';
 import DeadLine from '@/assets/icons/dead_line.svg?react';
 import Edit from '@/assets/icons/edit_24px.svg?react';
 import Filter from '@/assets/icons/filter.svg?react';
@@ -36,6 +37,7 @@ import Maximize from '@/assets/icons/maximize_24px.svg?react';
 import Medal from '@/assets/icons/medal.svg?react';
 import MedalWhite from '@/assets/icons/medal_fill_white.svg?react';
 import Menu from '@/assets/icons/menu_24px.svg?react';
+import MessageOutlineDarkGray from '@/assets/icons/message-outline-dark-gray.svg?react';
 import MessageOutlineGray from '@/assets/icons/message-outline-gray.svg?react';
 import MessageFill from '@/assets/icons/message_fill_24px.svg?react';
 import MessageOutline from '@/assets/icons/message_outline_24px.svg?react';
@@ -77,6 +79,8 @@ export const ICONS = {
   ArrowRightGray,
   VoteGray,
   MessageOutlineGray,
+  MessageOutlineDarkGray,
+  DeadLineDarkGray,
   PostWhite,
   Vote,
   Talk,

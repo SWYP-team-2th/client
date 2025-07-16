@@ -1,8 +1,15 @@
 import { useState } from 'react';
 import CardItem from '@/components/poll-detail/Card/CardItem';
-import { Post } from '@/types/post';
+import { Post, PollChoice } from '@/types/post';
 
-export default function CardList({ post }: { post: Post }) {
+interface CardListProps {
+  pollOptions: {
+    pollType: Post['pollOptions']['pollType'];
+  };
+  pollChoices: PollChoice[];
+}
+
+export default function CardList({ pollOptions, pollChoices }: CardListProps) {
   const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>(
     {},
   );
@@ -11,7 +18,7 @@ export default function CardList({ post }: { post: Post }) {
 
   const handleCheck =
     (id: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (post.pollOptions.pollType === 'SINGLE') {
+      if (pollOptions.pollType === 'SINGLE') {
         // 단일 투표
         setCheckedItems({ [id]: e.target.checked });
       } else {
@@ -22,7 +29,7 @@ export default function CardList({ post }: { post: Post }) {
 
   return (
     <div className="grid grid-cols-2 gap-x-5 gap-y-8 mx-[30px]">
-      {post.pollChoices.map((choice) => (
+      {pollChoices.map((choice) => (
         <CardItem
           key={choice.id}
           choice={choice}

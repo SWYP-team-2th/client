@@ -1,10 +1,9 @@
 import { useNavigate, useParams } from 'react-router-dom';
+import { useGetPost } from '@/api/useGetPost';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
 import CardList from '@/components/poll-detail/Card/CardList';
 import PollInfo from '@/components/poll-detail/Info/PollInfo';
-import { usePost } from '@/hooks/usePost';
-import NotFoundPage from '@/pages/NotFound/NotFoundPage';
 export default function PollDetailPage() {
   const navigate = useNavigate();
   const { postId } = useParams<{ postId: string }>();
@@ -13,10 +12,14 @@ export default function PollDetailPage() {
     return <div>게시글 ID가 없습니다.</div>;
   }
 
-  const { data: post } = usePost(postId);
+  const { data: post } = useGetPost(postId);
 
   if (!post) {
-    return <NotFoundPage />;
+    return (
+      <div className="w-full h-screen flex items-center justify-center text-gray-600">
+        존재하지 않는 투표예요.
+      </div>
+    );
   }
 
   return (
@@ -37,10 +40,19 @@ export default function PollDetailPage() {
         }
       />
 
-      <PollInfo post={post} />
+      <PollInfo
+        author={post.author}
+        createdAt={post.createdAt}
+        status={post.status}
+        closeOptions={post.closeOptions}
+        title={post.title}
+        description={post.description}
+        voterCount={post.voterCount}
+        commentCount={post.commentCount}
+      />
 
       {/* 투표  선탹지 */}
-      <CardList post={post} />
+      <CardList pollOptions={post.pollOptions} pollChoices={post.pollChoices} />
     </div>
   );
 }

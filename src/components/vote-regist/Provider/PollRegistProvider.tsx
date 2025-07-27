@@ -1,8 +1,8 @@
 import { useReducer, createContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { IMAGE_TITLE_PLACEHOLDER, INITIAL_POLL_REGIST_DATA } from './constants';
+import { PollFormFieldValidator } from './form-field-validate';
 import { PollRegistData, PollRegistState } from './types';
-import { PollValidator } from './validate';
 
 // TODO: 서버에서 공개 투표 추가하면 반영
 const initialPollRegistState: PollRegistState = {
@@ -247,7 +247,7 @@ export const PollContext = createContext<
 export const PollProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(pollReducer, initialPollRegistState);
 
-  const validator = new PollValidator(state.data);
+  const validator = new PollFormFieldValidator(state.data);
   const actions = pollActions(dispatch);
 
   return (

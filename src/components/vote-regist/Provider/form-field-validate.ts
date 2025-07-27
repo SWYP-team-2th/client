@@ -9,7 +9,7 @@ export interface ValidationResult {
   errors: Record<keyof PollRegistData, string | null>;
 }
 
-export class PollValidator {
+export class PollFormFieldValidator {
   private _errors: Record<keyof PollRegistData, string | null> = {
     title: null,
     description: null,
@@ -131,7 +131,7 @@ export class PollValidator {
 
   // 정적 메서드들 (기존 호환성 유지)
   static validateForm(formData: PollRegistData): ValidationResult {
-    const validator = new PollValidator(formData);
+    const validator = new PollFormFieldValidator(formData);
     return validator.validationResult;
   }
 

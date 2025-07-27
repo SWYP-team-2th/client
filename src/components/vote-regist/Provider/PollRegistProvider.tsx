@@ -4,19 +4,6 @@ import { IMAGE_TITLE_PLACEHOLDER, INITIAL_POLL_REGIST_DATA } from './constants';
 import { PollFormFieldValidator } from './form-field-validate';
 import { PollRegistData, PollRegistState } from './types';
 
-// TODO: 서버에서 공개 투표 추가하면 반영
-const initialPollRegistState: PollRegistState = {
-  data: INITIAL_POLL_REGIST_DATA,
-  errors: {
-    title: null,
-    description: null,
-    pollChoices: null,
-    pollOptions: null,
-    closeOptions: null,
-  },
-  isValid: false,
-};
-
 type BasicAction =
   | { type: 'SET_TITLE'; payload: string }
   | { type: 'SET_DESCRIPTION'; payload: string };
@@ -262,19 +249,47 @@ type PollActions = ReturnType<typeof pollActions>;
 
 export const PollContext = createContext<
   {
+    type: 'REGIST' | 'EDIT';
     data: PollRegistData;
     errors: Record<keyof PollRegistData, string | null>;
     isValid: boolean;
   } & PollActions
 >({
-  data: initialPollRegistState.data,
-  errors: initialPollRegistState.errors,
-  isValid: initialPollRegistState.isValid,
+  type: 'REGIST',
+  data: INITIAL_POLL_REGIST_DATA,
+  errors: {
+    title: null,
+    description: null,
+    pollChoices: null,
+    pollOptions: null,
+    closeOptions: null,
+  },
+  isValid: false,
   ...pollActions(() => {}),
 });
 
-export const PollProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, dispatch] = useReducer(pollReducer, initialPollRegistState);
+export const PollProvider = ({
+  type,
+  initialData,
+  children,
+}: {
+  type: 'REGIST' | 'EDIT';
+  initialData: PollRegistData;
+  children: React.ReactNode;
+}) => {
+  const initialState: PollRegistState = {
+    data: initialData,
+    errors: {
+      title: null,
+      description: null,
+      pollChoices: null,
+      pollOptions: null,
+      closeOptions: null,
+    },
+    isValid: false,
+  };
+
+  const [state, dispatch] = useReducer(pollReducer, initialState);
 
   const validator = new PollFormFieldValidator(state.data);
   const actions = pollActions(dispatch);
@@ -286,6 +301,7 @@ export const PollProvider = ({ children }: { children: React.ReactNode }) => {
         errors: validator.errors,
         isValid: validator.isValid,
         ...actions,
+        type,
       }}
     >
       <form

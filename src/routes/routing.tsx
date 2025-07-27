@@ -10,6 +10,7 @@ import PollDetailPage from '@/pages/PollDetail/PollDetailPage';
 import PrivacyPolicyPage from '@/pages/PrivacyPolicy/PrivacyPolicyPage';
 import SettingsPage from '@/pages/settings/SettingsPage';
 import TermsPage from '@/pages/Terms/TermsPage';
+import PollEditPage from '@/pages/Vote/PollEditPage';
 import VoteCommentDetailPage from '@/pages/Vote/VoteCommentDetailPage';
 import VotePage from '@/pages/Vote/VotePage';
 import VoteRegistPage from '@/pages/Vote/VoteRegistPage';
@@ -52,7 +53,10 @@ export const router = createBrowserRouter([
         path: '/votes/regist',
         element: <VoteRegistPage />,
       },
-
+      {
+        path: '/polls/:pollId/edit',
+        element: <PollEditPage />,
+      },
       {
         path: '/settings',
         element: <SettingsPage />,

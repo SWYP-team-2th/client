@@ -1,10 +1,10 @@
-import FieldContainer from '../FieldContainer';
 import PollBasicInformation from './PollBasicInformation';
 import PollChoiceInformation from './PollChoiceInformation';
-import usePollRegist from '../Provider/hooks';
+import FieldContainer from '../FieldContainer';
+import usePollForm from '../Provider/hooks';
 
 export default function PollInformation() {
-  const { type } = usePollRegist();
+  const { type } = usePollForm();
 
   return (
     <FieldContainer className="flex flex-col gap-8">

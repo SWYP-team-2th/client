@@ -1,6 +1,6 @@
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { request } from './config';
-import { PollRegistData } from '@/components/vote-regist/Provider/types';
+import { PollFormData } from '@/components/poll/Provider/types';
 
 interface RegistVoteResponse {
   postId: number;
@@ -9,12 +9,12 @@ interface RegistVoteResponse {
 
 export default function usePostRegistVote(
   options?: Omit<
-    UseMutationOptions<RegistVoteResponse, Error, PollRegistData>,
+    UseMutationOptions<RegistVoteResponse, Error, PollFormData>,
     'mutationFn'
   >,
 ) {
-  return useMutation<RegistVoteResponse, Error, PollRegistData>({
-    mutationFn: (data: PollRegistData) =>
+  return useMutation<RegistVoteResponse, Error, PollFormData>({
+    mutationFn: (data: PollFormData) =>
       request({
         method: 'POST',
         url: '/posts',

@@ -1,5 +1,5 @@
-import FieldContainer from '../FieldContainer';
 import usePollOptionSection from './hooks';
+import FieldContainer from '../../poll/FieldContainer';
 import Switch from '@/components/common/Switch';
 
 export default function PollOptionSection() {

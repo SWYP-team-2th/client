@@ -1,8 +1,8 @@
 import { Reorder, motion } from 'motion/react';
 import usePollChoice from './hooks';
-import type { PollChoice } from '@/components/vote-regist/Provider/types';
+import type { PollChoice } from '@/components/poll/Provider/types';
 import Icon from '@/components/common/Icon';
-import { IMAGE_TITLE_PLACEHOLDER } from '@/components/vote-regist/Provider/constants';
+import { IMAGE_TITLE_PLACEHOLDER } from '@/components/poll/Provider/constants';
 import { cn } from '@/utils/cn';
 
 interface PollChoiceProps {

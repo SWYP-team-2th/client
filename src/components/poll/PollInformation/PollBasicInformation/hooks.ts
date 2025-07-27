@@ -1,7 +1,7 @@
-import usePollRegist from '../../Provider/hooks';
+import usePollForm from '@/components/poll/Provider/hooks';
 
 export default function usePollBasicInformation() {
-  const { data, setTitle, setDescription } = usePollRegist();
+  const { data, setTitle, setDescription } = usePollForm();
 
   return {
     title: data.title,

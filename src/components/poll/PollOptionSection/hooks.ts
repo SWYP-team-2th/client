@@ -1,26 +1,26 @@
-import usePollRegist from '../Provider/hooks';
-import { PollOption } from '../Provider/types';
+import usePollForm from '@/components/poll/Provider/hooks';
+import { PollOptions } from '@/types/post';
 
 export default function usePollOptionSection() {
-  const { data, setPollType, setCommentActive } = usePollRegist();
+  const { data, setPollType, setCommentActive } = usePollForm();
 
   // TODO: 서버에서 공개 투표 추가하면 반영
   const POLL_OPTIONS: {
     label: string;
-    value: PollOption[keyof PollOption];
+    value: PollOptions[keyof PollOptions];
     checked: boolean;
     onChange: (checked: boolean) => void;
   }[] = [
     {
       label: '복수 선택',
-      value: data.pollOptions.pollType,
-      checked: data.pollOptions.pollType === 'MULTIPLE',
+      value: data.pollOption.pollType,
+      checked: data.pollOption.pollType === 'MULTIPLE',
       onChange: (checked) => setPollType(checked ? 'MULTIPLE' : 'SINGLE'),
     },
     {
       label: '댓글 비활성화',
-      value: data.pollOptions.commentActive,
-      checked: data.pollOptions.commentActive === 'CLOSED',
+      value: data.pollOption.commentActive,
+      checked: data.pollOption.commentActive === 'CLOSED',
       onChange: (checked) => setCommentActive(checked ? 'CLOSED' : 'OPEN'),
     },
   ];

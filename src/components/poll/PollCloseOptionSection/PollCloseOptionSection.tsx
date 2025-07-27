@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import FieldContainer from '../FieldContainer';
 import usePollCloseOptionSection from './hooks';
+import FieldContainer from '../../poll/FieldContainer';
 import RadioGroup from '@/components/common/RadioGroup';
 
 export default function PollCloseOptionSection() {
@@ -22,7 +22,10 @@ export default function PollCloseOptionSection() {
             value: 'TIME',
             label: '시간으로 마감',
             Content: (
-              <TimeCloseContent closedAt={closedAt} setClosedAt={setClosedAt} />
+              <TimeCloseContent
+                closedAt={closedAt ?? ''}
+                setClosedAt={setClosedAt}
+              />
             ),
           },
           {
@@ -30,7 +33,7 @@ export default function PollCloseOptionSection() {
             label: '투표 수로 마감',
             Content: (
               <MaxVoterCountContent
-                maxVoterCount={maxVoterCount}
+                maxVoterCount={maxVoterCount ?? 0}
                 setMaxVoterCount={handleMaxVoterCount}
               />
             ),
@@ -38,9 +41,7 @@ export default function PollCloseOptionSection() {
           { value: 'SELF', label: '직접 마감' },
         ]}
         value={closeType}
-        onChange={(value) =>
-          setCloseType(value as 'SELF' | 'TIME' | 'VOTER_COUNT')
-        }
+        onChange={(value) => setCloseType(value as 'SELF' | 'DATE' | 'VOTER')}
       />
     </FieldContainer>
   );

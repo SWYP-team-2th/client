@@ -1,16 +1,6 @@
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { request } from './config';
-
-interface Image {
-  imageFileId: number;
-}
-
-interface RegistVoteRequest {
-  description: string;
-  images: Image[];
-  voteType: 'SINGLE' | 'MULTIPLE' | null;
-  scope: 'PUBLIC' | 'PRIVATE';
-}
+import { PollRegistData } from '@/components/vote-regist/Provider/types';
 
 interface RegistVoteResponse {
   postId: number;
@@ -19,12 +9,12 @@ interface RegistVoteResponse {
 
 export default function usePostRegistVote(
   options?: Omit<
-    UseMutationOptions<RegistVoteResponse, Error, RegistVoteRequest>,
+    UseMutationOptions<RegistVoteResponse, Error, PollRegistData>,
     'mutationFn'
   >,
 ) {
-  return useMutation<RegistVoteResponse, Error, RegistVoteRequest>({
-    mutationFn: (data: RegistVoteRequest) =>
+  return useMutation<RegistVoteResponse, Error, PollRegistData>({
+    mutationFn: (data: PollRegistData) =>
       request({
         method: 'POST',
         url: '/posts',

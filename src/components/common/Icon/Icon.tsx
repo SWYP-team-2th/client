@@ -12,6 +12,8 @@ import BookmarkOutline from '@/assets/icons/bookmark_outline_24px.svg?react';
 import Check from '@/assets/icons/check_24px.svg?react';
 import CheckLarge from '@/assets/icons/check_large.svg?react';
 import CheckSmall from '@/assets/icons/check_small.svg?react';
+import Close from '@/assets/icons/close.svg?react';
+import ThickClose from '@/assets/icons/close_thick.svg?react';
 import Cross from '@/assets/icons/cross_24px.svg?react';
 import DeadLineDarkGray from '@/assets/icons/dead-Line-dark-gray.svg?react';
 import DeadLine from '@/assets/icons/dead_line.svg?react';
@@ -99,6 +101,8 @@ export const ICONS = {
   BookmarkFill,
   BookmarkOutline,
   Check,
+  Close,
+  ThickClose,
   Cross,
   Edit,
   HeartFill,

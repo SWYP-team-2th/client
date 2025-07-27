@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { PollFormFieldValidator } from './form-field-validate';
 import { CloseOption } from './types';
-import { PollValidator } from './validate';
 
 describe('test Form Validate Utils: 각 필드의 유효성 검사를 하는 유틸 함수를 테스트합니다.', () => {
   describe('test validateCloseOptions(): 마감 설정 유효성 검사 함수를 테스트합니다.', () => {
@@ -13,7 +13,7 @@ describe('test Form Validate Utils: 각 필드의 유효성 검사를 하는 유
       };
 
       // when
-      const result = PollValidator.validateCloseOptions(closeOptions);
+      const result = PollFormFieldValidator.validateCloseOptions(closeOptions);
 
       // then
       expect(result).toBe(null);
@@ -27,7 +27,7 @@ describe('test Form Validate Utils: 각 필드의 유효성 검사를 하는 유
       };
 
       // when
-      const result = PollValidator.validateCloseOptions(closeOptions);
+      const result = PollFormFieldValidator.validateCloseOptions(closeOptions);
 
       // then
       expect(result).toBe('날짜와 시간을 모두 입력해 주세요.');
@@ -41,7 +41,7 @@ describe('test Form Validate Utils: 각 필드의 유효성 검사를 하는 유
       };
 
       // when
-      const result = PollValidator.validateCloseOptions(closeOptions);
+      const result = PollFormFieldValidator.validateCloseOptions(closeOptions);
 
       // then
       expect(result).toBe('최대 참여자 수는 0 이하일 수 없습니다.');

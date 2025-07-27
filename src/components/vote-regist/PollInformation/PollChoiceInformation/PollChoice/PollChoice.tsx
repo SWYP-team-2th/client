@@ -12,8 +12,8 @@ interface PollChoiceProps {
 export default function PollChoice({ choice }: PollChoiceProps) {
   const {
     dragControls,
-    setPollChoiceImage,
     setPollChoiceTitle,
+    addPollChoices,
     fileInputRef,
     handleClickImageButton,
     handleDelete,
@@ -51,16 +51,20 @@ export default function PollChoice({ choice }: PollChoiceProps) {
                 </div>
               )}
               <input
+                multiple
                 type="file"
                 accept="image/*"
                 ref={fileInputRef}
                 style={{ display: 'none' }}
                 onChange={(e) => {
-                  if (e.target.files?.[0]) {
-                    setPollChoiceImage(
-                      choice.id,
-                      URL.createObjectURL(e.target.files[0]),
+                  if (e.target.files) {
+                    const files = Array.from(e.target.files);
+                    const imageUrls = files.map((file) =>
+                      URL.createObjectURL(file),
                     );
+
+                    // 기존 빈 pollChoice들을 삭제하고 모든 이미지로 새로운 pollChoice 생성
+                    addPollChoices(imageUrls, files);
                   }
                 }}
               />

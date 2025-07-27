@@ -10,6 +10,8 @@ export interface PollChoice {
   id: string;
   title: string;
   imageUrl: string;
+  file?: File;
+  imageFileId?: number;
   order: number;
 }
 

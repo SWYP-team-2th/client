@@ -25,8 +25,8 @@ type PollChoiceAction =
   | { type: 'ADD_POLL_CHOICE' }
   | { type: 'DELETE_POLL_CHOICE'; payload: { id: string } }
   | {
-      type: 'SET_POLL_CHOICE_IMAGE';
-      payload: { id: string; imageUrl: string };
+      type: 'ADD_POLL_CHOICES';
+      payload: { imageUrls: string[]; files: File[] };
     }
   | {
       type: 'SET_POLL_CHOICES_ORDER';
@@ -95,16 +95,45 @@ function pollReducer(
         },
       };
     }
-    case 'SET_POLL_CHOICE_IMAGE': {
+    case 'ADD_POLL_CHOICES': {
+      const emptyChoices = state.data.pollChoices.filter(
+        (choice) => !choice.imageUrl,
+      );
+      const remainingUrls = action.payload.imageUrls.slice(emptyChoices.length);
+      const remainingFiles = action.payload.files.slice(emptyChoices.length);
+
       return {
         ...state,
         data: {
           ...state.data,
-          pollChoices: state.data.pollChoices.map((choice) =>
-            choice.id === action.payload.id
-              ? { ...choice, imageUrl: action.payload.imageUrl }
-              : choice,
-          ),
+          pollChoices: [
+            // 기존 pollChoice들을 업데이트
+            ...state.data.pollChoices.map((choice, index) => {
+              if (
+                index < emptyChoices.length &&
+                action.payload.imageUrls[index]
+              ) {
+                return {
+                  ...choice,
+                  imageUrl: action.payload.imageUrls[index],
+                  file: action.payload.files[index],
+                };
+              }
+              return choice;
+            }),
+            // 남은 이미지들로 새로운 pollChoice 생성
+            ...remainingUrls.map((imageUrl, index) => ({
+              id: uuidv4(),
+              title:
+                IMAGE_TITLE_PLACEHOLDER[
+                  (state.data.pollChoices.length +
+                    index) as keyof typeof IMAGE_TITLE_PLACEHOLDER
+                ],
+              imageUrl: imageUrl,
+              file: remainingFiles[index],
+              order: state.data.pollChoices.length + index,
+            })),
+          ],
         },
       };
     }
@@ -207,8 +236,8 @@ const pollActions = (dispatch: React.Dispatch<PollAction>) => ({
   addPollChoice: () => dispatch({ type: 'ADD_POLL_CHOICE' }),
   deletePollChoice: (id: string) =>
     dispatch({ type: 'DELETE_POLL_CHOICE', payload: { id } }),
-  setPollChoiceImage: (id: string, imageUrl: string) =>
-    dispatch({ type: 'SET_POLL_CHOICE_IMAGE', payload: { id, imageUrl } }),
+  addPollChoices: (imageUrls: string[], files: File[]) =>
+    dispatch({ type: 'ADD_POLL_CHOICES', payload: { imageUrls, files } }),
   setPollChoicesOrder: (newOrder: number[]) => {
     dispatch({
       type: 'SET_POLL_CHOICES_ORDER',

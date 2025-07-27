@@ -6,7 +6,7 @@ import usePollRegist from '@/components/vote-regist/Provider/hooks';
 export default function usePollChoice(id: string) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dragControls = useDragControls();
-  const { setPollChoiceTitle, setPollChoiceImage, deletePollChoice } =
+  const { setPollChoiceTitle, deletePollChoice, addPollChoices } =
     usePollRegist();
 
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -37,7 +37,7 @@ export default function usePollChoice(id: string) {
   return {
     dragControls,
     setPollChoiceTitle,
-    setPollChoiceImage,
+    addPollChoices,
     fileInputRef,
     handleClickImageButton,
     handleDelete,

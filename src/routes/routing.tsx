@@ -3,7 +3,6 @@ import DefaultLayout from '@/components/common/Layout/DefaultLayout';
 import SubLayout from '@/components/common/Layout/SubLayout';
 import Home from '@/pages/Home/Home';
 import OAuthPage from '@/pages/Login/OAuthPage';
-import MyPage from '@/pages/my/MyPage';
 import NotFoundPage from '@/pages/NotFound/NotFoundPage';
 import OnBoardingPage from '@/pages/OnBoarding/OnBoardingPage';
 import PollDetailPage from '@/pages/PollDetail/PollDetailPage';
@@ -22,10 +21,6 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
-      },
-      {
-        path: '/user/:userId',
-        element: <MyPage />,
       },
     ],
   },

@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { PollRegistData } from './types';
+import { PollFormData } from './types';
 
 export const IMAGE_TITLE_PLACEHOLDER = {
   0: '츄즈 A',
@@ -14,7 +14,7 @@ export const IMAGE_TITLE_PLACEHOLDER = {
   9: '츄즈 J',
 };
 
-export const INITIAL_POLL_REGIST_DATA: PollRegistData = {
+export const INITIAL_POLL_REGIST_DATA: PollFormData = {
   title: '',
   description: '',
   pollChoices: [
@@ -31,11 +31,12 @@ export const INITIAL_POLL_REGIST_DATA: PollRegistData = {
       order: 1,
     },
   ],
-  pollOptions: {
+  pollOption: {
+    scope: 'PUBLIC',
     pollType: 'SINGLE',
     commentActive: 'OPEN',
   },
-  closeOptions: {
+  closeOption: {
     closeType: 'SELF',
     closedAt: '',
     maxVoterCount: 0,

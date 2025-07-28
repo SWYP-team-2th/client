@@ -1,8 +1,8 @@
-import { MAX_VOTER_COUNT } from '../Provider/constants';
-import usePollRegist from '../Provider/hooks';
+import { MAX_VOTER_COUNT } from '@/components/poll/Provider/constants';
+import usePollForm from '@/components/poll/Provider/hooks';
 
 export default function usePollCloseOptionSection() {
-  const { data, setCloseType, setClosedAt, setMaxVoterCount } = usePollRegist();
+  const { data, setCloseType, setClosedAt, setMaxVoterCount } = usePollForm();
 
   const handleMaxVoterCount = (value: string) => {
     const onlyNums = value.replace(/[^0-9]/g, '');
@@ -11,9 +11,9 @@ export default function usePollCloseOptionSection() {
   };
 
   return {
-    closeType: data.closeOptions.closeType,
-    closedAt: data.closeOptions.closedAt,
-    maxVoterCount: data.closeOptions.maxVoterCount,
+    closeType: data.closeOption.closeType,
+    closedAt: data.closeOption.closedAt,
+    maxVoterCount: data.closeOption.maxVoterCount,
     setCloseType,
     setClosedAt,
     handleMaxVoterCount,

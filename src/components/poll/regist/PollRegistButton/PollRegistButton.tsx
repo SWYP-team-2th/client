@@ -1,15 +1,15 @@
 import { useNavigate } from 'react-router-dom';
-import usePollRegist from '../Provider/hooks';
+import usePollForm from '../../Provider/hooks';
 import usePostRegistVote from '@/api/usePostRegistVote';
 import usePostUploadImage from '@/api/usePostUploadImage';
 import { Button } from '@/components/common/Button/Button';
 import Loading from '@/components/common/Loading';
 import useToast from '@/components/common/Toast/hooks';
 
-export default function PollSubmitButton() {
+export default function PollRegistButton() {
   const navigate = useNavigate();
   const toast = useToast();
-  const { isValid, data: pollData } = usePollRegist();
+  const { isValid, data: pollData } = usePollForm();
   const { mutate: registVote, isPending: isRegistVotePending } =
     usePostRegistVote({
       onSuccess: (data) => {
@@ -41,8 +41,8 @@ export default function PollSubmitButton() {
             order: choice.order,
             imageFileId: formattedImageIds[index]?.imageFileId,
           })),
-          pollOptions: pollData.pollOptions,
-          closeOptions: pollData.closeOptions,
+          pollOption: pollData.pollOption,
+          closeOption: pollData.closeOption,
         });
       },
     });

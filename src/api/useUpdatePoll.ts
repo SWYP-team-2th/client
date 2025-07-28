@@ -1,6 +1,6 @@
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { request } from './config';
-import { PollRegistData } from '@/components/vote-regist/Provider/types';
+import { PollFormData } from '@/components/poll/Provider/types';
 
 interface UpdatePollResponse {
   postId: number;
@@ -13,12 +13,12 @@ export default function useUpdatePoll({
 }: {
   id: number;
   options?: Omit<
-    UseMutationOptions<UpdatePollResponse, Error, PollRegistData>,
+    UseMutationOptions<UpdatePollResponse, Error, PollFormData>,
     'mutationFn'
   >;
 }) {
-  return useMutation<UpdatePollResponse, Error, PollRegistData>({
-    mutationFn: (data: PollRegistData) =>
+  return useMutation<UpdatePollResponse, Error, PollFormData>({
+    mutationFn: (data: PollFormData) =>
       request({
         method: 'PUT',
         url: `/posts/${id}`,

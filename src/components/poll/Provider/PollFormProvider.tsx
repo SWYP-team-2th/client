@@ -2,7 +2,8 @@ import { useReducer, createContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { IMAGE_TITLE_PLACEHOLDER, INITIAL_POLL_REGIST_DATA } from './constants';
 import { PollFormFieldValidator } from './form-field-validate';
-import { PollRegistData, PollRegistState } from './types';
+import { PollFormData, PollRegistState } from './types';
+import { CloseOptions } from '@/types/post';
 
 type BasicAction =
   | { type: 'SET_TITLE'; payload: string }
@@ -29,7 +30,7 @@ type PollOptionAction =
   | { type: 'SET_COMMENT_ACTIVE'; payload: 'OPEN' | 'CLOSED' };
 
 type CloseOptionAction =
-  | { type: 'SET_CLOSE_TYPE'; payload: 'SELF' | 'TIME' | 'VOTER_COUNT' }
+  | { type: 'SET_CLOSE_TYPE'; payload: CloseOptions['closeType'] }
   | { type: 'SET_CLOSED_AT'; payload: string }
   | { type: 'SET_MAX_VOTER_COUNT'; payload: number };
 
@@ -39,7 +40,7 @@ type PollAction =
   | PollOptionAction
   | CloseOptionAction;
 
-function pollReducer(
+function pollFormReducer(
   state: PollRegistState,
   action: PollAction,
 ): PollRegistState {
@@ -155,7 +156,7 @@ function pollReducer(
         ...state,
         data: {
           ...state.data,
-          pollOptions: { ...state.data.pollOptions, pollType: action.payload },
+          pollOption: { ...state.data.pollOption, pollType: action.payload },
         },
       };
     }
@@ -164,8 +165,8 @@ function pollReducer(
         ...state,
         data: {
           ...state.data,
-          pollOptions: {
-            ...state.data.pollOptions,
+          pollOption: {
+            ...state.data.pollOption,
             commentActive: action.payload,
           },
         },
@@ -177,11 +178,11 @@ function pollReducer(
         ...state,
         data: {
           ...state.data,
-          closeOptions: {
-            ...state.data.closeOptions,
+          closeOption: {
+            ...state.data.closeOption,
             closeType,
-            ...(closeType === 'TIME' && { maxVoterCount: 0 }),
-            ...(closeType === 'VOTER_COUNT' && { closedAt: '' }),
+            ...(closeType === 'VOTER' && { maxVoterCount: 0 }),
+            ...(closeType === 'DATE' && { closedAt: '' }),
             ...(closeType === 'SELF' && { closedAt: '', maxVoterCount: 0 }),
           },
         },
@@ -192,8 +193,8 @@ function pollReducer(
         ...state,
         data: {
           ...state.data,
-          closeOptions: {
-            ...state.data.closeOptions,
+          closeOption: {
+            ...state.data.closeOption,
             closedAt: action.payload,
           },
         },
@@ -204,8 +205,8 @@ function pollReducer(
         ...state,
         data: {
           ...state.data,
-          closeOptions: {
-            ...state.data.closeOptions,
+          closeOption: {
+            ...state.data.closeOption,
             maxVoterCount: action.payload,
           },
         },
@@ -216,7 +217,7 @@ function pollReducer(
   }
 }
 
-const pollActions = (dispatch: React.Dispatch<PollAction>) => ({
+const pollFormActions = (dispatch: React.Dispatch<PollAction>) => ({
   setTitle: (title: string) => dispatch({ type: 'SET_TITLE', payload: title }),
   setDescription: (description: string) =>
     dispatch({ type: 'SET_DESCRIPTION', payload: description }),
@@ -237,7 +238,7 @@ const pollActions = (dispatch: React.Dispatch<PollAction>) => ({
     dispatch({ type: 'SET_POLL_TYPE', payload: pollType }),
   setCommentActive: (commentActive: 'OPEN' | 'CLOSED') =>
     dispatch({ type: 'SET_COMMENT_ACTIVE', payload: commentActive }),
-  setCloseType: (closeType: 'SELF' | 'TIME' | 'VOTER_COUNT') =>
+  setCloseType: (closeType: CloseOptions['closeType']) =>
     dispatch({ type: 'SET_CLOSE_TYPE', payload: closeType }),
   setClosedAt: (closedAt: string) =>
     dispatch({ type: 'SET_CLOSED_AT', payload: closedAt }),
@@ -245,15 +246,15 @@ const pollActions = (dispatch: React.Dispatch<PollAction>) => ({
     dispatch({ type: 'SET_MAX_VOTER_COUNT', payload: maxVoterCount }),
 });
 
-type PollActions = ReturnType<typeof pollActions>;
+type PollFormActions = ReturnType<typeof pollFormActions>;
 
-export const PollContext = createContext<
+export const PollFormContext = createContext<
   {
     type: 'REGIST' | 'EDIT';
-    data: PollRegistData;
-    errors: Record<keyof PollRegistData, string | null>;
+    data: PollFormData;
+    errors: Record<keyof PollFormData, string | null>;
     isValid: boolean;
-  } & PollActions
+  } & PollFormActions
 >({
   type: 'REGIST',
   data: INITIAL_POLL_REGIST_DATA,
@@ -261,20 +262,20 @@ export const PollContext = createContext<
     title: null,
     description: null,
     pollChoices: null,
-    pollOptions: null,
-    closeOptions: null,
+    pollOption: null,
+    closeOption: null,
   },
   isValid: false,
-  ...pollActions(() => {}),
+  ...pollFormActions(() => {}),
 });
 
-export const PollProvider = ({
+export const PollFormProvider = ({
   type,
   initialData,
   children,
 }: {
   type: 'REGIST' | 'EDIT';
-  initialData: PollRegistData;
+  initialData: PollFormData;
   children: React.ReactNode;
 }) => {
   const initialState: PollRegistState = {
@@ -283,19 +284,19 @@ export const PollProvider = ({
       title: null,
       description: null,
       pollChoices: null,
-      pollOptions: null,
-      closeOptions: null,
+      pollOption: null,
+      closeOption: null,
     },
     isValid: false,
   };
 
-  const [state, dispatch] = useReducer(pollReducer, initialState);
+  const [state, dispatch] = useReducer(pollFormReducer, initialState);
 
   const validator = new PollFormFieldValidator(state.data);
-  const actions = pollActions(dispatch);
+  const actions = pollFormActions(dispatch);
 
   return (
-    <PollContext.Provider
+    <PollFormContext.Provider
       value={{
         data: state.data,
         errors: validator.errors,
@@ -310,6 +311,6 @@ export const PollProvider = ({
       >
         {children}
       </form>
-    </PollContext.Provider>
+    </PollFormContext.Provider>
   );
 };

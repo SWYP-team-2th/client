@@ -1,13 +1,13 @@
 import { useMotionValue, useAnimation } from 'framer-motion';
 import { useDragControls } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
-import usePollRegist from '@/components/vote-regist/Provider/hooks';
+import usePollForm from '@/components/poll/Provider/hooks';
 
 export default function usePollChoice(id: string) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dragControls = useDragControls();
   const { setPollChoiceTitle, deletePollChoice, addPollChoices } =
-    usePollRegist();
+    usePollForm();
 
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 

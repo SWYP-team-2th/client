@@ -1,12 +1,12 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import useUpdatePoll from '@/api/useUpdatePoll';
 import useToast from '@/components/common/Toast/hooks';
-import usePollRegist from '@/components/vote-regist/Provider/hooks';
+import usePollForm from '@/components/poll/Provider/hooks';
 
 export default function usePollEditButton() {
   const navigate = useNavigate();
   const toast = useToast();
-  const { isValid, data } = usePollRegist();
+  const { isValid, data } = usePollForm();
   const { pollId } = useParams<{ pollId: string }>();
 
   const { mutate: updatePoll, isPending } = useUpdatePoll({

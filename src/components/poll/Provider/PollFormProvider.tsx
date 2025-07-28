@@ -27,7 +27,8 @@ type PollChoiceAction =
 
 type PollOptionAction =
   | { type: 'SET_POLL_TYPE'; payload: 'SINGLE' | 'MULTIPLE' }
-  | { type: 'SET_COMMENT_ACTIVE'; payload: 'OPEN' | 'CLOSED' };
+  | { type: 'SET_COMMENT_ACTIVE'; payload: 'OPEN' | 'CLOSED' }
+  | { type: 'SET_SCOPE'; payload: 'PUBLIC' | 'PRIVATE' };
 
 type CloseOptionAction =
   | { type: 'SET_CLOSE_TYPE'; payload: CloseOptions['closeType'] }
@@ -172,6 +173,15 @@ function pollFormReducer(
         },
       };
     }
+    case 'SET_SCOPE': {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          pollOption: { ...state.data.pollOption, scope: action.payload },
+        },
+      };
+    }
     case 'SET_CLOSE_TYPE': {
       const closeType = action.payload;
       return {
@@ -238,6 +248,8 @@ const pollFormActions = (dispatch: React.Dispatch<PollAction>) => ({
     dispatch({ type: 'SET_POLL_TYPE', payload: pollType }),
   setCommentActive: (commentActive: 'OPEN' | 'CLOSED') =>
     dispatch({ type: 'SET_COMMENT_ACTIVE', payload: commentActive }),
+  setScope: (scope: 'PUBLIC' | 'PRIVATE') =>
+    dispatch({ type: 'SET_SCOPE', payload: scope }),
   setCloseType: (closeType: CloseOptions['closeType']) =>
     dispatch({ type: 'SET_CLOSE_TYPE', payload: closeType }),
   setClosedAt: (closedAt: string) =>

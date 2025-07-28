@@ -7,7 +7,7 @@ export default function PollOptionSection() {
 
   return (
     <FieldContainer title="투표 설정" className="flex flex-col gap-5">
-      {POLL_OPTIONS.map((option) => (
+      {POLL_OPTIONS.filter((option) => option.visible).map((option) => (
         <div
           key={option.value}
           className="flex items-center justify-between text-gray-900 text-headline-2"

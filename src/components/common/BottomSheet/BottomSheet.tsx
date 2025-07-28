@@ -21,20 +21,18 @@ export default function BottomSheet({
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: '100%', opacity: 0 }}
       transition={{ duration: 0.4, ease: 'easeInOut' }}
-      className="py-[28px] rounded-t-2xl relative w-full max-w-[480px] bg-gray-100"
+      className="pt-[24px] pb-[24px] pl-[32px] pr-[32px] rounded-t-2xl relative w-full max-w-[480px] bg-gray-100"
     >
-      <h3 className="px-10 text-title-large pb-4 border-b-[1px] border-gray-400">
-        {title}
-      </h3>
+      <h3 className="text-heading-1 pb-8 border-gray-400">{title}</h3>
       {hasCloseButton && (
         <button
-          className="absolute top-[10px] right-[10px]"
+          className="absolute top-[24px] right-[24px]"
           onClick={closeBottomSheet}
         >
-          <Icon name="Cross" size="large" />
+          <Icon name="CrossGray" size="large" />
         </button>
       )}
-      <div className="pt-4 px-10">{children}</div>
+      <div>{children}</div>
     </motion.div>
   );
 }

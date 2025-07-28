@@ -15,6 +15,7 @@ import CheckSmall from '@/assets/icons/check_small.svg?react';
 import Close from '@/assets/icons/close.svg?react';
 import ThickClose from '@/assets/icons/close_thick.svg?react';
 import Cross from '@/assets/icons/cross_24px.svg?react';
+import CrossGray from '@/assets/icons/cross_gray.svg?react';
 import DeadLineDarkGray from '@/assets/icons/dead-Line-dark-gray.svg?react';
 import DeadLine from '@/assets/icons/dead_line.svg?react';
 import Edit from '@/assets/icons/edit_24px.svg?react';
@@ -66,6 +67,7 @@ import ToastSuccess from '@/assets/icons/toast_success.svg?react';
 import ToastWarning from '@/assets/icons/toast_warning.svg?react';
 import TrashCanGray from '@/assets/icons/trash-can-gray.svg?react';
 import Trash from '@/assets/icons/trash_24px.svg?react';
+import UpLoad from '@/assets/icons/upload.svg?react';
 import User2Fill from '@/assets/icons/user2_fill_24px.svg?react';
 import User2Outline from '@/assets/icons/user2_outline_24px.svg?react';
 import UserFill from '@/assets/icons/user_fill_24px.svg?react';
@@ -75,6 +77,8 @@ import Vote from '@/assets/icons/vote.svg?react';
 import VoteClose from '@/assets/icons/vote_close.svg?react';
 import World from '@/assets/icons/world_24px.svg?react';
 export const ICONS = {
+  UpLoad,
+  CrossGray,
   CheckLarge,
   CheckSmall,
   LogoutGray,

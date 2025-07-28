@@ -1,9 +1,9 @@
+import { useNavigate } from 'react-router-dom';
+import Logo from '@/assets/icons/logo.svg?react';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
 import HomeFeed from '@/components/home/HomeFeed';
 
-import { useNavigate } from 'react-router-dom';
-import Logo from '@/assets/icons/logo.svg?react';
 
 export default function Home() {
   const navigate = useNavigate();

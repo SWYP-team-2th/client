@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useGetPost } from '@/api/useGetPost';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
-import ShareButton from '@/components/poll-detail/Button/ShareButton';
+import PollActionButtons from '@/components/poll-detail/Button/PollActionButtons';
 import CardList from '@/components/poll-detail/Card/CardList';
 import PollInfo from '@/components/poll-detail/Info/PollInfo';
 export default function PollDetailPage() {
@@ -54,7 +54,9 @@ export default function PollDetailPage() {
 
       {/* 투표  선탹지 */}
       <CardList pollOptions={post.pollOptions} pollChoices={post.pollChoices} />
-      <ShareButton shareUrl={post.shareUrl} />
+
+      {/* 투표 버튼, 공유 버튼 */}
+      <PollActionButtons shareUrl={post.shareUrl} />
     </div>
   );
 }

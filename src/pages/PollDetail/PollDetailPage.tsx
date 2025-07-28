@@ -54,7 +54,7 @@ export default function PollDetailPage() {
 
       {/* 투표  선탹지 */}
       <CardList pollOptions={post.pollOptions} pollChoices={post.pollChoices} />
-      <ShareButton shareUrl={''} />
+      <ShareButton shareUrl={post.shareUrl} />
     </div>
   );
 }

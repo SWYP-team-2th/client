@@ -13,7 +13,7 @@ export default function HomeFeed() {
     );
   }
 
-  const feeds = feed?.data || [];
+  const feeds = feed?.pages.flatMap((page) => page.data) || [];
 
   return (
     <div className="space-y-4">

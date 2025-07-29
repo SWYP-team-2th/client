@@ -1,29 +1,15 @@
-import {
-  InfiniteData,
-  useInfiniteQuery,
-  UseInfiniteQueryOptions,
-} from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { request } from '@/api/config';
 import { getAccessToken } from '@/components/login/Auth/token';
 import { FeedType } from '@/types/feed';
 import { Pageable } from '@/types/pageable';
 
-export default function useGetFeed(
-  size: number,
-  options?: Omit<
-    UseInfiniteQueryOptions<
-      Pageable<FeedType>,
-      Error,
-      InfiniteData<Pageable<FeedType>, unknown>
-    >,
-    'queryKey' | 'queryFn'
-  >,
-) {
+export default function useGetFeed(size: number) {
   const accessToken = getAccessToken();
 
-  return useInfiniteQuery<Pageable<FeedType>>({
+  return useInfiniteQuery({
     queryKey: ['feed', size],
-    queryFn: async ({ pageParam = null }) => {
+    queryFn: async ({ pageParam }: { pageParam: number | null }) => {
       return request<Pageable<FeedType>>({
         method: 'GET',
         url: '/posts/feed',
@@ -36,7 +22,7 @@ export default function useGetFeed(
         },
       });
     },
-    initialPageParam: null,
+    initialPageParam: null as number | null,
     getNextPageParam: (lastPage) => {
       if (!lastPage.hasNext || lastPage.data.length === 0) {
         return undefined;
@@ -44,6 +30,5 @@ export default function useGetFeed(
       return lastPage.nextCursor;
     },
     enabled: !!accessToken,
-    ...options,
   });
 }

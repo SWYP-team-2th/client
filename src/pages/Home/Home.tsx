@@ -1,89 +1,38 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useGetFeed from '@/api/useGetFeed';
-import useGetMyInfo from '@/api/useGetMyInfo';
 import Logo from '@/assets/icons/logo.svg?react';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
-import Loading from '@/components/common/Loading';
-import useToast from '@/components/common/Toast/hooks';
-import HomeSection from '@/components/home/HomeSection';
-import { useHomePagenation } from '@/components/home/hooks';
-import { FeedType } from '@/types/feed';
+import HomeFeed from '@/components/home/HomeFeed';
+
 
 export default function Home() {
   const navigate = useNavigate();
-  const toast = useToast();
-
-  const handleClickAlarmButton = () => {
-    toast.warning({
-      title: '추가 예정인 기능이에요!',
-    });
-  };
-
-  const {
-    data: feed,
-    isLoading,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useGetFeed(10);
-  const observerRef = useHomePagenation({
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  });
-
-  const feeds = feed?.pages.flatMap((page) => page.data);
-
-  const { data: myInfo } = useGetMyInfo();
-
-  useEffect(() => {
-    if (!myInfo?.id) {
-      navigate('/onboarding', { replace: true });
-    }
-  }, [myInfo, navigate]);
-
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-screen w-full bg-gray-100">
-        <Loading />
-      </div>
-    );
-  }
 
   return (
-    <div className="bg-gray-300 flex flex-col w-full h-screen px-4 pt-[65px] overflow-y-auto">
+    <div className="min-h-screen bg-gray-100">
       <Header
-        centerNode={
+        className="bg-gray-100"
+        leftNode={
           <Logo
-            style={{ width: 50, cursor: 'pointer' }}
+            style={{ width: 80, cursor: 'pointer' }}
             onClick={() => navigate('/')}
           />
         }
         rightNode={
-          <Icon
-            className="cursor-pointer"
-            name="BellOutline"
-            size="medium"
-            onClick={handleClickAlarmButton}
-          />
+          <Icon className="cursor-pointer" name="BellOutline" size="medium" />
         }
       />
 
-      <div className="flex flex-col gap-3">
-        {feeds?.map((post: FeedType) => (
-          <HomeSection key={post.id} feed={post} />
-        ))}
-      </div>
-
-      {hasNextPage && <div ref={observerRef} className="h-10" />}
-
-      {isFetchingNextPage && (
-        <div className="w-full flex justify-center py-2">
-          <Loading />
+      {/* 메인 콘텐츠 */}
+      <div className="pt-20 pb-4 px-5 ">
+        <div className="flex flex-col gap-2">
+          <span className="text-title-3">오늘의 Chooz 📸</span>
+          <span className="text-headline-1 text-gray-700">
+            지금 가장 핫한 사진 투표, 당신의 선택은?
+          </span>
         </div>
-      )}
+        <HomeFeed />
+      </div>
     </div>
   );
 }

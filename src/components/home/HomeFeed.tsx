@@ -20,7 +20,6 @@ export default function HomeFeed() {
       {feeds.map((item: FeedType) => (
         <FeedItem
           key={item.id}
-          id={item.id}
           author={item.author}
           status={item.status}
           title={item.title}

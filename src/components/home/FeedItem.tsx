@@ -1,21 +1,7 @@
 import Icon from '@/components/common/Icon';
 import { Label } from '@/components/common/Label/Label';
 import { useTimeAgo } from '@/hooks/useTimeAgo';
-
-interface FeedItemProps {
-  id: number;
-  author: {
-    id: number;
-    nickname: string;
-    profileUrl: string;
-  };
-  status: 'PROGRESS' | 'CLOSED';
-  title: string;
-  thumbnailUrl: string;
-  voterCount: number;
-  commentCount: number;
-  createdAt: string;
-}
+import { FeedType } from '@/types/feed';
 
 export default function FeedItem({
   author,
@@ -25,7 +11,7 @@ export default function FeedItem({
   voterCount,
   commentCount,
   createdAt,
-}: FeedItemProps) {
+}: Omit<FeedType, 'id' | 'isAuthor'>) {
   const getStatusBadge = () => {
     return (
       <div className="absolute top-2.5 right-2.5">

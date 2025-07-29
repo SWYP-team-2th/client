@@ -9,6 +9,7 @@ import PollDetailPage from '@/pages/PollDetail/PollDetailPage';
 import PrivacyPolicyPage from '@/pages/PrivacyPolicy/PrivacyPolicyPage';
 import SettingsPage from '@/pages/settings/SettingsPage';
 import TermsPage from '@/pages/Terms/TermsPage';
+import UserPage from '@/pages/User/UserPage';
 import PollEditPage from '@/pages/Vote/PollEditPage';
 import VoteCommentDetailPage from '@/pages/Vote/VoteCommentDetailPage';
 import VotePage from '@/pages/Vote/VotePage';
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+      },
+      {
+        path: '/user/:userId',
+        element: <UserPage />,
       },
     ],
   },
@@ -53,7 +58,7 @@ export const router = createBrowserRouter([
         element: <PollEditPage />,
       },
       {
-        path: '/settings',
+        path: '/user/:userId/settings',
         element: <SettingsPage />,
       },
       {

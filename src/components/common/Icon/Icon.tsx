@@ -160,18 +160,100 @@ export const ICON_SIZE = {
   xLarge: 32,
 } as const;
 
+export const ICON_COLORS = {
+  primary: '#8B5CF6',
+  secondary: '#6B7280',
+  success: '#10B981',
+  warning: '#F59E0B',
+  error: '#EF4444',
+  white: '#FFFFFF',
+  black: '#000000',
+  gray: '#9CA3AF',
+  red: '#FF0000',
+  blue: '#3B82F6',
+  green: '#22C55E',
+} as const;
+
 export interface IconProps extends SVGProps<SVGSVGElement> {
   name: keyof typeof ICONS;
   size: keyof typeof ICON_SIZE;
+  strokeColor?: string | keyof typeof ICON_COLORS; // stroke 색상 추가
+  strokeWidth?: number; // stroke 두께 추가
 }
 
-export default function Icon({ name, size, ...props }: IconProps) {
+export default function Icon({
+  name,
+  size,
+  strokeColor,
+  strokeWidth,
+  className,
+  ...props
+}: IconProps) {
   const IconComponent = ICONS[name];
   const sizeConfig = ICON_SIZE[size];
+
+  // 색상 처리 로직
+  const getColor = (colorProp?: string | keyof typeof ICON_COLORS) => {
+    if (!colorProp) return 'currentColor';
+    if (typeof colorProp === 'string' && colorProp.startsWith('#'))
+      return colorProp;
+    if (
+      typeof colorProp === 'string' &&
+      ICON_COLORS[colorProp as keyof typeof ICON_COLORS]
+    ) {
+      return ICON_COLORS[colorProp as keyof typeof ICON_COLORS];
+    }
+    return colorProp;
+  };
+
+  const strokeColorValue = getColor(strokeColor);
+
+  // Tailwind 색상 클래스 매핑
+  const getTailwindColorClass = (color: string) => {
+    const colorMap: Record<string, string> = {
+      primary: 'text-purple-500',
+      secondary: 'text-gray-500',
+      success: 'text-green-500',
+      warning: 'text-yellow-500',
+      error: 'text-red-500',
+      white: 'text-white',
+      black: 'text-black',
+      gray: 'text-gray-400',
+      red: 'text-red-500',
+      blue: 'text-blue-500',
+      green: 'text-green-500',
+    };
+
+    return colorMap[color] || '';
+  };
+
+  // 동적 스타일 생성
+  const dynamicStyle = {
+    width: sizeConfig,
+    height: sizeConfig,
+    ...(strokeColorValue && {
+      '--icon-stroke': strokeColorValue,
+    }),
+    ...(strokeWidth && {
+      '--icon-stroke-width': `${strokeWidth}px`,
+    }),
+  } as React.CSSProperties;
+
+  // Tailwind 색상 클래스 추가
+  const colorClass =
+    strokeColor &&
+    typeof strokeColor === 'string' &&
+    !strokeColor.startsWith('#')
+      ? getTailwindColorClass(strokeColor)
+      : '';
+
+  const combinedClassName = `${className || ''} ${colorClass}`.trim();
+
   return (
     <IconComponent
       {...props}
-      style={{ width: sizeConfig, height: sizeConfig }}
+      className={combinedClassName}
+      style={dynamicStyle}
     />
   );
 }

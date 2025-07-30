@@ -13,7 +13,7 @@ export default function PollChoice({ choice }: PollChoiceProps) {
   const {
     dragControls,
     setPollChoiceTitle,
-    addPollChoices,
+    addPollChoiceImages,
     fileInputRef,
     handleClickImageButton,
     handleDelete,
@@ -63,8 +63,8 @@ export default function PollChoice({ choice }: PollChoiceProps) {
                       URL.createObjectURL(file),
                     );
 
-                    // 기존 빈 pollChoice들을 삭제하고 모든 이미지로 새로운 pollChoice 생성
-                    addPollChoices(imageUrls, files);
+                    // 현재 선택지에만 이미지 추가
+                    addPollChoiceImages(choice.id, imageUrls, files);
                   }
                 }}
               />

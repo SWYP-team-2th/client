@@ -98,6 +98,14 @@ export class PollFormFieldValidator {
       }
     }
 
+    // 최소 2개의 선택지에 이미지가 등록되어야 함
+    const choicesWithImages = pollChoices.filter(
+      (choice) => choice.imageUrl && choice.imageUrl.length > 0,
+    );
+    if (choicesWithImages.length < 2) {
+      return '최소 2개의 선택지에 이미지를 등록해주세요.';
+    }
+
     return null;
   }
 
@@ -163,6 +171,14 @@ export class PollFormFieldValidator {
       }
     }
 
+    // 최소 2개의 선택지에 이미지가 등록되어야 함
+    const choicesWithImages = pollChoices.filter(
+      (choice) => choice.imageUrl && choice.imageUrl.length > 0,
+    );
+    if (choicesWithImages.length < 2) {
+      return '최소 2개의 선택지에 이미지를 등록해주세요.';
+    }
+
     return null;
   }
 
@@ -182,5 +198,27 @@ export class PollFormFieldValidator {
       return null;
     }
     return null;
+  }
+
+  // 데이터가 동일한지 확인하는 유틸리티 메서드
+  private isDataEqual(data1: PollFormData, data2: PollFormData): boolean {
+    if (data1.title !== data2.title) return false;
+    if (data1.description !== data2.description) return false;
+    if (data1.pollChoices.length !== data2.pollChoices.length) return false;
+    for (let i = 0; i < data1.pollChoices.length; i++) {
+      if (data1.pollChoices[i].title !== data2.pollChoices[i].title)
+        return false;
+    }
+    if (data1.closeOption.closeType !== data2.closeOption.closeType)
+      return false;
+    if (data1.closeOption.closeType === 'DATE') {
+      if (data1.closeOption.closedAt !== data2.closeOption.closedAt)
+        return false;
+    }
+    if (data1.closeOption.closeType === 'VOTER') {
+      if (data1.closeOption.maxVoterCount !== data2.closeOption.maxVoterCount)
+        return false;
+    }
+    return true;
   }
 }

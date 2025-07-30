@@ -47,7 +47,7 @@ export const theme = {
       ],
       'body-1-long': [
         '16px',
-        { lineHeight: '22px', letterSpacing: '-0.6px', fontWeight: '400' },
+        { lineHeight: '24px', letterSpacing: '-0.6px', fontWeight: '400' },
       ],
       'body-2': [
         '14px',
@@ -60,7 +60,7 @@ export const theme = {
 
       'caption-1': [
         '12px',
-        { lineHeight: '16px', letterSpacing: '-0.6px', fontWeight: '400' },
+        { lineHeight: '16px', letterSpacing: '-0.8px', fontWeight: '400' },
       ],
       'caption-2': [
         '11px',

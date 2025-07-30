@@ -1,0 +1,18 @@
+/* SVG 색상 커스터마이징을 위한 CSS */
+svg[style*='--icon-stroke'] path,
+svg[style*='--icon-stroke'] circle,
+svg[style*='--icon-stroke'] rect,
+svg[style*='--icon-stroke'] line,
+svg[style*='--icon-stroke'] polyline,
+svg[style*='--icon-stroke'] polygon {
+  stroke: var(--icon-stroke) !important;
+}
+
+svg[style*='--icon-stroke-width'] path,
+svg[style*='--icon-stroke-width'] circle,
+svg[style*='--icon-stroke-width'] rect,
+svg[style*='--icon-stroke-width'] line,
+svg[style*='--icon-stroke-width'] polyline,
+svg[style*='--icon-stroke-width'] polygon {
+  stroke-width: var(--icon-stroke-width) !important;
+}

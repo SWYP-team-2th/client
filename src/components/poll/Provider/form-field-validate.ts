@@ -199,26 +199,4 @@ export class PollFormFieldValidator {
     }
     return null;
   }
-
-  // 데이터가 동일한지 확인하는 유틸리티 메서드
-  private isDataEqual(data1: PollFormData, data2: PollFormData): boolean {
-    if (data1.title !== data2.title) return false;
-    if (data1.description !== data2.description) return false;
-    if (data1.pollChoices.length !== data2.pollChoices.length) return false;
-    for (let i = 0; i < data1.pollChoices.length; i++) {
-      if (data1.pollChoices[i].title !== data2.pollChoices[i].title)
-        return false;
-    }
-    if (data1.closeOption.closeType !== data2.closeOption.closeType)
-      return false;
-    if (data1.closeOption.closeType === 'DATE') {
-      if (data1.closeOption.closedAt !== data2.closeOption.closedAt)
-        return false;
-    }
-    if (data1.closeOption.closeType === 'VOTER') {
-      if (data1.closeOption.maxVoterCount !== data2.closeOption.maxVoterCount)
-        return false;
-    }
-    return true;
-  }
 }

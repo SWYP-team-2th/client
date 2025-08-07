@@ -98,6 +98,14 @@ export class PollFormFieldValidator {
       }
     }
 
+    // 최소 2개의 선택지에 이미지가 등록되어야 함
+    const choicesWithImages = pollChoices.filter(
+      (choice) => choice.imageUrl && choice.imageUrl.length > 0,
+    );
+    if (choicesWithImages.length < 2) {
+      return '최소 2개의 선택지에 이미지를 등록해주세요.';
+    }
+
     return null;
   }
 
@@ -161,6 +169,14 @@ export class PollFormFieldValidator {
       if (choice.title.trim().length === 0) {
         return '투표 항목의 제목을 입력해주세요.';
       }
+    }
+
+    // 최소 2개의 선택지에 이미지가 등록되어야 함
+    const choicesWithImages = pollChoices.filter(
+      (choice) => choice.imageUrl && choice.imageUrl.length > 0,
+    );
+    if (choicesWithImages.length < 2) {
+      return '최소 2개의 선택지에 이미지를 등록해주세요.';
     }
 
     return null;

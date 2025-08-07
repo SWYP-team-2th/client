@@ -13,8 +13,12 @@ type PollChoiceAction =
   | { type: 'ADD_POLL_CHOICE' }
   | { type: 'DELETE_POLL_CHOICE'; payload: { id: string } }
   | {
-      type: 'ADD_POLL_CHOICES';
-      payload: { imageUrls: string[]; files: File[] };
+      type: 'ADD_POLL_CHOICE_IMAGES';
+      payload: {
+        choiceId: string;
+        imageUrls: string[];
+        files: File[];
+      };
     }
   | {
       type: 'SET_POLL_CHOICES_ORDER';
@@ -84,45 +88,67 @@ function pollFormReducer(
         },
       };
     }
-    case 'ADD_POLL_CHOICES': {
-      const emptyChoices = state.data.pollChoices.filter(
-        (choice) => !choice.imageUrl,
+    case 'ADD_POLL_CHOICE_IMAGES': {
+      const { choiceId, imageUrls, files } = action.payload;
+
+      // 1. 현재 선택지 찾기
+      const currentChoiceIndex = state.data.pollChoices.findIndex(
+        (choice) => choice.id === choiceId,
       );
-      const remainingUrls = action.payload.imageUrls.slice(emptyChoices.length);
-      const remainingFiles = action.payload.files.slice(emptyChoices.length);
+      if (currentChoiceIndex === -1) return state;
+
+      // 2. 단일 이미지인 경우: 현재 선택지만 업데이트
+      if (imageUrls.length === 1) {
+        return {
+          ...state,
+          data: {
+            ...state.data,
+            pollChoices: state.data.pollChoices.map((choice) =>
+              choice.id === choiceId
+                ? { ...choice, imageUrl: imageUrls[0], file: files[0] }
+                : choice,
+            ),
+          },
+        };
+      }
+
+      // 3. 복수 이미지인 경우: 현재 선택지 + 새로운 선택지들 추가
+      const currentChoices = [...state.data.pollChoices];
+
+      // 3-1. 현재 선택지에 첫 번째 이미지 설정
+      currentChoices[currentChoiceIndex] = {
+        ...currentChoices[currentChoiceIndex],
+        imageUrl: imageUrls[0],
+        file: files[0],
+      };
+
+      // 3-2. 나머지 이미지들로 새로운 선택지 생성
+      const newChoices = imageUrls.slice(1).map((imageUrl, index) => ({
+        id: uuidv4(),
+        title:
+          IMAGE_TITLE_PLACEHOLDER[
+            (state.data.pollChoices.length +
+              index) as keyof typeof IMAGE_TITLE_PLACEHOLDER
+          ],
+        imageUrl,
+        file: files[index + 1],
+        order: state.data.pollChoices.length + index,
+      }));
+
+      // 3-3. 새로운 선택지들을 현재 선택지 바로 다음에 삽입
+      currentChoices.splice(currentChoiceIndex + 1, 0, ...newChoices);
+
+      // 3-4. 모든 선택지의 order를 0부터 순차적으로 재정렬
+      const reorderedChoices = currentChoices.map((choice, index) => ({
+        ...choice,
+        order: index,
+      }));
 
       return {
         ...state,
         data: {
           ...state.data,
-          pollChoices: [
-            // 기존 pollChoice들을 업데이트
-            ...state.data.pollChoices.map((choice, index) => {
-              if (
-                index < emptyChoices.length &&
-                action.payload.imageUrls[index]
-              ) {
-                return {
-                  ...choice,
-                  imageUrl: action.payload.imageUrls[index],
-                  file: action.payload.files[index],
-                };
-              }
-              return choice;
-            }),
-            // 남은 이미지들로 새로운 pollChoice 생성
-            ...remainingUrls.map((imageUrl, index) => ({
-              id: uuidv4(),
-              title:
-                IMAGE_TITLE_PLACEHOLDER[
-                  (state.data.pollChoices.length +
-                    index) as keyof typeof IMAGE_TITLE_PLACEHOLDER
-                ],
-              imageUrl: imageUrl,
-              file: remainingFiles[index],
-              order: state.data.pollChoices.length + index,
-            })),
-          ],
+          pollChoices: reorderedChoices,
         },
       };
     }
@@ -234,8 +260,11 @@ const pollFormActions = (dispatch: React.Dispatch<PollAction>) => ({
   addPollChoice: () => dispatch({ type: 'ADD_POLL_CHOICE' }),
   deletePollChoice: (id: string) =>
     dispatch({ type: 'DELETE_POLL_CHOICE', payload: { id } }),
-  addPollChoices: (imageUrls: string[], files: File[]) =>
-    dispatch({ type: 'ADD_POLL_CHOICES', payload: { imageUrls, files } }),
+  addPollChoiceImages: (choiceId: string, imageUrls: string[], files: File[]) =>
+    dispatch({
+      type: 'ADD_POLL_CHOICE_IMAGES',
+      payload: { choiceId, imageUrls, files },
+    }),
   setPollChoicesOrder: (newOrder: number[]) => {
     dispatch({
       type: 'SET_POLL_CHOICES_ORDER',
@@ -310,11 +339,11 @@ export const PollFormProvider = ({
   return (
     <PollFormContext.Provider
       value={{
+        type,
         data: state.data,
         errors: validator.errors,
         isValid: validator.isValid,
         ...actions,
-        type,
       }}
     >
       <form

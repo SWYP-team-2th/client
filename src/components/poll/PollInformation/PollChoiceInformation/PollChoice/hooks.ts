@@ -6,7 +6,7 @@ import usePollForm from '@/components/poll/Provider/hooks';
 export default function usePollChoice(id: string) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dragControls = useDragControls();
-  const { setPollChoiceTitle, deletePollChoice, addPollChoices } =
+  const { setPollChoiceTitle, deletePollChoice, addPollChoiceImages } =
     usePollForm();
 
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -37,7 +37,7 @@ export default function usePollChoice(id: string) {
   return {
     dragControls,
     setPollChoiceTitle,
-    addPollChoices,
+    addPollChoiceImages,
     fileInputRef,
     handleClickImageButton,
     handleDelete,

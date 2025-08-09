@@ -15,7 +15,7 @@ export default function PollBasicInformation() {
       />
       <textarea
         placeholder="고민하고 계신 내용을 알려주세요."
-        className="bg-white text-headline-1 px-0 h-fit border-none resize-none placeholder:text-gray-400 focus:outline-none"
+        className="bg-white text-headline-2 px-0 h-fit border-none resize-none placeholder:text-gray-400 focus:outline-none"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />

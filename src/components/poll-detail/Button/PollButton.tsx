@@ -4,11 +4,16 @@ import { useSelection } from '@/components/poll-detail/SelectionContext';
 
 interface PollButtonProps {
   postId: number;
+  onVoted: () => void;
 }
 
-export default function PollButton({ postId }: PollButtonProps) {
+export default function PollButton({ postId, onVoted }: PollButtonProps) {
   const { selectedChoiceIds } = useSelection();
-  const { mutate: vote, isPending } = usePost();
+  const { mutate: vote, isPending } = usePost({
+    onSuccess: () => {
+      onVoted();
+    },
+  });
 
   const handleVote = () => {
     if (selectedChoiceIds.length === 0) {

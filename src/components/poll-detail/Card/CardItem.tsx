@@ -1,19 +1,19 @@
 import CheckBox from '@/components/common/CheckBox';
 import Icon from '@/components/common/Icon';
 import { Label } from '@/components/common/Label/Label';
-import { useSelection } from '@/components/poll-detail/SelectionContext';
 import { PollChoice } from '@/types/post';
 
 export default function CardItem({
   choice,
   checked,
   onChange,
+  isVoted,
 }: {
   choice: PollChoice;
   checked: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isVoted: boolean;
 }) {
-  const { isVoted } = useSelection();
   return (
     <div key={choice.id} className="rounded-xl w-50">
       <div className="flex items-center justify-between w-full">

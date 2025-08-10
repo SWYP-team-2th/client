@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGetPost } from '@/api/useGetPost';
-import { useGetResult } from '@/api/useGetResult';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
 import PollActionButtons from '@/components/poll-detail/Button/PollActionButtons';
@@ -9,6 +7,7 @@ import CardList from '@/components/poll-detail/Card/CardList';
 import PollInfo from '@/components/poll-detail/Info/PollInfo';
 import ResultList from '@/components/poll-detail/Result/ResultList';
 import { SelectionProvider } from '@/components/poll-detail/SelectionContext';
+import { usePollResult } from '@/components/poll-detail/hooks';
 
 export default function PollDetailPage() {
   const navigate = useNavigate();
@@ -20,8 +19,15 @@ export default function PollDetailPage() {
     return <div>게시글 ID가 없습니다.</div>;
   }
 
-  const { data: post } = useGetPost(postId);
-  const { data: result } = useGetResult(postId);
+  const { post, resultChoices, isLoading } = usePollResult(postId);
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-screen flex items-center justify-center text-gray-600">
+        로딩 중...
+      </div>
+    );
+  }
 
   if (!post) {
     return (
@@ -30,13 +36,6 @@ export default function PollDetailPage() {
       </div>
     );
   }
-
-  const resultChoices = (result ?? []).map((result) => ({
-    id: result.id,
-    title: result.title,
-    imageUrl: result.imageUrl,
-    voteCount: result.voteCount,
-  }));
 
   return (
     <div className="w-full bg-gray-100 h-screen flex itmes-center flex-col pt-[60px] relative">

@@ -16,7 +16,7 @@ export default function OnBoardingPage() {
 
   useEffect(() => {
     if (myInfo?.id) {
-      navigate('/', { replace: true });
+      navigate('/home', { replace: true });
     }
   }, [myInfo, navigate]);
 

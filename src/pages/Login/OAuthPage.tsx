@@ -11,7 +11,7 @@ export default function OAuthPage() {
     onSuccess: (data) => {
       setRole(data.role);
       setAccessToken(data.accessToken);
-      navigate(state ?? '/');
+      navigate('/home');
     },
   });
 

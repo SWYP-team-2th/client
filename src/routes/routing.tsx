@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
     element: <DefaultLayout />,
     children: [
       {
-        path: '/',
+        path: '/home',
         element: <Home />,
       },
       {
@@ -32,6 +32,7 @@ export const router = createBrowserRouter([
   {
     element: <SubLayout />,
     children: [
+      { path: '/', element: <OnBoardingPage /> },
       { path: '/onboarding', element: <OnBoardingPage /> },
       {
         path: '/posts/:postId',

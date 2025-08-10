@@ -17,11 +17,11 @@ function App() {
     }
 
     if (myInfo && isMyInfoSuccess) {
-      navigate(`/user/${myInfo.id}`, { replace: true });
+      navigate('/home', { replace: true });
       return;
     }
 
-    navigate('/onboarding', { replace: true });
+    navigate('/', { replace: true });
   }, [myInfo, isMyInfoSuccess, isMyInfoLoading]);
 
   return (

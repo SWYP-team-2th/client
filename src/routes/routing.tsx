@@ -6,6 +6,7 @@ import OAuthPage from '@/pages/Login/OAuthPage';
 import NotFoundPage from '@/pages/NotFound/NotFoundPage';
 import OnBoardingPage from '@/pages/OnBoarding/OnBoardingPage';
 import PollDetailPage from '@/pages/PollDetail/PollDetailPage';
+import PollResultPage from '@/pages/PollDetail/PollResultPage';
 import PrivacyPolicyPage from '@/pages/PrivacyPolicy/PrivacyPolicyPage';
 import SettingsPage from '@/pages/settings/SettingsPage';
 import TermsPage from '@/pages/Terms/TermsPage';
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: '/posts/:postId',
         element: <PollDetailPage />,
+      },
+      {
+        path: '/posts/:postId/result',
+        element: <PollResultPage />,
       },
       {
         path: '/votes/:shareUrl',

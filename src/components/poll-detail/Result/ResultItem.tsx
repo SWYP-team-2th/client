@@ -24,7 +24,7 @@ export default function ResultItem({
     <div className={cn('flex items-center w-full', className)}>
       <span className="text-center text-label-1">{rank}</span>
 
-      <div className="w-[58px] h-[58px] rounded-md overflow-hidden flex-shrink-0 ml-4 mr-3">
+      <div className="w-[58px] h-[58px] rounded-lg overflow-hidden flex-shrink-0 ml-4 mr-3">
         <img
           src={imageUrl}
           alt={title}

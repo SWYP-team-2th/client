@@ -17,6 +17,7 @@ import ThickClose from '@/assets/icons/close_thick.svg?react';
 import Cross from '@/assets/icons/cross_24px.svg?react';
 import CrossGray from '@/assets/icons/cross_gray.svg?react';
 import DeadLineDarkGray from '@/assets/icons/dead-Line-dark-gray.svg?react';
+import DeadLineGray from '@/assets/icons/dead-line-gray.svg?react';
 import DeadLine from '@/assets/icons/dead_line.svg?react';
 import Edit from '@/assets/icons/edit_24px.svg?react';
 import Filter from '@/assets/icons/filter.svg?react';
@@ -76,7 +77,6 @@ import VoteGray from '@/assets/icons/vote-gray.svg?react';
 import Vote from '@/assets/icons/vote.svg?react';
 import VoteClose from '@/assets/icons/vote_close.svg?react';
 import World from '@/assets/icons/world_24px.svg?react';
-import DeadLineGray from '@/assets/icons/dead-line-gray.svg?react';
 export const ICONS = {
   DeadLineGray,
   UpLoad,

@@ -2,6 +2,7 @@ import { Reorder, motion } from 'motion/react';
 import usePollChoice from './hooks';
 import type { PollChoice } from '@/components/poll/Provider/types';
 import Icon from '@/components/common/Icon';
+import Loading from '@/components/common/Loading';
 import { IMAGE_TITLE_PLACEHOLDER } from '@/components/poll/Provider/constants';
 import { cn } from '@/utils/cn';
 
@@ -13,11 +14,12 @@ export default function PollChoice({ choice }: PollChoiceProps) {
   const {
     dragControls,
     setPollChoiceTitle,
-    addPollChoiceImages,
     fileInputRef,
     handleClickImageButton,
+    handleFileChange,
     handleDelete,
     isDeleteOpen,
+    isUploading,
     x,
     controls,
   } = usePollChoice(choice.id);
@@ -39,7 +41,11 @@ export default function PollChoice({ choice }: PollChoiceProps) {
         >
           <div className="flex items-center gap-3">
             <div onClick={handleClickImageButton} className="cursor-pointer">
-              {choice.imageUrl ? (
+              {isUploading ? (
+                <div className="w-20 h-20 bg-gray-400 rounded-lg flex items-center justify-center">
+                  <Loading className="w-10 h-10" />
+                </div>
+              ) : choice.imageUrl ? (
                 <img
                   src={choice.imageUrl}
                   alt={choice.title}
@@ -59,12 +65,7 @@ export default function PollChoice({ choice }: PollChoiceProps) {
                 onChange={(e) => {
                   if (e.target.files) {
                     const files = Array.from(e.target.files);
-                    const imageUrls = files.map((file) =>
-                      URL.createObjectURL(file),
-                    );
-
-                    // 현재 선택지에만 이미지 추가
-                    addPollChoiceImages(choice.id, imageUrls, files);
+                    handleFileChange(files);
                   }
                 }}
               />

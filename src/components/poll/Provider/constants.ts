@@ -38,8 +38,8 @@ export const INITIAL_POLL_REGIST_DATA: PollFormData = {
   },
   closeOption: {
     closeType: 'SELF',
-    closedAt: '',
-    maxVoterCount: 0,
+    closedAt: null,
+    maxVoterCount: null,
   },
 };
 

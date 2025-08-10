@@ -33,7 +33,7 @@ export interface Post {
   isAuthor: boolean;
   status: 'PROGRESS' | 'CLOSED';
   pollOptions: PollOptions;
-  closeOptions: CloseOptions;
+  closeOption: CloseOptions;
   commentCount: number;
   voterCount: number;
   createdAt: string;

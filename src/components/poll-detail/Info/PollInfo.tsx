@@ -12,7 +12,7 @@ interface PollInfoProps {
   };
   createdAt: string;
   status: Post['status'];
-  closeOptions: Post['closeOptions'];
+  closeOption: Post['closeOption'];
   title: string;
   description: string;
   voterCount: number;
@@ -23,7 +23,7 @@ export default function PollInfo({
   author,
   createdAt,
   status,
-  closeOptions,
+  closeOption,
   title,
   description,
   voterCount,
@@ -94,19 +94,19 @@ export default function PollInfo({
             'text-primary-500': status !== 'CLOSED',
           })}
         >
-          {status !== 'CLOSED' && closeOptions.closeType === 'DATE' && (
-            <>{closeOptions.closedAt}일 남음</>
+          {status !== 'CLOSED' && closeOption.closeType === 'DATE' && (
+            <>{closeOption.closedAt}일 남음</>
           )}
-          {status !== 'CLOSED' && closeOptions.closeType === 'SELF' && (
+          {status !== 'CLOSED' && closeOption.closeType === 'SELF' && (
             <Label variant="outline" colorVarient="progress" size="medium">
               직접 마감
             </Label>
           )}
-          {closeOptions.closeType === 'VOTER' && (
+          {closeOption.closeType === 'VOTER' && (
             <>
               {status === 'CLOSED'
                 ? `${voterCount}명 참여`
-                : `${voterCount}명 참여 중 ${closeOptions.maxVoterCount}명 참여 시 마감`}
+                : `${voterCount}명 참여 중 ${closeOption.maxVoterCount}명 참여 시 마감`}
             </>
           )}
         </span>

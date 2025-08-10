@@ -1,11 +1,13 @@
-import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useGetPost } from '@/api/useGetPost';
+import { useGetResult } from '@/api/useGetResult';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
 import PollActionButtons from '@/components/poll-detail/Button/PollActionButtons';
 import CardList from '@/components/poll-detail/Card/CardList';
 import PollInfo from '@/components/poll-detail/Info/PollInfo';
+import ResultList from '@/components/poll-detail/Result/ResultList';
 import { SelectionProvider } from '@/components/poll-detail/SelectionContext';
 
 export default function PollDetailPage() {
@@ -18,6 +20,7 @@ export default function PollDetailPage() {
   }
 
   const { data: post } = useGetPost(postId);
+  const { data: result } = useGetResult(postId);
 
   if (!post) {
     return (
@@ -27,8 +30,15 @@ export default function PollDetailPage() {
     );
   }
 
+  const resultChoices = (result ?? []).map((result) => ({
+    id: result.id,
+    title: result.title,
+    imageUrl: result.imageUrl,
+    voteCount: result.voteCount,
+  }));
+
   return (
-    <div className="w-full bg-gray-100 h-screen flex itmes-center flex-col pt-[60px] relative gap-4">
+    <div className="w-full bg-gray-100 h-screen flex itmes-center flex-col pt-[60px] relative">
       <Header
         className="bg-gray-100"
         leftNode={
@@ -55,6 +65,14 @@ export default function PollDetailPage() {
         voterCount={post.voterCount}
         commentCount={post.commentCount}
       />
+
+      {/* 투표 결과 섹션 */}
+      <div className="px-5 border-y-[3px] border-gray-200 mb-[30px]">
+        <div className="text-headline-1 text-gray-800 mt-[35px]">투표 결과</div>
+        {resultChoices.length > 0 && (
+          <ResultList choices={resultChoices} showAll={false} />
+        )}
+      </div>
 
       <SelectionProvider pollType={post.pollOption.pollType}>
         {/* 투표  선탹지 */}

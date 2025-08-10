@@ -40,7 +40,7 @@ export default function CardItem({
           <div className="pointer-events-none absolute top-0 left-0 w-full h-full rounded-lg border-3 border-primary-500"></div>
         )}
         {isVoted && checked && (
-          <div className="absolute top-2 left-2">
+          <div className="absolute top-[10px] left-[10px]">
             <Label variant="solid" colorVarient="progress" size="medium">
               MY CHOOZ
             </Label>

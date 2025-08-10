@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import usePost from '@/api/usePost';
 import { Button } from '@/components/common/Button/Button';
 import { useSelection } from '@/components/poll-detail/SelectionContext';
@@ -9,8 +10,13 @@ interface PollButtonProps {
 
 export default function PollButton({ postId, onVoted }: PollButtonProps) {
   const { selectedChoiceIds } = useSelection();
+  const queryClient = useQueryClient();
   const { mutate: vote, isPending } = usePost({
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['post', String(postId)] });
+      queryClient.invalidateQueries({
+        queryKey: ['postResult', String(postId)],
+      });
       onVoted();
     },
   });

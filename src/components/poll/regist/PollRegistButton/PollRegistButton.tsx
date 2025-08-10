@@ -12,7 +12,7 @@ export default function PollRegistButton() {
   const { mutate: registVote, isPending: isRegistVotePending } =
     usePostRegistVote({
       onSuccess: (data) => {
-        navigate(`/votes/${data.shareUrl}`);
+        navigate(`/posts/${data.postId}`);
       },
       onError: () => {
         toast.error({

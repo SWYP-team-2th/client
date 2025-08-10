@@ -47,7 +47,7 @@ export default function ResultList({
         />
       ))}
 
-      {!showAll && (
+      {!showAll && choices.length > 3 && (
         <button
           type="button"
           onClick={handleShowAllResults}

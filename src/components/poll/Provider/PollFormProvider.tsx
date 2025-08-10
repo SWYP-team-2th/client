@@ -219,7 +219,10 @@ function pollFormReducer(
             closeType,
             ...(closeType === 'VOTER' && { maxVoterCount: 0 }),
             ...(closeType === 'DATE' && { closedAt: '' }),
-            ...(closeType === 'SELF' && { closedAt: '', maxVoterCount: 0 }),
+            ...(closeType === 'SELF' && {
+              closedAt: null,
+              maxVoterCount: null,
+            }),
           },
         },
       };

@@ -8,6 +8,7 @@ interface PollActionButtonsProps {
   postId: number;
   isVoted: boolean;
   setIsVoted: (v: boolean) => void;
+  setShowResult: (v: boolean) => void;
 }
 
 export default function PollActionButtons({
@@ -15,18 +16,24 @@ export default function PollActionButtons({
   postId,
   isVoted,
   setIsVoted,
+  setShowResult,
 }: PollActionButtonsProps) {
   const { selectedChoiceIds, setChecked } = useSelection();
 
-  const onVoted = () => setIsVoted(true);
+  const onVoted = () => {
+    setIsVoted(true);
+    setShowResult(true);
+  };
 
   const handleVoteAgain = () => {
     setIsVoted(false);
+    setShowResult(true);
   };
 
   const handleCancel = () => {
     selectedChoiceIds.forEach((id) => setChecked(String(id), false));
     setIsVoted(false);
+    setShowResult(false);
   };
 
   return (

@@ -4,10 +4,11 @@ import { PollChoice } from '@/types/post';
 
 interface CardListProps {
   pollChoices: PollChoice[];
+  isVoted: boolean;
 }
 
-export default function CardList({ pollChoices }: CardListProps) {
-  const { checkedItems, setChecked } = useSelection();
+export default function CardList({ pollChoices, isVoted }: CardListProps) {
+  const { selectedChoiceIds, setChecked } = useSelection();
 
   const handleCheck =
     (id: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,8 +21,9 @@ export default function CardList({ pollChoices }: CardListProps) {
         <CardItem
           key={choice.id}
           choice={choice}
-          checked={!!checkedItems[choice.id]}
+          checked={selectedChoiceIds.includes(choice.id)}
           onChange={handleCheck(String(choice.id))}
+          isVoted={isVoted}
         />
       ))}
     </div>

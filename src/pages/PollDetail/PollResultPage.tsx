@@ -51,9 +51,9 @@ export default function PollResultPage() {
 
       {/* 투표 결과 섹션 */}
       <div className="px-5 flex-1">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-6">
           <div className="text-headline-1 text-gray-800">투표 결과</div>
-          <div className="flex items-center gap-2 text-gray-500">
+          <div className="flex items-center gap-1 text-gray-500">
             <Icon name="DeadLineGray" size="small" />
             <span className="text-body-2">{totalVotes}표</span>
           </div>

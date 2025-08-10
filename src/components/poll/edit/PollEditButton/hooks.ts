@@ -12,8 +12,8 @@ export default function usePollEditButton() {
   const { mutate: updatePoll, isPending } = useUpdatePoll({
     id: Number(pollId),
     options: {
-      onSuccess: (data) => {
-        navigate(`/vote/${data.postId}`);
+      onSuccess: () => {
+        navigate(`/posts/${pollId}`);
       },
       onError: () => {
         toast.error({

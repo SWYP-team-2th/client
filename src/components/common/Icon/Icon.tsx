@@ -76,7 +76,9 @@ import VoteGray from '@/assets/icons/vote-gray.svg?react';
 import Vote from '@/assets/icons/vote.svg?react';
 import VoteClose from '@/assets/icons/vote_close.svg?react';
 import World from '@/assets/icons/world_24px.svg?react';
+import DeadLineGray from '@/assets/icons/dead-line-gray.svg?react';
 export const ICONS = {
+  DeadLineGray,
   UpLoad,
   CrossGray,
   CheckLarge,

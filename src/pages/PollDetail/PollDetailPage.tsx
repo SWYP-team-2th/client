@@ -4,10 +4,10 @@ import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
 import PollActionButtons from '@/components/poll-detail/Button/PollActionButtons';
 import CardList from '@/components/poll-detail/Card/CardList';
+import { usePollResult } from '@/components/poll-detail/hooks';
 import PollInfo from '@/components/poll-detail/Info/PollInfo';
 import ResultList from '@/components/poll-detail/Result/ResultList';
 import { SelectionProvider } from '@/components/poll-detail/SelectionContext';
-import { usePollResult } from '@/components/poll-detail/hooks';
 
 export default function PollDetailPage() {
   const navigate = useNavigate();

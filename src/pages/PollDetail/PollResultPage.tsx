@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
-import ResultItem from '@/components/poll-detail/Result/ResultItem';
 import { usePollResult } from '@/components/poll-detail/hooks';
+import ResultItem from '@/components/poll-detail/Result/ResultItem';
 
 export default function PollResultPage() {
   const navigate = useNavigate();

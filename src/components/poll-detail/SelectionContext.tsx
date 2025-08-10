@@ -11,6 +11,8 @@ interface SelectionContextValue {
   checkedItems: Record<string, boolean>;
   selectedChoiceIds: number[];
   setChecked: (id: string, checked: boolean) => void;
+  isVoted: boolean;
+  setVoted: (voted: boolean) => void;
 }
 
 const SelectionContext = createContext<SelectionContextValue | undefined>(
@@ -26,6 +28,7 @@ export function SelectionProvider({
   children,
 }: SelectionProviderProps) {
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
+  const [isVoted, setIsVoted] = useState<boolean>(false);
 
   const setChecked = (id: string, checked: boolean) => {
     setCheckedItems((prev) => {
@@ -46,6 +49,8 @@ export function SelectionProvider({
     checkedItems,
     selectedChoiceIds,
     setChecked,
+    isVoted,
+    setVoted: setIsVoted,
   };
 
   return (

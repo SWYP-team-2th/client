@@ -25,7 +25,9 @@ export default function PollButton({ postId }: PollButtonProps) {
   return (
     <Button
       variant="solid"
-      buttonType="primary"
+      buttonType={
+        isPending || selectedChoiceIds.length === 0 ? 'disabled' : 'primary'
+      }
       size="large"
       onClick={handleVote}
       disabled={isPending || selectedChoiceIds.length === 0}

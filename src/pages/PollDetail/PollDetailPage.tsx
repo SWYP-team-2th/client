@@ -5,6 +5,8 @@ import Icon from '@/components/common/Icon';
 import PollActionButtons from '@/components/poll-detail/Button/PollActionButtons';
 import CardList from '@/components/poll-detail/Card/CardList';
 import PollInfo from '@/components/poll-detail/Info/PollInfo';
+import { SelectionProvider } from '@/components/poll-detail/SelectionContext';
+
 export default function PollDetailPage() {
   const navigate = useNavigate();
   const { postId } = useParams<{ postId: string }>();
@@ -52,11 +54,13 @@ export default function PollDetailPage() {
         commentCount={post.commentCount}
       />
 
-      {/* 투표  선탹지 */}
-      <CardList pollOption={post.pollOption} pollChoices={post.pollChoices} />
+      <SelectionProvider pollType={post.pollOption.pollType}>
+        {/* 투표  선탹지 */}
+        <CardList pollChoices={post.pollChoices} />
 
-      {/* 투표 버튼, 공유 버튼 */}
-      <PollActionButtons shareUrl={post.shareUrl} />
+        {/* 투표 버튼, 공유 버튼 */}
+        <PollActionButtons shareUrl={post.shareUrl} postId={parseInt(postId)} />
+      </SelectionProvider>
     </div>
   );
 }

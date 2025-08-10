@@ -1,30 +1,17 @@
-import { useState } from 'react';
 import CardItem from '@/components/poll-detail/Card/CardItem';
-import { Post, PollChoice } from '@/types/post';
+import { useSelection } from '@/components/poll-detail/SelectionContext';
+import { PollChoice } from '@/types/post';
 
 interface CardListProps {
-  pollOption: {
-    pollType: Post['pollOption']['pollType'];
-  };
   pollChoices: PollChoice[];
 }
 
-export default function CardList({ pollOption, pollChoices }: CardListProps) {
-  const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>(
-    {},
-  );
-
-  console.log(checkedItems);
+export default function CardList({ pollChoices }: CardListProps) {
+  const { checkedItems, setChecked } = useSelection();
 
   const handleCheck =
     (id: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (pollOption.pollType === 'SINGLE') {
-        // 단일 투표
-        setCheckedItems({ [id]: e.target.checked });
-      } else {
-        // 복수 투표
-        setCheckedItems((prev) => ({ ...prev, [id]: e.target.checked }));
-      }
+      setChecked(id, e.target.checked);
     };
 
   return (

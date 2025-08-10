@@ -32,7 +32,7 @@ export interface Post {
   shareUrl: string;
   isAuthor: boolean;
   status: 'PROGRESS' | 'CLOSED';
-  pollOptions: PollOptions;
+  pollOption: PollOptions;
   closeOption: CloseOptions;
   commentCount: number;
   voterCount: number;

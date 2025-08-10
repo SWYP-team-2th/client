@@ -53,7 +53,7 @@ export default function PollDetailPage() {
       />
 
       {/* 투표  선탹지 */}
-      <CardList pollOptions={post.pollOptions} pollChoices={post.pollChoices} />
+      <CardList pollOption={post.pollOption} pollChoices={post.pollChoices} />
 
       {/* 투표 버튼, 공유 버튼 */}
       <PollActionButtons shareUrl={post.shareUrl} />

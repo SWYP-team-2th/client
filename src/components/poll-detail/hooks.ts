@@ -1,9 +1,9 @@
 import { useGetPost } from '@/api/useGetPost';
-import { useGetResult } from '@/api/useGetResult';
+import { useGetVotesStatus } from '@/api/useGetVotesStatus';
 
 export function usePollResult(postId: string) {
   const { data: post } = useGetPost(postId);
-  const { data: result } = useGetResult(postId);
+  const { data: result } = useGetVotesStatus(postId);
 
   const resultChoices = (result ?? []).map((result) => ({
     id: result.id,

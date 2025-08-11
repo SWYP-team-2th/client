@@ -12,8 +12,7 @@ export default function PollResultPage() {
     return <div>없는 게시글이용</div>;
   }
 
-  const { post, sortedChoices, totalVotes, calculatePercentage, isLoading } =
-    usePollResult(postId);
+  const { post, sortedChoices, totalVotes, isLoading } = usePollResult(postId);
 
   if (isLoading) {
     return (
@@ -67,7 +66,7 @@ export default function PollResultPage() {
                 title={choice.title}
                 imageUrl={choice.imageUrl}
                 voteCount={choice.voteCount}
-                percentage={calculatePercentage(choice.voteCount)}
+                percentage={choice.voteRatio}
               />
             ))}
           </div>

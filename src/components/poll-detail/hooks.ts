@@ -10,7 +10,7 @@ export function usePollResult(postId: string) {
     title: result.title,
     imageUrl: result.imageUrl,
     voteCount: result.voteCount,
-    voteRatio: result.voteRatio,
+    voteRatio: parseFloat(result.voteRatio),
   }));
 
   // 투표 수로 정렬 (내림차순)
@@ -24,17 +24,11 @@ export function usePollResult(postId: string) {
     0,
   );
 
-  // 백분율 계산 함수
-  const calculatePercentage = (voteCount: number) => {
-    return totalVotes > 0 ? (voteCount / totalVotes) * 100 : 0;
-  };
-
   return {
     post,
     resultChoices,
     sortedChoices,
     totalVotes,
-    calculatePercentage,
     isLoading: !post || !result,
   };
 }

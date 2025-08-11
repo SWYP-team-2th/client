@@ -9,18 +9,13 @@ interface RegistPollRequest extends Omit<PollFormData, 'pollChoices'> {
   }[];
 }
 
-interface RegistVoteResponse {
-  postId: number;
-  shareUrl: string;
-}
-
 export default function usePostRegistVote(
   options?: Omit<
-    UseMutationOptions<RegistVoteResponse, Error, RegistPollRequest>,
+    UseMutationOptions<void, Error, RegistPollRequest>,
     'mutationFn'
   >,
 ) {
-  return useMutation<RegistVoteResponse, Error, RegistPollRequest>({
+  return useMutation<void, Error, RegistPollRequest>({
     mutationFn: (data: RegistPollRequest) =>
       request({
         method: 'POST',

@@ -6,15 +6,10 @@ interface VoteRequest {
   pollChoiceIds: number[];
 }
 
-interface VoteResponse {
-  success: boolean;
-  message?: string;
-}
-
 export default function usePost(
-  options?: UseMutationOptions<VoteResponse, Error, VoteRequest>,
+  options?: UseMutationOptions<void, Error, VoteRequest>,
 ) {
-  return useMutation<VoteResponse, Error, VoteRequest>({
+  return useMutation<void, Error, VoteRequest>({
     mutationFn: (voteData: VoteRequest) => {
       return request({
         method: 'POST',
@@ -22,8 +17,8 @@ export default function usePost(
         data: voteData,
       });
     },
-    onSuccess: (data) => {
-      console.log('투표 성공:', data);
+    onSuccess: () => {
+      console.log('투표 성공');
     },
     onError: (err) => {
       console.error('투표 에러:', err);

@@ -22,11 +22,6 @@ export default function PollButton({ postId, onVoted }: PollButtonProps) {
   });
 
   const handleVote = () => {
-    if (selectedChoiceIds.length === 0) {
-      alert('투표할 선택지를 선택해주세요.');
-      return;
-    }
-
     vote({
       postId,
       pollChoiceIds: selectedChoiceIds,

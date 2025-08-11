@@ -3,7 +3,9 @@ import { useGetPost } from '@/api/useGetPost';
 import { useGetVotesStatus } from '@/api/useGetVotesStatus';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
+import Loading from '@/components/common/Loading/Loading';
 import ResultItem from '@/components/poll-detail/Result/ResultItem';
+import NotFoundPage from '@/pages/NotFound/NotFoundPage';
 
 export default function PollResultPage() {
   const navigate = useNavigate();
@@ -17,11 +19,11 @@ export default function PollResultPage() {
   const { data: result } = useGetVotesStatus(postId);
 
   if (!post) {
-    return (
-      <div className="w-full h-screen flex items-center justify-center text-gray-600">
-        존재하지 않는 투표예요.
-      </div>
-    );
+    return <NotFoundPage />;
+  }
+
+  if (!result) {
+    return <Loading />;
   }
 
   return (

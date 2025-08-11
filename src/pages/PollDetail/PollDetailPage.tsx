@@ -4,11 +4,13 @@ import { useGetPost } from '@/api/useGetPost';
 import { useGetVotesStatus } from '@/api/useGetVotesStatus';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
+import Loading from '@/components/common/Loading/Loading';
 import PollActionButtons from '@/components/poll-detail/Button/PollActionButtons';
 import CardList from '@/components/poll-detail/Card/CardList';
 import PollInfo from '@/components/poll-detail/Info/PollInfo';
 import ResultList from '@/components/poll-detail/Result/ResultList';
 import { SelectionProvider } from '@/components/poll-detail/SelectionContext';
+import NotFoundPage from '@/pages/NotFound/NotFoundPage';
 
 export default function PollDetailPage() {
   const navigate = useNavigate();
@@ -24,11 +26,11 @@ export default function PollDetailPage() {
   const { data: result } = useGetVotesStatus(postId);
 
   if (!post) {
-    return (
-      <div className="w-full h-screen flex items-center justify-center text-gray-600">
-        존재하지 않는 투표예요.
-      </div>
-    );
+    return <NotFoundPage />;
+  }
+
+  if (!result) {
+    return <Loading />;
   }
 
   return (

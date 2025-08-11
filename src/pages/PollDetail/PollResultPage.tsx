@@ -1,7 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom';
+import { useGetPost } from '@/api/useGetPost';
+import { useGetVotesStatus } from '@/api/useGetVotesStatus';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
-import { usePollResult } from '@/components/poll-detail/hooks';
 import ResultItem from '@/components/poll-detail/Result/ResultItem';
 
 export default function PollResultPage() {
@@ -12,15 +13,8 @@ export default function PollResultPage() {
     return <div>없는 게시글이용</div>;
   }
 
-  const { post, sortedChoices, totalVotes, isLoading } = usePollResult(postId);
-
-  if (isLoading) {
-    return (
-      <div className="w-full h-screen flex items-center justify-center text-gray-600">
-        로딩 중이용
-      </div>
-    );
-  }
+  const { data: post } = useGetPost(postId);
+  const { data: result } = useGetVotesStatus(postId);
 
   if (!post) {
     return (
@@ -54,19 +48,19 @@ export default function PollResultPage() {
           <div className="text-headline-1 text-gray-800">투표 결과</div>
           <div className="flex items-center gap-1 text-gray-500">
             <Icon name="DeadLineGray" size="small" />
-            <span className="text-body-2">{totalVotes}표</span>
+            <span className="text-body-2">{post.voterCount}표</span>
           </div>
         </div>
-        {sortedChoices.length > 0 && (
+        {result && result.length > 0 && (
           <div className="space-y-4">
-            {sortedChoices.map((choice, index) => (
+            {result.map((choice, index) => (
               <ResultItem
                 key={choice.id}
                 rank={index + 1}
                 title={choice.title}
                 imageUrl={choice.imageUrl}
                 voteCount={choice.voteCount}
-                percentage={choice.voteRatio}
+                percentage={parseFloat(choice.voteRatio)}
               />
             ))}
           </div>

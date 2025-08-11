@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useGetPost } from '@/api/useGetPost';
+import { useGetVotesStatus } from '@/api/useGetVotesStatus';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
 import PollActionButtons from '@/components/poll-detail/Button/PollActionButtons';
 import CardList from '@/components/poll-detail/Card/CardList';
-import { usePollResult } from '@/components/poll-detail/hooks';
 import PollInfo from '@/components/poll-detail/Info/PollInfo';
 import ResultList from '@/components/poll-detail/Result/ResultList';
 import { SelectionProvider } from '@/components/poll-detail/SelectionContext';
@@ -19,15 +20,8 @@ export default function PollDetailPage() {
     return <div>게시글 ID가 없습니다.</div>;
   }
 
-  const { post, resultChoices, isLoading } = usePollResult(postId);
-
-  if (isLoading) {
-    return (
-      <div className="w-full h-screen flex items-center justify-center text-gray-600">
-        로딩 중...
-      </div>
-    );
-  }
+  const { data: post } = useGetPost(postId);
+  const { data: result } = useGetVotesStatus(postId);
 
   if (!post) {
     return (
@@ -67,13 +61,13 @@ export default function PollDetailPage() {
       />
 
       {/* 투표 결과 섹션 */}
-      {showResult && resultChoices.length > 0 && (
+      {showResult && result && result.length > 0 && (
         <div className="px-5 border-y-[3px] border-gray-200 mb-[30px]">
           <div className="text-headline-1 text-gray-800 mt-[35px]">
             투표 결과
           </div>
           <ResultList
-            choices={resultChoices}
+            choices={result}
             showAll={false}
             postId={parseInt(postId)}
           />

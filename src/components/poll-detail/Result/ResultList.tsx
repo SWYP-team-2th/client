@@ -12,17 +12,13 @@ interface ResultChoice {
 
 interface ResultListProps {
   result: ResultChoice[];
-  showAll?: boolean;
 }
 
-export default function ResultList({
-  result,
-  showAll = true,
-}: ResultListProps) {
+export default function ResultList({ result }: ResultListProps) {
   const navigate = useNavigate();
   const { postId } = useParams<{ postId: string }>();
 
-  const visible = showAll ? result : result.slice(0, 3);
+  const visible = result.length > 3 ? result.slice(0, 3) : result;
 
   const handleShowAllResults = () => {
     if (postId) {
@@ -43,7 +39,7 @@ export default function ResultList({
         />
       ))}
 
-      {!showAll && result.length > 3 && (
+      {result.length > 3 && (
         <button
           type="button"
           onClick={handleShowAllResults}

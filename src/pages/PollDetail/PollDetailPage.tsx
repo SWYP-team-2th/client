@@ -16,7 +16,6 @@ export default function PollDetailPage() {
   const navigate = useNavigate();
   const { postId } = useParams<{ postId: string }>();
   const [isVoted, setIsVoted] = useState(false);
-  const [showResult, setShowResult] = useState(false);
 
   if (!postId) {
     return <div>게시글 ID가 없습니다.</div>;
@@ -59,12 +58,12 @@ export default function PollDetailPage() {
       />
 
       {/* 투표 결과 섹션 */}
-      {showResult && result && result.length > 0 && (
+      {isVoted && result && result.length > 0 && (
         <div className="px-5 border-y-[3px] border-gray-200 mb-[30px]">
           <div className="text-headline-1 text-gray-800 mt-[35px]">
             투표 결과
           </div>
-          <ResultList result={result} showAll={false} />
+          <ResultList result={result} />
         </div>
       )}
 
@@ -78,7 +77,6 @@ export default function PollDetailPage() {
           postId={parseInt(postId)}
           isVoted={isVoted}
           setIsVoted={setIsVoted}
-          setShowResult={setShowResult}
         />
       </SelectionProvider>
     </div>

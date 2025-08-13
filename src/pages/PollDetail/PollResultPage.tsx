@@ -15,16 +15,12 @@ export default function PollResultPage() {
     return <div>없는 게시글이용</div>;
   }
 
-  const { data: post } = useGetPost(postId);
-  const { data: result } = useGetVotesStatus(postId);
+  const { data: post, isLoading: isPostLoading } = useGetPost(postId);
+  const { data: result, isLoading: isResultLoading } =
+    useGetVotesStatus(postId);
 
-  if (!post) {
-    return <NotFoundPage />;
-  }
-
-  if (!result) {
-    return <Loading />;
-  }
+  if (isPostLoading || isResultLoading) return <Loading />;
+  if (!post || !result) return <NotFoundPage />;
 
   return (
     <div className="w-full bg-gray-100 min-h-screen flex flex-col pt-[80px] relative">

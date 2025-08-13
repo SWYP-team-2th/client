@@ -22,16 +22,12 @@ export default function PollDetailPage() {
     return <div>게시글 ID가 없습니다.</div>;
   }
 
-  const { data: post } = useGetPost(postId);
-  const { data: result } = useGetVotesStatus(postId);
+  const { data: post, isLoading: isPostLoading } = useGetPost(postId);
+  const { data: result, isLoading: isResultLoading } =
+    useGetVotesStatus(postId);
 
-  if (!post) {
-    return <NotFoundPage />;
-  }
-
-  if (!result) {
-    return <Loading />;
-  }
+  if (isPostLoading || isResultLoading) return <Loading />;
+  if (!post || !result) return <NotFoundPage />;
 
   return (
     <div className="w-full bg-gray-100 h-screen flex itmes-center flex-col pt-[60px] relative">

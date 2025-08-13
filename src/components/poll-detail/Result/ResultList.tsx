@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Icon from '@/components/common/Icon';
 import ResultItem from '@/components/poll-detail/Result/ResultItem';
 
@@ -7,24 +7,22 @@ interface ResultChoice {
   title: string;
   imageUrl: string;
   voteCount: number;
+  voteRatio: string;
 }
 
 interface ResultListProps {
-  choices: ResultChoice[];
+  result: ResultChoice[];
   showAll?: boolean;
-  postId?: number;
 }
 
 export default function ResultList({
-  choices,
+  result,
   showAll = true,
-  postId,
 }: ResultListProps) {
   const navigate = useNavigate();
-  const sorted = [...choices].sort((a, b) => b.voteCount - a.voteCount);
-  const totalVotes = sorted.reduce((sum, c) => sum + c.voteCount, 0);
+  const { postId } = useParams<{ postId: string }>();
 
-  const visible = showAll ? sorted : sorted.slice(0, 3);
+  const visible = showAll ? result : result.slice(0, 3);
 
   const handleShowAllResults = () => {
     if (postId) {
@@ -41,13 +39,11 @@ export default function ResultList({
           title={item.title}
           imageUrl={item.imageUrl}
           voteCount={item.voteCount}
-          percentage={
-            totalVotes === 0 ? 0 : (item.voteCount / totalVotes) * 100
-          }
+          percentage={parseFloat(item.voteRatio)}
         />
       ))}
 
-      {!showAll && choices.length > 3 && (
+      {!showAll && result.length > 3 && (
         <button
           type="button"
           onClick={handleShowAllResults}

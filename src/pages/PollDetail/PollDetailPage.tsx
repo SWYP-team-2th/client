@@ -68,11 +68,7 @@ export default function PollDetailPage() {
           <div className="text-headline-1 text-gray-800 mt-[35px]">
             투표 결과
           </div>
-          <ResultList
-            choices={result}
-            showAll={false}
-            postId={parseInt(postId)}
-          />
+          <ResultList result={result} showAll={false} />
         </div>
       )}
 

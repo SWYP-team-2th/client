@@ -17,12 +17,6 @@ export default function usePost(
         data: voteData,
       });
     },
-    onSuccess: () => {
-      console.log('투표 성공');
-    },
-    onError: (err) => {
-      console.error('투표 에러:', err);
-    },
     ...options,
   });
 }

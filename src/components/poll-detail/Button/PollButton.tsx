@@ -1,6 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import usePost from '@/api/usePost';
 import { Button } from '@/components/common/Button/Button';
+import useToast from '@/components/common/Toast/hooks';
 import { useSelection } from '@/components/poll-detail/SelectionContext';
 
 interface PollButtonProps {
@@ -11,13 +12,27 @@ interface PollButtonProps {
 export default function PollButton({ postId, onVoted }: PollButtonProps) {
   const { selectedChoiceIds } = useSelection();
   const queryClient = useQueryClient();
+  const toast = useToast();
+
   const { mutate: vote, isPending } = usePost({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['post', String(postId)] });
       queryClient.invalidateQueries({
         queryKey: ['postResult', String(postId)],
       });
+
+      toast.success({
+        title: '투표 완료',
+        description: '투표가 성공적으로 완료되었어요.',
+      });
+
       onVoted();
+    },
+    onError: () => {
+      toast.error({
+        title: '투표 실패',
+        description: '투표 처리 중 오류가 발생했어요. 다시 시도해주세요.',
+      });
     },
   });
 

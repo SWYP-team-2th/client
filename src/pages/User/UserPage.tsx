@@ -51,7 +51,7 @@ export default function UserPage() {
         profileImageUrl={userInfo?.profileUrl}
         name={userInfo?.nickname}
       />
-      <div className="rounded-t-[20px] overflow-hidden px-5 py-6 -mt-6 z-1000 bg-white">
+      <div className="rounded-t-[20px] overflow-hidden px-5 py-6 -mt-6 bg-white">
         <div className="flex gap-6 mb-6 text-heading-2">
           <button
             onClick={() => handleTabChange('MY')}

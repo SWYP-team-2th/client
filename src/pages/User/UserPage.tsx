@@ -4,6 +4,7 @@ import useGetUserInfo from '@/api/useGetUserInfo';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
 import Profile from '@/components/user/Profile';
+import { cn } from '@/utils/cn';
 
 export default function UserPage() {
   const { userId } = useParams();
@@ -54,9 +55,10 @@ export default function UserPage() {
         <div className="flex gap-6 mb-6 text-heading-2">
           <button
             onClick={() => handleTabChange('MY')}
-            className={`font-bold pb-2 relative ${
-              currentTab === 'MY' ? 'text-gray-900' : 'text-gray-500'
-            }`}
+            className={cn(
+              'font-bold pb-2 relative text-gray-500',
+              currentTab === 'MY' && 'text-gray-900',
+            )}
           >
             내 투표
             {currentTab === 'MY' && (
@@ -65,9 +67,10 @@ export default function UserPage() {
           </button>
           <button
             onClick={() => handleTabChange('PARTICIPATED')}
-            className={`font-bold pb-2 relative ${
-              currentTab === 'PARTICIPATED' ? 'text-gray-900' : 'text-gray-500'
-            }`}
+            className={cn(
+              'font-bold pb-2 relative text-gray-500',
+              currentTab === 'PARTICIPATED' && 'text-gray-900',
+            )}
           >
             참여한 투표
             {currentTab === 'PARTICIPATED' && (

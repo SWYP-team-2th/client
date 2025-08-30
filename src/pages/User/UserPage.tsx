@@ -1,4 +1,5 @@
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import useGetUserInfo from '@/api/useGetUserInfo';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
@@ -7,6 +8,20 @@ import Profile from '@/components/user/Profile';
 export default function UserPage() {
   const { userId } = useParams();
   const { data: userInfo } = useGetUserInfo(Number(userId));
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const currentTab = (searchParams.get('tab') as 'MY' | 'PARTICIPATED') || 'MY';
+
+  const handleTabChange = (newTab: 'MY' | 'PARTICIPATED') => {
+    setSearchParams({ tab: newTab });
+  };
+
+  useEffect(() => {
+    if (!searchParams.get('tab')) {
+      setSearchParams({ tab: 'MY' });
+    }
+  }, [searchParams, setSearchParams]);
 
   return (
     <div className="h-full w-full min-h-lvh pt-15">
@@ -18,7 +33,7 @@ export default function UserPage() {
             strokeColor="white"
             name="ArrowLeft"
             size="medium"
-            onClick={() => {}}
+            onClick={() => navigate(-1)}
           />
         }
         centerNode={<h1 className="text-heading-1">마이페이지</h1>}
@@ -36,7 +51,44 @@ export default function UserPage() {
         name={userInfo?.nickname}
       />
       <div className="rounded-t-[20px] overflow-hidden px-5 py-6 -mt-6 z-1000 bg-white">
-        ㅗㅜㅑ
+        <div className="flex gap-6 mb-6 text-heading-2">
+          <button
+            onClick={() => handleTabChange('MY')}
+            className={`font-bold pb-2 relative ${
+              currentTab === 'MY' ? 'text-gray-900' : 'text-gray-500'
+            }`}
+          >
+            내 투표
+            {currentTab === 'MY' && (
+              <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gray-900"></div>
+            )}
+          </button>
+          <button
+            onClick={() => handleTabChange('PARTICIPATED')}
+            className={`font-bold pb-2 relative ${
+              currentTab === 'PARTICIPATED' ? 'text-gray-900' : 'text-gray-500'
+            }`}
+          >
+            참여한 투표
+            {currentTab === 'PARTICIPATED' && (
+              <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gray-900"></div>
+            )}
+          </button>
+        </div>
+        <div>
+          {currentTab === 'MY' && (
+            <div>
+              <p className="text-gray-600">내 투표 목록이 여기에 표시됩니다.</p>
+            </div>
+          )}
+          {currentTab === 'PARTICIPATED' && (
+            <div>
+              <p className="text-gray-600">
+                참여한 투표 목록이 여기에 표시됩니다.
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

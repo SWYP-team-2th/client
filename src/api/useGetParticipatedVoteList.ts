@@ -7,7 +7,7 @@ import { request } from './config';
 import { Pageable } from '@/types/pageable';
 import { UserPost } from '@/types/user-post';
 
-interface UseGetMyVoteListOptions {
+interface UseGetParticipatedVoteListOptions {
   userId: string;
   options?: UseSuspenseInfiniteQueryOptions<
     Pageable<UserPost>,
@@ -19,18 +19,21 @@ interface UseGetMyVoteListOptions {
   >;
 }
 
-export function useGetMyVoteList({ userId, options }: UseGetMyVoteListOptions) {
+export function useGetParticipatedVoteList({
+  userId,
+  options,
+}: UseGetParticipatedVoteListOptions) {
   return useSuspenseInfiniteQuery<Pageable<UserPost>>({
     queryFn: ({ pageParam = null }) =>
       request({
         method: 'GET',
-        url: `/posts/users/${userId}`,
+        url: `/posts/users/${userId}/voted`,
         params: {
           cursor: pageParam,
           size: 10,
         },
       }),
-    queryKey: ['my-vote-list', userId],
+    queryKey: ['posts', 'users', userId, 'voted'],
     initialPageParam: null,
     getNextPageParam: (lastPage) => {
       if (!lastPage.hasNext || lastPage.data.length === 0) {

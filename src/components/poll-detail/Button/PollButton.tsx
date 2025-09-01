@@ -2,15 +2,18 @@ import { useQueryClient } from '@tanstack/react-query';
 import usePost from '@/api/usePost';
 import { Button } from '@/components/common/Button/Button';
 import useToast from '@/components/common/Toast/hooks';
-import { useSelection } from '@/components/poll-detail/SelectionContext';
 
 interface PollButtonProps {
   postId: number;
   onVoted: () => void;
+  checkedItems: number[];
 }
 
-export default function PollButton({ postId, onVoted }: PollButtonProps) {
-  const { selectedChoiceIds } = useSelection();
+export default function PollButton({
+  postId,
+  onVoted,
+  checkedItems,
+}: PollButtonProps) {
   const queryClient = useQueryClient();
   const toast = useToast();
 
@@ -39,7 +42,7 @@ export default function PollButton({ postId, onVoted }: PollButtonProps) {
   const handleVote = () => {
     vote({
       postId,
-      pollChoiceIds: selectedChoiceIds,
+      pollChoiceIds: checkedItems,
     });
   };
 
@@ -47,11 +50,11 @@ export default function PollButton({ postId, onVoted }: PollButtonProps) {
     <Button
       variant="solid"
       buttonType={
-        isPending || selectedChoiceIds.length === 0 ? 'disabled' : 'primary'
+        isPending || checkedItems.length === 0 ? 'disabled' : 'primary'
       }
       size="large"
       onClick={handleVote}
-      disabled={isPending || selectedChoiceIds.length === 0}
+      disabled={isPending || checkedItems.length === 0}
     >
       {isPending ? '투표 중...' : '투표하기'}
     </Button>

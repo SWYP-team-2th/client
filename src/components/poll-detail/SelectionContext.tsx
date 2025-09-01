@@ -1,15 +1,9 @@
-import {
-  createContext,
-  useContext,
-  useMemo,
-  useState,
-  PropsWithChildren,
-} from 'react';
+import { createContext, useContext, useState, PropsWithChildren } from 'react';
 import { Post } from '@/types/post';
 
 interface SelectionContextValue {
-  selectedChoiceIds: number[];
-  setChecked: (id: string, checked: boolean) => void;
+  checkedItems: number[];
+  setChecked: (id: number, checked: boolean) => void;
 }
 
 const SelectionContext = createContext<SelectionContextValue | undefined>(
@@ -24,25 +18,21 @@ export function SelectionProvider({
   pollType,
   children,
 }: SelectionProviderProps) {
-  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
+  const [checkedItems, setCheckedItems] = useState<number[]>([]);
 
-  const setChecked = (id: string, checked: boolean) => {
+  const setChecked = (id: number, checked: boolean) => {
     setCheckedItems((prev) => {
       if (pollType === 'SINGLE') {
-        return checked ? { [id]: true } : {};
+        return checked ? [id] : [];
       }
-      return { ...prev, [id]: checked };
+      return checked
+        ? [...prev, id]
+        : prev.filter((choiceId) => choiceId !== id);
     });
   };
 
-  const selectedChoiceIds = useMemo(() => {
-    return Object.entries(checkedItems)
-      .filter(([, isChecked]) => isChecked)
-      .map(([id]) => parseInt(id, 10));
-  }, [checkedItems]);
-
   const value: SelectionContextValue = {
-    selectedChoiceIds,
+    checkedItems,
     setChecked,
   };
 

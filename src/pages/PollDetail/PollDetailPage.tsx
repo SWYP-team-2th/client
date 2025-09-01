@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGetPost } from '@/api/useGetPost';
-import { useGetVotesStatus } from '@/api/useGetVotesStatus';
+import { usePollDetail } from '@/hooks/usePollDetail';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
 import Loading from '@/components/common/Loading/Loading';
@@ -15,17 +13,14 @@ import NotFoundPage from '@/pages/NotFound/NotFoundPage';
 export default function PollDetailPage() {
   const navigate = useNavigate();
   const { postId } = useParams<{ postId: string }>();
-  const [isVoted, setIsVoted] = useState(false);
 
   if (!postId) {
     return <div>게시글 ID가 없습니다.</div>;
   }
 
-  const { data: post, isLoading: isPostLoading } = useGetPost(postId);
-  const { data: result, isLoading: isResultLoading } =
-    useGetVotesStatus(postId);
+  const { post, result, isVoted, isLoading } = usePollDetail(postId);
 
-  if (isPostLoading || isResultLoading) return <Loading />;
+  if (isLoading) return <Loading />;
   if (!post || !result) return <NotFoundPage />;
 
   return (
@@ -76,7 +71,6 @@ export default function PollDetailPage() {
           shareUrl={post.shareUrl}
           postId={parseInt(postId)}
           isVoted={isVoted}
-          setIsVoted={setIsVoted}
         />
       </SelectionProvider>
     </div>

@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 
+// TODO: getTimeRemainingText로 변경하고 제거
 export function useTimeAgo(dateString: string) {
   return useMemo(() => {
     const now = new Date();

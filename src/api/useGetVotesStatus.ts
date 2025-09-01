@@ -15,7 +15,7 @@ export const useGetVotesStatus = (postId: string) => {
     queryFn: () =>
       request<VotesStatus[]>({
         method: 'GET',
-        url: `/posts/${postId}/votes/status`,
+        url: `/posts/${postId}/votes/result`,
       }),
     enabled: !!postId,
   });

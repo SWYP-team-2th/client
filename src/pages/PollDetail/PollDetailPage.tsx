@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { usePollDetail } from '@/hooks/usePollDetail';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
 import Loading from '@/components/common/Loading/Loading';
@@ -8,6 +7,7 @@ import CardList from '@/components/poll-detail/Card/CardList';
 import PollInfo from '@/components/poll-detail/Info/PollInfo';
 import ResultList from '@/components/poll-detail/Result/ResultList';
 import { SelectionProvider } from '@/components/poll-detail/SelectionContext';
+import { usePollDetail } from '@/hooks/usePollDetail';
 import NotFoundPage from '@/pages/NotFound/NotFoundPage';
 
 export default function PollDetailPage() {

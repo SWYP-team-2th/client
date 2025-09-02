@@ -4,6 +4,7 @@ import Icon from '@/components/common/Icon';
 import Loading from '@/components/common/Loading/Loading';
 import PollActionButtons from '@/components/poll-detail/Button/PollActionButtons';
 import CardList from '@/components/poll-detail/Card/CardList';
+import { CommentSection } from '@/components/poll-detail/Comment';
 import PollInfo from '@/components/poll-detail/Info/PollInfo';
 import ResultList from '@/components/poll-detail/Result/ResultList';
 import { SelectionProvider } from '@/components/poll-detail/SelectionContext';
@@ -72,6 +73,9 @@ export default function PollDetailPage() {
           postId={parseInt(postId)}
           isVoted={isVoted}
         />
+
+        {/* 댓글 섹션 */}
+        <CommentSection postId={parseInt(postId)} />
       </SelectionProvider>
     </div>
   );

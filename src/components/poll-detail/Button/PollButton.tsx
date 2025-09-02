@@ -6,15 +6,10 @@ import { useSelection } from '@/components/poll-detail/SelectionContext';
 
 interface PollButtonProps {
   postId: number;
-  onVoted: () => void;
   checkedItems: number[];
 }
 
-export default function PollButton({
-  postId,
-  onVoted,
-  checkedItems,
-}: PollButtonProps) {
+export default function PollButton({ postId, checkedItems }: PollButtonProps) {
   const { setVoteMode } = useSelection();
   const queryClient = useQueryClient();
   const toast = useToast();
@@ -33,7 +28,6 @@ export default function PollButton({
 
       // voteMode 종료
       setVoteMode(false);
-      onVoted();
     },
     onError: () => {
       toast.error({

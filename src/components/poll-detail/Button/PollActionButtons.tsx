@@ -37,12 +37,6 @@ export default function PollActionButtons({
     },
   });
 
-  const onVoted = () => {
-    // 투표 완료 후 서버 데이터 새로고침
-    queryClient.invalidateQueries({ queryKey: ['post', String(postId)] });
-    queryClient.invalidateQueries({ queryKey: ['postResult', String(postId)] });
-  };
-
   // 투표 다시하기 (수정하기)
   const handleVoteAgain = () => {
     // 기존 선택 값 유지해야하기 때문에 voteMode만 켜주면 됨
@@ -69,11 +63,7 @@ export default function PollActionButtons({
   return (
     <div className="flex flex-col justify-center items-center gap-[18px] my-5">
       {!isVoted || voteMode ? (
-        <PollButton
-          postId={postId}
-          onVoted={onVoted}
-          checkedItems={checkedItems}
-        />
+        <PollButton postId={postId} checkedItems={checkedItems} />
       ) : (
         <>
           <Button

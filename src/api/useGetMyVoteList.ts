@@ -6,27 +6,22 @@ import {
 import { useParams } from 'react-router-dom';
 import { request } from './config';
 import { Pageable } from '@/types/pageable';
+import { UserPost } from '@/types/user-post';
 
-interface Vote {
-  id: number;
-  bestPickedImageUrl: string;
-  shareUrl: string;
-  createdAt: string;
-}
-
-export function useGetMyVoteList(
+interface UseGetMyVoteListOptions {
+  userId: string;
   options?: UseSuspenseInfiniteQueryOptions<
-    Pageable<Vote>,
+    Pageable<UserPost>,
     Error,
-    InfiniteData<Pageable<Vote>, unknown>,
-    Pageable<Vote>,
+    InfiniteData<Pageable<UserPost>, unknown>,
+    Pageable<UserPost>,
     readonly unknown[],
     unknown
-  >,
-) {
-  const { userId } = useParams<{ userId: string }>();
+  >;
+}
 
-  return useSuspenseInfiniteQuery<Pageable<Vote>>({
+export function useGetMyVoteList({ userId, options }: UseGetMyVoteListOptions) {
+  return useSuspenseInfiniteQuery<Pageable<UserPost>>({
     queryFn: ({ pageParam = null }) =>
       request({
         method: 'GET',
@@ -49,19 +44,20 @@ export function useGetMyVoteList(
   });
 }
 
+// TODO: useGetParticipatedVoteList.ts 파일로 이동
 export function useGetParticipatedVoteList(
   options?: UseSuspenseInfiniteQueryOptions<
-    Pageable<Vote>,
+    Pageable<UserPost>,
     Error,
-    InfiniteData<Pageable<Vote>, unknown>,
-    Pageable<Vote>,
+    InfiniteData<Pageable<UserPost>, unknown>,
+    Pageable<UserPost>,
     readonly unknown[],
     unknown
   >,
 ) {
   const { userId } = useParams<{ userId: string }>();
 
-  return useSuspenseInfiniteQuery<Pageable<Vote>>({
+  return useSuspenseInfiniteQuery<Pageable<UserPost>>({
     queryFn: ({ pageParam = null }) =>
       request({
         method: 'GET',

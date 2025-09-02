@@ -32,8 +32,8 @@ export interface Post {
   shareUrl: string;
   isAuthor: boolean;
   status: 'PROGRESS' | 'CLOSED';
-  pollOptions: PollOptions;
-  closeOptions: CloseOptions;
+  pollOption: PollOptions;
+  closeOption: CloseOptions;
   commentCount: number;
   voterCount: number;
   createdAt: string;

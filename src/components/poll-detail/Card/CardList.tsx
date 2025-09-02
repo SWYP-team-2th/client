@@ -1,30 +1,18 @@
-import { useState } from 'react';
 import CardItem from '@/components/poll-detail/Card/CardItem';
-import { Post, PollChoice } from '@/types/post';
+import { useSelection } from '@/components/poll-detail/SelectionContext';
+import { PollChoice } from '@/types/post';
 
 interface CardListProps {
-  pollOptions: {
-    pollType: Post['pollOptions']['pollType'];
-  };
   pollChoices: PollChoice[];
+  isVoted: boolean;
 }
 
-export default function CardList({ pollOptions, pollChoices }: CardListProps) {
-  const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>(
-    {},
-  );
-
-  console.log(checkedItems);
+export default function CardList({ pollChoices, isVoted }: CardListProps) {
+  const { checkedItems, handleVoteChoice, voteMode } = useSelection();
 
   const handleCheck =
-    (id: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (pollOptions.pollType === 'SINGLE') {
-        // 단일 투표
-        setCheckedItems({ [id]: e.target.checked });
-      } else {
-        // 복수 투표
-        setCheckedItems((prev) => ({ ...prev, [id]: e.target.checked }));
-      }
+    (id: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      handleVoteChoice(id, e.target.checked);
     };
 
   return (
@@ -33,8 +21,23 @@ export default function CardList({ pollOptions, pollChoices }: CardListProps) {
         <CardItem
           key={choice.id}
           choice={choice}
-          checked={!!checkedItems[choice.id]}
-          onChange={handleCheck(String(choice.id))}
+          checked={
+            // voteMode가 true일 시 사용자 선택 상태만 (다시하기 모드)
+            // voteMode가 false이고 투표 완료 후일 시: 서버 투표 상태 + 사용자 투표 선택 상태
+            // - choice.voteId !== null: 실제로 서버에 투표된 항목 (테두리와 MY CHOOZ 표시)
+            // - checkedItems.includes(choice.id): 사용자가 현재 선택한 항목
+            // - OR 연산자로 둘 중 하나라도 true면 체크 상태로 표시
+
+            // 투표 전: 사용자 선택 상태만
+            // - checkedItems.includes(choice.id): 사용자가 현재 선택한 항목만 체크 상태로 표시
+            voteMode
+              ? checkedItems.includes(choice.id)
+              : isVoted
+                ? choice.voteId !== null || checkedItems.includes(choice.id)
+                : checkedItems.includes(choice.id)
+          }
+          onChange={handleCheck(choice.id)}
+          isVoted={isVoted && !voteMode}
         />
       ))}
     </div>

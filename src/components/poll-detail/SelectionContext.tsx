@@ -4,6 +4,8 @@ import { Post } from '@/types/post';
 interface SelectionContextValue {
   checkedItems: number[];
   setChecked: (id: number, checked: boolean) => void;
+  voteMode: boolean;
+  setVoteMode: (mode: boolean) => void;
 }
 
 const SelectionContext = createContext<SelectionContextValue | undefined>(
@@ -19,6 +21,7 @@ export function SelectionProvider({
   children,
 }: SelectionProviderProps) {
   const [checkedItems, setCheckedItems] = useState<number[]>([]);
+  const [voteMode, setVoteMode] = useState<boolean>(false);
 
   const setChecked = (id: number, checked: boolean) => {
     setCheckedItems((prev) => {
@@ -34,6 +37,8 @@ export function SelectionProvider({
   const value: SelectionContextValue = {
     checkedItems,
     setChecked,
+    voteMode,
+    setVoteMode,
   };
 
   return (

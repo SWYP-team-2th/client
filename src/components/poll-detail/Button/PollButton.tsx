@@ -2,6 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import usePost from '@/api/usePost';
 import { Button } from '@/components/common/Button/Button';
 import useToast from '@/components/common/Toast/hooks';
+import { useSelection } from '@/components/poll-detail/SelectionContext';
 
 interface PollButtonProps {
   postId: number;
@@ -14,6 +15,7 @@ export default function PollButton({
   onVoted,
   checkedItems,
 }: PollButtonProps) {
+  const { setVoteMode } = useSelection();
   const queryClient = useQueryClient();
   const toast = useToast();
 
@@ -29,6 +31,8 @@ export default function PollButton({
         description: '투표가 성공적으로 완료되었어요.',
       });
 
+      // voteMode 종료
+      setVoteMode(false);
       onVoted();
     },
     onError: () => {

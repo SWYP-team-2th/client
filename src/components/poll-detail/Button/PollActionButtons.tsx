@@ -17,7 +17,7 @@ export default function PollActionButtons({
   postId,
   isVoted,
 }: PollActionButtonsProps) {
-  const { checkedItems, setChecked } = useSelection();
+  const { checkedItems, setChecked, voteMode, setVoteMode } = useSelection();
   const queryClient = useQueryClient();
   const { error: showErrorToast } = useToast();
 
@@ -43,16 +43,15 @@ export default function PollActionButtons({
     queryClient.invalidateQueries({ queryKey: ['postResult', String(postId)] });
   };
 
+  // 투표 다시하기 (수정하기)
   const handleVoteAgain = () => {
-    // 투표 취소 API 호출
-    vote({
-      postId,
-      pollChoiceIds: [],
-    });
+    // 기존 선택 값 유지해야하기 때문에 voteMode만 켜주면 됨
+    setVoteMode(true);
   };
 
+  // 투표 취소하기 (초기화)
   const handleVoteCancel = () => {
-    // 투표 취소 API 호출
+    // 서버에 배열 초기화하여 요청
     vote({
       postId,
       pollChoiceIds: [],
@@ -62,11 +61,14 @@ export default function PollActionButtons({
     checkedItems.forEach((id) => {
       setChecked(id, false);
     });
+
+    // voteMode도 끄기
+    setVoteMode(false);
   };
 
   return (
     <div className="flex flex-col justify-center items-center gap-[18px] my-5">
-      {!isVoted ? (
+      {!isVoted || voteMode ? (
         <PollButton
           postId={postId}
           onVoted={onVoted}

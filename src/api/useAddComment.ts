@@ -10,7 +10,12 @@ interface AddCommentResponse {
   commentId: number;
 }
 
-export default function useAddComment() {
+interface AddCommentOptions {
+  onSuccess?: () => void;
+  onError?: () => void;
+}
+
+export default function useAddComment(options?: AddCommentOptions) {
   const queryClient = useQueryClient();
 
   return useMutation<AddCommentResponse, Error, AddCommentVariables>({
@@ -26,10 +31,12 @@ export default function useAddComment() {
 
     onSuccess: (_, { postId }) => {
       queryClient.invalidateQueries({ queryKey: ['comments', postId] });
+      options?.onSuccess?.();
     },
 
     onError: (error) => {
       console.error('댓글 작성 에러:', error);
+      options?.onError?.();
     },
   });
 }

@@ -22,8 +22,17 @@ export default function CommentBottomSheet({
   const { data: commentsData, isLoading } = useGetComments(postId, 10);
 
   // 댓글 추가
-  const { mutate: addComment, isPending: isAddCommentPending } =
-    useAddComment();
+  const { mutate: addComment, isPending: isAddCommentPending } = useAddComment({
+    onSuccess: () => {
+      setContent('');
+    },
+    onError: () => {
+      showErrorToast({
+        title: '댓글 작성 실패',
+        description: '댓글 작성 중 오류가 발생했습니다. 다시 시도해주세요.',
+      });
+    },
+  });
 
   const comments = commentsData?.comments.data || [];
   const commentCount = commentsData?.commentCount || 0;
@@ -35,20 +44,7 @@ export default function CommentBottomSheet({
       return;
     }
 
-    addComment(
-      { postId, content },
-      {
-        onSuccess: () => {
-          setContent('');
-        },
-        onError: () => {
-          showErrorToast({
-            title: '댓글 작성 실패',
-            description: '댓글 작성 중 오류가 발생했습니다. 다시 시도해주세요.',
-          });
-        },
-      },
-    );
+    addComment({ postId, content });
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

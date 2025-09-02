@@ -57,6 +57,7 @@ import Post from '@/assets/icons/post_24px.svg?react';
 import PostWhite from '@/assets/icons/post_white.svg?react';
 import ArrowRightGray from '@/assets/icons/right_arrow_gray.svg?react';
 import SearchFill from '@/assets/icons/search_fill_24px.svg?react';
+import SendGray from '@/assets/icons/send_2.svg?react';
 import Send from '@/assets/icons/send_24px.svg?react';
 import SettingsOutline from '@/assets/icons/settings_outline_24px.svg?react';
 import Talk from '@/assets/icons/talk.svg?react';
@@ -87,6 +88,7 @@ export const ICONS = {
   CheckLarge,
   CheckSmall,
   LogoutGray,
+  SendGray,
   ArrowRightGray,
   VoteGray,
   MessageOutlineGray,

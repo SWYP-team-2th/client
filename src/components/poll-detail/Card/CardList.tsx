@@ -8,11 +8,11 @@ interface CardListProps {
 }
 
 export default function CardList({ pollChoices, isVoted }: CardListProps) {
-  const { checkedItems, setChecked, voteMode } = useSelection();
+  const { checkedItems, handleVoteChoice, voteMode } = useSelection();
 
   const handleCheck =
     (id: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      setChecked(id, e.target.checked);
+      handleVoteChoice(id, e.target.checked);
     };
 
   return (

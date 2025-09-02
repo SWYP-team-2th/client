@@ -8,14 +8,6 @@ interface AddCommentVariables {
 
 interface AddCommentResponse {
   commentId: number;
-  content: string;
-  voteId: number | null;
-  createdAt: string;
-  author: {
-    userId: number;
-    nickname: string;
-    profileUrl: string;
-  };
 }
 
 export default function useAddComment() {

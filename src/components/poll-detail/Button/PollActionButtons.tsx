@@ -17,7 +17,8 @@ export default function PollActionButtons({
   postId,
   isVoted,
 }: PollActionButtonsProps) {
-  const { checkedItems, setChecked, voteMode, setVoteMode } = useSelection();
+  const { checkedItems, setCheckedItems, voteMode, setVoteMode } =
+    useSelection();
   const queryClient = useQueryClient();
   const { error: showErrorToast } = useToast();
 
@@ -52,9 +53,7 @@ export default function PollActionButtons({
     });
 
     // 모든 체크박스 해제
-    checkedItems.forEach((id) => {
-      setChecked(id, false);
-    });
+    setCheckedItems([]);
 
     // voteMode도 끄기
     setVoteMode(false);

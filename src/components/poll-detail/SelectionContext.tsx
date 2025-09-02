@@ -4,6 +4,7 @@ import { Post } from '@/types/post';
 interface SelectionContextValue {
   checkedItems: number[];
   setChecked: (id: number, checked: boolean) => void;
+  setCheckedItems: (items: number[]) => void;
   voteMode: boolean;
   setVoteMode: (mode: boolean) => void;
 }
@@ -37,6 +38,7 @@ export function SelectionProvider({
   const value: SelectionContextValue = {
     checkedItems,
     setChecked,
+    setCheckedItems,
     voteMode,
     setVoteMode,
   };

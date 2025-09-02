@@ -3,6 +3,7 @@ import PollButton from './PollButton';
 import ShareButton from './ShareButton';
 import usePost from '@/api/usePost';
 import { Button } from '@/components/common/Button/Button';
+import useToast from '@/components/common/Toast/hooks';
 import { useSelection } from '@/components/poll-detail/SelectionContext';
 
 interface PollActionButtonsProps {
@@ -18,6 +19,7 @@ export default function PollActionButtons({
 }: PollActionButtonsProps) {
   const { checkedItems, setChecked } = useSelection();
   const queryClient = useQueryClient();
+  const { error: showErrorToast } = useToast();
 
   const { mutate: vote } = usePost({
     onSuccess: () => {
@@ -28,7 +30,10 @@ export default function PollActionButtons({
       });
     },
     onError: () => {
-      console.error('투표 취소/다시하기 실패염');
+      showErrorToast({
+        title: '투표 실패',
+        description: '오류가 발생하였습니다. 다시 시도해주세요.',
+      });
     },
   });
 

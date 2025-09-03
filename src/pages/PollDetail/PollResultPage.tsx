@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGetPost } from '@/api/useGetPost';
-import { useGetVotesStatus } from '@/api/useGetVotesStatus';
+import { useGetVotesResult } from '@/api/useGetVotesResult';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
 import Loading from '@/components/common/Loading/Loading';
@@ -16,8 +16,12 @@ export default function PollResultPage() {
   }
 
   const { data: post, isLoading: isPostLoading } = useGetPost(postId);
-  const { data: result, isLoading: isResultLoading } =
-    useGetVotesStatus(postId);
+  const { data: result, isLoading: isResultLoading } = useGetVotesResult({
+    postId,
+    options: {
+      enabled: !!postId,
+    },
+  });
 
   if (isPostLoading || isResultLoading) return <Loading />;
   if (!post || !result) return <NotFoundPage />;

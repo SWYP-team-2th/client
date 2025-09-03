@@ -14,14 +14,13 @@ export default function PollDetailPage() {
   const navigate = useNavigate();
   const { postId } = useParams<{ postId: string }>();
 
-  if (!postId) {
-    return <div>게시글 ID가 없습니다.</div>;
-  }
-
-  const { post, result, isVoted, isLoading } = usePollDetail(postId);
+  const { post, result, isVoted, isLoading } = usePollDetail(postId ?? '');
 
   if (isLoading) return <Loading />;
-  if (!post || !result) return <NotFoundPage />;
+
+  if (!postId || !post) {
+    return <NotFoundPage />;
+  }
 
   return (
     <div className="w-full bg-gray-100 h-screen flex itmes-center flex-col pt-[60px] relative">

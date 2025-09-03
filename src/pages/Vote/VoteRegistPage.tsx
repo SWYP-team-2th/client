@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
 import PollCloseOptionSection from '@/components/poll/PollCloseOptionSection';
@@ -8,13 +9,28 @@ import { PollFormProvider } from '@/components/poll/Provider/PollFormProvider';
 import PollSubmitButton from '@/components/poll/regist/PollRegistButton';
 
 export default function VoteRegistPage() {
+  const navigate = useNavigate();
+
+  const handleClickCloseButton = () => {
+    navigate(-1);
+  };
+
   return (
     <div>
       <Header
         className="bg-white"
-        leftNode={<Icon name="Close" size="large" />}
+        leftNode={
+          <Icon
+            name="Close"
+            size="large"
+            className="cursor-pointer"
+            onClick={handleClickCloseButton}
+          />
+        }
         centerNode={<h1 className="text-heading-1">투표</h1>}
-        rightNode={<Icon name="BellOutline" size="large" />}
+        rightNode={
+          <Icon name="BellOutline" size="large" className="cursor-pointer" />
+        }
       />
       <PollFormProvider type="REGIST" initialData={INITIAL_POLL_REGIST_DATA}>
         <PollInformation />

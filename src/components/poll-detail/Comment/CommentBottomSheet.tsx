@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { useState, useRef } from 'react';
 import { CommentItem } from './index';
 import useAddComment from '@/api/useAddComment';
@@ -18,12 +19,14 @@ export default function CommentBottomSheet({
   const [content, setContent] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const queryClient = useQueryClient();
   const { error: showErrorToast } = useToast();
   const { data: commentsData, isLoading } = useGetComments(postId, 10);
 
   // 댓글 추가
   const { mutate: addComment, isPending: isAddCommentPending } = useAddComment({
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['comments', postId] });
       setContent('');
     },
     onError: () => {

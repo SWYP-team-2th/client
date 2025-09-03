@@ -1,6 +1,8 @@
+import DeleteCommentDialog from './DeleteCommentDialog';
 import { CommentBottomSheet } from './index';
 import useGetComments from '@/api/useGetComments';
 import { useBottomSheet } from '@/components/common/BottomSheet/hooks';
+import { useDialog } from '@/components/common/Dialog/hooks';
 import Icon from '@/components/common/Icon';
 
 interface CommentSectionProps {
@@ -9,6 +11,7 @@ interface CommentSectionProps {
 
 export default function CommentSection({ postId }: CommentSectionProps) {
   const { openBottomSheet } = useBottomSheet();
+  const { openDialog } = useDialog();
 
   // 댓글 미리보기 최대 1개까지 보여주기
   const { data: commentsData } = useGetComments(postId, 1);
@@ -16,7 +19,16 @@ export default function CommentSection({ postId }: CommentSectionProps) {
   const commentCount = commentsData?.commentCount || 0;
 
   const handleCommentClick = () => {
-    openBottomSheet(<CommentBottomSheet postId={postId} />);
+    openBottomSheet(
+      <CommentBottomSheet
+        postId={postId}
+        onDeleteComment={(commentId) => {
+          openDialog(
+            <DeleteCommentDialog postId={postId} commentId={commentId} />,
+          );
+        }}
+      />,
+    );
   };
 
   return (

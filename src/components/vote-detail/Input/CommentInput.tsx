@@ -35,10 +35,24 @@ export default function CommentInput({
   const { data: myInfo } = useGetMyInfo();
   const { openDialog } = useDialog();
   const { data: voteDetail } = useGetVoteDetail(shareUrl ?? '');
-  const { mutate: addComment, isPending: isAddCommentPending } =
-    useAddComment();
+  const { mutate: addComment, isPending: isAddCommentPending } = useAddComment({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['comments', voteDetail?.id],
+      });
+      setContent('');
+    },
+  });
   const { mutate: editComment, isPending: isEditCommentPending } =
-    useEditComment();
+    useEditComment({
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['comments', voteDetail?.id],
+        });
+        setContent('');
+        onEditComplete?.();
+      },
+    });
 
   useEffect(() => {
     if (editingComment) {
@@ -62,34 +76,13 @@ export default function CommentInput({
     }
 
     if (editingComment) {
-      editComment(
-        {
-          postId: voteDetail.id,
-          commentId: editingComment.commentId,
-          content,
-        },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries({
-              queryKey: ['comments', voteDetail.id],
-            });
-            setContent('');
-            onEditComplete?.();
-          },
-        },
-      );
+      editComment({
+        postId: voteDetail.id,
+        commentId: editingComment.commentId,
+        content,
+      });
     } else {
-      addComment(
-        { postId: voteDetail.id, content },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries({
-              queryKey: ['comments', voteDetail.id],
-            });
-            setContent('');
-          },
-        },
-      );
+      addComment({ postId: voteDetail.id, content });
     }
   };
 

@@ -3,6 +3,7 @@ import { useState, useRef } from 'react';
 import { CommentItem } from './index';
 import useAddComment from '@/api/useAddComment';
 import useGetComments from '@/api/useGetComments';
+import useUpdateComment from '@/api/useUpdateComment';
 import BottomSheet from '@/components/common/BottomSheet';
 import Icon from '@/components/common/Icon';
 import Loading from '@/components/common/Loading';
@@ -11,16 +12,22 @@ import useToast from '@/components/common/Toast/hooks';
 
 interface CommentBottomSheetProps {
   postId: number;
+  onDeleteComment: (commentId: number) => void;
 }
 
 export default function CommentBottomSheet({
   postId,
+  onDeleteComment,
 }: CommentBottomSheetProps) {
   const [content, setContent] = useState('');
+  const [editingComment, setEditingComment] = useState<{
+    id: number;
+    content: string;
+  } | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const queryClient = useQueryClient();
-  const { error: showErrorToast } = useToast();
+  const { success: showSuccessToast, error: showErrorToast } = useToast();
   const { data: commentsData, isLoading } = useGetComments(postId, 10);
 
   // 댓글 추가
@@ -37,6 +44,24 @@ export default function CommentBottomSheet({
     },
   });
 
+  // 댓글 수정
+  const { mutate: updateComment } = useUpdateComment({
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['comments', postId] });
+      setContent('');
+      setEditingComment(null);
+      showSuccessToast({
+        title: '댓글이 수정되었습니다.',
+      });
+    },
+    onError: () => {
+      showErrorToast({
+        title: '댓글 수정 실패',
+        description: '댓글 수정 중 오류가 발생했습니다. 다시 시도해주세요.',
+      });
+    },
+  });
+
   const comments = commentsData?.comments.data || [];
   const commentCount = commentsData?.commentCount || 0;
 
@@ -47,7 +72,19 @@ export default function CommentBottomSheet({
       return;
     }
 
-    addComment({ postId, content });
+    if (editingComment) {
+      // 댓글 수정
+      updateComment({ postId, commentId: editingComment.id, content });
+    } else {
+      // 댓글 추가
+      addComment({ postId, content });
+    }
+  };
+
+  const handleEditComment = (commentId: number, commentContent: string) => {
+    setContent(commentContent);
+    setEditingComment({ id: commentId, content: commentContent });
+    inputRef.current?.focus();
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -82,7 +119,12 @@ export default function CommentBottomSheet({
           ) : (
             <div className="space-y-4">
               {comments.map((comment) => (
-                <CommentItem key={comment.id} comment={comment} />
+                <CommentItem
+                  key={comment.id}
+                  comment={comment}
+                  onEditComment={handleEditComment}
+                  onDeleteComment={onDeleteComment}
+                />
               ))}
             </div>
           )}

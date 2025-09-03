@@ -4,6 +4,7 @@ import useGetUserInfo from '@/api/useGetUserInfo';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
 import MyVoteList from '@/components/user/MyVoteList';
+import ParticipatedVoteList from '@/components/user/ParticipatedVoteList/ParticipatedVoteList';
 import Profile from '@/components/user/Profile';
 import { cn } from '@/utils/cn';
 
@@ -81,13 +82,7 @@ export default function UserPage() {
         </div>
         <div>
           {currentTab === 'MY' && <MyVoteList />}
-          {currentTab === 'PARTICIPATED' && (
-            <div>
-              <p className="text-gray-600">
-                참여한 투표 목록이 여기에 표시됩니다.
-              </p>
-            </div>
-          )}
+          {currentTab === 'PARTICIPATED' && <ParticipatedVoteList />}
         </div>
       </div>
     </div>

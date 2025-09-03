@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useAddComment from '@/api/useAddComment';
@@ -30,6 +31,7 @@ export default function CommentInput({
 }: CommentInputProps) {
   const [content, setContent] = useState('');
   const { shareUrl } = useParams<{ shareUrl: string }>();
+  const queryClient = useQueryClient();
   const { data: myInfo } = useGetMyInfo();
   const { openDialog } = useDialog();
   const { data: voteDetail } = useGetVoteDetail(shareUrl ?? '');
@@ -68,6 +70,9 @@ export default function CommentInput({
         },
         {
           onSuccess: () => {
+            queryClient.invalidateQueries({
+              queryKey: ['comments', voteDetail.id],
+            });
             setContent('');
             onEditComplete?.();
           },
@@ -78,6 +83,9 @@ export default function CommentInput({
         { postId: voteDetail.id, content },
         {
           onSuccess: () => {
+            queryClient.invalidateQueries({
+              queryKey: ['comments', voteDetail.id],
+            });
             setContent('');
           },
         },

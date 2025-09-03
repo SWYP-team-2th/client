@@ -31,7 +31,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
   ) => {
     return (
       <div
-        className={cn('flex flex-col gap-1 text-gray-700', {
+        className={cn('flex flex-col gap-1', {
           'text-error': status === 'error',
           'text-success': status === 'success',
         })}
@@ -40,14 +40,14 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         <div className="relative">
           <input
             className={cn(
-              'w-full px-4 py-3 rounded-xl border-[1px] border-gray-500 border-solid text-body-1-long text-gray-700 [&:hover]:text-gray-800 focus:outline-none',
+              'w-full px-4 py-3 rounded-lg text-body-1-long',
               {
                 'border-success':
                   status === 'success' && variant === 'outlined',
                 'border-error': status === 'error' && variant === 'outlined',
                 'bg-success-100': status === 'success',
                 'bg-error-100': status === 'error',
-                'bg-gray-300': status === 'default' && variant === 'solid',
+                'bg-gray-200': status === 'default' && variant === 'solid',
                 'border-none': variant === 'solid',
                 'pr-12': rightNode,
               },
@@ -60,7 +60,9 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             {...restProps}
           />
           {rightNode && (
-            <div className="absolute top-3 right-3 w-6 h-6">{rightNode}</div>
+            <div className="absolute top-3 right-3 w-6 h-6 text-gray-700">
+              {rightNode}
+            </div>
           )}
         </div>
         <div className="text-caption flex justify-between">

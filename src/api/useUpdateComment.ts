@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { request } from '@/api/config';
 
 interface UpdateCommentType {
@@ -7,19 +7,21 @@ interface UpdateCommentType {
   content: string;
 }
 
-export default function useEditComment() {
-  const queryClient = useQueryClient();
+interface UpdateCommentResponse {
+  commentId: number;
+}
 
-  return useMutation<void, Error, UpdateCommentType>({
-    mutationFn: ({ postId, commentId, content }) =>
-      request({
-        method: 'POST',
+export default function useUpdateComment(
+  options?: UseMutationOptions<UpdateCommentResponse, Error, UpdateCommentType>,
+) {
+  return useMutation({
+    mutationFn: ({ postId, commentId, content }: UpdateCommentType) =>
+      request<UpdateCommentResponse>({
+        method: 'PATCH',
         url: `/posts/${postId}/comments/${commentId}`,
         data: { content },
       }),
 
-    onSuccess: (_, { postId }) => {
-      queryClient.invalidateQueries({ queryKey: ['comments', postId] });
-    },
+    ...options,
   });
 }

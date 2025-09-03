@@ -6,15 +6,20 @@ interface DeleteCommentType {
   commentId: number;
 }
 
+interface DeleteCommentResponse {
+  commentId: number;
+}
+
 export function useDeleteComment(
-  options?: UseMutationOptions<void, Error, DeleteCommentType>,
+  options?: UseMutationOptions<DeleteCommentResponse, Error, DeleteCommentType>,
 ) {
-  return useMutation<void, Error, DeleteCommentType>({
-    mutationFn: ({ postId, commentId }) =>
-      request({
+  return useMutation({
+    mutationFn: ({ postId, commentId }: DeleteCommentType) =>
+      request<DeleteCommentResponse>({
         method: 'DELETE',
         url: `/posts/${postId}/comments/${commentId}`,
       }),
+
     ...options,
   });
 }

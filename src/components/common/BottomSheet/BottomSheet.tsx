@@ -29,7 +29,7 @@ export default function BottomSheet({
           className="absolute top-[24px] right-[24px]"
           onClick={closeBottomSheet}
         >
-          <Icon name="CrossGray" size="medium" />
+          <Icon name="Cross" size="large" />
         </button>
       )}
       <hr className="border-gray-200" />

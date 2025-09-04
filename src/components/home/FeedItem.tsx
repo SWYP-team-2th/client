@@ -1,8 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import Icon from '@/components/common/Icon';
 import { Label } from '@/components/common/Label/Label';
 import { useTimeAgo } from '@/hooks/useTimeAgo';
 import { FeedType } from '@/types/feed';
-import { useNavigate } from 'react-router-dom';
 
 export default function FeedItem({
   id,

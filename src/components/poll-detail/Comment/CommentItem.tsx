@@ -1,21 +1,37 @@
+import { useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
+import useDeleteCommentLike from '@/api/useDeleteCommentLike';
 import useGetMyInfo from '@/api/useGetMyInfo';
+import usePostCommentLike from '@/api/usePostCommentLike';
 import ContextMenu from '@/components/common/ContextMenu';
 import Icon from '@/components/common/Icon';
+import useToast from '@/components/common/Toast/hooks';
 import { CommentType } from '@/types/comment';
 import { getRemainedTimeText } from '@/utils/date/date';
 
 interface CommentItemProps {
   comment: CommentType;
+  postId: number;
   onEditComment: (commentId: number, content: string) => void;
   onDeleteComment: (commentId: number) => void;
 }
 
 export default function CommentItem({
   comment,
+  postId,
   onEditComment,
   onDeleteComment,
 }: CommentItemProps) {
   const { data: myInfo } = useGetMyInfo();
+  const toast = useToast();
+  const queryClient = useQueryClient();
+
+  const [likeCount, setLikeCount] = useState(comment.like.likeCount);
+  const [commentLikeId, setCommentLikeId] = useState(
+    comment.like.commentLikeId,
+  );
+
+  const liked = commentLikeId !== null;
 
   const isAuthor = myInfo?.id === comment.author.userId;
 
@@ -24,8 +40,40 @@ export default function CommentItem({
     suffix: '전',
   });
 
+  const postCommentLike = usePostCommentLike({
+    onSuccess: (data) => {
+      setLikeCount((count) => count + 1);
+      setCommentLikeId(data.commentLikeId);
+      queryClient.invalidateQueries({ queryKey: ['comments', postId] });
+    },
+    onError: () => {
+      toast.error({
+        title: '좋아요 실패',
+        description: '좋아요를 추가하는 중 오류가 발생하였습니다.',
+      });
+    },
+  });
+
+  const deleteCommentLike = useDeleteCommentLike({
+    onSuccess: () => {
+      setLikeCount((count) => count - 1);
+      setCommentLikeId(null);
+      queryClient.invalidateQueries({ queryKey: ['comments', postId] });
+    },
+    onError: () => {
+      toast.error({
+        title: '좋아요 취소 실패',
+        description: '좋아요를 취소하는 중 오류가 발생하였습니다.',
+      });
+    },
+  });
+
   const handleLikeClick = () => {
-    console.log('좋아요 클릭이요');
+    if (commentLikeId) {
+      deleteCommentLike.mutate(commentLikeId);
+    } else {
+      postCommentLike.mutate(comment.id);
+    }
   };
 
   const handleEdit = () => {
@@ -88,12 +136,10 @@ export default function CommentItem({
             className={`flex items-center gap-1`}
           >
             <Icon
-              name={
-                comment.like.liked ? 'ThumbUpFillGray' : 'ThumbUpOutlineGray'
-              }
+              name={liked ? 'ThumbUpFillGray' : 'ThumbUpOutlineGray'}
               size="small"
             />
-            <span className="text-body-2-long">{comment.like.likeCount}</span>
+            <span className="text-body-2-long">{likeCount}</span>
           </button>
         </div>
       </div>

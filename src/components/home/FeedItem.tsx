@@ -1,9 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import Icon from '@/components/common/Icon';
 import { Label } from '@/components/common/Label/Label';
 import { useTimeAgo } from '@/hooks/useTimeAgo';
 import { FeedType } from '@/types/feed';
 
 export default function FeedItem({
+  id,
   author,
   status,
   title,
@@ -11,7 +13,8 @@ export default function FeedItem({
   voterCount,
   commentCount,
   createdAt,
-}: Omit<FeedType, 'id' | 'isAuthor'>) {
+}: Omit<FeedType, 'isAuthor'>) {
+  const navigate = useNavigate();
   const getStatusBadge = () => {
     return (
       <div className="absolute top-2.5 right-2.5">
@@ -28,9 +31,16 @@ export default function FeedItem({
 
   const timeAgo = useTimeAgo(createdAt);
 
+  const handleClick = () => {
+    navigate(`/posts/${id}`);
+  };
+
   return (
     <div className="bg-gray-100">
-      <div className="flex items-start pt-4">
+      <div
+        className="flex items-start pt-4 cursor-pointer hover:bg-gray-50 transition-colors"
+        onClick={handleClick}
+      >
         <div className="flex-1 min-w-0">
           {/* 게시글 올린 유저 정보 */}
           <div className="flex items-center mb-2">

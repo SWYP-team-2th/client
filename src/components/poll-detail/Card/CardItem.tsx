@@ -28,7 +28,11 @@ export default function CardItem({
         ) : (
           <span className="text-body-1">{choice.title}</span>
         )}
-        <Icon name="FullPhoto" size="small" className="cursor-pointer" />
+        <Icon
+          name="FullPhoto"
+          size="small"
+          className="cursor-pointer text-gray-600"
+        />
       </div>
       <div className="w-50 h-50 relative">
         <img

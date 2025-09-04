@@ -43,6 +43,7 @@ export default function PollDetailPage() {
 
       <PollInfo
         author={post.author}
+        isAuthor={post.isAuthor}
         createdAt={post.createdAt}
         status={post.status}
         closeOption={post.closeOption}

@@ -16,10 +16,10 @@ export default function ShareButton({ shareUrl }: ShareButtonProps) {
   return (
     <button
       onClick={handleClickShareButton}
-      className={`flex items-center justify-center gap-1`}
+      className={`flex items-center justify-center gap-1 cursor-pointer`}
     >
       <span className="text-headline-3 text-gray-600">링크 공유하기</span>
-      <Icon name="UpLoad" size="small" />
+      <Icon className="text-gray-600" name="UpLoad" size="small" />
     </button>
   );
 }

@@ -32,7 +32,7 @@ export default function CommentSection({ postId }: CommentSectionProps) {
   };
 
   return (
-    <div className="w-full px-5">
+    <div className="w-full px-5 border-t-[1px] border-gray-200 pt-8 pb-12">
       {/* 댓글 섹션 */}
       <div className="cursor-pointer" onClick={handleCommentClick}>
         <div className="flex items-center gap-2 mb-2">

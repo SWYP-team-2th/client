@@ -59,13 +59,13 @@ export default function FeedItem({
           <p className="text-body-1-long text-gray-800 mb-[6px]">{title}</p>
 
           {/* 투표, 댓글 수 */}
-          <div className="flex items-center text-body-2-long text-gray-600">
-            <div className="flex items-center">
+          <div className="flex items-center text-body-2-long text-gray-600 ga">
+            <div className="flex items-center gap-1">
               <Icon name="DeadLineDarkGray" size="small" />
               <span>{voterCount}</span>
             </div>
             <span className="px-[6px]">·</span>
-            <div className="flex items-center">
+            <div className="flex items-center gap-1">
               <Icon name="MessageOutlineDarkGray" size="small" />
               <span>{commentCount}</span>
             </div>

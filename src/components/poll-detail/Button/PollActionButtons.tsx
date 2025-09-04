@@ -60,7 +60,7 @@ export default function PollActionButtons({
   };
 
   return (
-    <div className="flex flex-col justify-center items-center gap-[18px] my-5">
+    <div className="flex flex-col justify-center items-center gap-[18px] my-8">
       {!isVoted || voteMode ? (
         <PollButton postId={postId} checkedItems={checkedItems} />
       ) : (

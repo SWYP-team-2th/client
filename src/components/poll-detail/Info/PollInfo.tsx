@@ -10,6 +10,7 @@ interface PollInfoProps {
     profileUrl: string;
     nickname: string;
   };
+  isAuthor: boolean;
   createdAt: string;
   status: Post['status'];
   closeOption: Post['closeOption'];
@@ -21,6 +22,7 @@ interface PollInfoProps {
 
 export default function PollInfo({
   author,
+  isAuthor,
   createdAt,
   status,
   closeOption,
@@ -32,7 +34,7 @@ export default function PollInfo({
   const timeAgo = useTimeAgo(createdAt);
 
   return (
-    <div className="bg-white px-5  flex flex-col w-full">
+    <div className="bg-white px-5 flex flex-col w-full mb-8">
       {/* 프로필 이미지, 닉네임, 시간*/}
       <div className="flex items-center gap-2 my-3">
         <img
@@ -47,35 +49,37 @@ export default function PollInfo({
         </div>
 
         {/* ContextMenu */}
-        <div className="ml-auto flex items-center">
-          <ContextMenu>
-            <ContextMenu.Trigger>
-              <Icon name="More" size="medium" className="cursor-pointer" />
-            </ContextMenu.Trigger>
-            <ContextMenu.List>
-              <ContextMenu.Item
-                icon={<Icon name="Post" size="medium" />}
-                onClick={() => alert('수정!')}
-              >
-                투표 마감하기
-              </ContextMenu.Item>
-              <ContextMenu.Item
-                icon={<Icon name="Trash" size="medium" />}
-                className="text-body-1"
-                onClick={() => alert('삭제!')}
-              >
-                투표 수정하기
-              </ContextMenu.Item>
-              <ContextMenu.Item
-                icon={<Icon name="Trash" size="medium" />}
-                className="text-body-1"
-                onClick={() => alert('삭제!')}
-              >
-                투표 삭제하기
-              </ContextMenu.Item>
-            </ContextMenu.List>
-          </ContextMenu>
-        </div>
+        {isAuthor && (
+          <div className="ml-auto flex items-center">
+            <ContextMenu>
+              <ContextMenu.Trigger>
+                <Icon name="More" size="medium" className="cursor-pointer" />
+              </ContextMenu.Trigger>
+              <ContextMenu.List>
+                <ContextMenu.Item
+                  icon={<Icon name="Post" size="medium" />}
+                  onClick={() => alert('수정!')}
+                >
+                  투표 마감하기
+                </ContextMenu.Item>
+                <ContextMenu.Item
+                  icon={<Icon name="Trash" size="medium" />}
+                  className="text-body-1"
+                  onClick={() => alert('삭제!')}
+                >
+                  투표 수정하기
+                </ContextMenu.Item>
+                <ContextMenu.Item
+                  icon={<Icon name="Trash" size="medium" />}
+                  className="text-body-1"
+                  onClick={() => alert('삭제!')}
+                >
+                  투표 삭제하기
+                </ContextMenu.Item>
+              </ContextMenu.List>
+            </ContextMenu>
+          </div>
+        )}
       </div>
       {/* 진행 여부 */}
       <div className="flex items-center gap-2">
@@ -115,10 +119,10 @@ export default function PollInfo({
         <span className="text-heading-2">{title}</span>
         <span className="text-headline-2 ">{description}</span>
       </div>
-      <div className="flex items-center justify-end gap-1 text-gray-600 text-sm">
+      <div className="flex items-center justify-end gap-1 text-gray-600 text-body-2-long">
         <Icon name="DeadLineDarkGray" size="small" />
         {voterCount}
-        <span className="px-[2px]">·</span>
+        <span className="px-[3px">·</span>
         <Icon name="MessageOutlineDarkGray" size="small" />
         {commentCount}
       </div>

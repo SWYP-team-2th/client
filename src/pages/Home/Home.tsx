@@ -1,12 +1,21 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useGetMyInfo from '@/api/useGetMyInfo';
 import Logo from '@/assets/icons/logo.svg?react';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
 import HomeFeed from '@/components/home/HomeFeed';
 
-
 export default function Home() {
   const navigate = useNavigate();
+  const { data: myInfo } = useGetMyInfo();
+
+  useEffect(() => {
+    // 로그인 하지 않은 사용자는 온보딩으로 리다이렉트
+    if (!myInfo?.id) {
+      navigate('/onboarding', { replace: true });
+    }
+  }, [myInfo, navigate]);
 
   return (
     <div className="min-h-screen bg-gray-100">

@@ -73,6 +73,7 @@ export default function PollDetailPage() {
           shareUrl={post.shareUrl}
           postId={parseInt(postId)}
           isVoted={isVoted}
+          isClosed={post.status === 'CLOSED'}
         />
 
         {/* 댓글 섹션 */}

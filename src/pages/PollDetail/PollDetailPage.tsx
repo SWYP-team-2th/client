@@ -64,7 +64,11 @@ export default function PollDetailPage() {
         </div>
       )}
 
-      <SelectionProvider pollType={post.pollOption.pollType}>
+      <SelectionProvider
+        pollType={post.pollOption.pollType}
+        pollChoices={post.pollChoices}
+        isVoted={isVoted}
+      >
         {/* 투표  선탹지 */}
         <CardList pollChoices={post.pollChoices} isVoted={isVoted} />
 

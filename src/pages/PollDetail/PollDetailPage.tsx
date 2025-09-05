@@ -30,7 +30,7 @@ export default function PollDetailPage() {
         leftNode={
           <Icon
             className="cursor-pointer"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate('/')}
             name="ArrowLeft"
             size="medium"
           />
@@ -51,6 +51,7 @@ export default function PollDetailPage() {
         description={post.description}
         voterCount={post.voterCount}
         commentCount={post.commentCount}
+        postId={parseInt(postId)}
       />
 
       {/* 투표 결과 섹션 */}

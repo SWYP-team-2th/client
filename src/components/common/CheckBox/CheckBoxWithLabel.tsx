@@ -53,6 +53,7 @@ export default function CheckBoxWithLabel({
           />
           {checked && (
             <Icon
+              className="text-gray-100"
               name={size === 'large' ? 'CheckLarge' : 'CheckSmall'}
               size={size === 'large' ? 'large' : 'small'}
             />

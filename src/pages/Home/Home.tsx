@@ -12,7 +12,7 @@ export default function Home() {
 
   useEffect(() => {
     // 로그인 하지 않은 사용자는 온보딩으로 리다이렉트
-    if (!myInfo?.id) {
+    if (!myInfo?.id && isMyInfoSuccess) {
       navigate('/onboarding', { replace: true });
     }
   }, [myInfo, navigate]);

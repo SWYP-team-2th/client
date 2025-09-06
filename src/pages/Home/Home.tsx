@@ -15,7 +15,7 @@ export default function Home() {
     if (!myInfo?.id && isMyInfoSuccess) {
       navigate('/onboarding', { replace: true });
     }
-  }, [myInfo, navigate]);
+  }, [myInfo, navigate, isMyInfoSuccess]);
 
   return (
     <div className="min-h-screen bg-gray-100">

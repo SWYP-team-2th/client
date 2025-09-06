@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, PropsWithChildren } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  PropsWithChildren,
+  useEffect,
+} from 'react';
 import { Post } from '@/types/post';
 
 interface SelectionContextValue {
@@ -14,15 +20,23 @@ const SelectionContext = createContext<SelectionContextValue | undefined>(
 );
 
 interface SelectionProviderProps extends PropsWithChildren {
-  pollType: Post['pollOption']['pollType'];
+  post: Post;
 }
 
-export function SelectionProvider({
-  pollType,
-  children,
-}: SelectionProviderProps) {
+export function SelectionProvider({ post, children }: SelectionProviderProps) {
   const [checkedItems, setCheckedItems] = useState<number[]>([]);
   const [voteMode, setVoteMode] = useState<boolean>(false);
+
+  const pollType = post.pollOption.pollType;
+
+  // 사용자가 선택한 투표 사진들의 id만 뽑아서 체크 상태로 복원시키기
+  useEffect(() => {
+    setCheckedItems(
+      post.pollChoices
+        .filter((choice) => choice.voteId !== null)
+        .map((choice) => choice.id),
+    );
+  }, [post]);
 
   const handleVoteChoice = (id: number, checked: boolean) => {
     setCheckedItems((prev) => {

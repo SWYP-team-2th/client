@@ -10,12 +10,14 @@ interface PollActionButtonsProps {
   shareUrl: string;
   postId: number;
   isVoted: boolean;
+  isVotedClosed: boolean;
 }
 
 export default function PollActionButtons({
   shareUrl,
   postId,
   isVoted,
+  isVotedClosed,
 }: PollActionButtonsProps) {
   const { checkedItems, setCheckedItems, voteMode, setVoteMode } =
     useSelection();
@@ -61,28 +63,33 @@ export default function PollActionButtons({
 
   return (
     <div className="flex flex-col justify-center items-center gap-[18px] my-8">
-      {!isVoted || voteMode ? (
-        <PollButton postId={postId} checkedItems={checkedItems} />
-      ) : (
+      {!isVotedClosed && (
         <>
-          <Button
-            variant="solid"
-            size="large"
-            buttonType="primary"
-            onClick={handleVoteAgain}
-          >
-            투표 다시하기
-          </Button>
-          <Button
-            variant="outline"
-            size="large"
-            buttonType="primary"
-            onClick={handleVoteCancel}
-          >
-            투표 취소하기
-          </Button>
+          {!isVoted || voteMode ? (
+            <PollButton postId={postId} checkedItems={checkedItems} />
+          ) : (
+            <>
+              <Button
+                variant="solid"
+                size="large"
+                buttonType="primary"
+                onClick={handleVoteAgain}
+              >
+                투표 다시하기
+              </Button>
+              <Button
+                variant="outline"
+                size="large"
+                buttonType="primary"
+                onClick={handleVoteCancel}
+              >
+                투표 취소하기
+              </Button>
+            </>
+          )}
         </>
       )}
+
       <ShareButton shareUrl={shareUrl} />
     </div>
   );

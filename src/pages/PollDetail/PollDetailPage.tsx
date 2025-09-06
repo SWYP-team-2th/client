@@ -30,7 +30,7 @@ export default function PollDetailPage() {
         leftNode={
           <Icon
             className="cursor-pointer"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate('/')}
             name="ArrowLeft"
             size="medium"
           />
@@ -51,6 +51,7 @@ export default function PollDetailPage() {
         description={post.description}
         voterCount={post.voterCount}
         commentCount={post.commentCount}
+        postId={parseInt(postId)}
       />
 
       {/* 투표 결과 섹션 */}
@@ -63,7 +64,7 @@ export default function PollDetailPage() {
         </div>
       )}
 
-      <SelectionProvider pollType={post.pollOption.pollType}>
+      <SelectionProvider post={post}>
         {/* 투표  선탹지 */}
         <CardList pollChoices={post.pollChoices} isVoted={isVoted} />
 
@@ -72,6 +73,7 @@ export default function PollDetailPage() {
           shareUrl={post.shareUrl}
           postId={parseInt(postId)}
           isVoted={isVoted}
+          isVotedClosed={post.status === 'CLOSED'}
         />
 
         {/* 댓글 섹션 */}

@@ -8,7 +8,7 @@ import HomeFeed from '@/components/home/HomeFeed';
 
 export default function Home() {
   const navigate = useNavigate();
-  const { data: myInfo } = useGetMyInfo();
+  const { data: myInfo, isSuccess: isMyInfoSuccess } = useGetMyInfo();
 
   useEffect(() => {
     // 로그인 하지 않은 사용자는 온보딩으로 리다이렉트

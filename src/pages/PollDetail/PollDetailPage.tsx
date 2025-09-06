@@ -64,11 +64,7 @@ export default function PollDetailPage() {
         </div>
       )}
 
-      <SelectionProvider
-        pollType={post.pollOption.pollType}
-        pollChoices={post.pollChoices}
-        isVoted={isVoted}
-      >
+      <SelectionProvider post={post}>
         {/* 투표  선탹지 */}
         <CardList pollChoices={post.pollChoices} isVoted={isVoted} />
 
@@ -77,7 +73,7 @@ export default function PollDetailPage() {
           shareUrl={post.shareUrl}
           postId={parseInt(postId)}
           isVoted={isVoted}
-          isClosed={post.status === 'CLOSED'}
+          isVotedClosed={post.status === 'CLOSED'}
         />
 
         {/* 댓글 섹션 */}

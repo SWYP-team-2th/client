@@ -10,14 +10,14 @@ interface PollActionButtonsProps {
   shareUrl: string;
   postId: number;
   isVoted: boolean;
-  isClosed: boolean;
+  isVotedClosed: boolean;
 }
 
 export default function PollActionButtons({
   shareUrl,
   postId,
   isVoted,
-  isClosed,
+  isVotedClosed,
 }: PollActionButtonsProps) {
   const { checkedItems, setCheckedItems, voteMode, setVoteMode } =
     useSelection();
@@ -63,7 +63,7 @@ export default function PollActionButtons({
 
   return (
     <div className="flex flex-col justify-center items-center gap-[18px] my-8">
-      {!isClosed && (
+      {!isVotedClosed && (
         <>
           {!isVoted || voteMode ? (
             <PollButton postId={postId} checkedItems={checkedItems} />

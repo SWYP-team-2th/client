@@ -26,7 +26,7 @@ interface PollInfoProps {
   voterCount: number;
   commentCount: number;
   postId: number;
-  onClosePost?: (postId: number) => void;
+
   onEditPost?: (postId: number) => void;
   onDeletePost?: (postId: number) => void;
 }
@@ -42,7 +42,7 @@ export default function PollInfo({
   voterCount,
   commentCount,
   postId,
-  onClosePost,
+
   onEditPost,
   onDeletePost,
 }: PollInfoProps) {
@@ -75,38 +75,21 @@ export default function PollInfo({
   });
 
   const handleClosePost = () => {
-    if (!postId) {
-      toast.error({ title: '투표 정보를 불러올 수 없습니다' });
-      return;
-    }
-
-    if (onClosePost) {
-      onClosePost(postId);
-    } else {
-      openDialog(
-        <Dialog
-          title="투표를 지금 마감할까요?"
-          description="투표를 마감하면 더 이상 투표에 참여할 수 없어요."
-          cancelButtonProps={{ text: '취소' }}
-          confirmButtonProps={{
-            text: '마감하기',
-            onClick: () => closeVoteMutation.mutate(postId),
-          }}
-          showLaterButton={false}
-        />,
-      );
-    }
+    openDialog(
+      <Dialog
+        title="투표를 지금 마감할까요?"
+        description="투표를 마감하면 더 이상 투표에 참여할 수 없어요."
+        cancelButtonProps={{ text: '취소' }}
+        confirmButtonProps={{
+          text: '마감하기',
+          onClick: () => closeVoteMutation.mutate(postId),
+        }}
+        showLaterButton={false}
+      />,
+    );
   };
 
   const handleEditPost = () => {
-    if (!postId) {
-      toast.error({
-        title: '수정 페이지 이동 실패!',
-        description: '투표 정보를 불러올 수 없습니다.',
-      });
-      return;
-    }
-
     if (onEditPost) {
       onEditPost(postId);
     } else {
@@ -115,11 +98,6 @@ export default function PollInfo({
   };
 
   const handleDeletePost = () => {
-    if (!postId) {
-      toast.error({ title: '투표 정보를 불러올 수 없습니다' });
-      return;
-    }
-
     if (onDeletePost) {
       onDeletePost(postId);
     } else {

@@ -56,7 +56,9 @@ export default function FeedItem({
           </div>
 
           {/* 게시글 내용 */}
-          <p className="text-body-1-long text-gray-800 mb-[6px]">{title}</p>
+          <p className="text-body-1-long text-gray-800 mb-[6px] min-h-[2.9rem] leading-6">
+            {title}
+          </p>
 
           {/* 투표, 댓글 수 */}
           <div className="flex items-center text-body-2-long text-gray-600 ga">

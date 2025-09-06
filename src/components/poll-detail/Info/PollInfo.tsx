@@ -26,9 +26,6 @@ interface PollInfoProps {
   voterCount: number;
   commentCount: number;
   postId: number;
-
-  onEditPost?: (postId: number) => void;
-  onDeletePost?: (postId: number) => void;
 }
 
 export default function PollInfo({
@@ -42,9 +39,6 @@ export default function PollInfo({
   voterCount,
   commentCount,
   postId,
-
-  onEditPost,
-  onDeletePost,
 }: PollInfoProps) {
   const timeAgo = useTimeAgo(createdAt);
   const { openDialog, closeDialog } = useDialog();
@@ -90,30 +84,22 @@ export default function PollInfo({
   };
 
   const handleEditPost = () => {
-    if (onEditPost) {
-      onEditPost(postId);
-    } else {
-      navigate(`/polls/${postId}/edit`);
-    }
+    navigate(`/polls/${postId}/edit`);
   };
 
   const handleDeletePost = () => {
-    if (onDeletePost) {
-      onDeletePost(postId);
-    } else {
-      openDialog(
-        <Dialog
-          title="투표를 삭제할까요?"
-          description="삭제하면 투표와 관련된 모든 데이터가 영구적으로 삭제됩니다."
-          cancelButtonProps={{ text: '취소' }}
-          confirmButtonProps={{
-            text: '삭제하기',
-            onClick: () => deletePostMutation.mutate(postId),
-          }}
-          showLaterButton={false}
-        />,
-      );
-    }
+    openDialog(
+      <Dialog
+        title="투표를 삭제할까요?"
+        description="삭제하면 투표와 관련된 모든 데이터가 영구적으로 삭제됩니다."
+        cancelButtonProps={{ text: '취소' }}
+        confirmButtonProps={{
+          text: '삭제하기',
+          onClick: () => deletePostMutation.mutate(postId),
+        }}
+        showLaterButton={false}
+      />,
+    );
   };
 
   return (

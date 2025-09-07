@@ -1,14 +1,15 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { CommentItem } from './index';
 import useAddComment from '@/api/useAddComment';
-import useGetComments from '@/api/useGetComments';
+import { useGetComments } from '@/api/useGetComments';
 import useUpdateComment from '@/api/useUpdateComment';
 import BottomSheet from '@/components/common/BottomSheet';
 import Icon from '@/components/common/Icon';
 import Loading from '@/components/common/Loading';
 import TextInput from '@/components/common/TextInput';
 import useToast from '@/components/common/Toast/hooks';
+import InfiniteScroller from '@/components/common/InfiniteScroller';
 
 interface CommentBottomSheetProps {
   postId: number;
@@ -28,7 +29,13 @@ export default function CommentBottomSheet({
 
   const queryClient = useQueryClient();
   const { success: showSuccessToast, error: showErrorToast } = useToast();
-  const { data: commentsData, isLoading } = useGetComments(postId, 10);
+  const {
+    data: commentsData,
+    isLoading,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useGetComments(postId, 10);
 
   // 댓글 추가
   const { mutate: addComment, isPending: isAddCommentPending } = useAddComment({
@@ -62,8 +69,15 @@ export default function CommentBottomSheet({
     },
   });
 
-  const comments = commentsData?.comments.data || [];
-  const commentCount = commentsData?.commentCount || 0;
+  const comments = useMemo(
+    () => commentsData?.pages.flatMap((page: any) => page.comments.data) || [],
+    [commentsData],
+  );
+
+  const commentCount = useMemo(
+    () => commentsData?.pages[0]?.commentCount || 0,
+    [commentsData],
+  );
 
   const handleSendComment = () => {
     if (content.trim() === '') {
@@ -98,36 +112,39 @@ export default function CommentBottomSheet({
       <div className="flex flex-col h-[65vh]">
         {/* 댓글 리스트 */}
         <div className="flex-1 overflow-y-auto mb-4 px-5 mt-4">
-          {isLoading ? (
-            <div className="flex justify-center py-8">
-              <Loading />
-            </div>
-          ) : comments.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-12 text-center">
-              <Icon
-                name="MessageOutline"
-                size="large"
-                className="text-gray-400 mb-2"
+          <InfiniteScroller
+            className="space-y-4"
+            data={comments}
+            renderItem={(comment) => (
+              <CommentItem
+                comment={comment}
+                onEditComment={handleEditComment}
+                onDeleteComment={onDeleteComment}
               />
-              <p className="text-body-1 text-gray-500 mb-1">
-                아직 댓글이 없어요.
-              </p>
-              <p className="text-body-2 text-gray-400">
-                가장 먼저 한 마디를 남겨보세요.
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {comments.map((comment) => (
-                <CommentItem
-                  key={comment.id}
-                  comment={comment}
-                  onEditComment={handleEditComment}
-                  onDeleteComment={onDeleteComment}
+            )}
+            fetchNextPage={fetchNextPage}
+            hasNextPage={hasNextPage}
+            isFetchingNextPage={isFetchingNextPage}
+            isLoading={isLoading}
+            keyExtractor={(comment) => comment.id}
+            threshold={0.1}
+            rootMargin="100px"
+            emptyComponent={
+              <div className="flex flex-col items-center justify-center py-12 text-center">
+                <Icon
+                  name="MessageOutline"
+                  size="large"
+                  className="text-gray-400 mb-2"
                 />
-              ))}
-            </div>
-          )}
+                <p className="text-body-1 text-gray-500 mb-1">
+                  아직 댓글이 없어요.
+                </p>
+                <p className="text-body-2 text-gray-400">
+                  가장 먼저 한 마디를 남겨보세요.
+                </p>
+              </div>
+            }
+          />
         </div>
 
         {/* TextInput */}

@@ -19,7 +19,7 @@ export default function PollCloseOptionSection() {
         size="medium"
         options={[
           {
-            value: 'TIME',
+            value: 'DATE',
             label: '시간으로 마감',
             Content: (
               <TimeCloseContent
@@ -29,7 +29,7 @@ export default function PollCloseOptionSection() {
             ),
           },
           {
-            value: 'VOTER_COUNT',
+            value: 'VOTER',
             label: '투표 수로 마감',
             Content: (
               <MaxVoterCountContent

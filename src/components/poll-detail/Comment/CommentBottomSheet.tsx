@@ -6,10 +6,10 @@ import { useGetComments } from '@/api/useGetComments';
 import useUpdateComment from '@/api/useUpdateComment';
 import BottomSheet from '@/components/common/BottomSheet';
 import Icon from '@/components/common/Icon';
+import InfiniteScroller from '@/components/common/InfiniteScroller';
 import Loading from '@/components/common/Loading';
 import TextInput from '@/components/common/TextInput';
 import useToast from '@/components/common/Toast/hooks';
-import InfiniteScroller from '@/components/common/InfiniteScroller';
 
 interface CommentBottomSheetProps {
   postId: number;

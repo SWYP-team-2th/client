@@ -10,6 +10,7 @@ import InfiniteScroller from '@/components/common/InfiniteScroller';
 import Loading from '@/components/common/Loading';
 import TextInput from '@/components/common/TextInput';
 import useToast from '@/components/common/Toast/hooks';
+import { CommentsResponse } from '@/types/comment';
 
 interface CommentBottomSheetProps {
   postId: number;
@@ -70,7 +71,10 @@ export default function CommentBottomSheet({
   });
 
   const comments = useMemo(
-    () => commentsData?.pages.flatMap((page: any) => page.comments.data) || [],
+    () =>
+      commentsData?.pages.flatMap(
+        (page: CommentsResponse) => page.comments.data,
+      ) || [],
     [commentsData],
   );
 

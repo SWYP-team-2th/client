@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import Icon from '@/components/common/Icon';
 import { Label } from '@/components/common/Label/Label';
-import { getRemainedTimeText } from '@/utils/date/date';
 import { FeedType } from '@/types/feed';
+import { getRemainedTimeText } from '@/utils/date/date';
 
 export default function FeedItem({
   id,

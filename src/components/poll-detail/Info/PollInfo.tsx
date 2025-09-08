@@ -9,8 +9,8 @@ import { useDialog } from '@/components/common/Dialog/hooks';
 import Icon from '@/components/common/Icon';
 import { Label } from '@/components/common/Label/Label';
 import useToast from '@/components/common/Toast/hooks';
-import { getRemainedTimeText, getDeadlineText } from '@/utils/date/date';
 import { cn } from '@/utils/cn';
+import { getRemainedTimeText, getDeadlineText } from '@/utils/date/date';
 
 interface PollInfoProps {
   author: {

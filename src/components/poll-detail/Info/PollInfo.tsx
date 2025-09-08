@@ -9,7 +9,7 @@ import { useDialog } from '@/components/common/Dialog/hooks';
 import Icon from '@/components/common/Icon';
 import { Label } from '@/components/common/Label/Label';
 import useToast from '@/components/common/Toast/hooks';
-import { useTimeAgo } from '@/hooks/useTimeAgo';
+import { getRemainedTimeText, getDeadlineText } from '@/utils/date/date';
 import { cn } from '@/utils/cn';
 
 interface PollInfoProps {
@@ -40,7 +40,7 @@ export default function PollInfo({
   commentCount,
   postId,
 }: PollInfoProps) {
-  const timeAgo = useTimeAgo(createdAt);
+  const timeAgo = getRemainedTimeText({ dateString: createdAt, suffix: '전' });
   const { openDialog, closeDialog } = useDialog();
   const navigate = useNavigate();
   const toast = useToast();
@@ -172,9 +172,11 @@ export default function PollInfo({
             'text-primary-500': status !== 'CLOSED',
           })}
         >
-          {status !== 'CLOSED' && closeOption.closeType === 'DATE' && (
-            <>{closeOption.closedAt}일 남음</>
-          )}
+          {status !== 'CLOSED' &&
+            closeOption.closeType === 'DATE' &&
+            closeOption.closedAt && (
+              <>{getDeadlineText(closeOption.closedAt)}</>
+            )}
           {status !== 'CLOSED' && closeOption.closeType === 'SELF' && (
             <Label variant="outline" colorVarient="progress" size="medium">
               직접 마감

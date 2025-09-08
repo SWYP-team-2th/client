@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Icon from '@/components/common/Icon';
 import { Label } from '@/components/common/Label/Label';
-import { useTimeAgo } from '@/hooks/useTimeAgo';
+import { getRemainedTimeText } from '@/utils/date/date';
 import { FeedType } from '@/types/feed';
 
 export default function FeedItem({
@@ -29,7 +29,7 @@ export default function FeedItem({
     );
   };
 
-  const timeAgo = useTimeAgo(createdAt);
+  const timeAgo = getRemainedTimeText({ dateString: createdAt, suffix: '전' });
 
   const handleClick = () => {
     navigate(`/posts/${id}`);

@@ -122,6 +122,7 @@ export default function CommentBottomSheet({
             renderItem={(comment) => (
               <CommentItem
                 comment={comment}
+                postId={postId}
                 onEditComment={handleEditComment}
                 onDeleteComment={onDeleteComment}
               />

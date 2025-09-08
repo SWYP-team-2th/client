@@ -14,7 +14,6 @@ export default function usePostCommentLike(
       return request<PostCommentLikeResponse>({
         method: 'POST',
         url: `/comment-likes/${commentId}`,
-        data: {},
       });
     },
     ...options,

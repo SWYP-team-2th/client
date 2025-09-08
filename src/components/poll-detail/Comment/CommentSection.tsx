@@ -1,6 +1,6 @@
 import DeleteCommentDialog from './DeleteCommentDialog';
 import { CommentBottomSheet } from './index';
-import useGetComments from '@/api/useGetComments';
+import { useGetComments } from '@/api/useGetComments';
 import { useBottomSheet } from '@/components/common/BottomSheet/hooks';
 import { useDialog } from '@/components/common/Dialog/hooks';
 import Icon from '@/components/common/Icon';
@@ -15,8 +15,8 @@ export default function CommentSection({ postId }: CommentSectionProps) {
 
   // 댓글 미리보기 최대 1개까지 보여주기
   const { data: commentsData } = useGetComments(postId, 1);
-  const previewComments = commentsData?.comments.data || [];
-  const commentCount = commentsData?.commentCount || 0;
+  const previewComments = commentsData?.pages?.[0]?.comments.data || [];
+  const commentCount = commentsData?.pages?.[0]?.commentCount || 0;
 
   const handleCommentClick = () => {
     openBottomSheet(

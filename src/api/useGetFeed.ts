@@ -4,13 +4,13 @@ import { getAccessToken } from '@/components/login/Auth/token';
 import { FeedType } from '@/types/feed';
 import { Pageable } from '@/types/pageable';
 
-export default function useGetFeed(size: number) {
+export function useGetFeed(size: number) {
   const accessToken = getAccessToken();
 
-  return useInfiniteQuery({
+  return useInfiniteQuery<Pageable<FeedType>>({
     queryKey: ['feed', size],
-    queryFn: async ({ pageParam }: { pageParam: number | null }) => {
-      return request<Pageable<FeedType>>({
+    queryFn: ({ pageParam = null }) =>
+      request({
         method: 'GET',
         url: '/posts/feed',
         headers: {
@@ -20,9 +20,8 @@ export default function useGetFeed(size: number) {
           cursor: pageParam,
           size,
         },
-      });
-    },
-    initialPageParam: null as number | null,
+      }),
+    initialPageParam: null,
     getNextPageParam: (lastPage) => {
       if (!lastPage.hasNext || lastPage.data.length === 0) {
         return undefined;

@@ -1,17 +1,32 @@
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { request } from './config';
 
+interface DeleteCommentLikeResponse {
+  commentLikeId: null;
+  likeCount: number;
+}
+
+interface DeleteCommentLikeParams {
+  commentId: number;
+  commentLikeId: number;
+}
+
 export default function useDeleteCommentLike(
-  options?: UseMutationOptions<void, Error, number>,
+  options?: UseMutationOptions<
+    DeleteCommentLikeResponse,
+    Error,
+    DeleteCommentLikeParams
+  >,
 ) {
-  return useMutation<void, Error, number>({
-    mutationFn: (commentLikeId: number) => {
-      console.log('DELETE comment like request:', { commentLikeId });
-      return request<void>({
-        method: 'DELETE',
-        url: `/comment-likes/${commentLikeId}`,
-      });
+  return useMutation<DeleteCommentLikeResponse, Error, DeleteCommentLikeParams>(
+    {
+      mutationFn: ({ commentId, commentLikeId }: DeleteCommentLikeParams) => {
+        return request<DeleteCommentLikeResponse>({
+          method: 'DELETE',
+          url: `/comment-likes/${commentId}/${commentLikeId}`,
+        });
+      },
+      ...options,
     },
-    ...options,
-  });
+  );
 }

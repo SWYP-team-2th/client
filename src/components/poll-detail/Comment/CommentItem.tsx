@@ -1,5 +1,4 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
 import useDeleteCommentLike from '@/api/useDeleteCommentLike';
 import useGetMyInfo from '@/api/useGetMyInfo';
 import usePostCommentLike from '@/api/usePostCommentLike';
@@ -26,12 +25,7 @@ export default function CommentItem({
   const toast = useToast();
   const queryClient = useQueryClient();
 
-  const [likeCount, setLikeCount] = useState(comment.like.likeCount);
-  const [commentLikeId, setCommentLikeId] = useState(
-    comment.like.commentLikeId,
-  );
-
-  const liked = commentLikeId !== null;
+  const liked = comment.like.liked;
 
   const isAuthor = myInfo?.id === comment.author.userId;
 
@@ -41,9 +35,7 @@ export default function CommentItem({
   });
 
   const postCommentLike = usePostCommentLike({
-    onSuccess: (data) => {
-      setLikeCount((count) => count + 1);
-      setCommentLikeId(data.commentLikeId);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['comments', postId] });
     },
     onError: () => {
@@ -56,8 +48,6 @@ export default function CommentItem({
 
   const deleteCommentLike = useDeleteCommentLike({
     onSuccess: () => {
-      setLikeCount((count) => count - 1);
-      setCommentLikeId(null);
       queryClient.invalidateQueries({ queryKey: ['comments', postId] });
     },
     onError: () => {
@@ -69,8 +59,11 @@ export default function CommentItem({
   });
 
   const handleLikeClick = () => {
-    if (commentLikeId) {
-      deleteCommentLike.mutate(commentLikeId);
+    if (liked && comment.like.commentLikeId) {
+      deleteCommentLike.mutate({
+        commentId: comment.id,
+        commentLikeId: comment.like.commentLikeId,
+      });
     } else {
       postCommentLike.mutate(comment.id);
     }
@@ -139,7 +132,7 @@ export default function CommentItem({
               name={liked ? 'ThumbUpFillGray' : 'ThumbUpOutlineGray'}
               size="small"
             />
-            <span className="text-body-2-long">{likeCount}</span>
+            <span className="text-body-2-long">{comment.like.likeCount}</span>
           </button>
         </div>
       </div>

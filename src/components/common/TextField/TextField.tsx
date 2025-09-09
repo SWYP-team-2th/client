@@ -54,6 +54,7 @@ const TextField = React.forwardRef<HTMLTextAreaElement, TextFieldProps>(
             )}
             ref={ref}
             maxLength={maxLength}
+            value={value}
             {...restProps}
           />
           {rightNode && (

@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useGetMyInfo from '@/api/useGetMyInfo';
 import Logo from '@/assets/icons/logo.svg?react';
+import CoachMark from '@/components/coach-mark/CoachMark';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
 import HomeFeed from '@/components/home/HomeFeed';
@@ -9,6 +10,12 @@ import HomeFeed from '@/components/home/HomeFeed';
 export default function Home() {
   const navigate = useNavigate();
   const { data: myInfo, isSuccess: isMyInfoSuccess } = useGetMyInfo();
+
+  const [showCoachMark, setShowCoachMark] = useState(true);
+
+  const handleCloseCoachMark = () => {
+    setShowCoachMark(false);
+  };
 
   useEffect(() => {
     // 로그인 하지 않은 사용자는 온보딩으로 리다이렉트
@@ -42,6 +49,8 @@ export default function Home() {
         </div>
         <HomeFeed />
       </div>
+
+      {showCoachMark && <CoachMark onClose={handleCloseCoachMark} />}
     </div>
   );
 }

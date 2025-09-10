@@ -14,7 +14,6 @@ import CheckLarge from '@/assets/icons/check_large.svg?react';
 import CheckSmall from '@/assets/icons/check_small.svg?react';
 import Close from '@/assets/icons/close.svg?react';
 import ThickClose from '@/assets/icons/close_thick.svg?react';
-
 import Cross from '@/assets/icons/cross_24px.svg?react';
 import CrossGray from '@/assets/icons/cross_gray.svg?react';
 import DeadLineDarkGray from '@/assets/icons/dead-Line-dark-gray.svg?react';

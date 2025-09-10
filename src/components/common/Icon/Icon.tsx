@@ -171,6 +171,7 @@ export const ICON_SIZE = {
   medium: 24,
   large: 28,
   xLarge: 32,
+  xxLarge: 40,
 } as const;
 
 export const ICON_COLORS = {

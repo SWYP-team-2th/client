@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import LogoutDialog from './LogoutDialog';
 import { useDialog } from '../common/Dialog/hooks';
 import Icon from '../common/Icon';
@@ -23,6 +23,7 @@ const FEEDBACK_NOTION_LINK =
   'https://docs.google.com/forms/d/e/1FAIpQLSe7YxB99oPFZ4H2bzNMmS9szvyE0mVBlFxczLr3gThAIECqlA/viewform?usp=header';
 
 export default function useSettingMenus() {
+  const { userId } = useParams();
   const toast = useToast();
   const { openDialog } = useDialog();
   const navigate = useNavigate();
@@ -31,6 +32,10 @@ export default function useSettingMenus() {
     toast.info({
       title: '추가 예정인 기능이에요!',
     });
+  };
+
+  const handleClickMyProfileButton = () => {
+    navigate(`/user/${userId}/settings/profile`);
   };
 
   const handleClickLogoutButton = () => {
@@ -59,7 +64,7 @@ export default function useSettingMenus() {
             id: 'my-information',
             title: '내 정보',
             rightIcon: <Icon name="ArrowRightGray" size="medium" />,
-            onClick: handleClickNotOpenedMenu,
+            onClick: handleClickMyProfileButton,
           },
           {
             id: 'logout',

@@ -8,6 +8,7 @@ import OnBoardingPage from '@/pages/OnBoarding/OnBoardingPage';
 import PollDetailPage from '@/pages/PollDetail/PollDetailPage';
 import PollResultPage from '@/pages/PollDetail/PollResultPage';
 import PrivacyPolicyPage from '@/pages/PrivacyPolicy/PrivacyPolicyPage';
+import ProfilePage from '@/pages/settings/ProfilePage';
 import SettingsPage from '@/pages/settings/SettingsPage';
 import TermsPage from '@/pages/Terms/TermsPage';
 import UserPage from '@/pages/User/UserPage';
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
       {
         path: '/user/:userId/settings',
         element: <SettingsPage />,
+      },
+      {
+        path: '/user/:userId/settings/profile',
+        element: <ProfilePage />,
       },
       {
         path: '/terms',

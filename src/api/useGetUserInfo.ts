@@ -4,7 +4,12 @@ import { request } from './config';
 export interface UserInfoType {
   id: number;
   nickname: string;
-  profileUrl: string;
+  notification: boolean;
+  onboardingStep: {
+    FIRST_VOTE: boolean;
+    WELCOME_GUIDE: boolean;
+  };
+  profileImageUrl: string;
 }
 
 export default function useGetUserInfo(userId: number) {

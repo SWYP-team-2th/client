@@ -50,7 +50,7 @@ export default function UserPage() {
         }
       />
       <Profile
-        profileImageUrl={userInfo?.profileUrl}
+        profileImageUrl={userInfo?.profileImageUrl}
         name={userInfo?.nickname}
       />
       <div className="rounded-t-[20px] overflow-hidden px-5 py-6 -mt-6 bg-white">

@@ -13,8 +13,6 @@ import SettingsPage from '@/pages/settings/SettingsPage';
 import TermsPage from '@/pages/Terms/TermsPage';
 import UserPage from '@/pages/User/UserPage';
 import PollEditPage from '@/pages/Vote/PollEditPage';
-import VoteCommentDetailPage from '@/pages/Vote/VoteCommentDetailPage';
-import VotePage from '@/pages/Vote/VotePage';
 import VoteRegistPage from '@/pages/Vote/VoteRegistPage';
 
 export const router = createBrowserRouter([
@@ -42,14 +40,6 @@ export const router = createBrowserRouter([
       {
         path: '/posts/:postId/result',
         element: <PollResultPage />,
-      },
-      {
-        path: '/votes/:shareUrl',
-        element: <VotePage />,
-      },
-      {
-        path: '/votes/:shareUrl/comments',
-        element: <VoteCommentDetailPage />,
       },
       {
         path: '/oauth',

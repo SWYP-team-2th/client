@@ -14,10 +14,7 @@ import CheckLarge from '@/assets/icons/check_large.svg?react';
 import CheckSmall from '@/assets/icons/check_small.svg?react';
 import Close from '@/assets/icons/close.svg?react';
 import ThickClose from '@/assets/icons/close_thick.svg?react';
-import CoachArrowDown from '@/assets/icons/coach_arrow_down.svg?react';
-import CoachArrowLeft from '@/assets/icons/coach_arrow_left.svg?react';
-import CoachArrowRight from '@/assets/icons/coach_arrow_right.svg?react';
-import CoachFinger from '@/assets/icons/coach_finger.svg?react';
+
 import Cross from '@/assets/icons/cross_24px.svg?react';
 import CrossGray from '@/assets/icons/cross_gray.svg?react';
 import DeadLineDarkGray from '@/assets/icons/dead-Line-dark-gray.svg?react';
@@ -86,10 +83,6 @@ import VoteClose from '@/assets/icons/vote_close.svg?react';
 import World from '@/assets/icons/world_24px.svg?react';
 
 export const ICONS = {
-  CoachFinger,
-  CoachArrowDown,
-  CoachArrowLeft,
-  CoachArrowRight,
   DeadLineGray,
   UpLoad,
   CrossGray,
@@ -179,6 +172,7 @@ export const ICON_SIZE = {
   medium: 24,
   large: 28,
   xLarge: 32,
+  xxLarge: 40,
 } as const;
 
 export const ICON_COLORS = {

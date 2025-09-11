@@ -9,7 +9,7 @@ import HomeFeed from '@/components/home/HomeFeed';
 
 export default function Home() {
   const navigate = useNavigate();
-  const { data: myInfo, isSuccess: isMyInfoSuccess } = useGetMyInfo();
+  const { data: myInfo, isLoading: isMyInfoLoading } = useGetMyInfo();
 
   const [showCoachMark, setShowCoachMark] = useState(true);
 
@@ -19,10 +19,10 @@ export default function Home() {
 
   useEffect(() => {
     // 로그인 하지 않은 사용자는 온보딩으로 리다이렉트
-    if (!myInfo?.id && isMyInfoSuccess) {
+    if (!myInfo?.id && !isMyInfoLoading) {
       navigate('/onboarding', { replace: true });
     }
-  }, [myInfo, navigate, isMyInfoSuccess]);
+  }, [myInfo, myInfo, isMyInfoLoading]);
 
   return (
     <div className="min-h-screen bg-gray-100">

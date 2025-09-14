@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useGetMyInfo from '@/api/useGetMyInfo';
+import useUpdateOnboarding from '@/api/useUpdateOnboarding';
 import Logo from '@/assets/icons/logo.svg?react';
 import CoachMark from '@/components/coach-mark/CoachMark';
 import { Header } from '@/components/common/Header/Header';
@@ -10,11 +11,18 @@ import HomeFeed from '@/components/home/HomeFeed';
 export default function Home() {
   const navigate = useNavigate();
   const { data: myInfo, isLoading: isMyInfoLoading } = useGetMyInfo();
+  const updateOnboarding = useUpdateOnboarding();
 
-  const [showCoachMark, setShowCoachMark] = useState(true);
+  // 무조건 띄워줘야 되니깐 코치마크 닫히는 것을 체크해야함
+  const [isCoachMarkClosed, setIsCoachMarkClosed] = useState(false);
 
   const handleCloseCoachMark = () => {
-    setShowCoachMark(false);
+    setIsCoachMarkClosed(true);
+    if (myInfo?.onboardingStep) {
+      updateOnboarding.mutate({
+        onboardingStep: { ...myInfo.onboardingStep, WELCOME_GUIDE: true },
+      });
+    }
   };
 
   useEffect(() => {
@@ -23,6 +31,9 @@ export default function Home() {
       navigate('/onboarding', { replace: true });
     }
   }, [myInfo, myInfo, isMyInfoLoading]);
+
+  const shouldShowCoachMark =
+    !isCoachMarkClosed && !myInfo?.onboardingStep.WELCOME_GUIDE;
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -50,7 +61,7 @@ export default function Home() {
         <HomeFeed />
       </div>
 
-      {showCoachMark && <CoachMark onClose={handleCloseCoachMark} />}
+      {shouldShowCoachMark && <CoachMark onClose={handleCloseCoachMark} />}
     </div>
   );
 }

@@ -1,4 +1,7 @@
+import { useParams } from 'react-router-dom';
+import ImageDetailModal from '../ImageDetailModal';
 import CheckBox from '@/components/common/CheckBox';
+import { useDialog } from '@/components/common/Dialog/hooks';
 import Icon from '@/components/common/Icon';
 import { Label } from '@/components/common/Label/Label';
 import { PollChoice } from '@/types/post';
@@ -14,6 +17,9 @@ export default function CardItem({
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isVoted: boolean;
 }) {
+  const { postId } = useParams<{ postId: string }>();
+  const { openDialog } = useDialog();
+
   return (
     <div key={choice.id} className="rounded-xl w-50">
       <div className="flex items-center justify-between w-full">
@@ -32,6 +38,14 @@ export default function CardItem({
           name="FullPhoto"
           size="small"
           className="cursor-pointer text-gray-600"
+          onClick={() =>
+            openDialog(
+              <ImageDetailModal
+                postId={postId ?? ''}
+                selectedImageId={choice.id}
+              />,
+            )
+          }
         />
       </div>
       <div className="w-50 h-50 relative">

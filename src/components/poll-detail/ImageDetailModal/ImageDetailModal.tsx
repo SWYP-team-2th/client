@@ -1,29 +1,33 @@
 import useImageDetailModal from './hooks';
-import { FloatingButton } from '@/components/common/Button/FloatingButton';
 import Icon from '@/components/common/Icon';
-import Loading from '@/components/common/Loading';
 import { cn } from '@/utils/cn';
 
 interface ImageDetailModalProps {
+  postId: string;
   selectedImageId: number;
 }
 
 export default function ImageDetailModal({
+  postId,
   selectedImageId,
 }: ImageDetailModalProps) {
   const {
+    post,
     scrollContainerRef,
     currentIndex,
     currentImageId,
     images,
-    isVotePending,
     handleScrollCapture,
     handleClickImage,
-    handleClickVoteButton,
     closeDialog,
   } = useImageDetailModal({
+    postId,
     selectedImageId,
   });
+
+  if (!post) {
+    return null;
+  }
 
   return (
     <div className="bg-gray-700 w-full h-[100dvh] max-w-[480px] flex flex-col">
@@ -31,31 +35,9 @@ export default function ImageDetailModal({
         <button onClick={closeDialog}>
           <Icon name="ArrowLeft" size="medium" />
         </button>
-        <div className="text-white">{images[currentIndex].imageName}</div>
+        <div className="text-white">{images[currentIndex].title}</div>
         <div className="w-[24px] h-full"></div>
       </header>
-
-      <div className="overflow-x-auto">
-        <div className="flex gap-2 px-6 pt-1 min-w-max ">
-          {images.map((image) => (
-            <button
-              key={image.id}
-              className="w-[64px] h-[94px]"
-              onClick={() => handleClickImage(image.id)}
-            >
-              <img
-                className={cn(
-                  'rounded-lg overflow-hidden object-cover w-full h-full',
-                  image.id === currentImageId &&
-                    'border-[3px] border-primary-500',
-                )}
-                src={image.imageUrl}
-                alt={`image-${image.id}`}
-              />
-            </button>
-          ))}
-        </div>
-      </div>
 
       <div
         ref={scrollContainerRef}
@@ -77,25 +59,30 @@ export default function ImageDetailModal({
         ))}
       </div>
 
-      <FloatingButton
-        size="small"
-        className="bg-gray-100 fixed bottom-16 right-6"
-        onClick={handleClickVoteButton}
-        disabled={isVotePending}
-      >
-        {isVotePending ? (
-          <Loading />
-        ) : (
-          <Icon
-            name={
-              images.find((image) => image.id === currentImageId)?.voteId
-                ? 'HeartFillRed'
-                : 'HeartOutline'
-            }
-            size="medium"
-          />
-        )}
-      </FloatingButton>
+      <div className="overflow-x-auto fixed bottom-16 w-full flex flex-col gap-6">
+        <p className="text-white text-body-2-long text-center">
+          {currentIndex + 1} / {images.length}
+        </p>
+        <div className="flex gap-2 px-6 pt-1 min-w-max ">
+          {images.map((image) => (
+            <button
+              key={image.id}
+              className="w-20 h-20"
+              onClick={() => handleClickImage(image.id)}
+            >
+              <img
+                className={cn(
+                  'rounded-lg overflow-hidden object-cover w-full h-full',
+                  image.id === currentImageId &&
+                    'border-[3px] border-primary-500',
+                )}
+                src={image.imageUrl}
+                alt={`image-${image.id}`}
+              />
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

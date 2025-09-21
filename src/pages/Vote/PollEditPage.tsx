@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import useGetPostUpdateInfo from '@/api/useGetPostUpdateInfo';
 import { Button } from '@/components/common/Button/Button';
 import { Header } from '@/components/common/Header/Header';
@@ -12,6 +12,7 @@ import { PollFormProvider } from '@/components/poll/Provider/PollFormProvider';
 
 export default function PollEditPage() {
   const { pollId } = useParams<{ pollId: string }>();
+  const navigate = useNavigate();
   const {
     data: postUpdateInfo,
     isLoading,
@@ -46,7 +47,14 @@ export default function PollEditPage() {
     <div>
       <Header
         className="bg-white"
-        leftNode={<Icon name="ThickClose" size="large" />}
+        leftNode={
+          <Icon
+            name="ThickClose"
+            size="large"
+            className="cursor-pointer"
+            onClick={() => navigate(-1)}
+          />
+        }
         centerNode={<h1 className="text-heading-1">투표</h1>}
         rightNode={<Icon name="BellOutline" size="large" />}
       />

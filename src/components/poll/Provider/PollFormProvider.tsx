@@ -1,4 +1,4 @@
-import { useReducer, createContext } from 'react';
+import { useReducer, createContext, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { IMAGE_TITLE_PLACEHOLDER, INITIAL_POLL_REGIST_DATA } from './constants';
 import { PollFormFieldValidator } from './form-field-validate';
@@ -43,7 +43,8 @@ type PollAction =
   | BasicAction
   | PollChoiceAction
   | PollOptionAction
-  | CloseOptionAction;
+  | CloseOptionAction
+  | { type: 'INITIALIZE_DATA'; payload: PollFormData };
 
 function pollFormReducer(
   state: PollRegistState,
@@ -251,6 +252,12 @@ function pollFormReducer(
         },
       };
     }
+    case 'INITIALIZE_DATA': {
+      return {
+        ...state,
+        data: action.payload,
+      };
+    }
     default:
       return state;
   }
@@ -288,6 +295,8 @@ const pollFormActions = (dispatch: React.Dispatch<PollAction>) => ({
     dispatch({ type: 'SET_CLOSED_AT', payload: closedAt }),
   setMaxVoterCount: (maxVoterCount: number) =>
     dispatch({ type: 'SET_MAX_VOTER_COUNT', payload: maxVoterCount }),
+  initializeData: (data: PollFormData) =>
+    dispatch({ type: 'INITIALIZE_DATA', payload: data }),
 });
 
 type PollFormActions = ReturnType<typeof pollFormActions>;
@@ -335,6 +344,12 @@ export const PollFormProvider = ({
   };
 
   const [state, dispatch] = useReducer(pollFormReducer, initialState);
+
+  useEffect(() => {
+    if (type === 'EDIT' && initialData) {
+      dispatch({ type: 'INITIALIZE_DATA', payload: initialData });
+    }
+  }, [initialData, type]);
 
   const validator = new PollFormFieldValidator(state.data);
   const actions = pollFormActions(dispatch);

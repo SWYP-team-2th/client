@@ -30,7 +30,7 @@ export default function PollCloseOptionSection() {
           },
           {
             value: 'VOTER',
-            label: '투표 수로 마감',
+            label: '참여자 수로 마감',
             Content: (
               <MaxVoterCountContent
                 maxVoterCount={maxVoterCount ?? 0}

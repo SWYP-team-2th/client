@@ -36,7 +36,7 @@ export default function UserPage() {
             strokeColor="white"
             name="ArrowLeft"
             size="medium"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate('/')}
           />
         }
         centerNode={<h1 className="text-heading-1">마이페이지</h1>}

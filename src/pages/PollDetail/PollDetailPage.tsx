@@ -47,6 +47,7 @@ export default function PollDetailPage() {
         createdAt={post.createdAt}
         status={post.status}
         closeOption={post.closeOption}
+        pollOption={post.pollOption}
         title={post.title}
         description={post.description}
         voterCount={post.voterCount}
@@ -77,7 +78,9 @@ export default function PollDetailPage() {
         />
 
         {/* 댓글 섹션 */}
-        <CommentSection postId={parseInt(postId)} />
+        {post.pollOption.commentActive === 'OPEN' && (
+          <CommentSection postId={parseInt(postId)} />
+        )}
       </SelectionProvider>
     </div>
   );

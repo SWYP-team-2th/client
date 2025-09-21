@@ -2,7 +2,7 @@ import EmptyMyVoteList from '@/assets/images/my/EmptyMyVoteList.jpg';
 
 export default function ZeroUI() {
   return (
-    <div className="text-center text-gray-500 py-8 flex flex-col items-center">
+    <div className="text-center text-gray-500 flex flex-col items-center justify-center h-full min-h-[400px]">
       <img
         className="w-[188px] h-[188px]"
         src={EmptyMyVoteList}

@@ -42,6 +42,7 @@ export default function CommentBottomSheet({
   const { mutate: addComment, isPending: isAddCommentPending } = useAddComment({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['comments', postId] });
+      queryClient.invalidateQueries({ queryKey: ['post', postId.toString()] });
       setContent('');
     },
     onError: () => {

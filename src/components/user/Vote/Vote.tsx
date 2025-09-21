@@ -24,7 +24,7 @@ export default function Vote({
       onClick={handleVoteClick}
     >
       <img
-        className="w-25 h-25 rounded-xl overflow-hidden"
+        className="w-25 h-25 rounded-xl overflow-hidden object-cover"
         src={thumbnailImageUrl}
         alt="1위 이미지"
       />

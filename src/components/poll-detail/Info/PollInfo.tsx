@@ -21,6 +21,7 @@ interface PollInfoProps {
   createdAt: string;
   status: Post['status'];
   closeOption: Post['closeOption'];
+  pollOption: Post['pollOption'];
   title: string;
   description: string;
   voterCount: number;
@@ -34,6 +35,7 @@ export default function PollInfo({
   createdAt,
   status,
   closeOption,
+  pollOption,
   title,
   description,
   voterCount,
@@ -164,6 +166,13 @@ export default function PollInfo({
         >
           {status === 'PROGRESS' ? '진행 중' : '투표 종료'}
         </Label>
+
+        {/* 복수 투표 라벨 */}
+        {pollOption.pollType === 'MULTIPLE' && (
+          <Label variant="outline" colorVarient="progress" size="medium">
+            복수 투표
+          </Label>
+        )}
 
         {/* 시간 설정으로 마감 시 nnn일 남음, 직접 마감으로 마감 시 직접 마감 라벨, 투표 수로 마감 시 n명 참여중 n명 참여 시 마감*/}
         <span

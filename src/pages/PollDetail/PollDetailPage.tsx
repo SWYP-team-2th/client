@@ -47,6 +47,7 @@ export default function PollDetailPage() {
         createdAt={post.createdAt}
         status={post.status}
         closeOption={post.closeOption}
+        pollOption={post.pollOption}
         title={post.title}
         description={post.description}
         voterCount={post.voterCount}

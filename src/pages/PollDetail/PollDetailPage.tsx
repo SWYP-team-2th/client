@@ -78,7 +78,9 @@ export default function PollDetailPage() {
         />
 
         {/* 댓글 섹션 */}
-        <CommentSection postId={parseInt(postId)} />
+        {post.pollOption.commentActive === 'OPEN' && (
+          <CommentSection postId={parseInt(postId)} />
+        )}
       </SelectionProvider>
     </div>
   );

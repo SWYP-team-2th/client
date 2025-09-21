@@ -20,6 +20,7 @@ export default function DeleteCommentDialog({
   const { mutate: deleteComment, isPending: isPending } = useDeleteComment({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['comments', postId] });
+      queryClient.invalidateQueries({ queryKey: ['post', postId.toString()] });
       showSuccessToast({
         title: '댓글이 삭제되었습니다.',
       });

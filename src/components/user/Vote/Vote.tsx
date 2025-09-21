@@ -52,13 +52,12 @@ export default function Vote({
             <p className="flex items-center gap-2">
               <span>🥇1위</span>
               <div className="w-px h-4 bg-gray-300"></div>
-              <p>
+              <p className="text-gray-800 text-body-2">
                 {postVoteInfo.mostVotedPollChoice.title}{' '}
-                {postVoteInfo.mostVotedPollChoice.voterCount}표 (득표율{' '}
-                <span className="text-gray-700">
-                  {postVoteInfo.mostVotedPollChoice.voteRatio}
+                {postVoteInfo.mostVotedPollChoice.voteCount}표{' '}
+                <span className="text-gray-700 text-body-2-long">
+                  (득표율 {postVoteInfo.mostVotedPollChoice.voteRatio}%)
                 </span>
-                )
               </p>
             </p>
           )}

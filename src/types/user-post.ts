@@ -20,6 +20,6 @@ export interface PostVoteInfo {
 export interface MostVotedPollChoice {
   id: number;
   title: string;
-  voterCount: number;
+  voteCount: number;
   voteRatio: string;
 }

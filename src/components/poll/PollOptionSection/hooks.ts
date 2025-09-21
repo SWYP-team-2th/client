@@ -27,10 +27,10 @@ export default function usePollOptionSection() {
       visible: true,
     },
     {
-      label: '공개 투표',
+      label: '비공개 투표',
       value: data.pollOption.scope,
-      checked: data.pollOption.scope === 'PUBLIC',
-      onChange: (checked) => setScope(checked ? 'PUBLIC' : 'PRIVATE'),
+      checked: data.pollOption.scope === 'PRIVATE',
+      onChange: (checked) => setScope(checked ? 'PRIVATE' : 'PUBLIC'),
       visible: true,
     },
   ];

@@ -13,9 +13,9 @@ export default function CommentSection({ postId }: CommentSectionProps) {
   const { openBottomSheet } = useBottomSheet();
   const { openDialog } = useDialog();
 
-  // 댓글 미리보기 최대 1개까지 보여주기
-  const { data: commentsData } = useGetComments(postId, 1);
-  const previewComments = commentsData?.pages?.[0]?.comments.data || [];
+  const { data: commentsData } = useGetComments(postId, 10);
+  const previewComments =
+    commentsData?.pages?.[0]?.comments.data.slice(0, 1) || [];
   const commentCount = commentsData?.pages?.[0]?.commentCount || 0;
 
   const handleCommentClick = () => {

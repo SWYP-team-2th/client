@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import useVote from './hooks';
 import { Label } from '@/components/common/Label/Label';
 import { UserPost } from '@/types/user-post';
@@ -10,10 +11,18 @@ export default function Vote({
   closeOptionDto,
   postVoteInfo,
 }: Omit<UserPost, 'createdAt'>) {
+  const navigate = useNavigate();
   const { remainedTimeText } = useVote({ id, closeOptionDto, postVoteInfo });
 
+  const handleVoteClick = () => {
+    navigate(`/posts/${id}`);
+  };
+
   return (
-    <div className="flex items-center gap-4">
+    <div
+      className="flex items-center gap-4 cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors"
+      onClick={handleVoteClick}
+    >
       <img
         className="w-25 h-25 rounded-xl overflow-hidden"
         src={thumbnailImageUrl}

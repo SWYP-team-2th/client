@@ -32,7 +32,7 @@ export const INITIAL_POLL_REGIST_DATA: PollFormData = {
     },
   ],
   pollOption: {
-    scope: 'PRIVATE',
+    scope: 'PUBLIC',
     pollType: 'SINGLE',
     commentActive: 'OPEN',
   },

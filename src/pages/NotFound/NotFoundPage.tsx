@@ -21,8 +21,8 @@ export default function NotFoundPage() {
   };
 
   return (
-    <div className="relative w-full h-[100dvh]">
-      <div className="flex gap-[55px] w-full flex-col items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <div className="flex flex-col w-full h-[100dvh]">
+      <div className="flex-1 flex gap-[55px] w-full flex-col items-center justify-center pt-20">
         <img src={NotFoundImage} alt="not-found" width={156} height={174} />
         <div className="flex flex-col gap-2 justify-center items-center">
           <p className="text-title-2">앗! 페이지를 찾을 수 없어요.</p>
@@ -31,15 +31,17 @@ export default function NotFoundPage() {
           </p>
         </div>
       </div>
-      <Button
-        buttonType="primary"
-        size="large"
-        variant="solid"
-        className="fixed bottom-16 left-1/2 -translate-x-1/2"
-        onClick={handleClickGoToHomeButton}
-      >
-        홈으로 가기
-      </Button>
+      <div className="px-6 pb-10">
+        <Button
+          buttonType="primary"
+          size="large"
+          variant="solid"
+          className="w-full"
+          onClick={handleClickGoToHomeButton}
+        >
+          홈으로 가기
+        </Button>
+      </div>
     </div>
   );
 }

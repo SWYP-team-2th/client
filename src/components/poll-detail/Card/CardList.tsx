@@ -16,7 +16,7 @@ export default function CardList({ pollChoices, isVoted }: CardListProps) {
     };
 
   return (
-    <div className="grid grid-cols-2 gap-x-5 gap-y-8 mx-[30px]">
+    <div className="grid grid-cols-2 gap-x-3 gap-y-6 mx-[18px] sm:gap-x-5 sm:gap-y-8 sm:mx-[30px]">
       {pollChoices.map((choice) => (
         <CardItem
           key={choice.id}

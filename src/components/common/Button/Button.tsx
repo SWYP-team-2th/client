@@ -4,7 +4,7 @@ import React from 'react';
 import { cn } from '@/utils/cn';
 
 const buttonVariants = cva(
-  'flex items-center justify-center cursor-pointer max-w-[430px]',
+  'flex items-center justify-center cursor-pointer max-w-[480px]',
   {
     variants: {
       variant: {

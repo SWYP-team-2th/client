@@ -21,8 +21,8 @@ export default function CardItem({
   const { openDialog } = useDialog();
 
   return (
-    <div key={choice.id} className="rounded-xl w-50">
-      <div className="flex items-center justify-between w-full">
+    <div key={choice.id} className="rounded-xl w-full">
+      <div className="flex items-center justify-between w-full mb-2">
         {!isVoted ? (
           <CheckBox
             id={String(choice.id)}
@@ -37,7 +37,7 @@ export default function CardItem({
         <Icon
           name="FullPhoto"
           size="small"
-          className="cursor-pointer text-gray-600"
+          className="cursor-pointer text-gray-600 flex-shrink-0"
           onClick={() =>
             openDialog(
               <ImageDetailModal
@@ -48,7 +48,7 @@ export default function CardItem({
           }
         />
       </div>
-      <div className="w-50 h-50 relative">
+      <div className="w-full aspect-square relative">
         <img
           src={choice.imageUrl}
           alt={choice.title}

@@ -19,7 +19,7 @@ export default function LinkShareBottomSheet({
           onClick={handleClickKakaoShareButton}
           className="flex gap-3 items-center"
         >
-          <Icon className="text-[#FEE102]" name="KakaoLogo" size="xLarge" />
+          <Icon name="KakaoLogo" size="xLarge" />
           <p>카카오로 공유하기</p>
         </button>
         <button

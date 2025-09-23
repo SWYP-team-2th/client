@@ -16,3 +16,10 @@ svg[style*='--icon-stroke-width'] polyline,
 svg[style*='--icon-stroke-width'] polygon {
   stroke-width: var(--icon-stroke-width) !important;
 }
+
+svg path[fill]:not([fill='none']),
+svg circle[fill]:not([fill='none']),
+svg rect[fill]:not([fill='none']),
+svg polygon[fill]:not([fill='none']) {
+  stroke-width: 0 !important;
+}

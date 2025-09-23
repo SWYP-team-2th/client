@@ -56,7 +56,7 @@ export default function PollDetailPage() {
       />
 
       {/* 투표 결과 섹션 */}
-      {isVoted && result && result.length > 0 && (
+      {(isVoted || post.status === 'CLOSED') && result && (
         <div className="px-5 border-y-[3px] border-gray-200 mb-[30px]">
           <div className="text-headline-1 text-gray-800 mt-[35px]">
             투표 결과
@@ -67,7 +67,11 @@ export default function PollDetailPage() {
 
       <SelectionProvider post={post}>
         {/* 투표  선탹지 */}
-        <CardList pollChoices={post.pollChoices} isVoted={isVoted} />
+        <CardList
+          pollChoices={post.pollChoices}
+          isVoted={isVoted}
+          status={post.status}
+        />
 
         {/* 투표 버튼, 공유 버튼 */}
         <PollActionButtons

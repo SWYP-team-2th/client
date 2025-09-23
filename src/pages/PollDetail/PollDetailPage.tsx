@@ -67,7 +67,11 @@ export default function PollDetailPage() {
 
       <SelectionProvider post={post}>
         {/* 투표  선탹지 */}
-        <CardList pollChoices={post.pollChoices} isVoted={isVoted} />
+        <CardList
+          pollChoices={post.pollChoices}
+          isVoted={isVoted}
+          status={post.status}
+        />
 
         {/* 투표 버튼, 공유 버튼 */}
         <PollActionButtons

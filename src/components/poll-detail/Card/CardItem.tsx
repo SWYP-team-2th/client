@@ -11,11 +11,13 @@ export default function CardItem({
   checked,
   onChange,
   isVoted,
+  status,
 }: {
   choice: PollChoice;
   checked: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isVoted: boolean;
+  status: 'PROGRESS' | 'CLOSED';
 }) {
   const { postId } = useParams<{ postId: string }>();
   const { openDialog } = useDialog();
@@ -23,7 +25,7 @@ export default function CardItem({
   return (
     <div key={choice.id} className="rounded-xl w-full">
       <div className="flex items-center justify-between w-full mb-2">
-        {!isVoted ? (
+        {!isVoted && status === 'PROGRESS' ? (
           <CheckBox
             id={String(choice.id)}
             checked={checked}

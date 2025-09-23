@@ -5,9 +5,14 @@ import { PollChoice } from '@/types/post';
 interface CardListProps {
   pollChoices: PollChoice[];
   isVoted: boolean;
+  status: 'PROGRESS' | 'CLOSED';
 }
 
-export default function CardList({ pollChoices, isVoted }: CardListProps) {
+export default function CardList({
+  pollChoices,
+  isVoted,
+  status,
+}: CardListProps) {
   const { checkedItems, handleVoteChoice, voteMode } = useSelection();
 
   const handleCheck =
@@ -38,6 +43,7 @@ export default function CardList({ pollChoices, isVoted }: CardListProps) {
           }
           onChange={handleCheck(choice.id)}
           isVoted={isVoted && !voteMode}
+          status={status}
         />
       ))}
     </div>

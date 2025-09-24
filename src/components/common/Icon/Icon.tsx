@@ -11,6 +11,7 @@ import DeadLineDarkGray from '@/assets/icons/dead-Line-dark-gray.svg?react';
 import DeadLineGray from '@/assets/icons/dead-line-gray.svg?react';
 import DeadLine from '@/assets/icons/dead_line.svg?react';
 import Edit from '@/assets/icons/edit_24px.svg?react';
+import EditFill from '@/assets/icons/edit_fill.svg?react';
 import FullPhoto from '@/assets/icons/full.svg?react';
 import HomeFilled from '@/assets/icons/home-filled.svg?react';
 import HomeOutline from '@/assets/icons/home.svg?react';
@@ -83,6 +84,7 @@ export const ICONS = {
   FullPhoto,
   ThumbUpFillGray,
   ThumbUpOutlineGray,
+  EditFill,
 } as const;
 
 export const ICON_SIZE = {

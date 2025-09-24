@@ -48,7 +48,7 @@ export default function ProfileEditForm() {
             className="absolute bottom-0 right-0 border-gray-400 border-[1px] bg-white rounded-full p-1"
             onClick={() => fileInputRef.current?.click()}
           >
-            <Icon name="PencilGray" size="medium" />
+            <Icon name="EditFill" size="medium" />
           </button>
         </div>
         <TextField

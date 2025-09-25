@@ -5,7 +5,7 @@ import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
 import Loading from '@/components/common/Loading';
 import PollEditButton from '@/components/poll/edit/PollEditButton';
-import PollCloseOptionSection from '@/components/poll/PollCloseOptionSection';
+import PollEditCloseOptionSection from '@/components/poll/edit/PollEditCloseOptionSection';
 import PollInformation from '@/components/poll/PollInformation';
 import PollOptionSection from '@/components/poll/PollOptionSection';
 import { PollFormProvider } from '@/components/poll/Provider/PollFormProvider';
@@ -61,7 +61,7 @@ export default function PollEditPage() {
       <PollFormProvider type="EDIT" initialData={postUpdateInfo}>
         <PollInformation />
         <PollOptionSection />
-        <PollCloseOptionSection />
+        <PollEditCloseOptionSection />
         <PollEditButton />
       </PollFormProvider>
     </div>

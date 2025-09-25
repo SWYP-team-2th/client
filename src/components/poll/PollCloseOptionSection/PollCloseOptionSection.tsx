@@ -47,23 +47,35 @@ export default function PollCloseOptionSection() {
   );
 }
 
-function TimeCloseContent({
+export function TimeCloseContent({
   closedAt,
   setClosedAt,
 }: {
   closedAt: string;
   setClosedAt: (value: string) => void;
 }) {
-  const [date, setDate] = useState(closedAt);
-  const [time, setTime] = useState(closedAt);
+  const parseDateTime = (dateTime: string) => {
+    if (!dateTime) return { date: '', time: '' };
+    const [date, time] = dateTime.split('T');
+    return { date: date || '', time: time || '' };
+  };
+
+  const { date: initialDate, time: initialTime } = parseDateTime(closedAt);
+  const [date, setDate] = useState(initialDate);
+  const [time, setTime] = useState(initialTime);
 
   useEffect(() => {
-    if (date && time) {
-      setClosedAt(`${date}T${time}`);
-    } else {
-      setClosedAt('');
+    const { date: newDate, time: newTime } = parseDateTime(closedAt);
+    setDate(newDate);
+    setTime(newTime);
+  }, [closedAt]);
+
+  useEffect(() => {
+    const newValue = date && time ? `${date}T${time}` : '';
+    if (newValue !== closedAt) {
+      setClosedAt(newValue);
     }
-  }, [date, time]);
+  }, [date, time, closedAt, setClosedAt]);
 
   return (
     <div className="flex flex-col gap-3 text-gray-600 text-body-1-long">
@@ -87,7 +99,7 @@ function TimeCloseContent({
   );
 }
 
-function MaxVoterCountContent({
+export function MaxVoterCountContent({
   maxVoterCount,
   setMaxVoterCount,
 }: {
@@ -102,7 +114,11 @@ function MaxVoterCountContent({
           type="text"
           inputMode="numeric"
           pattern="[0-9]*"
-          value={maxVoterCount === 0 ? '' : String(maxVoterCount)}
+          value={
+            maxVoterCount === 0 || maxVoterCount === null
+              ? ''
+              : String(maxVoterCount)
+          }
           onChange={(e) => {
             setMaxVoterCount(e.target.value);
           }}

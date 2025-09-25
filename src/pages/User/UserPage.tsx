@@ -45,7 +45,7 @@ export default function UserPage() {
             className="cursor-pointer"
             name="BellOutline"
             size="medium"
-            onClick={() => {}}
+            onClick={() => navigate('/notifications')}
           />
         }
       />

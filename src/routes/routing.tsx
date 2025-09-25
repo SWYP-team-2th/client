@@ -4,6 +4,7 @@ import SubLayout from '@/components/common/Layout/SubLayout';
 import Home from '@/pages/Home/Home';
 import OAuthPage from '@/pages/Login/OAuthPage';
 import NotFoundPage from '@/pages/NotFound/NotFoundPage';
+import NotificationPage from '@/pages/Notification/NotificationPage';
 import OnBoardingPage from '@/pages/OnBoarding/OnBoardingPage';
 import PollDetailPage from '@/pages/PollDetail/PollDetailPage';
 import PollResultPage from '@/pages/PollDetail/PollResultPage';
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: '/oauth',
         element: <OAuthPage />,
+      },
+      {
+        path: '/notifications',
+        element: <NotificationPage />,
       },
       {
         path: '/votes/regist',

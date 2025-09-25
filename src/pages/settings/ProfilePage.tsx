@@ -17,7 +17,14 @@ export default function ProfilePage() {
           <Icon name="ArrowLeft" size="large" onClick={handleClickBackButton} />
         }
         centerNode={<h1 className="text-heading-1">내 정보</h1>}
-        rightNode={<Icon name="BellOutline" size="large" />}
+        rightNode={
+          <Icon
+            name="BellOutline"
+            size="large"
+            onClick={() => navigate('/notifications')}
+            className="cursor-pointer"
+          />
+        }
       />
       <div className="pt-[55px]">
         <ProfileEditForm />

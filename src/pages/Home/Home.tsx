@@ -46,7 +46,12 @@ export default function Home() {
           />
         }
         rightNode={
-          <Icon className="cursor-pointer" name="BellOutline" size="medium" />
+          <Icon
+            className="cursor-pointer"
+            name="BellOutline"
+            size="medium"
+            onClick={() => navigate('/notifications')}
+          />
         }
       />
 

@@ -92,13 +92,11 @@ function pollFormReducer(
     case 'ADD_POLL_CHOICE_IMAGES': {
       const { choiceId, imageUrls, files } = action.payload;
 
-      // 1. 현재 선택지 찾기
       const currentChoiceIndex = state.data.pollChoices.findIndex(
         (choice) => choice.id === choiceId,
       );
       if (currentChoiceIndex === -1) return state;
 
-      // 2. 단일 이미지인 경우: 현재 선택지만 업데이트
       if (imageUrls.length === 1) {
         return {
           ...state,
@@ -113,34 +111,46 @@ function pollFormReducer(
         };
       }
 
-      // 3. 복수 이미지인 경우: 현재 선택지 + 새로운 선택지들 추가
       const currentChoices = [...state.data.pollChoices];
 
-      // 3-1. 현재 선택지에 첫 번째 이미지 설정
-      currentChoices[currentChoiceIndex] = {
-        ...currentChoices[currentChoiceIndex],
-        imageUrl: imageUrls[0],
-        file: files[0],
-      };
+      const updatedChoices = currentChoices.map((choice, index) => {
+        const imageIndex = index - currentChoiceIndex;
 
-      // 3-2. 나머지 이미지들로 새로운 선택지 생성
-      const newChoices = imageUrls.slice(1).map((imageUrl, index) => ({
-        id: uuidv4(),
-        title:
-          IMAGE_TITLE_PLACEHOLDER[
-            (state.data.pollChoices.length +
-              index) as keyof typeof IMAGE_TITLE_PLACEHOLDER
-          ],
-        imageUrl,
-        file: files[index + 1],
-        order: state.data.pollChoices.length + index,
-      }));
+        if (imageIndex >= 0 && imageIndex < imageUrls.length) {
+          return {
+            ...choice,
+            imageUrl: imageUrls[imageIndex],
+            file: files[imageIndex],
+          };
+        }
 
-      // 3-3. 새로운 선택지들을 현재 선택지 바로 다음에 삽입
-      currentChoices.splice(currentChoiceIndex + 1, 0, ...newChoices);
+        return choice;
+      });
 
-      // 3-4. 모든 선택지의 order를 0부터 순차적으로 재정렬
-      const reorderedChoices = currentChoices.map((choice, index) => ({
+      const remainingImages = imageUrls.slice(
+        currentChoices.length - currentChoiceIndex,
+      );
+      const remainingFiles = files.slice(
+        currentChoices.length - currentChoiceIndex,
+      );
+
+      if (remainingImages.length > 0) {
+        const newChoices = remainingImages.map((imageUrl, index) => ({
+          id: uuidv4(),
+          title:
+            IMAGE_TITLE_PLACEHOLDER[
+              (currentChoices.length +
+                index) as keyof typeof IMAGE_TITLE_PLACEHOLDER
+            ],
+          imageUrl,
+          file: remainingFiles[index],
+          order: currentChoices.length + index,
+        }));
+
+        updatedChoices.push(...newChoices);
+      }
+
+      const reorderedChoices = updatedChoices.map((choice, index) => ({
         ...choice,
         order: index,
       }));
@@ -344,6 +354,8 @@ export const PollFormProvider = ({
   };
 
   const [state, dispatch] = useReducer(pollFormReducer, initialState);
+
+  console.log(state.data.pollChoices);
 
   useEffect(() => {
     if (type === 'EDIT' && initialData) {

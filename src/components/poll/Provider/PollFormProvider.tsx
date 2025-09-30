@@ -355,8 +355,6 @@ export const PollFormProvider = ({
 
   const [state, dispatch] = useReducer(pollFormReducer, initialState);
 
-  console.log(state.data.pollChoices);
-
   useEffect(() => {
     if (type === 'EDIT' && initialData) {
       dispatch({ type: 'INITIALIZE_DATA', payload: initialData });

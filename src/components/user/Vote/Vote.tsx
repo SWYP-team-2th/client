@@ -20,7 +20,7 @@ export default function Vote({
 
   return (
     <div
-      className="flex items-center gap-4 cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors"
+      className="flex items-center gap-4 cursor-pointer hover:bg-gray-50 rounded-lg transition-colors"
       onClick={handleVoteClick}
     >
       <img

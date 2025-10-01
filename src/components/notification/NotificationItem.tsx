@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import usePatchNotification from '@/api/usePatchNotification';
 import useToast from '@/components/common/Toast/hooks';
@@ -15,6 +16,7 @@ export default function NotificationItem({
 }: NotificationItemProps) {
   const navigate = useNavigate();
   const toast = useToast();
+  const queryClient = useQueryClient();
   const patchNotification = usePatchNotification();
 
   const handleNotificationClick = () => {
@@ -33,6 +35,9 @@ export default function NotificationItem({
         { notificationId: notification.id },
         {
           onSuccess: () => {
+            queryClient.invalidateQueries({
+              queryKey: ['notificationPresent'],
+            });
             navigate(`/posts/${notification.targets[0].id}`);
           },
           onError: () => {

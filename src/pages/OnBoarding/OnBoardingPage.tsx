@@ -43,8 +43,8 @@ export default function OnBoardingPage() {
           className="w-full max-h-[60vh] object-contain "
         />
 
-        <div className="text-center mb-12">
-          <h2 className="text-title-1 mb-3">
+        <div className="text-center">
+          <h2 className="text-title-2 pt-8 pb-3">
             고민되는 순간,
             <br />
             투표로 결정해봐요!

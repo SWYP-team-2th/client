@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
+import { useGetNotificationPresent } from '@/api/useGetNotificationPresent';
 import useGetUserInfo from '@/api/useGetUserInfo';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
@@ -13,6 +14,7 @@ export default function UserPage() {
   const { data: userInfo } = useGetUserInfo(Number(userId));
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { data: notificationPresent } = useGetNotificationPresent();
 
   const currentTab = (searchParams.get('tab') as 'MY' | 'PARTICIPATED') || 'MY';
 
@@ -43,9 +45,11 @@ export default function UserPage() {
         rightNode={
           <Icon
             className="cursor-pointer"
-            name="BellOutline"
+            name={
+              notificationPresent?.present ? 'BellOutlinePoint' : 'BellOutline'
+            }
             size="medium"
-            onClick={() => {}}
+            onClick={() => navigate('/notifications')}
           />
         }
       />

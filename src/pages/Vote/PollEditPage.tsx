@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
+import { useGetNotificationPresent } from '@/api/useGetNotificationPresent';
 import useGetPostUpdateInfo from '@/api/useGetPostUpdateInfo';
 import { Button } from '@/components/common/Button/Button';
 import { Header } from '@/components/common/Header/Header';
@@ -13,6 +14,7 @@ import { PollFormProvider } from '@/components/poll/Provider/PollFormProvider';
 export default function PollEditPage() {
   const { pollId } = useParams<{ pollId: string }>();
   const navigate = useNavigate();
+  const { data: notificationPresent } = useGetNotificationPresent();
   const {
     data: postUpdateInfo,
     isLoading,
@@ -56,7 +58,16 @@ export default function PollEditPage() {
           />
         }
         centerNode={<h1 className="text-heading-1">투표</h1>}
-        rightNode={<Icon name="BellOutline" size="large" />}
+        rightNode={
+          <Icon
+            name={
+              notificationPresent?.present ? 'BellOutlinePoint' : 'BellOutline'
+            }
+            size="large"
+            className="cursor-pointer"
+            onClick={() => navigate('/notifications')}
+          />
+        }
       />
       <PollFormProvider type="EDIT" initialData={postUpdateInfo}>
         <PollInformation />

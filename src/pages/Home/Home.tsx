@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useGetMyInfo from '@/api/useGetMyInfo';
+import { useGetNotificationPresent } from '@/api/useGetNotificationPresent';
 import useUpdateOnboarding from '@/api/useUpdateOnboarding';
 import Logo from '@/assets/icons/logo.svg?react';
 import CoachMark from '@/components/coach-mark/CoachMark';
@@ -12,6 +13,7 @@ export default function Home() {
   const navigate = useNavigate();
   const { data: myInfo, isLoading: isMyInfoLoading } = useGetMyInfo();
   const updateOnboarding = useUpdateOnboarding();
+  const { data: notificationPresent } = useGetNotificationPresent();
 
   // 무조건 띄워줘야 되니깐 코치마크 닫히는 것을 체크해야함
   const [isCoachMarkClosed, setIsCoachMarkClosed] = useState(false);
@@ -46,7 +48,14 @@ export default function Home() {
           />
         }
         rightNode={
-          <Icon className="cursor-pointer" name="BellOutline" size="medium" />
+          <Icon
+            className="cursor-pointer"
+            name={
+              notificationPresent?.present ? 'BellOutlinePoint' : 'BellOutline'
+            }
+            size="medium"
+            onClick={() => navigate('/notifications')}
+          />
         }
       />
 

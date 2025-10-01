@@ -28,9 +28,6 @@ export default function VoteRegistPage() {
           />
         }
         centerNode={<h1 className="text-heading-1">투표</h1>}
-        rightNode={
-          <Icon name="BellOutline" size="large" className="cursor-pointer" />
-        }
       />
       <PollFormProvider type="REGIST" initialData={INITIAL_POLL_REGIST_DATA}>
         <PollInformation />

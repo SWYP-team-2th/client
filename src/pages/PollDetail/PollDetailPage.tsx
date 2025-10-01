@@ -1,4 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
+import { useGetNotificationPresent } from '@/api/useGetNotificationPresent';
 import { Header } from '@/components/common/Header/Header';
 import Icon from '@/components/common/Icon';
 import Loading from '@/components/common/Loading/Loading';
@@ -14,6 +15,7 @@ import NotFoundPage from '@/pages/NotFound/NotFoundPage';
 export default function PollDetailPage() {
   const navigate = useNavigate();
   const { postId } = useParams<{ postId: string }>();
+  const { data: notificationPresent } = useGetNotificationPresent();
 
   const { post, result, isVoted, isLoading } = usePollDetail(postId ?? '');
 
@@ -37,7 +39,14 @@ export default function PollDetailPage() {
         }
         centerNode="투표"
         rightNode={
-          <Icon className="cursor-pointer" name="BellOutline" size="medium" />
+          <Icon
+            className="cursor-pointer"
+            name={
+              notificationPresent?.present ? 'BellOutlinePoint' : 'BellOutline'
+            }
+            size="medium"
+            onClick={() => navigate('/notifications')}
+          />
         }
       />
 

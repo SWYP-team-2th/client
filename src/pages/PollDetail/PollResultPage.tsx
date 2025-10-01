@@ -1,4 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
+import { useGetNotificationPresent } from '@/api/useGetNotificationPresent';
 import { useGetPost } from '@/api/useGetPost';
 import { useGetVotesResult } from '@/api/useGetVotesResult';
 import { Header } from '@/components/common/Header/Header';
@@ -10,6 +11,7 @@ import NotFoundPage from '@/pages/NotFound/NotFoundPage';
 export default function PollResultPage() {
   const navigate = useNavigate();
   const { postId } = useParams<{ postId: string }>();
+  const { data: notificationPresent } = useGetNotificationPresent();
 
   if (!postId) {
     return <div>없는 게시글이용</div>;
@@ -40,7 +42,14 @@ export default function PollResultPage() {
         }
         centerNode="투표"
         rightNode={
-          <Icon className="cursor-pointer" name="BellOutline" size="medium" />
+          <Icon
+            className="cursor-pointer"
+            name={
+              notificationPresent?.present ? 'BellOutlinePoint' : 'BellOutline'
+            }
+            size="medium"
+            onClick={() => navigate('/notifications')}
+          />
         }
       />
 

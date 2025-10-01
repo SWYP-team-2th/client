@@ -14,7 +14,7 @@ export default function MyVoteList() {
 
   return (
     <InfiniteScroller
-      className="h-full"
+      className="h-full flex flex-col gap-4"
       data={myVoteList}
       emptyComponent={<ZeroUI />}
       renderItem={(item) => (

@@ -62,12 +62,14 @@ export default function Home() {
       {/* 메인 콘텐츠 */}
       <div className="pt-20 pb-4 px-5 ">
         <div className="flex flex-col gap-2">
-          <span className="text-title-3">오늘의 Chooz 📸</span>
-          <span className="text-headline-1 text-gray-700">
+          <span className="text-heading-1">오늘의 Chooz 📸</span>
+          <span className="text-headline-3 text-gray-700">
             지금 가장 핫한 사진 투표, 당신의 선택은?
           </span>
         </div>
-        <HomeFeed />
+        <div className="mt-4">
+          <HomeFeed />
+        </div>
       </div>
 
       {shouldShowCoachMark && <CoachMark onClose={handleCloseCoachMark} />}

@@ -2,6 +2,7 @@ import { SVGProps } from 'react';
 import ArrowLeft from '@/assets/icons/arrow_left_24px.svg?react';
 import ArrowRight from '@/assets/icons/arrow_right_24px.svg?react';
 import BellOutline from '@/assets/icons/bell_outline_24px.svg?react';
+import BellOutlinePoint from '@/assets/icons/bell_outline_point.svg?react';
 import CheckLarge from '@/assets/icons/check_large.svg?react';
 import CheckSmall from '@/assets/icons/check_small.svg?react';
 import Close from '@/assets/icons/close.svg?react';
@@ -43,6 +44,7 @@ import User2Fill from '@/assets/icons/user2_fill_24px.svg?react';
 import User2Outline from '@/assets/icons/user2_outline_24px.svg?react';
 
 export const ICONS = {
+  BellOutlinePoint,
   DeadLineGray,
   UpLoad,
   CheckLarge,

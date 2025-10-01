@@ -28,6 +28,10 @@ export const router = createBrowserRouter([
         path: '/user/:userId',
         element: <UserPage />,
       },
+      {
+        path: '/notifications',
+        element: <NotificationPage />,
+      },
     ],
   },
   {
@@ -45,10 +49,6 @@ export const router = createBrowserRouter([
       {
         path: '/oauth',
         element: <OAuthPage />,
-      },
-      {
-        path: '/notifications',
-        element: <NotificationPage />,
       },
       {
         path: '/votes/regist',

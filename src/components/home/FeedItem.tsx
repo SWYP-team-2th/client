@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import Avatar from '../common/Avatar';
 import Icon from '@/components/common/Icon';
 import { Label } from '@/components/common/Label/Label';
 import { FeedType } from '@/types/feed';
@@ -35,6 +36,11 @@ export default function FeedItem({
     navigate(`/posts/${id}`);
   };
 
+  const handleClickProfile = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    navigate(`/user/${author.id}`);
+  };
+
   return (
     <div className="bg-gray-100">
       <div
@@ -43,16 +49,17 @@ export default function FeedItem({
       >
         <div className="flex-1 min-w-0">
           {/* 게시글 올린 유저 정보 */}
-          <div className="flex items-center mb-2">
-            <img
-              src={author.profileUrl}
-              alt="프로필"
-              className="w-7 h-7 mr-[6px] rounded-full"
-            />
-            <span className="text-label-1 mr-1 text-gray-900">
-              {author.nickname}
-            </span>
-            <span className="text-caption-1 text-gray-600">{timeAgo}</span>
+          <div
+            className="flex items-center gap-[6px] mb-2"
+            onClick={handleClickProfile}
+          >
+            <Avatar size="small" src={author.profileUrl} alt="프로필" />
+            <div className="flex gap-1 items-center">
+              <span className="text-label-1 text-gray-900">
+                {author.nickname}
+              </span>
+              <span className="text-caption-1 text-gray-600">{timeAgo}</span>
+            </div>
           </div>
 
           {/* 게시글 내용 */}

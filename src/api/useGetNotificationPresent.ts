@@ -15,9 +15,6 @@ export function useGetNotificationPresent() {
       request({
         method: 'GET',
         url: '/notifications/present',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
       }),
     enabled: !!accessToken,
   });

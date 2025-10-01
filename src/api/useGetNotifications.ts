@@ -12,9 +12,6 @@ export function useGetNotifications(size: number = 10) {
       request({
         method: 'GET',
         url: '/notifications',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
         params: {
           cursor: pageParam,
           size,

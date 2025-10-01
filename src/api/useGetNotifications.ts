@@ -1,11 +1,8 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { request } from '@/api/config';
-import { getAccessToken } from '@/components/login/Auth/token';
 import { NotificationResponse } from '@/types/notification';
 
 export function useGetNotifications(size: number = 10) {
-  const accessToken = getAccessToken();
-
   return useInfiniteQuery<NotificationResponse>({
     queryKey: ['notifications', size],
     queryFn: ({ pageParam = null }) =>
@@ -24,6 +21,5 @@ export function useGetNotifications(size: number = 10) {
       }
       return lastPage.nextCursor;
     },
-    enabled: !!accessToken,
   });
 }

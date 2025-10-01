@@ -81,7 +81,17 @@ export default function PollChoice({ choice }: PollChoiceProps) {
               )}
               value={choice.title}
               onChange={(e) => {
-                setPollChoiceTitle(choice.id, e.target.value);
+                const newValue = e.target.value;
+                const placeholderValue =
+                  IMAGE_TITLE_PLACEHOLDER[
+                    choice.order as keyof typeof IMAGE_TITLE_PLACEHOLDER
+                  ];
+
+                const shouldClear =
+                  choice.title === placeholderValue &&
+                  newValue.length === placeholderValue.length - 1;
+
+                setPollChoiceTitle(choice.id, shouldClear ? '' : newValue);
               }}
             />
           </div>

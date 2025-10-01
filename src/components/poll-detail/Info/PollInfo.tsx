@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import type { Post } from '@/types/post';
 import { useDeletePost } from '@/api/useDeletePost';
 import usePostCloseVote from '@/api/usePostCloseVote';
+import Avatar from '@/components/common/Avatar';
 import ContextMenu from '@/components/common/ContextMenu';
 import Dialog from '@/components/common/Dialog';
 import { useDialog } from '@/components/common/Dialog/hooks';
@@ -13,10 +14,7 @@ import { cn } from '@/utils/cn';
 import { getRemainedTimeText, getDeadlineText } from '@/utils/date/date';
 
 interface PollInfoProps {
-  author: {
-    profileUrl: string;
-    nickname: string;
-  };
+  author: Post['author'];
   isAuthor: boolean;
   createdAt: string;
   status: Post['status'];
@@ -70,6 +68,11 @@ export default function PollInfo({
     },
   });
 
+  const handleClickProfile = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    navigate(`/user/${author.id}`);
+  };
+
   const handleClosePost = () => {
     openDialog(
       <Dialog
@@ -108,10 +111,11 @@ export default function PollInfo({
     <div className="bg-white px-5 flex flex-col w-full mb-8">
       {/* 프로필 이미지, 닉네임, 시간*/}
       <div className="flex items-center gap-2 my-3">
-        <img
+        <Avatar
+          size="medium"
           src={author.profileUrl}
           alt={author.nickname}
-          className="w-8 h-8 rounded-full object-cover"
+          onClick={handleClickProfile}
         />
 
         <div className="flex items-center mr-2">

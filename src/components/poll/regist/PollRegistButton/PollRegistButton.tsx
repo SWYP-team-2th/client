@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import usePollForm from '../../Provider/hooks';
+import useGetMyInfo from '@/api/useGetMyInfo';
 import usePostRegistVote from '@/api/usePostRegistVote';
+import useUpdateOnboarding from '@/api/useUpdateOnboarding';
 import { Button } from '@/components/common/Button/Button';
 import Loading from '@/components/common/Loading';
 import useToast from '@/components/common/Toast/hooks';
@@ -9,9 +11,16 @@ export default function PollRegistButton() {
   const navigate = useNavigate();
   const toast = useToast();
   const { isValid, data: pollData } = usePollForm();
+  const { data: myInfo } = useGetMyInfo();
+  const { mutate: updateOnboarding } = useUpdateOnboarding();
   const { mutate: registVote, isPending: isRegistVotePending } =
     usePostRegistVote({
       onSuccess: (data) => {
+        if (myInfo?.onboardingStep) {
+          updateOnboarding({
+            onboardingStep: { ...myInfo.onboardingStep, FIRST_VOTE: false },
+          });
+        }
         navigate(`/posts/${data.postId}`);
       },
       onError: () => {

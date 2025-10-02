@@ -1,14 +1,25 @@
 import { Reorder } from 'motion/react';
 import usePollChoiceInformation from './hooks';
 import PollChoice from './PollChoice';
+import PollChoiceDeleteGuideTooltip from './PollChoiceDeleteGuideTooltip';
 import Icon from '@/components/common/Icon';
 
 export default function PollChoiceInformation() {
-  const { pollChoices, addPollChoice, setPollChoicesOrder, isPollChoiceFull } =
-    usePollChoiceInformation();
+  const {
+    pollChoices,
+    addPollChoice,
+    setPollChoicesOrder,
+    isPollChoiceFull,
+    isFirstVote,
+  } = usePollChoiceInformation();
 
   return (
     <div className="flex flex-col gap-6 justify-center items-center">
+      {isFirstVote && (
+        <div className="ml-auto">
+          <PollChoiceDeleteGuideTooltip />
+        </div>
+      )}
       <Reorder.Group
         className="flex flex-col gap-3 w-full"
         values={pollChoices.map((choice) => choice.order)}

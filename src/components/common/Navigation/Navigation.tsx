@@ -6,7 +6,7 @@ const Navigation = () => {
   const { menus } = useBottomNavigation();
 
   return (
-    <nav className="w-full h-[86px] fixed bottom-0 desktop:w-[480px] bg-gray-100 flex justify-between items-center px-20 border-t-[0.5px] border-gray-300">
+    <nav className="w-full h-[86px] fixed bottom-0 desktop:w-[480px] bg-gray-100 flex justify-between items-center px-15 border-t-[0.5px] border-gray-300">
       {menus.map((menu) => (
         <NavLink key={menu.id} to={menu.link} className="flex justify-center">
           {({ isActive }) => (

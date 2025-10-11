@@ -29,7 +29,7 @@ export default function UserPage() {
   }, [searchParams, setSearchParams]);
 
   return (
-    <div className="h-full w-full min-h-lvh pt-15">
+    <div className="h-[calc(100vh-86px)] w-full flex flex-col pt-15">
       <Header
         className="text-white bg-primary-500"
         leftNode={
@@ -57,12 +57,12 @@ export default function UserPage() {
         profileImageUrl={userInfo?.profileImageUrl}
         name={userInfo?.nickname}
       />
-      <div className="rounded-t-[20px] overflow-hidden px-5 py-6 -mt-6 bg-white">
-        <div className="flex gap-6 mb-6 text-heading-2">
+      <div className="flex-1 rounded-t-[20px] overflow-hidden px-5 py-6 -mt-6 bg-white shadow-[0_-5px_30px_0_rgba(0,0,0,0.10),0_-22px_22px_0_rgba(0,0,0,0.09),0_-5px_12px_0_rgba(0,0,0,0.10)]">
+        <div className="flex gap-[18px] mb-6 text-headline-1">
           <button
             onClick={() => handleTabChange('MY')}
             className={cn(
-              'font-bold pb-2 relative text-gray-500',
+              'font-bold pb-[2px] relative text-gray-500',
               currentTab === 'MY' && 'text-gray-900',
             )}
           >
@@ -74,7 +74,7 @@ export default function UserPage() {
           <button
             onClick={() => handleTabChange('PARTICIPATED')}
             className={cn(
-              'font-bold pb-2 relative text-gray-500',
+              'font-bold pb-[2px] relative text-gray-500',
               currentTab === 'PARTICIPATED' && 'text-gray-900',
             )}
           >

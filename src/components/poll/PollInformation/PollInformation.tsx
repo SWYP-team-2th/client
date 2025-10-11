@@ -7,7 +7,7 @@ export default function PollInformation() {
   const { type } = usePollForm();
 
   return (
-    <FieldContainer className="flex flex-col gap-8">
+    <FieldContainer className="flex flex-col gap-7">
       <PollBasicInformation />
       {type === 'REGIST' && <PollChoiceInformation />}
     </FieldContainer>

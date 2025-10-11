@@ -31,7 +31,9 @@ export default function RadioGroup({
     <div
       className={cn(
         'flex',
-        direction === 'vertical' ? 'flex-col space-y-4' : 'flex-row space-x-4',
+        direction === 'vertical'
+          ? 'flex-col space-y-[14px]'
+          : 'flex-row space-x-[14px]',
         className,
       )}
       role="radiogroup"

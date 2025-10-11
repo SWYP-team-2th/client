@@ -21,7 +21,7 @@ export default function PollChoiceInformation() {
         </div>
       )}
       <Reorder.Group
-        className="flex flex-col gap-3 w-full"
+        className="flex flex-col gap-2 w-full"
         values={pollChoices.map((choice) => choice.order)}
         onReorder={setPollChoicesOrder}
       >
@@ -31,7 +31,7 @@ export default function PollChoiceInformation() {
       </Reorder.Group>
       {!isPollChoiceFull && (
         <button
-          className="flex items-center gap-[6px] text-gray-600 text-headline-3 cursor-pointer"
+          className="flex items-center gap-[6px] text-gray-600 text-body-1 cursor-pointer"
           onClick={addPollChoice}
         >
           <Icon size="small" name="Plus" className="text-gray-600" />

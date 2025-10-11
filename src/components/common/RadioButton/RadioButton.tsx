@@ -49,7 +49,7 @@ export default function RadioButton({
       ),
     },
     label: cn(
-      'ml-1 text-headline-2',
+      'ml-1 text-headline-3',
       disabled ? 'text-gray-500' : 'text-gray-900',
     ),
   };

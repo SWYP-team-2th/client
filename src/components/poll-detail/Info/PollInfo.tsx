@@ -166,21 +166,21 @@ export default function PollInfo({
         <Label
           variant="solid"
           colorVarient={status === 'PROGRESS' ? 'progress' : 'ended'}
-          size="medium"
+          size="small"
         >
           {status === 'PROGRESS' ? '진행 중' : '투표 종료'}
         </Label>
 
         {/* 복수 투표 라벨 */}
         {pollOption.pollType === 'MULTIPLE' && (
-          <Label variant="outline" colorVarient="progress" size="medium">
+          <Label variant="outline" colorVarient="progress" size="small">
             복수 투표
           </Label>
         )}
 
         {/* 시간 설정으로 마감 시 nnn일 남음, 직접 마감으로 마감 시 직접 마감 라벨, 투표 수로 마감 시 n명 참여중 n명 참여 시 마감*/}
         <span
-          className={cn('text-label-1', {
+          className={cn('text-label-2', {
             'text-accent-900': status === 'CLOSED',
             'text-primary-500': status !== 'CLOSED',
           })}
@@ -191,7 +191,7 @@ export default function PollInfo({
               <>{getDeadlineText(closeOption.closedAt)}</>
             )}
           {status !== 'CLOSED' && closeOption.closeType === 'SELF' && (
-            <Label variant="outline" colorVarient="progress" size="medium">
+            <Label variant="outline" colorVarient="progress" size="small">
               직접 마감
             </Label>
           )}
@@ -204,7 +204,7 @@ export default function PollInfo({
           )}
         </span>
       </div>
-      <div className="flex flex-col gap-[6px] mt-3 mb-2">
+      <div className="flex flex-col gap-[6px] mt-[18px] mb-2">
         <span className="text-heading-2">{title}</span>
         <span className="text-headline-2 ">{description}</span>
       </div>

@@ -62,7 +62,7 @@ export default function PollActionButtons({
   };
 
   return (
-    <div className="flex flex-col justify-center items-center gap-[18px] my-8 px-4">
+    <div className="flex flex-col justify-center items-center gap-3 my-8 px-4">
       {!isVotedClosed && (
         <>
           {!isVoted || voteMode ? (

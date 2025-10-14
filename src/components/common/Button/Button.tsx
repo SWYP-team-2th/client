@@ -9,13 +9,12 @@ const buttonVariants = cva(
     variants: {
       variant: {
         solid: '',
-        outline: 'border bg-gray-100',
+        outline: 'border-[1.5px] bg-gray-100',
       },
       size: {
         small: 'w-[160px] h-[40px] rounded-lg text-label-1',
         medium: 'w-[210px] h-[46px] rounded-xl text-headline-3',
-        large: 'w-full h-[58px] rounded-2xl text-heading-2',
-        jumbo: 'w-full h-[1px]',
+        large: 'w-full h-[58px] rounded-xl text-headline-1',
       },
       solidType: {
         primary: 'bg-primary-500 text-gray-100',
@@ -28,12 +27,6 @@ const buttonVariants = cva(
         secondary: 'border-primary-700 text-primary-700',
         disabled: 'border-gray-500 text-gray-600',
         tertiary: 'bg-gray-100',
-      },
-      borderSize: {
-        small: 'border-[1.5px]',
-        medium: 'border-[1.8px]',
-        large: 'border-[2px]',
-        jumbo: 'border-[1px]',
       },
     },
   },
@@ -65,7 +58,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const type =
       variant === 'solid'
         ? buttonVariants({ solidType: buttonType })
-        : buttonVariants({ outlineType: buttonType, borderSize: size });
+        : buttonVariants({ outlineType: buttonType });
 
     const disabled = buttonType === 'disabled';
 

@@ -23,7 +23,7 @@ export default function SettingsPage() {
             onClick={handleClickBackButton}
           />
         }
-        centerNode={<h1 className="text-title-medium">설정</h1>}
+        centerNode={<h1 className="text-heading-1">설정</h1>}
       />
       <div className="pt-[55px]">
         {menus.map((menu) => (

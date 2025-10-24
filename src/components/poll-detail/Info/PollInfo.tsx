@@ -52,9 +52,6 @@ export default function PollInfo({
       closeDialog();
       queryClient.invalidateQueries({ queryKey: ['post', postId?.toString()] });
     },
-    onError: () => {
-      toast.error({ title: '투표 마감에 실패했습니다' });
-    },
   });
 
   const deletePostMutation = useDeletePost({
@@ -62,9 +59,6 @@ export default function PollInfo({
       closeDialog();
       toast.success({ title: '투표가 삭제되었습니다' });
       navigate('/');
-    },
-    onError: () => {
-      toast.error({ title: '투표 삭제에 실패했습니다' });
     },
   });
 

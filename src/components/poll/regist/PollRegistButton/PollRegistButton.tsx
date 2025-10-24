@@ -5,11 +5,9 @@ import usePostRegistVote from '@/api/usePostRegistVote';
 import useUpdateOnboarding from '@/api/useUpdateOnboarding';
 import { Button } from '@/components/common/Button/Button';
 import Loading from '@/components/common/Loading';
-import useToast from '@/components/common/Toast/hooks';
 
 export default function PollRegistButton() {
   const navigate = useNavigate();
-  const toast = useToast();
   const { isValid, data: pollData } = usePollForm();
   const { data: myInfo } = useGetMyInfo();
   const { mutate: updateOnboarding } = useUpdateOnboarding();
@@ -22,12 +20,6 @@ export default function PollRegistButton() {
           });
         }
         navigate(`/posts/${data.postId}`);
-      },
-      onError: () => {
-        toast.error({
-          title: '투표 올리기에 실패했습니다.',
-          description: '다시 시도해주세요.',
-        });
       },
     });
 

@@ -1,4 +1,4 @@
-import { createContext, useCallback, useState } from 'react';
+import { createContext, useCallback, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Toast from './Toast';
 import { ToastProps } from './types';
@@ -13,6 +13,8 @@ interface ToastContextType {
 }
 
 export const ToastContext = createContext<ToastContextType | null>(null);
+
+let globalToastContext: ToastContextType | null = null;
 
 export default function ToastProvider({
   children,
@@ -34,8 +36,17 @@ export default function ToastProvider({
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
   }, []);
 
+  const contextValue = { showToast, removeToast };
+
+  useEffect(() => {
+    globalToastContext = contextValue;
+    return () => {
+      globalToastContext = null;
+    };
+  }, [contextValue]);
+
   return (
-    <ToastContext.Provider value={{ showToast, removeToast }}>
+    <ToastContext.Provider value={contextValue}>
       {children}
       {createPortal(
         <div className="fixed top-10 left-1/2 -translate-x-1/2 flex flex-col gap-4 max-w-[430px] w-full z-100">
@@ -48,3 +59,5 @@ export default function ToastProvider({
     </ToastContext.Provider>
   );
 }
+
+export const getGlobalToastContext = () => globalToastContext;

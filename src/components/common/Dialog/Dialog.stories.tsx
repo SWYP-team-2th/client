@@ -58,7 +58,7 @@ export const CustomDialog: Story = {
         로그인하고 투표에 참여하세요!
       </p>
     ),
-    description: '카카오로 로그인 하고, 뽀또픽의 모든 기능을 이용해 보세요!',
+    description: '카카오로 로그인 하고, 츄즈의 모든 기능을 이용해 보세요!',
     hasCloseButton: true,
     customButtonProps: (
       <div className="flex flex-col gap-2 w-full">

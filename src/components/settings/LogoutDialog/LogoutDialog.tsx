@@ -6,8 +6,8 @@ export default function LogoutDialog() {
 
   return (
     <Dialog
-      title="잠깐! 뽀또들을 두고 떠나시려구요?😢"
-      description="뽀또본부로 다시 돌아오실거죠?"
+      title="잠깐! 츄즈들을 두고 떠나시려구요?😢"
+      description="츄즈본부로 다시 돌아오실거죠?"
       cancelButtonProps={{
         text: '취소',
       }}

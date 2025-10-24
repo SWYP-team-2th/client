@@ -11,7 +11,7 @@ export default function GuestConfirmDialog({ title }: GuestConfirmDialogProps) {
   return (
     <Dialog
       title={title}
-      description="카카오로 로그인하고 뽀또가 되어주세요!"
+      description="카카오로 로그인하고 츄즈가 되어주세요!"
       confirmButtonProps={{
         text: '카카오로 계속하기',
         onClick: handleKakaoLogin,

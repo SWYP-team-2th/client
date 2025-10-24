@@ -40,11 +40,6 @@ export default function NotificationItem({
             });
             navigate(`/posts/${notification.targets[0].id}`);
           },
-          onError: () => {
-            toast.error({
-              title: '알림 읽기 처리에 실패했어요!',
-            });
-          },
         },
       );
     } else {

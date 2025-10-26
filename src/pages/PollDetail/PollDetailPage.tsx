@@ -25,6 +25,8 @@ export default function PollDetailPage() {
     return <NotFoundPage />;
   }
 
+  const shareUrl = `${window.location.origin}/posts/${postId}?shareUrl=${post.shareUrl}`;
+
   return (
     <div className="w-full bg-gray-100 h-screen flex itmes-center flex-col pt-[60px] relative">
       <Header
@@ -84,7 +86,7 @@ export default function PollDetailPage() {
 
         {/* 투표 버튼, 공유 버튼 */}
         <PollActionButtons
-          shareUrl={post.shareUrl}
+          shareUrl={shareUrl}
           postId={parseInt(postId)}
           isVoted={isVoted}
           isVotedClosed={post.status === 'CLOSED'}

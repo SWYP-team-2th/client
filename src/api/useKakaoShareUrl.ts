@@ -25,7 +25,7 @@ export function useKakaoShareUrl({ author, shareUrl }: KakaoShareUrlProps) {
         objectType: 'feed',
         content: {
           description: `${author}님이 투표를 공유했어요! 💛`,
-          imageUrl: 'https://image.photopic.site/photopic_thumnail.png',
+          imageUrl: 'https://cdn.chooz.site/opengraph.png',
           link: {
             mobileWebUrl: shareUrl,
             webUrl: shareUrl,

@@ -17,6 +17,24 @@ const queryClient = new QueryClient({
     queries: {
       refetchOnWindowFocus: false,
       retry: false,
+      throwOnError: (error: Error) => {
+        const toastContext = getGlobalToastContext();
+        if (toastContext) {
+          if (error instanceof AxiosError) {
+            const apiError = error.response?.data as ApiError;
+            toastContext.showToast({
+              type: 'error',
+              title: apiError?.message || '알 수 없는 오류가 발생했습니다.',
+            });
+          } else {
+            toastContext.showToast({
+              type: 'error',
+              title: error.message || '오류가 발생했습니다',
+            });
+          }
+        }
+        return false;
+      },
     },
     mutations: {
       onError: (error: Error) => {
@@ -26,15 +44,12 @@ const queryClient = new QueryClient({
             const apiError = error.response?.data as ApiError;
             toastContext.showToast({
               type: 'error',
-              title: apiError?.errorCode || '알 수 없는 오류가 발생했습니다.',
-              description:
-                apiError?.message || '알 수 없는 오류가 발생했습니다.',
+              title: apiError?.message || '알 수 없는 오류가 발생했습니다.',
             });
           } else {
             toastContext.showToast({
               type: 'error',
-              title: '오류가 발생했습니다',
-              description: error.message || '알 수 없는 오류가 발생했습니다.',
+              title: error.message || '오류가 발생했습니다',
             });
           }
         }

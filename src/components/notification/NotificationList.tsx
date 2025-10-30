@@ -1,8 +1,8 @@
 import NotificationItem from './NotificationItem';
 import { useGetNotifications } from '@/api/useGetNotifications';
+import EmptyNotification from '@/assets/images/my/EmptyNotification.png';
 import InfiniteScroller from '@/components/common/InfiniteScroller';
 import Loading from '@/components/common/Loading';
-import EmptyNotification from '@/assets/images/my/EmptyNotification.png';
 
 export default function NotificationList() {
   const {

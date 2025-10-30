@@ -25,6 +25,8 @@ export default function PollDetailPage() {
     return <NotFoundPage />;
   }
 
+  const showResultList = post.isAuthor || isVoted || post.status === 'CLOSED';
+
   return (
     <div className="w-full bg-gray-100 h-screen flex itmes-center flex-col pt-[60px] relative">
       <Header
@@ -65,7 +67,7 @@ export default function PollDetailPage() {
       />
 
       {/* 투표 결과 섹션 */}
-      {(isVoted || post.status === 'CLOSED') && result && (
+      {showResultList && result && (
         <div className="px-5 border-y-[1px] border-gray-200 mb-[30px]">
           <div className="text-headline-1 text-gray-800 mt-[35px]">
             투표 결과

@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useGetNotificationPresent } from '@/api/useGetNotificationPresent';
 import { useGetPost } from '@/api/useGetPost';
 import { useGetVotesResult } from '@/api/useGetVotesResult';
@@ -11,13 +11,17 @@ import NotFoundPage from '@/pages/NotFound/NotFoundPage';
 export default function PollResultPage() {
   const navigate = useNavigate();
   const { postId } = useParams<{ postId: string }>();
+  const [searchParams] = useSearchParams();
   const { data: notificationPresent } = useGetNotificationPresent();
 
   if (!postId) {
     return <div>없는 게시글이용</div>;
   }
 
-  const { data: post, isLoading: isPostLoading } = useGetPost(postId);
+  const { data: post, isLoading: isPostLoading } = useGetPost({
+    postId,
+    shareKey: searchParams.get('shareUrl') ?? undefined,
+  });
   const { data: result, isLoading: isResultLoading } = useGetVotesResult({
     postId,
     options: {

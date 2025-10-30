@@ -4,7 +4,6 @@ import useGetMyInfo from '@/api/useGetMyInfo';
 import usePostCommentLike from '@/api/usePostCommentLike';
 import ContextMenu from '@/components/common/ContextMenu';
 import Icon from '@/components/common/Icon';
-import useToast from '@/components/common/Toast/hooks';
 import { CommentType } from '@/types/comment';
 import { getRemainedTimeText } from '@/utils/date/date';
 
@@ -22,7 +21,6 @@ export default function CommentItem({
   onDeleteComment,
 }: CommentItemProps) {
   const { data: myInfo } = useGetMyInfo();
-  const toast = useToast();
   const queryClient = useQueryClient();
 
   const liked = comment.like.liked;
@@ -38,23 +36,11 @@ export default function CommentItem({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['comments', postId] });
     },
-    onError: () => {
-      toast.error({
-        title: '좋아요 실패',
-        description: '좋아요를 추가하는 중 오류가 발생하였습니다.',
-      });
-    },
   });
 
   const deleteCommentLike = useDeleteCommentLike({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['comments', postId] });
-    },
-    onError: () => {
-      toast.error({
-        title: '좋아요 취소 실패',
-        description: '좋아요를 취소하는 중 오류가 발생하였습니다.',
-      });
     },
   });
 

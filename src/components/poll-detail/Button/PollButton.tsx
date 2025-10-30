@@ -29,12 +29,6 @@ export default function PollButton({ postId, checkedItems }: PollButtonProps) {
       // voteMode 종료
       setVoteMode(false);
     },
-    onError: () => {
-      toast.error({
-        title: '투표 실패',
-        description: '투표 처리 중 오류가 발생했어요. 다시 시도해주세요.',
-      });
-    },
   });
 
   const handleVote = () => {

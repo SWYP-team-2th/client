@@ -101,6 +101,11 @@ interface RequestConfig extends AxiosRequestConfig {
   headers?: AxiosRequestConfig['headers'];
 }
 
+export interface ApiError {
+  errorCode: string;
+  message: string;
+}
+
 const request = async <T>(config: RequestConfig): Promise<T> => {
   const { data } = await axiosInstance.request<T>({
     ...config,

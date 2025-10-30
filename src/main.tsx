@@ -1,10 +1,14 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
+import { ApiError } from '@/api/config';
 import { BottomSheetProvider } from '@/components/common/BottomSheet/BottomSheetProvider.tsx';
 import { DialogProvider } from '@/components/common/Dialog/DialogProvider.tsx';
-import ToastProvider from '@/components/common/Toast/ToastProvider';
+import ToastProvider, {
+  getGlobalToastContext,
+} from '@/components/common/Toast/ToastProvider';
 import { router } from '@/routes/routing.tsx';
 import './index.css';
 
@@ -13,6 +17,43 @@ const queryClient = new QueryClient({
     queries: {
       refetchOnWindowFocus: false,
       retry: false,
+      throwOnError: (error: Error) => {
+        const toastContext = getGlobalToastContext();
+        if (toastContext) {
+          if (error instanceof AxiosError) {
+            const apiError = error.response?.data as ApiError;
+            toastContext.showToast({
+              type: 'error',
+              title: apiError?.message || '알 수 없는 오류가 발생했습니다.',
+            });
+          } else {
+            toastContext.showToast({
+              type: 'error',
+              title: error.message || '오류가 발생했습니다',
+            });
+          }
+        }
+        return false;
+      },
+    },
+    mutations: {
+      onError: (error: Error) => {
+        const toastContext = getGlobalToastContext();
+        if (toastContext) {
+          if (error instanceof AxiosError) {
+            const apiError = error.response?.data as ApiError;
+            toastContext.showToast({
+              type: 'error',
+              title: apiError?.message || '알 수 없는 오류가 발생했습니다.',
+            });
+          } else {
+            toastContext.showToast({
+              type: 'error',
+              title: error.message || '오류가 발생했습니다',
+            });
+          }
+        }
+      },
     },
   },
 });

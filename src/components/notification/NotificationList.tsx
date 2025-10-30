@@ -2,6 +2,7 @@ import NotificationItem from './NotificationItem';
 import { useGetNotifications } from '@/api/useGetNotifications';
 import InfiniteScroller from '@/components/common/InfiniteScroller';
 import Loading from '@/components/common/Loading';
+import EmptyNotification from '@/assets/images/my/EmptyNotification.png';
 
 export default function NotificationList() {
   const {
@@ -27,7 +28,7 @@ export default function NotificationList() {
         <div className="fixed inset-0 flex flex-col items-center justify-center">
           <div className="text-center">
             <img
-              src="/src/assets/images/my/EmptyNotification.png"
+              src={EmptyNotification}
               alt="알림 없구요"
               className="mx-auto mb-4 w-24 h-24"
             />

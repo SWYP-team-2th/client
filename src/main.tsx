@@ -17,7 +17,6 @@ import ToastProvider, {
 import { router } from '@/routes/routing.tsx';
 import './index.css';
 
-// 중복 토스트 방지를 위한 Map
 const recentErrors = new Map<string, number>();
 
 const showErrorToast = (error: Error) => {

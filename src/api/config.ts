@@ -104,6 +104,7 @@ interface RequestConfig extends AxiosRequestConfig {
 export interface ApiError {
   errorCode: string;
   message: string;
+  subMessage: string | null;
 }
 
 const request = async <T>(config: RequestConfig): Promise<T> => {

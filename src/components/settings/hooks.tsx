@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import LogoutDialog from './LogoutDialog';
+import WithDrawalDialog from './WithDrawalDialog';
 import { useDialog } from '../common/Dialog/hooks';
 import Icon from '../common/Icon';
 
@@ -30,6 +31,10 @@ export default function useSettingMenus() {
     openDialog(<LogoutDialog />);
   };
 
+  const handleClickWithdrawalButton = () => {
+    openDialog(<WithDrawalDialog />);
+  };
+
   const handleClickServiceOfTermsButton = () => {
     navigate('/terms');
   };
@@ -50,12 +55,6 @@ export default function useSettingMenus() {
             rightIcon: <Icon name="ArrowRightGray" size="medium" />,
             onClick: handleClickMyProfileButton,
           },
-          {
-            id: 'logout',
-            title: '로그아웃',
-            rightIcon: <Icon name="LogoutGray" size="medium" />,
-            onClick: handleClickLogoutButton,
-          },
         ],
       },
       {
@@ -73,6 +72,22 @@ export default function useSettingMenus() {
             title: '개인정보 처리 방침',
             rightIcon: <Icon name="ArrowRightGray" size="medium" />,
             onClick: handleClickPrivacyPolicyButton,
+          },
+        ],
+      },
+      {
+        id: 'account-security',
+        title: '계정/보안',
+        subMenus: [
+          {
+            id: 'logout',
+            title: '로그아웃',
+            onClick: handleClickLogoutButton,
+          },
+          {
+            id: 'withdrawal',
+            title: '회원탈퇴',
+            onClick: handleClickWithdrawalButton,
           },
         ],
       },

@@ -5,15 +5,18 @@ import { cn } from '@/utils/cn';
 interface ImageDetailModalProps {
   postId: string;
   selectedImageId: number;
+  shareKey?: string;
 }
 
 export default function ImageDetailModal({
   postId,
   selectedImageId,
+  shareKey,
 }: ImageDetailModalProps) {
   const {
     post,
     scrollContainerRef,
+    thumbnailContainerRef,
     currentIndex,
     currentImageId,
     images,
@@ -23,6 +26,7 @@ export default function ImageDetailModal({
   } = useImageDetailModal({
     postId,
     selectedImageId,
+    shareKey,
   });
 
   if (!post) {
@@ -59,15 +63,24 @@ export default function ImageDetailModal({
         ))}
       </div>
 
-      <div className="overflow-x-auto fixed bottom-16 w-full flex flex-col gap-6">
-        <p className="text-white text-body-2-long text-center">
+      <div className="fixed bottom-16 w-full flex flex-col gap-6 items-center">
+        <p className="text-white text-body-2-long text-center rounded-xl bg-[rgba(0,0,0,0.6)] backdrop-blur-[2px] px-2 py-1 w-fit">
           {currentIndex + 1} / {images.length}
         </p>
-        <div className="flex gap-2 px-6 pt-1 min-w-max ">
+        <div
+          ref={thumbnailContainerRef}
+          className="flex gap-2 pt-1 overflow-x-auto w-full scrollbar-hide"
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            paddingLeft: 'calc(50% - 40px)',
+            paddingRight: 'calc(50% - 40px)',
+          }}
+        >
           {images.map((image) => (
             <button
               key={image.id}
-              className="w-20 h-20"
+              className="w-20 h-20 flex-shrink-0"
               onClick={() => handleClickImage(image.id)}
             >
               <img

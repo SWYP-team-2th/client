@@ -16,4 +16,13 @@ interface Window {
     init: (key: string) => void;
     isInitialized: () => boolean;
   };
+
+  gtag: (
+    command: string,
+    action: string,
+    params?: {
+      page_path?: string;
+      page_title?: string;
+    },
+  ) => void;
 }

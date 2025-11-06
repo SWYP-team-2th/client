@@ -1,4 +1,11 @@
-import { createContext, useCallback, useState, useEffect } from 'react';
+import {
+  createContext,
+  useCallback,
+  useState,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 import { createPortal } from 'react-dom';
 import Toast from './Toast';
 import { ToastProps } from './types';
@@ -22,21 +29,33 @@ export default function ToastProvider({
   children: React.ReactNode;
 }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
+  const timeoutIdsRef = useRef<Map<string, NodeJS.Timeout>>(new Map());
+
+  const removeToast = useCallback((id: string) => {
+    setToasts((prev) => prev.filter((toast) => toast.id !== id));
+    const timeoutId = timeoutIdsRef.current.get(id);
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      timeoutIdsRef.current.delete(id);
+    }
+  }, []);
 
   const showToast = useCallback((toast: ToastProps) => {
     const newToast = { ...toast, id: crypto.randomUUID() };
     setToasts((prev) => [...prev, newToast]);
 
-    setTimeout(() => {
-      removeToast(newToast.id);
+    const timeoutId = setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== newToast.id));
+      timeoutIdsRef.current.delete(newToast.id);
     }, 3000);
+
+    timeoutIdsRef.current.set(newToast.id, timeoutId);
   }, []);
 
-  const removeToast = useCallback((id: string) => {
-    setToasts((prev) => prev.filter((toast) => toast.id !== id));
-  }, []);
-
-  const contextValue = { showToast, removeToast };
+  const contextValue = useMemo(
+    () => ({ showToast, removeToast }),
+    [showToast, removeToast],
+  );
 
   useEffect(() => {
     globalToastContext = contextValue;

@@ -57,7 +57,7 @@ export default function UserPage() {
         profileImageUrl={userInfo?.profileImageUrl}
         name={userInfo?.nickname}
       />
-      <div className="flex-1 rounded-t-[20px] overflow-hidden px-5 py-6 -mt-6 bg-white shadow-[0_-5px_30px_0_rgba(0,0,0,0.10),0_-22px_22px_0_rgba(0,0,0,0.09),0_-5px_12px_0_rgba(0,0,0,0.10)]">
+      <div className="flex-1 flex flex-col rounded-t-[20px] overflow-hidden px-5 py-6 -mt-6 bg-white shadow-[0_-5px_30px_0_rgba(0,0,0,0.10),0_-22px_22px_0_rgba(0,0,0,0.09),0_-5px_12px_0_rgba(0,0,0,0.10)]">
         <div className="flex gap-[18px] mb-6 text-headline-1">
           <button
             onClick={() => handleTabChange('MY')}
@@ -84,7 +84,7 @@ export default function UserPage() {
             )}
           </button>
         </div>
-        <div>
+        <div className="flex-1 overflow-auto">
           {currentTab === 'MY' && <MyVoteList />}
           {currentTab === 'PARTICIPATED' && <ParticipatedVoteList />}
         </div>

@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import ImageDetailModal from '../ImageDetailModal';
 import CheckBox from '@/components/common/CheckBox';
 import { useDialog } from '@/components/common/Dialog/hooks';
@@ -20,6 +20,9 @@ export default function CardItem({
   status: 'PROGRESS' | 'CLOSED';
 }) {
   const { postId } = useParams<{ postId: string }>();
+  const [searchParams] = useSearchParams();
+  const shareKey = searchParams.get('shareUrl') ?? undefined;
+
   const { openDialog } = useDialog();
 
   return (
@@ -40,14 +43,16 @@ export default function CardItem({
           name="FullPhoto"
           size="small"
           className="cursor-pointer text-gray-600 flex-shrink-0"
-          onClick={() =>
+          onClick={() => {
+            console.log(postId);
             openDialog(
               <ImageDetailModal
                 postId={postId ?? ''}
                 selectedImageId={choice.id}
+                shareKey={shareKey}
               />,
-            )
-          }
+            );
+          }}
         />
       </div>
       <div className="w-full aspect-square relative">

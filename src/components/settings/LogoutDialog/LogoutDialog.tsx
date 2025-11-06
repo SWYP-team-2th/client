@@ -6,8 +6,8 @@ export default function LogoutDialog() {
 
   return (
     <Dialog
-      title="잠깐! 츄즈들을 두고 떠나시려구요?😢"
-      description="츄즈본부로 다시 돌아오실거죠?"
+      title="이 계정에서 로그아웃할까요?"
+      description="로그아웃 후에도 언제든 다시 돌아올 수 있어요."
       cancelButtonProps={{
         text: '취소',
       }}

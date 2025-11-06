@@ -80,18 +80,42 @@ export default function PollChoice({ choice }: PollChoiceProps) {
                   ] && 'text-gray-400',
               )}
               value={choice.title}
-              onChange={(e) => {
-                const newValue = e.target.value;
+              onKeyDown={(e) => {
                 const placeholderValue =
                   IMAGE_TITLE_PLACEHOLDER[
                     choice.order as keyof typeof IMAGE_TITLE_PLACEHOLDER
                   ];
 
-                const shouldClear =
-                  choice.title === placeholderValue &&
-                  newValue.length === placeholderValue.length - 1;
+                if (choice.title === placeholderValue) {
+                  if (e.key === 'Backspace' || e.key === 'Delete') {
+                    e.preventDefault();
+                    setPollChoiceTitle(choice.id, '');
+                  } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
+                    setPollChoiceTitle(choice.id, '');
+                  }
+                }
+              }}
+              onBlur={() => {
+                const placeholderValue =
+                  IMAGE_TITLE_PLACEHOLDER[
+                    choice.order as keyof typeof IMAGE_TITLE_PLACEHOLDER
+                  ];
+                if (choice.title.trim() === '') {
+                  setPollChoiceTitle(choice.id, placeholderValue);
+                }
+              }}
+              onChange={(e) => {
+                const placeholderValue =
+                  IMAGE_TITLE_PLACEHOLDER[
+                    choice.order as keyof typeof IMAGE_TITLE_PLACEHOLDER
+                  ];
+                const newValue = e.target.value;
 
-                setPollChoiceTitle(choice.id, shouldClear ? '' : newValue);
+                if (newValue.trim() === '') {
+                  setPollChoiceTitle(choice.id, placeholderValue);
+                } else {
+                  setPollChoiceTitle(choice.id, newValue);
+                }
               }}
             />
           </div>

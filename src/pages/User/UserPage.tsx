@@ -41,7 +41,7 @@ export default function UserPage() {
             onClick={() => navigate('/')}
           />
         }
-        centerNode={<h1 className="text-heading-1">마이페이지</h1>}
+        centerNode={<h1 className="text-heading-1">투표 갤러리</h1>}
         rightNode={
           <Icon
             className="cursor-pointer"

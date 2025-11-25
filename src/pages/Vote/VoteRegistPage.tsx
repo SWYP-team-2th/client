@@ -27,7 +27,7 @@ export default function VoteRegistPage() {
             onClick={handleClickCloseButton}
           />
         }
-        centerNode={<h1 className="text-heading-1">투표</h1>}
+        centerNode={<h1 className="text-heading-1">투표 만들기</h1>}
       />
       <PollFormProvider type="REGIST" initialData={INITIAL_POLL_REGIST_DATA}>
         <PollInformation />

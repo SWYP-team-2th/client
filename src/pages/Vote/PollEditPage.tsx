@@ -57,7 +57,7 @@ export default function PollEditPage() {
             onClick={() => navigate(-1)}
           />
         }
-        centerNode={<h1 className="text-heading-1">투표</h1>}
+        centerNode={<h1 className="text-heading-1">투표 수정하기</h1>}
         rightNode={
           <Icon
             name={

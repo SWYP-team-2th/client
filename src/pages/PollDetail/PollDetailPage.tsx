@@ -25,11 +25,10 @@ export default function PollDetailPage() {
     return <NotFoundPage />;
   }
 
-
-  const showResultList = post.isAuthor || isVoted || post.status === 'CLOSED';
+  const showResultList =
+    (post.isAuthor || isVoted || post.status === 'CLOSED') && isVoted !== false;
 
   const shareUrl = `${window.location.origin}/posts/${postId}?shareUrl=${post.shareUrl}`;
-
 
   return (
     <div className="w-full bg-gray-100 h-screen flex itmes-center flex-col pt-[60px] relative">

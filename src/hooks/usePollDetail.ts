@@ -17,12 +17,13 @@ export const usePollDetail = (postId: string) => {
   const { data: result, isLoading: isResultLoading } = useGetVotesResult({
     postId,
     options: {
-      enabled: !!postId && (isVoted || post?.status === 'CLOSED'),
+      enabled:
+        !!postId && (post?.isAuthor || isVoted || post?.status === 'CLOSED'),
     },
   });
 
   const isLoading =
-    isVoted || post?.status === 'CLOSED'
+    post?.isAuthor || isVoted || post?.status === 'CLOSED'
       ? isResultLoading || isPostLoading
       : isPostLoading;
 

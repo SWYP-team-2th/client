@@ -8,6 +8,7 @@ import PollCreatedShareBottomSheet from '@/components/common/PollCreatedShareBot
 import useGetMyInfo from '@/api/useGetMyInfo';
 import usePostRegistVote from '@/api/usePostRegistVote';
 import useUpdateOnboarding from '@/api/useUpdateOnboarding';
+import { useModerationCheck } from '@/hooks/useModerationCheck';
 
 export default function PollRegistButton() {
   const navigate = useNavigate();
@@ -32,15 +33,21 @@ export default function PollRegistButton() {
         openBottomSheet(<PollCreatedShareBottomSheet shareUrl={shareUrl} />);
       },
     });
+  const { mutate: checkModeration } = useModerationCheck();
 
   const handleClickSubmitButton = () => {
     if (isValid) {
-      registVote({
-        ...pollData,
-        pollChoices: pollData.pollChoices.map((choice) => ({
-          title: choice.title,
-          imageUrl: choice.imageUrl,
-        })),
+      checkModeration({
+        pollData,
+        onConfirm: () => {
+          registVote({
+            ...pollData,
+            pollChoices: pollData.pollChoices.map((choice) => ({
+              title: choice.title,
+              imageUrl: choice.imageUrl,
+            })),
+          });
+        },
       });
     }
   };

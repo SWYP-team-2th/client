@@ -21,7 +21,7 @@ export async function requestModeration(
 ): Promise<ModerationResult> {
   if (!MODERATION_API_URL) {
     throw new Error(
-      'VITE_MODERATION_API_URL 환경 변수가 설정되지 않았습니다. .env 파일에 VITE_MODERATION_API_URL을 추가해주세요.',
+      'VITE_MODERATION_API_URL 환경 변수가 설정되지 않았습니다. .env 파일에 VITE_MODERATION_API_URL을 추가해주세요..',
     );
   }
 

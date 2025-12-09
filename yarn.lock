@@ -1841,10 +1841,10 @@ check-error@^2.1.1:
   resolved "https://registry.yarnpkg.com/check-error/-/check-error-2.1.1.tgz#87eb876ae71ee388fa0471fe423f494be1d96ccc"
   integrity sha512-OAlb+T7V4Op9OwdkjmguYRqncdlx5JiofwOAUkmTF+jNdHwzTaTs4sRAGpzLF3oOz5xAyDGrPgeIDFQmDOTiJw==
 
-chooz-ai-code-review-cli@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/chooz-ai-code-review-cli/-/chooz-ai-code-review-cli-0.1.0.tgz#1e626a5335677ca76dc5b87c19ebcbf39f719a9e"
-  integrity sha512-C+TXTX0G++51QS0HStT2QRhTwTfT9j9FHdE9zR1L3BEpIHTRvBpeG9pWxn54sXqyC17ZCjeMBLFzLFgNTnDUFg==
+chooz-ai-code-review-cli@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/chooz-ai-code-review-cli/-/chooz-ai-code-review-cli-0.1.2.tgz#8cd511c5e2535bfa6af97c136a93dfb6f781094f"
+  integrity sha512-CCWeROUAHJW/D4D57uohqe8yE82IVAWD1mZd15hJiAKAyMGaZXQA8VqoglXXI3nbh1mRJNGixMkfWjDJVUpQ3Q==
   dependencies:
     "@octokit/rest" "^20.0.0"
     openai "^4.0.0"

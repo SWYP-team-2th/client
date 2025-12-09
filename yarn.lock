@@ -1841,7 +1841,7 @@ check-error@^2.1.1:
   resolved "https://registry.yarnpkg.com/check-error/-/check-error-2.1.1.tgz#87eb876ae71ee388fa0471fe423f494be1d96ccc"
   integrity sha512-OAlb+T7V4Op9OwdkjmguYRqncdlx5JiofwOAUkmTF+jNdHwzTaTs4sRAGpzLF3oOz5xAyDGrPgeIDFQmDOTiJw==
 
-chooz-ai-code-review-cli@^0.1.2:
+chooz-ai-code-review-cli@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/chooz-ai-code-review-cli/-/chooz-ai-code-review-cli-0.1.2.tgz#8cd511c5e2535bfa6af97c136a93dfb6f781094f"
   integrity sha512-CCWeROUAHJW/D4D57uohqe8yE82IVAWD1mZd15hJiAKAyMGaZXQA8VqoglXXI3nbh1mRJNGixMkfWjDJVUpQ3Q==

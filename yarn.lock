@@ -1849,6 +1849,13 @@ chooz-ai-code-review-cli@^0.1.0:
     "@octokit/rest" "^20.0.0"
     openai "^4.0.0"
 
+chooz-ai-moderation@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/chooz-ai-moderation/-/chooz-ai-moderation-0.1.0.tgz#9461ce239cc983cabbcce4c7df4b3675c61fbc6d"
+  integrity sha512-B/DpJcJf+UNHeMTZqIvXUmuZK+d1od0L33F2DMe7dG6RQVt84lz7GYk3JrbQEqVJoF/9HtmtxFJRhUv/C6JCtQ==
+  dependencies:
+    openai "^6.9.1"
+
 class-variance-authority@^0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/class-variance-authority/-/class-variance-authority-0.7.1.tgz#4008a798a0e4553a781a57ac5177c9fb5d043787"
@@ -3681,6 +3688,11 @@ openai@^4.0.0:
     form-data-encoder "1.7.2"
     formdata-node "^4.3.2"
     node-fetch "^2.6.7"
+
+openai@^6.9.1:
+  version "6.10.0"
+  resolved "https://registry.yarnpkg.com/openai/-/openai-6.10.0.tgz#3f52d2ad7b6b2288124d064b0eb737c914d1f3ea"
+  integrity sha512-ITxOGo7rO3XRMiKA5l7tQ43iNNu+iXGFAcf2t+aWVzzqRaS0i7m1K2BhxNdaveB+5eENhO0VY1FkiZzhBk4v3A==
 
 optionator@^0.9.3:
   version "0.9.4"

@@ -15,7 +15,7 @@ export default function PollCreatedShareBottomSheet({
   const { closeBottomSheet } = useBottomSheet();
 
   return (
-    <BottomSheet title="투표가 만들어졌어요!" variant="centered" hasCloseButton>
+    <BottomSheet title="투표가 만들어졌어요!" align="centered" hasCloseButton>
       <div className="flex flex-col items-center text-center px-6">
         <img src={shareImage} alt="Share" className="w-[90px] h-[90px] mb-4" />
         <p className="text-headline-1 text-gray-500 mb-7">

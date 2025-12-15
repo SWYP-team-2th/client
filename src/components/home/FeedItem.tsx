@@ -49,12 +49,17 @@ export default function FeedItem({
       >
         <div className="flex-1 min-w-0">
           {/* 게시글 올린 유저 정보 */}
-          <div
-            className="flex items-center gap-[6px] mb-2"
-            onClick={handleClickProfile}
-          >
-            <Avatar size="small" src={author.profileUrl} alt="프로필" />
-            <div className="flex gap-1 items-center">
+          <div className="flex items-center gap-[6px] mb-2">
+            <Avatar
+              size="small"
+              src={author.profileUrl}
+              alt="프로필"
+              onClick={handleClickProfile}
+            />
+            <div
+              className="flex gap-1 items-center"
+              onClick={handleClickProfile}
+            >
               <span className="text-label-1 text-gray-900">
                 {author.nickname}
               </span>

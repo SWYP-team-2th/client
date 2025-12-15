@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import Icon from '../Icon';
 import { useBottomSheet } from './hooks';
 
-type BottomSheetVariant = 'default' | 'centered';
+type BottomSheetVariant = 'left' | 'center';
 
 interface BottomSheetProps {
   title: string;

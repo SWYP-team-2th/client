@@ -2,24 +2,24 @@ import { motion } from 'motion/react';
 import Icon from '../Icon';
 import { useBottomSheet } from './hooks';
 
-type BottomSheetVariant = 'left' | 'centered';
+type BottomSheetAlign = 'left' | 'centered';
 
 interface BottomSheetProps {
   title: string;
-  variant?: BottomSheetVariant;
+  align?: BottomSheetAlign;
   hasCloseButton?: boolean;
   children: React.ReactNode;
 }
 
 export default function BottomSheet({
   title,
-  variant = 'left',
+  align = 'left',
   hasCloseButton = false,
   children,
 }: BottomSheetProps) {
   const { closeBottomSheet } = useBottomSheet();
 
-  const isCentered = variant === 'centered';
+  const isCentered = align === 'centered';
 
   const renderHeader = () =>
     isCentered ? (

@@ -2,12 +2,10 @@ import { motion } from 'motion/react';
 import Icon from '../Icon';
 import { useBottomSheet } from './hooks';
 
-type BottomSheetVariant = 'left' | 'center';
+type BottomSheetVariant = 'left' | 'centered';
 
 interface BottomSheetProps {
   title: string;
-  description?: string;
-  topContent?: React.ReactNode;
   variant?: BottomSheetVariant;
   hasCloseButton?: boolean;
   children: React.ReactNode;
@@ -15,9 +13,7 @@ interface BottomSheetProps {
 
 export default function BottomSheet({
   title,
-  description,
-  topContent,
-  variant = 'default',
+  variant = 'left',
   hasCloseButton = false,
   children,
 }: BottomSheetProps) {
@@ -27,12 +23,8 @@ export default function BottomSheet({
 
   const renderHeader = () =>
     isCentered ? (
-      <div className="flex flex-col items-center text-center px-6 pb-7">
-        {topContent && <div className="mb-4">{topContent}</div>}
-        <h1 className="text-heading-1 mb-3">{title}</h1>
-        {description && (
-          <p className="text-headline-1 text-gray-500">{description}</p>
-        )}
+      <div className="flex flex-col items-center text-center px-6">
+        <h1 className="text-heading-1 mb-5">{title}</h1>
       </div>
     ) : (
       <h1 className="pl-5 text-headline-1 pb-5 border-gray-400">{title}</h1>

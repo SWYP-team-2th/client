@@ -1,3 +1,4 @@
+import ReactGA from 'react-ga4';
 import { useNavigate } from 'react-router-dom';
 import usePollForm from '../../Provider/hooks';
 import useGetMyInfo from '@/api/useGetMyInfo';
@@ -18,6 +19,10 @@ export default function PollRegistButton() {
     usePostRegistVote({
       onSuccess: (data) => {
         if (myInfo?.onboardingStep) {
+          ReactGA.event('poll_created', {
+            post_id: data.postId,
+          });
+
           updateOnboarding({
             onboardingStep: { ...myInfo.onboardingStep, FIRST_VOTE: false },
           });

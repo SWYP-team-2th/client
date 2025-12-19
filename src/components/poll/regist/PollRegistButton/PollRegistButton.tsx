@@ -3,13 +3,16 @@ import usePollForm from '../../Provider/hooks';
 import useGetMyInfo from '@/api/useGetMyInfo';
 import usePostRegistVote from '@/api/usePostRegistVote';
 import useUpdateOnboarding from '@/api/useUpdateOnboarding';
+import { useBottomSheet } from '@/components/common/BottomSheet/hooks';
 import { Button } from '@/components/common/Button/Button';
 import Loading from '@/components/common/Loading';
+import PollCreatedShareBottomSheet from '@/components/common/PollCreatedShareBottomSheet';
 
 export default function PollRegistButton() {
   const navigate = useNavigate();
   const { isValid, data: pollData } = usePollForm();
   const { data: myInfo } = useGetMyInfo();
+  const { openBottomSheet } = useBottomSheet();
   const { mutate: updateOnboarding } = useUpdateOnboarding();
   const { mutate: registVote, isPending: isRegistVotePending } =
     usePostRegistVote({
@@ -19,7 +22,9 @@ export default function PollRegistButton() {
             onboardingStep: { ...myInfo.onboardingStep, FIRST_VOTE: false },
           });
         }
+        const shareUrl = `${window.location.origin}/posts/${data.postId}?shareUrl=${data.shareUrl}`;
         navigate(`/posts/${data.postId}`);
+        openBottomSheet(<PollCreatedShareBottomSheet shareUrl={shareUrl} />);
       },
     });
 

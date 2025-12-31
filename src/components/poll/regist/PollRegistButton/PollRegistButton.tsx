@@ -1,13 +1,14 @@
 import ReactGA from 'react-ga4';
 import { useNavigate } from 'react-router-dom';
 import usePollForm from '../../Provider/hooks';
+import useGetMyInfo from '@/api/useGetMyInfo';
+import usePostRegistVote from '@/api/usePostRegistVote';
+import useUpdateOnboarding from '@/api/useUpdateOnboarding';
 import { useBottomSheet } from '@/components/common/BottomSheet/hooks';
 import { Button } from '@/components/common/Button/Button';
 import Loading from '@/components/common/Loading';
 import PollCreatedShareBottomSheet from '@/components/common/PollCreatedShareBottomSheet';
-import useGetMyInfo from '@/api/useGetMyInfo';
-import usePostRegistVote from '@/api/usePostRegistVote';
-import useUpdateOnboarding from '@/api/useUpdateOnboarding';
+import { useModerationCheck } from '@/hooks/useModerationCheck';
 
 export default function PollRegistButton() {
   const navigate = useNavigate();
@@ -32,15 +33,21 @@ export default function PollRegistButton() {
         openBottomSheet(<PollCreatedShareBottomSheet shareUrl={shareUrl} />);
       },
     });
+  const { mutate: checkModeration } = useModerationCheck();
 
   const handleClickSubmitButton = () => {
     if (isValid) {
-      registVote({
-        ...pollData,
-        pollChoices: pollData.pollChoices.map((choice) => ({
-          title: choice.title,
-          imageUrl: choice.imageUrl,
-        })),
+      checkModeration({
+        pollData,
+        onConfirm: () => {
+          registVote({
+            ...pollData,
+            pollChoices: pollData.pollChoices.map((choice) => ({
+              title: choice.title,
+              imageUrl: choice.imageUrl,
+            })),
+          });
+        },
       });
     }
   };

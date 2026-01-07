@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ReactGA from 'react-ga4';
 import { useNavigate } from 'react-router-dom';
 import useGetMyInfo from '@/api/useGetMyInfo';
 import { useGetNotificationPresent } from '@/api/useGetNotificationPresent';
@@ -19,6 +20,7 @@ export default function Home() {
   const [isCoachMarkClosed, setIsCoachMarkClosed] = useState(false);
 
   const handleCloseCoachMark = () => {
+    ReactGA.event('user_signup');
     setIsCoachMarkClosed(true);
     if (myInfo?.onboardingStep) {
       updateOnboarding.mutate({

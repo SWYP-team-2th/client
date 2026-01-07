@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import ReactGA from 'react-ga4';
 import { useBottomSheet } from '@/components/common/BottomSheet/hooks';
 interface KakaoShareUrlProps {
   author: string;
@@ -21,6 +22,8 @@ export function useKakaoShareUrl({ author, shareUrl }: KakaoShareUrlProps) {
     }
 
     try {
+      ReactGA.event('poll_shared');
+
       window.Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {

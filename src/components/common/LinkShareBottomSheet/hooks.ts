@@ -1,3 +1,4 @@
+import ReactGA from 'react-ga4';
 import useToast from '../Toast/hooks';
 import useGetMyInfo from '@/api/useGetMyInfo';
 import { useKakaoShareUrl } from '@/api/useKakaoShareUrl';
@@ -22,6 +23,7 @@ export default function useLinkShareBottomSheet({
     navigator.clipboard
       .writeText(shareUrl)
       .then(() => {
+        ReactGA.event('poll_shared');
         toast.success({
           title: '투표 주소가 복사됐어요!😉',
         });

@@ -28,6 +28,11 @@ export default function PollRegistButton() {
             onboardingStep: { ...myInfo.onboardingStep, FIRST_VOTE: false },
           });
         }
+
+        ReactGA.event('every_poll_created', {
+          post_id: data.postId,
+        });
+
         const shareUrl = `${window.location.origin}/posts/${data.postId}?shareUrl=${data.shareUrl}`;
         navigate(`/posts/${data.postId}`);
         openBottomSheet(<PollCreatedShareBottomSheet shareUrl={shareUrl} />);

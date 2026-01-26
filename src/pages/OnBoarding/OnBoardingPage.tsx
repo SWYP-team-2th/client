@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ReactGA from 'react-ga4';
 import { useNavigate } from 'react-router-dom';
 import useGetMyInfo from '@/api/useGetMyInfo';
 import onboardingImage from '@/assets/images/onboarding/onboarding.png';
@@ -21,6 +22,12 @@ export default function OnBoardingPage() {
       setShowSplash(false);
     }, 2500);
   }, []);
+
+  useEffect(() => {
+    if (!showSplash) {
+      ReactGA.event('onboarding_viewed');
+    }
+  }, [showSplash]);
 
   if (showSplash) {
     return (

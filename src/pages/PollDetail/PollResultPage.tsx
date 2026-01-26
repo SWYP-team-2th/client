@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import ReactGA from 'react-ga4';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useGetNotificationPresent } from '@/api/useGetNotificationPresent';
 import { useGetPost } from '@/api/useGetPost';
@@ -28,6 +30,14 @@ export default function PollResultPage() {
       enabled: !!postId,
     },
   });
+
+  useEffect(() => {
+    if (post && result) {
+      ReactGA.event('poll_result_viewed', {
+        post_id: postId,
+      });
+    }
+  }, [post, result, postId]);
 
   if (isPostLoading || isResultLoading) return <Loading />;
   if (!post || !result) return <NotFoundPage />;

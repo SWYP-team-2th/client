@@ -1,4 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
+import ReactGA from 'react-ga4';
 import usePost from '@/api/usePost';
 import { Button } from '@/components/common/Button/Button';
 import useToast from '@/components/common/Toast/hooks';
@@ -16,6 +17,10 @@ export default function PollButton({ postId, checkedItems }: PollButtonProps) {
 
   const { mutate: vote, isPending } = usePost({
     onSuccess: () => {
+      ReactGA.event('poll_voted', {
+        post_id: postId,
+      });
+
       queryClient.invalidateQueries({ queryKey: ['post', String(postId)] });
       queryClient.invalidateQueries({
         queryKey: ['postResult', String(postId)],
@@ -26,7 +31,6 @@ export default function PollButton({ postId, checkedItems }: PollButtonProps) {
         description: '투표가 성공적으로 완료되었어요.',
       });
 
-      // voteMode 종료
       setVoteMode(false);
     },
   });
